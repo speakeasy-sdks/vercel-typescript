@@ -14,9 +14,6 @@ import (
 type UserEventType string
 
 const (
-	UserEventTypeFlag           UserEventType = "flag"
-	UserEventTypeFlagsSegment   UserEventType = "flags-segment"
-	UserEventTypeFlagsSettings  UserEventType = "flags-settings"
 	UserEventTypeAuthor         UserEventType = "author"
 	UserEventTypeBitbucketLogin UserEventType = "bitbucket_login"
 	UserEventTypeBold           UserEventType = "bold"
@@ -28,6 +25,9 @@ const (
 	UserEventTypeHookName       UserEventType = "hook_name"
 	UserEventTypeIntegration    UserEventType = "integration"
 	UserEventTypeEdgeConfig     UserEventType = "edge-config"
+	UserEventTypeFlag           UserEventType = "flag"
+	UserEventTypeFlagsSegment   UserEventType = "flags-segment"
+	UserEventTypeFlagsSettings  UserEventType = "flags-settings"
 	UserEventTypeLink           UserEventType = "link"
 	UserEventTypeProjectName    UserEventType = "project_name"
 	UserEventTypeScalingRules   UserEventType = "scaling_rules"
@@ -46,12 +46,6 @@ func (e *UserEventType) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "flag":
-		fallthrough
-	case "flags-segment":
-		fallthrough
-	case "flags-settings":
-		fallthrough
 	case "author":
 		fallthrough
 	case "bitbucket_login":
@@ -73,6 +67,12 @@ func (e *UserEventType) UnmarshalJSON(data []byte) error {
 	case "integration":
 		fallthrough
 	case "edge-config":
+		fallthrough
+	case "flag":
+		fallthrough
+	case "flags-segment":
+		fallthrough
+	case "flags-settings":
 		fallthrough
 	case "link":
 		fallthrough
@@ -2938,11 +2938,11 @@ func (o *NinetyNine) GetStoreType() StoreType {
 type UserEventPayloadType string
 
 const (
-	UserEventPayloadTypeIntegration UserEventPayloadType = "integration"
-	UserEventPayloadTypeEdgeConfig  UserEventPayloadType = "edge-config"
 	UserEventPayloadTypeRedis       UserEventPayloadType = "redis"
 	UserEventPayloadTypePostgres    UserEventPayloadType = "postgres"
+	UserEventPayloadTypeEdgeConfig  UserEventPayloadType = "edge-config"
 	UserEventPayloadTypeBlob        UserEventPayloadType = "blob"
+	UserEventPayloadTypeIntegration UserEventPayloadType = "integration"
 )
 
 func (e UserEventPayloadType) ToPointer() *UserEventPayloadType {
@@ -2954,15 +2954,15 @@ func (e *UserEventPayloadType) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "integration":
-		fallthrough
-	case "edge-config":
-		fallthrough
 	case "redis":
 		fallthrough
 	case "postgres":
 		fallthrough
+	case "edge-config":
+		fallthrough
 	case "blob":
+		fallthrough
+	case "integration":
 		*e = UserEventPayloadType(v)
 		return nil
 	default:
@@ -3834,10 +3834,284 @@ func (o *UserEventPayload83Team) GetName() string {
 	return o.Name
 }
 
+type EnvID2 string
+
+const (
+	EnvID2Preview    EnvID2 = "preview"
+	EnvID2Production EnvID2 = "production"
+)
+
+func (e EnvID2) ToPointer() *EnvID2 {
+	return &e
+}
+func (e *EnvID2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "preview":
+		fallthrough
+	case "production":
+		*e = EnvID2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnvID2: %v", v)
+	}
+}
+
+type EnvIDType string
+
+const (
+	EnvIDTypeStr    EnvIDType = "str"
+	EnvIDTypeEnvID2 EnvIDType = "envId_2"
+)
+
+type EnvID struct {
+	Str    *string
+	EnvID2 *EnvID2
+
+	Type EnvIDType
+}
+
+func CreateEnvIDStr(str string) EnvID {
+	typ := EnvIDTypeStr
+
+	return EnvID{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateEnvIDEnvID2(envID2 EnvID2) EnvID {
+	typ := EnvIDTypeEnvID2
+
+	return EnvID{
+		EnvID2: &envID2,
+		Type:   typ,
+	}
+}
+
+func (u *EnvID) UnmarshalJSON(data []byte) error {
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = EnvIDTypeStr
+		return nil
+	}
+
+	var envID2 EnvID2 = EnvID2("")
+	if err := utils.UnmarshalJSON(data, &envID2, "", true, true); err == nil {
+		u.EnvID2 = &envID2
+		u.Type = EnvIDTypeEnvID2
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for EnvID", string(data))
+}
+
+func (u EnvID) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.EnvID2 != nil {
+		return utils.MarshalJSON(u.EnvID2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type EnvID: all fields are null")
+}
+
 type OldConnectConfigurations struct {
+	EnvID                  EnvID   `json:"envId"`
+	ConnectConfigurationID string  `json:"connectConfigurationId"`
+	Passive                bool    `json:"passive"`
+	BuildsEnabled          bool    `json:"buildsEnabled"`
+	CreatedAt              float64 `json:"createdAt"`
+	UpdatedAt              float64 `json:"updatedAt"`
+}
+
+func (o *OldConnectConfigurations) GetEnvID() EnvID {
+	if o == nil {
+		return EnvID{}
+	}
+	return o.EnvID
+}
+
+func (o *OldConnectConfigurations) GetConnectConfigurationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ConnectConfigurationID
+}
+
+func (o *OldConnectConfigurations) GetPassive() bool {
+	if o == nil {
+		return false
+	}
+	return o.Passive
+}
+
+func (o *OldConnectConfigurations) GetBuildsEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.BuildsEnabled
+}
+
+func (o *OldConnectConfigurations) GetCreatedAt() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.CreatedAt
+}
+
+func (o *OldConnectConfigurations) GetUpdatedAt() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.UpdatedAt
+}
+
+type UserEventEnvID2 string
+
+const (
+	UserEventEnvID2Preview    UserEventEnvID2 = "preview"
+	UserEventEnvID2Production UserEventEnvID2 = "production"
+)
+
+func (e UserEventEnvID2) ToPointer() *UserEventEnvID2 {
+	return &e
+}
+func (e *UserEventEnvID2) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "preview":
+		fallthrough
+	case "production":
+		*e = UserEventEnvID2(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UserEventEnvID2: %v", v)
+	}
+}
+
+type PayloadEnvIDType string
+
+const (
+	PayloadEnvIDTypeStr             PayloadEnvIDType = "str"
+	PayloadEnvIDTypeUserEventEnvID2 PayloadEnvIDType = "UserEvent_envId_2"
+)
+
+type PayloadEnvID struct {
+	Str             *string
+	UserEventEnvID2 *UserEventEnvID2
+
+	Type PayloadEnvIDType
+}
+
+func CreatePayloadEnvIDStr(str string) PayloadEnvID {
+	typ := PayloadEnvIDTypeStr
+
+	return PayloadEnvID{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreatePayloadEnvIDUserEventEnvID2(userEventEnvID2 UserEventEnvID2) PayloadEnvID {
+	typ := PayloadEnvIDTypeUserEventEnvID2
+
+	return PayloadEnvID{
+		UserEventEnvID2: &userEventEnvID2,
+		Type:            typ,
+	}
+}
+
+func (u *PayloadEnvID) UnmarshalJSON(data []byte) error {
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = PayloadEnvIDTypeStr
+		return nil
+	}
+
+	var userEventEnvID2 UserEventEnvID2 = UserEventEnvID2("")
+	if err := utils.UnmarshalJSON(data, &userEventEnvID2, "", true, true); err == nil {
+		u.UserEventEnvID2 = &userEventEnvID2
+		u.Type = PayloadEnvIDTypeUserEventEnvID2
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PayloadEnvID", string(data))
+}
+
+func (u PayloadEnvID) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UserEventEnvID2 != nil {
+		return utils.MarshalJSON(u.UserEventEnvID2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type PayloadEnvID: all fields are null")
 }
 
 type NewConnectConfigurations struct {
+	EnvID                  PayloadEnvID `json:"envId"`
+	ConnectConfigurationID string       `json:"connectConfigurationId"`
+	Passive                bool         `json:"passive"`
+	BuildsEnabled          bool         `json:"buildsEnabled"`
+	CreatedAt              float64      `json:"createdAt"`
+	UpdatedAt              float64      `json:"updatedAt"`
+}
+
+func (o *NewConnectConfigurations) GetEnvID() PayloadEnvID {
+	if o == nil {
+		return PayloadEnvID{}
+	}
+	return o.EnvID
+}
+
+func (o *NewConnectConfigurations) GetConnectConfigurationID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ConnectConfigurationID
+}
+
+func (o *NewConnectConfigurations) GetPassive() bool {
+	if o == nil {
+		return false
+	}
+	return o.Passive
+}
+
+func (o *NewConnectConfigurations) GetBuildsEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.BuildsEnabled
+}
+
+func (o *NewConnectConfigurations) GetCreatedAt() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.CreatedAt
+}
+
+func (o *NewConnectConfigurations) GetUpdatedAt() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.UpdatedAt
 }
 
 type UserEventPayload83Project struct {
@@ -4984,11 +5258,11 @@ type PayloadOrigin string
 const (
 	PayloadOriginTeams             PayloadOrigin = "teams"
 	PayloadOriginSaml              PayloadOrigin = "saml"
-	PayloadOriginLink              PayloadOrigin = "link"
 	PayloadOriginGithub            PayloadOrigin = "github"
 	PayloadOriginGitlab            PayloadOrigin = "gitlab"
 	PayloadOriginBitbucket         PayloadOrigin = "bitbucket"
 	PayloadOriginMail              PayloadOrigin = "mail"
+	PayloadOriginLink              PayloadOrigin = "link"
 	PayloadOriginImport            PayloadOrigin = "import"
 	PayloadOriginDsync             PayloadOrigin = "dsync"
 	PayloadOriginFeedback          PayloadOrigin = "feedback"
@@ -5008,8 +5282,6 @@ func (e *PayloadOrigin) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "saml":
 		fallthrough
-	case "link":
-		fallthrough
 	case "github":
 		fallthrough
 	case "gitlab":
@@ -5017,6 +5289,8 @@ func (e *PayloadOrigin) UnmarshalJSON(data []byte) error {
 	case "bitbucket":
 		fallthrough
 	case "mail":
+		fallthrough
+	case "link":
 		fallthrough
 	case "import":
 		fallthrough
@@ -6850,7 +7124,6 @@ func (e *PayloadPurchaseType) UnmarshalJSON(data []byte) error {
 
 type PayloadBuildMachine struct {
 	PurchaseType          *PayloadPurchaseType `json:"purchaseType,omitempty"`
-	AbovePlan             *bool                `json:"abovePlan,omitempty"`
 	IsDefaultBuildMachine *bool                `json:"isDefaultBuildMachine,omitempty"`
 	Cores                 *float64             `json:"cores,omitempty"`
 	Memory                *float64             `json:"memory,omitempty"`
@@ -6861,13 +7134,6 @@ func (o *PayloadBuildMachine) GetPurchaseType() *PayloadPurchaseType {
 		return nil
 	}
 	return o.PurchaseType
-}
-
-func (o *PayloadBuildMachine) GetAbovePlan() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.AbovePlan
 }
 
 func (o *PayloadBuildMachine) GetIsDefaultBuildMachine() *bool {
@@ -7380,7 +7646,6 @@ func (e *PayloadReason) UnmarshalJSON(data []byte) error {
 type PayloadBlockedDueToOverageType string
 
 const (
-	PayloadBlockedDueToOverageTypeAiCredits                               PayloadBlockedDueToOverageType = "aiCredits"
 	PayloadBlockedDueToOverageTypeAnalyticsUsage                          PayloadBlockedDueToOverageType = "analyticsUsage"
 	PayloadBlockedDueToOverageTypeArtifacts                               PayloadBlockedDueToOverageType = "artifacts"
 	PayloadBlockedDueToOverageTypeBandwidth                               PayloadBlockedDueToOverageType = "bandwidth"
@@ -7434,8 +7699,6 @@ func (e *PayloadBlockedDueToOverageType) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "aiCredits":
-		fallthrough
 	case "analyticsUsage":
 		fallthrough
 	case "artifacts":
@@ -7675,11 +7938,11 @@ type UserEventPayloadOrigin string
 const (
 	UserEventPayloadOriginTeams             UserEventPayloadOrigin = "teams"
 	UserEventPayloadOriginSaml              UserEventPayloadOrigin = "saml"
-	UserEventPayloadOriginLink              UserEventPayloadOrigin = "link"
 	UserEventPayloadOriginGithub            UserEventPayloadOrigin = "github"
 	UserEventPayloadOriginGitlab            UserEventPayloadOrigin = "gitlab"
 	UserEventPayloadOriginBitbucket         UserEventPayloadOrigin = "bitbucket"
 	UserEventPayloadOriginMail              UserEventPayloadOrigin = "mail"
+	UserEventPayloadOriginLink              UserEventPayloadOrigin = "link"
 	UserEventPayloadOriginImport            UserEventPayloadOrigin = "import"
 	UserEventPayloadOriginDsync             UserEventPayloadOrigin = "dsync"
 	UserEventPayloadOriginFeedback          UserEventPayloadOrigin = "feedback"
@@ -7699,8 +7962,6 @@ func (e *UserEventPayloadOrigin) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "saml":
 		fallthrough
-	case "link":
-		fallthrough
 	case "github":
 		fallthrough
 	case "gitlab":
@@ -7708,6 +7969,8 @@ func (e *UserEventPayloadOrigin) UnmarshalJSON(data []byte) error {
 	case "bitbucket":
 		fallthrough
 	case "mail":
+		fallthrough
+	case "link":
 		fallthrough
 	case "import":
 		fallthrough
@@ -8001,33 +8264,6 @@ func (o *UsageAlerts) GetBlockingAt() *float64 {
 		return nil
 	}
 	return o.BlockingAt
-}
-
-type AiCredits struct {
-	CurrentThreshold float64  `json:"currentThreshold"`
-	WarningAt        *float64 `json:"warningAt,omitempty"`
-	BlockedAt        *float64 `json:"blockedAt,omitempty"`
-}
-
-func (o *AiCredits) GetCurrentThreshold() float64 {
-	if o == nil {
-		return 0.0
-	}
-	return o.CurrentThreshold
-}
-
-func (o *AiCredits) GetWarningAt() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.WarningAt
-}
-
-func (o *AiCredits) GetBlockedAt() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.BlockedAt
 }
 
 type AnalyticsUsage struct {
@@ -9165,7 +9401,6 @@ func (o *WebAnalyticsEvent) GetBlockedAt() *float64 {
 }
 
 type OverageUsageAlerts struct {
-	AiCredits                               *AiCredits                               `json:"aiCredits,omitempty"`
 	AnalyticsUsage                          *AnalyticsUsage                          `json:"analyticsUsage,omitempty"`
 	Artifacts                               *Artifacts                               `json:"artifacts,omitempty"`
 	Bandwidth                               *Bandwidth                               `json:"bandwidth,omitempty"`
@@ -9208,13 +9443,6 @@ type OverageUsageAlerts struct {
 	WafOwaspRequests                        *WafOwaspRequests                        `json:"wafOwaspRequests,omitempty"`
 	WafRateLimitRequest                     *WafRateLimitRequest                     `json:"wafRateLimitRequest,omitempty"`
 	WebAnalyticsEvent                       *WebAnalyticsEvent                       `json:"webAnalyticsEvent,omitempty"`
-}
-
-func (o *OverageUsageAlerts) GetAiCredits() *AiCredits {
-	if o == nil {
-		return nil
-	}
-	return o.AiCredits
 }
 
 func (o *OverageUsageAlerts) GetAnalyticsUsage() *AnalyticsUsage {
@@ -10044,7 +10272,6 @@ func (e *UserEventPayload62NewOwnerFeatureBlocksBlobBlockReason) UnmarshalJSON(d
 type OverageReason string
 
 const (
-	OverageReasonAiCredits                               OverageReason = "aiCredits"
 	OverageReasonAnalyticsUsage                          OverageReason = "analyticsUsage"
 	OverageReasonArtifacts                               OverageReason = "artifacts"
 	OverageReasonBandwidth                               OverageReason = "bandwidth"
@@ -10098,8 +10325,6 @@ func (e *OverageReason) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "aiCredits":
-		fallthrough
 	case "analyticsUsage":
 		fallthrough
 	case "artifacts":
@@ -10262,7 +10487,6 @@ func (e *UserEventPayload62NewOwnerFeatureBlocksPostgresBlockReason) UnmarshalJS
 type PayloadOverageReason string
 
 const (
-	PayloadOverageReasonAiCredits                               PayloadOverageReason = "aiCredits"
 	PayloadOverageReasonAnalyticsUsage                          PayloadOverageReason = "analyticsUsage"
 	PayloadOverageReasonArtifacts                               PayloadOverageReason = "artifacts"
 	PayloadOverageReasonBandwidth                               PayloadOverageReason = "bandwidth"
@@ -10316,8 +10540,6 @@ func (e *PayloadOverageReason) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "aiCredits":
-		fallthrough
 	case "analyticsUsage":
 		fallthrough
 	case "artifacts":
@@ -10480,7 +10702,6 @@ func (e *UserEventPayload62NewOwnerFeatureBlocksRedisBlockReason) UnmarshalJSON(
 type UserEventPayloadOverageReason string
 
 const (
-	UserEventPayloadOverageReasonAiCredits                               UserEventPayloadOverageReason = "aiCredits"
 	UserEventPayloadOverageReasonAnalyticsUsage                          UserEventPayloadOverageReason = "analyticsUsage"
 	UserEventPayloadOverageReasonArtifacts                               UserEventPayloadOverageReason = "artifacts"
 	UserEventPayloadOverageReasonBandwidth                               UserEventPayloadOverageReason = "bandwidth"
@@ -10534,8 +10755,6 @@ func (e *UserEventPayloadOverageReason) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "aiCredits":
-		fallthrough
 	case "analyticsUsage":
 		fallthrough
 	case "artifacts":
@@ -11704,13 +11923,13 @@ func (e *UserEventPayloadTarget) UnmarshalJSON(data []byte) error {
 
 type OldEnvVar struct {
 	// The date when the Shared Env Var was created.
-	Created time.Time `json:"created"`
+	Created *time.Time `json:"created,omitempty"`
 	// The name of the Shared Env Var.
-	Key string `json:"key"`
+	Key *string `json:"key,omitempty"`
 	// The unique identifier of the owner (team) the Shared Env Var was created for.
 	OwnerID *string `json:"ownerId,omitempty"`
 	// The unique identifier of the Shared Env Var.
-	ID string `json:"id"`
+	ID *string `json:"id,omitempty"`
 	// The unique identifier of the user who created the Shared Env Var.
 	CreatedBy *string `json:"createdBy,omitempty"`
 	// The unique identifier of the user who deleted the Shared Env Var.
@@ -11734,7 +11953,7 @@ type OldEnvVar struct {
 	// whether or not this env varible applies to custom environments
 	ApplyToAllCustomEnvironments *bool `json:"applyToAllCustomEnvironments,omitempty"`
 	// whether or not this env variable is decrypted
-	Decrypted bool `json:"decrypted"`
+	Decrypted *bool `json:"decrypted,omitempty"`
 	// A user provided comment that describes what this Shared Env Var is for.
 	Comment *string `json:"comment,omitempty"`
 	// The last editor full name or username.
@@ -11752,16 +11971,16 @@ func (o *OldEnvVar) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *OldEnvVar) GetCreated() time.Time {
+func (o *OldEnvVar) GetCreated() *time.Time {
 	if o == nil {
-		return time.Time{}
+		return nil
 	}
 	return o.Created
 }
 
-func (o *OldEnvVar) GetKey() string {
+func (o *OldEnvVar) GetKey() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Key
 }
@@ -11773,9 +11992,9 @@ func (o *OldEnvVar) GetOwnerID() *string {
 	return o.OwnerID
 }
 
-func (o *OldEnvVar) GetID() string {
+func (o *OldEnvVar) GetID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ID
 }
@@ -11857,9 +12076,9 @@ func (o *OldEnvVar) GetApplyToAllCustomEnvironments() *bool {
 	return o.ApplyToAllCustomEnvironments
 }
 
-func (o *OldEnvVar) GetDecrypted() bool {
+func (o *OldEnvVar) GetDecrypted() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.Decrypted
 }
@@ -11943,13 +12162,13 @@ func (e *UserEventPayload58Target) UnmarshalJSON(data []byte) error {
 
 type NewEnvVar struct {
 	// The date when the Shared Env Var was created.
-	Created time.Time `json:"created"`
+	Created *time.Time `json:"created,omitempty"`
 	// The name of the Shared Env Var.
-	Key string `json:"key"`
+	Key *string `json:"key,omitempty"`
 	// The unique identifier of the owner (team) the Shared Env Var was created for.
 	OwnerID *string `json:"ownerId,omitempty"`
 	// The unique identifier of the Shared Env Var.
-	ID string `json:"id"`
+	ID *string `json:"id,omitempty"`
 	// The unique identifier of the user who created the Shared Env Var.
 	CreatedBy *string `json:"createdBy,omitempty"`
 	// The unique identifier of the user who deleted the Shared Env Var.
@@ -11973,7 +12192,7 @@ type NewEnvVar struct {
 	// whether or not this env varible applies to custom environments
 	ApplyToAllCustomEnvironments *bool `json:"applyToAllCustomEnvironments,omitempty"`
 	// whether or not this env variable is decrypted
-	Decrypted bool `json:"decrypted"`
+	Decrypted *bool `json:"decrypted,omitempty"`
 	// A user provided comment that describes what this Shared Env Var is for.
 	Comment *string `json:"comment,omitempty"`
 	// The last editor full name or username.
@@ -11991,16 +12210,16 @@ func (n *NewEnvVar) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *NewEnvVar) GetCreated() time.Time {
+func (o *NewEnvVar) GetCreated() *time.Time {
 	if o == nil {
-		return time.Time{}
+		return nil
 	}
 	return o.Created
 }
 
-func (o *NewEnvVar) GetKey() string {
+func (o *NewEnvVar) GetKey() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Key
 }
@@ -12012,9 +12231,9 @@ func (o *NewEnvVar) GetOwnerID() *string {
 	return o.OwnerID
 }
 
-func (o *NewEnvVar) GetID() string {
+func (o *NewEnvVar) GetID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ID
 }
@@ -12096,9 +12315,9 @@ func (o *NewEnvVar) GetApplyToAllCustomEnvironments() *bool {
 	return o.ApplyToAllCustomEnvironments
 }
 
-func (o *NewEnvVar) GetDecrypted() bool {
+func (o *NewEnvVar) GetDecrypted() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.Decrypted
 }

@@ -584,7 +584,6 @@ const value: models.FiftyEight = {
     target: [
       "production",
     ],
-    decrypted: false,
   },
   newEnvVar: {
     created: new Date("2021-02-10T13:11:49.180Z"),
@@ -605,7 +604,6 @@ const value: models.FiftyEight = {
     target: [
       "production",
     ],
-    decrypted: false,
   },
 };
 ```
@@ -894,10 +892,24 @@ const value: models.EightyThree = {
   project: {
     id: "<id>",
     oldConnectConfigurations: [
-      {},
+      {
+        envId: "<id>",
+        connectConfigurationId: "<id>",
+        passive: false,
+        buildsEnabled: false,
+        createdAt: 2894.64,
+        updatedAt: 6044.37,
+      },
     ],
     newConnectConfigurations: [
-      {},
+      {
+        envId: "production",
+        connectConfigurationId: "<id>",
+        passive: false,
+        buildsEnabled: false,
+        createdAt: 9181.4,
+        updatedAt: 1382.23,
+      },
     ],
   },
 };
@@ -1069,7 +1081,7 @@ const value: models.NinetySeven = {
 ```typescript
 const value: models.NinetyEight = {
   id: "<id>",
-  type: "postgres",
+  type: "blob",
 };
 ```
 

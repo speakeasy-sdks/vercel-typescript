@@ -19,7 +19,6 @@ export const Reason = {
 export type Reason = ClosedEnum<typeof Reason>;
 
 export const BlockedDueToOverageType = {
-  AiCredits: "aiCredits",
   AnalyticsUsage: "analyticsUsage",
   Artifacts: "artifacts",
   Bandwidth: "bandwidth",
@@ -112,10 +111,6 @@ export type BuildMachine = {
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
    */
   purchaseType?: PurchaseType | undefined;
-  /**
-   * An object containing infomation related to the amount of platform resources may be allocated to the User account.
-   */
-  abovePlan?: boolean | undefined;
   /**
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
    */
@@ -681,7 +676,6 @@ export const BuildMachine$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   purchaseType: PurchaseType$inboundSchema.optional(),
-  abovePlan: z.boolean().optional(),
   isDefaultBuildMachine: z.boolean().optional(),
   cores: z.number().optional(),
   memory: z.number().optional(),
@@ -690,7 +684,6 @@ export const BuildMachine$inboundSchema: z.ZodType<
 /** @internal */
 export type BuildMachine$Outbound = {
   purchaseType?: string | undefined;
-  abovePlan?: boolean | undefined;
   isDefaultBuildMachine?: boolean | undefined;
   cores?: number | undefined;
   memory?: number | undefined;
@@ -703,7 +696,6 @@ export const BuildMachine$outboundSchema: z.ZodType<
   BuildMachine
 > = z.object({
   purchaseType: PurchaseType$outboundSchema.optional(),
-  abovePlan: z.boolean().optional(),
   isDefaultBuildMachine: z.boolean().optional(),
   cores: z.number().optional(),
   memory: z.number().optional(),

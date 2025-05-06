@@ -21,7 +21,13 @@ test("Environment Create Custom Environment", async () => {
     slug: "my-team-url-slug",
   });
   expect(result).toBeDefined();
-  expect(result).toEqual({});
+  expect(result).toEqual({
+    id: "<id>",
+    slug: "<value>",
+    type: "development",
+    createdAt: 2508.21,
+    updatedAt: 2983.67,
+  });
 });
 
 test("Environment Get /V9 /Projects/{id Or Name}/custom Environments", async () => {
@@ -66,7 +72,13 @@ test("Environment Get Custom Environment", async () => {
     slug: "my-team-url-slug",
   });
   expect(result).toBeDefined();
-  expect(result).toEqual({});
+  expect(result).toEqual({
+    id: "<id>",
+    slug: "<value>",
+    type: "preview",
+    createdAt: 8857.3,
+    updatedAt: 7592.66,
+  });
 });
 
 test("Environment Update Custom Environment", async () => {
@@ -85,7 +97,13 @@ test("Environment Update Custom Environment", async () => {
     slug: "my-team-url-slug",
   });
   expect(result).toBeDefined();
-  expect(result).toEqual({});
+  expect(result).toEqual({
+    id: "<id>",
+    slug: "<value>",
+    type: "preview",
+    createdAt: 9735.05,
+    updatedAt: 3636.6,
+  });
 });
 
 test("Environment Remove Custom Environment", async () => {
@@ -104,5 +122,11 @@ test("Environment Remove Custom Environment", async () => {
     slug: "my-team-url-slug",
   });
   expect(result).toBeDefined();
-  expect(result).toEqual({});
+  expect(result).toEqual({
+    id: "<id>",
+    slug: "<value>",
+    type: "production",
+    createdAt: 6826.13,
+    updatedAt: 5237.86,
+  });
 });
