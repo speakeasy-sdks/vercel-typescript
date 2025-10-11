@@ -402,6 +402,7 @@ const (
 	GetWebhooksFrameworkVuepress       GetWebhooksFramework = "vuepress"
 	GetWebhooksFrameworkParcel         GetWebhooksFramework = "parcel"
 	GetWebhooksFrameworkFastapi        GetWebhooksFramework = "fastapi"
+	GetWebhooksFrameworkFlask          GetWebhooksFramework = "flask"
 	GetWebhooksFrameworkFasthtml       GetWebhooksFramework = "fasthtml"
 	GetWebhooksFrameworkSanityV3       GetWebhooksFramework = "sanity-v3"
 	GetWebhooksFrameworkSanity         GetWebhooksFramework = "sanity"
@@ -410,6 +411,7 @@ const (
 	GetWebhooksFrameworkHono           GetWebhooksFramework = "hono"
 	GetWebhooksFrameworkExpress        GetWebhooksFramework = "express"
 	GetWebhooksFrameworkH3             GetWebhooksFramework = "h3"
+	GetWebhooksFrameworkNestjs         GetWebhooksFramework = "nestjs"
 	GetWebhooksFrameworkXmcp           GetWebhooksFramework = "xmcp"
 )
 
@@ -508,6 +510,8 @@ func (e *GetWebhooksFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "fastapi":
 		fallthrough
+	case "flask":
+		fallthrough
 	case "fasthtml":
 		fallthrough
 	case "sanity-v3":
@@ -523,6 +527,8 @@ func (e *GetWebhooksFramework) UnmarshalJSON(data []byte) error {
 	case "express":
 		fallthrough
 	case "h3":
+		fallthrough
+	case "nestjs":
 		fallthrough
 	case "xmcp":
 		*e = GetWebhooksFramework(v)

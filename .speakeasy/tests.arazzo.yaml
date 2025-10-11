@@ -6383,7 +6383,7 @@ workflows:
                   "externalResourceId": "\u003cid\u003e",
                   "product": {
                     "value": {
-                      "__@BRAND@8486": {}
+                      "__@BRAND@8581": {}
                     }
                   },
                   "secrets": []
@@ -6457,4 +6457,454 @@ workflows:
               }
             type: simple
     x-speakeasy-test-group: projects
+    x-speakeasy-test-rebuild: true
+  - workflowId: uploadProjectClientCert
+    steps:
+      - stepId: test
+        operationId: uploadProjectClientCert
+        parameters:
+          - name: idOrName
+            in: path
+            value: prj_XLKmu1DyR1eY7zq8UgeRKbA7yVLA
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+          - name: slug
+            in: query
+            value: my-team-url-slug
+        requestBody:
+          contentType: application/json
+          payload:
+            ca: '-----BEGIN CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----'
+            cert: '-----BEGIN CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----'
+            key: '-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----'
+            origin: https://api.example.com
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "origin": "\u003cvalue\u003e",
+                "certId": "\u003cid\u003e"
+              }
+            type: simple
+    x-speakeasy-test-group: projects
+    x-speakeasy-test-rebuild: true
+  - workflowId: getSupportedTlds
+    steps:
+      - stepId: test
+        operationId: getSupportedTlds
+        parameters:
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              [
+                "\u003cvalue 1\u003e",
+                "\u003cvalue 2\u003e"
+              ]
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: getTldPrice
+    steps:
+      - stepId: test
+        operationId: getTldPrice
+        parameters:
+          - name: tld
+            in: path
+            value: <value>
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "years": 8935.16,
+                "purchasePrice": 7886.17,
+                "renewalPrice": 4537.84,
+                "transferPrice": 7204.57
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: getDomainAvailability
+    steps:
+      - stepId: test
+        operationId: getDomainAvailability
+        parameters:
+          - name: domain
+            in: path
+            value: hungry-birdbath.info
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "available": false
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: getDomainPrice
+    steps:
+      - stepId: test
+        operationId: getDomainPrice
+        parameters:
+          - name: domain
+            in: path
+            value: excited-dwell.org
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "years": 40.44,
+                "purchasePrice": 1523.71,
+                "renewalPrice": 3417.52,
+                "transferPrice": 7908.61
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: getBulkAvailability
+    steps:
+      - stepId: test
+        operationId: getBulkAvailability
+        parameters:
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        requestBody:
+          contentType: application/json
+          payload:
+            domains:
+              - <value 1>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "results": []
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: getDomainAuthCode
+    steps:
+      - stepId: test
+        operationId: getDomainAuthCode
+        parameters:
+          - name: domain
+            in: path
+            value: ruddy-coil.org
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "authCode": "\u003cvalue\u003e"
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: buySingleDomain
+    steps:
+      - stepId: test
+        operationId: buySingleDomain
+        parameters:
+          - name: domain
+            in: path
+            value: metallic-simple.com
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        requestBody:
+          contentType: application/json
+          payload:
+            autoRenew: false
+            contactInformation:
+              address1: <value>
+              city: Spencerport
+              country: Sweden
+              email: Lionel21@gmail.com
+              firstName: Lexie
+              lastName: Lemke
+              phone: 550.220.6330 x258
+              state: West Virginia
+              zip: "46432"
+            expectedPrice: 7390.34
+            years: 7602.67
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "orderId": "\u003cid\u003e",
+                "_links": {
+                  "key": {
+                    "href": "\u003cvalue\u003e",
+                    "method": "PUT"
+                  }
+                }
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: buyDomains
+    steps:
+      - stepId: test
+        operationId: buyDomains
+        parameters:
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        requestBody:
+          contentType: application/json
+          payload:
+            contactInformation:
+              address1: <value>
+              city: Rennerland
+              country: Peru
+              email: Anna_Fisher13@hotmail.com
+              firstName: Leonie
+              lastName: Johnston
+              phone: (688) 699-0656
+              state: New Jersey
+              zip: "70054"
+            domains: []
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "orderId": "\u003cid\u003e",
+                "_links": {}
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: transferInDomain
+    steps:
+      - stepId: test
+        operationId: transferInDomain
+        parameters:
+          - name: domain
+            in: path
+            value: silky-fund.org
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        requestBody:
+          contentType: application/json
+          payload:
+            authCode: <value>
+            autoRenew: true
+            contactInformation:
+              address1: <value>
+              city: Pattiestead
+              country: Bolivia
+              email: Keshawn99@yahoo.com
+              firstName: Gabrielle
+              lastName: Hackett
+              phone: (758) 385-1802 x13762
+              state: Idaho
+              zip: 64653-9022
+            expectedPrice: 5092.5
+            years: 298.08
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "orderId": "\u003cid\u003e",
+                "_links": {}
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: getDomainTransferIn
+    steps:
+      - stepId: test
+        operationId: getDomainTransferIn
+        parameters:
+          - name: domain
+            in: path
+            value: unsung-antelope.com
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "status": "pending_transfer"
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: renewDomain
+    steps:
+      - stepId: test
+        operationId: renewDomain
+        parameters:
+          - name: domain
+            in: path
+            value: scaly-daughter.biz
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        requestBody:
+          contentType: application/json
+          payload:
+            expectedPrice: 7096.16
+            years: 1981.72
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "orderId": "\u003cid\u003e",
+                "_links": {}
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: getContactInfoSchema
+    steps:
+      - stepId: test
+        operationId: getContactInfoSchema
+        parameters:
+          - name: domain
+            in: path
+            value: tricky-issue.name
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {}
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: getOrder
+    steps:
+      - stepId: test
+        operationId: getOrder
+        parameters:
+          - name: orderId
+            in: path
+            value: <id>
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "orderId": "\u003cid\u003e",
+                "domains": [
+                  {
+                    "purchaseType": "renewal",
+                    "years": 340.32,
+                    "domainName": "average-farmer.name",
+                    "status": "failed",
+                    "price": 3271.32
+                  }
+                ],
+                "status": "purchasing"
+              }
+            type: simple
+    x-speakeasy-test-group: domains-registrar
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-resource
+    steps:
+      - stepId: test
+        operationId: update-resource
+        parameters:
+          - name: integrationConfigurationId
+            in: path
+            value: <id>
+          - name: resourceId
+            in: path
+            value: <id>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              {
+                "name": "\u003cvalue\u003e"
+              }
+            type: simple
+    x-speakeasy-test-group: marketplace
+    x-speakeasy-test-rebuild: true
+  - workflowId: updateSharedConnectLinks
+    steps:
+      - stepId: test
+        operationId: updateSharedConnectLinks
+        parameters:
+          - name: idOrName
+            in: path
+            value: <value>
+          - name: teamId
+            in: query
+            value: team_1a2b3c4d5e6f7g8h9i0j1k2l
+          - name: slug
+            in: query
+            value: my-team-url-slug
+        requestBody:
+          contentType: application/json
+          payload:
+            regions:
+              - iad1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/json
+          - context: $response.body
+            condition: |
+              [
+                {
+                  "envId": "\u003cid\u003e",
+                  "connectConfigurationId": "\u003cid\u003e",
+                  "passive": false,
+                  "buildsEnabled": false,
+                  "createdAt": 4065.64,
+                  "updatedAt": 8093.89
+                }
+              ]
+            type: simple
+    x-speakeasy-test-group: connect
     x-speakeasy-test-rebuild: true
