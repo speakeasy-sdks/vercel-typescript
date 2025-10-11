@@ -326,6 +326,7 @@ export const GetDeploymentsFramework = {
   Vuepress: "vuepress",
   Parcel: "parcel",
   Fastapi: "fastapi",
+  Flask: "flask",
   Fasthtml: "fasthtml",
   SanityV3: "sanity-v3",
   Sanity: "sanity",
@@ -334,6 +335,7 @@ export const GetDeploymentsFramework = {
   Hono: "hono",
   Express: "express",
   H3: "h3",
+  Nestjs: "nestjs",
   Xmcp: "xmcp",
 } as const;
 export type GetDeploymentsFramework = ClosedEnum<

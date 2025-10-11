@@ -118,6 +118,7 @@ async function $do(
     "repoUrl": payload.repoUrl,
     "search": payload.search,
     "slug": payload.slug,
+    "staticIpsEnabled": payload.staticIpsEnabled,
     "teamId": payload.teamId,
   });
 
@@ -133,7 +134,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "getProjects",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

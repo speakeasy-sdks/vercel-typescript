@@ -8,11 +8,11 @@ import { CreateIntegrationStoreDirectStore } from "@vercel/sdk/models/createinte
 let value: CreateIntegrationStoreDirectStore = {
   projectsMetadata: [],
   usageQuotaExceeded: true,
-  status: "limits-exceeded-suspended",
+  status: "limits-exceeded-suspended-store-count",
   externalResourceId: "<id>",
   product: {
     value: {
-      atBRANDAt8486: {},
+      atBRANDAt8581: {},
     },
   },
   secrets: [
@@ -29,6 +29,7 @@ let value: CreateIntegrationStoreDirectStore = {
 | Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `projectsMetadata`                                                                                               | [models.ProjectsMetadata](../models/projectsmetadata.md)[]                                                       | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `projectFilter`                                                                                                  | [models.ProjectFilter](../models/projectfilter.md)                                                               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `totalConnectedProjects`                                                                                         | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `usageQuotaExceeded`                                                                                             | *boolean*                                                                                                        | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `status`                                                                                                         | [models.CreateIntegrationStoreDirectStatus](../models/createintegrationstoredirectstatus.md)                     | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

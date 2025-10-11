@@ -307,6 +307,7 @@ export const Framework = {
   Vuepress: "vuepress",
   Parcel: "parcel",
   Fastapi: "fastapi",
+  Flask: "flask",
   Fasthtml: "fasthtml",
   SanityV3: "sanity-v3",
   Sanity: "sanity",
@@ -315,6 +316,7 @@ export const Framework = {
   Hono: "hono",
   Express: "express",
   H3: "h3",
+  Nestjs: "nestjs",
   Xmcp: "xmcp",
 } as const;
 /**
@@ -524,6 +526,7 @@ export const CreateDeploymentFramework = {
   Vuepress: "vuepress",
   Parcel: "parcel",
   Fastapi: "fastapi",
+  Flask: "flask",
   Fasthtml: "fasthtml",
   SanityV3: "sanity-v3",
   Sanity: "sanity",
@@ -532,6 +535,7 @@ export const CreateDeploymentFramework = {
   Hono: "hono",
   Express: "express",
   H3: "h3",
+  Nestjs: "nestjs",
   Xmcp: "xmcp",
 } as const;
 export type CreateDeploymentFramework = ClosedEnum<
@@ -1677,10 +1681,6 @@ export type CreateDeploymentMicrofrontends2 = {
    * Whether the MicrofrontendsAlias2 team flag should be considered enabled for this deployment or not.
    */
   microfrontendsAlias2Enabled?: boolean | undefined;
-  /**
-   * Temporary flag to safely test MFE alias routing in vercel-site production for specific production hosts (not vercel.com)
-   */
-  microfrontendsAliasRoutingVercelSiteProdTestHost?: boolean | undefined;
 };
 
 export type CreateDeploymentMicrofrontends1 = {
@@ -1701,10 +1701,6 @@ export type CreateDeploymentMicrofrontends1 = {
    * Whether the MicrofrontendsAlias2 team flag should be considered enabled for this deployment or not.
    */
   microfrontendsAlias2Enabled?: boolean | undefined;
-  /**
-   * Temporary flag to safely test MFE alias routing in vercel-site production for specific production hosts (not vercel.com)
-   */
-  microfrontendsAliasRoutingVercelSiteProdTestHost?: boolean | undefined;
 };
 
 export type CreateDeploymentMicrofrontends =
@@ -9613,7 +9609,6 @@ export const CreateDeploymentMicrofrontends2$inboundSchema: z.ZodType<
   defaultRoute: z.string().optional(),
   groupIds: z.array(z.string()),
   microfrontendsAlias2Enabled: z.boolean().optional(),
-  microfrontendsAliasRoutingVercelSiteProdTestHost: z.boolean().optional(),
 });
 
 /** @internal */
@@ -9627,7 +9622,6 @@ export type CreateDeploymentMicrofrontends2$Outbound = {
   defaultRoute?: string | undefined;
   groupIds: Array<string>;
   microfrontendsAlias2Enabled?: boolean | undefined;
-  microfrontendsAliasRoutingVercelSiteProdTestHost?: boolean | undefined;
 };
 
 /** @internal */
@@ -9645,7 +9639,6 @@ export const CreateDeploymentMicrofrontends2$outboundSchema: z.ZodType<
   defaultRoute: z.string().optional(),
   groupIds: z.array(z.string()),
   microfrontendsAlias2Enabled: z.boolean().optional(),
-  microfrontendsAliasRoutingVercelSiteProdTestHost: z.boolean().optional(),
 });
 
 /**
@@ -9692,7 +9685,6 @@ export const CreateDeploymentMicrofrontends1$inboundSchema: z.ZodType<
   defaultRoute: z.string().optional(),
   groupIds: z.array(z.string()),
   microfrontendsAlias2Enabled: z.boolean().optional(),
-  microfrontendsAliasRoutingVercelSiteProdTestHost: z.boolean().optional(),
 });
 
 /** @internal */
@@ -9702,7 +9694,6 @@ export type CreateDeploymentMicrofrontends1$Outbound = {
   defaultRoute?: string | undefined;
   groupIds: Array<string>;
   microfrontendsAlias2Enabled?: boolean | undefined;
-  microfrontendsAliasRoutingVercelSiteProdTestHost?: boolean | undefined;
 };
 
 /** @internal */
@@ -9716,7 +9707,6 @@ export const CreateDeploymentMicrofrontends1$outboundSchema: z.ZodType<
   defaultRoute: z.string().optional(),
   groupIds: z.array(z.string()),
   microfrontendsAlias2Enabled: z.boolean().optional(),
-  microfrontendsAliasRoutingVercelSiteProdTestHost: z.boolean().optional(),
 });
 
 /**
