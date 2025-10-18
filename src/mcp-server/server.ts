@@ -49,6 +49,7 @@ import { tool$checksGetAllChecks } from "./tools/checksGetAllChecks.js";
 import { tool$checksGetCheck } from "./tools/checksGetCheck.js";
 import { tool$checksRerequestCheck } from "./tools/checksRerequestCheck.js";
 import { tool$checksUpdateCheck } from "./tools/checksUpdateCheck.js";
+import { tool$connectUpdateSharedConnectLinks } from "./tools/connectUpdateSharedConnectLinks.js";
 import { tool$deploymentsCancelDeployment } from "./tools/deploymentsCancelDeployment.js";
 import { tool$deploymentsCreateDeployment } from "./tools/deploymentsCreateDeployment.js";
 import { tool$deploymentsDeleteDeployment } from "./tools/deploymentsDeleteDeployment.js";
@@ -73,6 +74,21 @@ import { tool$domainsGetDomainConfig } from "./tools/domainsGetDomainConfig.js";
 import { tool$domainsGetDomains } from "./tools/domainsGetDomains.js";
 import { tool$domainsGetDomainTransfer } from "./tools/domainsGetDomainTransfer.js";
 import { tool$domainsPatchDomain } from "./tools/domainsPatchDomain.js";
+import { tool$domainsRegistrarBuyDomains } from "./tools/domainsRegistrarBuyDomains.js";
+import { tool$domainsRegistrarBuySingleDomain } from "./tools/domainsRegistrarBuySingleDomain.js";
+import { tool$domainsRegistrarGetBulkAvailability } from "./tools/domainsRegistrarGetBulkAvailability.js";
+import { tool$domainsRegistrarGetContactInfoSchema } from "./tools/domainsRegistrarGetContactInfoSchema.js";
+import { tool$domainsRegistrarGetDomainAuthCode } from "./tools/domainsRegistrarGetDomainAuthCode.js";
+import { tool$domainsRegistrarGetDomainAvailability } from "./tools/domainsRegistrarGetDomainAvailability.js";
+import { tool$domainsRegistrarGetDomainPrice } from "./tools/domainsRegistrarGetDomainPrice.js";
+import { tool$domainsRegistrarGetDomainTransferIn } from "./tools/domainsRegistrarGetDomainTransferIn.js";
+import { tool$domainsRegistrarGetOrder } from "./tools/domainsRegistrarGetOrder.js";
+import { tool$domainsRegistrarGetSupportedTlds } from "./tools/domainsRegistrarGetSupportedTlds.js";
+import { tool$domainsRegistrarGetTldPrice } from "./tools/domainsRegistrarGetTldPrice.js";
+import { tool$domainsRegistrarRenewDomain } from "./tools/domainsRegistrarRenewDomain.js";
+import { tool$domainsRegistrarTransferInDomain } from "./tools/domainsRegistrarTransferInDomain.js";
+import { tool$domainsRegistrarUpdateDomainAutoRenew } from "./tools/domainsRegistrarUpdateDomainAutoRenew.js";
+import { tool$domainsRegistrarUpdateDomainNameservers } from "./tools/domainsRegistrarUpdateDomainNameservers.js";
 import { tool$edgeCacheDangerouslyDeleteByTags } from "./tools/edgeCacheDangerouslyDeleteByTags.js";
 import { tool$edgeCacheInvalidateByTags } from "./tools/edgeCacheInvalidateByTags.js";
 import { tool$edgeConfigCreateEdgeConfig } from "./tools/edgeConfigCreateEdgeConfig.js";
@@ -123,9 +139,11 @@ import { tool$marketplaceImportResource } from "./tools/marketplaceImportResourc
 import { tool$marketplaceSubmitBillingData } from "./tools/marketplaceSubmitBillingData.js";
 import { tool$marketplaceSubmitInvoice } from "./tools/marketplaceSubmitInvoice.js";
 import { tool$marketplaceSubmitPrepaymentBalances } from "./tools/marketplaceSubmitPrepaymentBalances.js";
+import { tool$marketplaceUpdateInstallation } from "./tools/marketplaceUpdateInstallation.js";
 import { tool$marketplaceUpdateInstallationIntegrationConfiguration } from "./tools/marketplaceUpdateInstallationIntegrationConfiguration.js";
 import { tool$marketplaceUpdateInstallationIntegrationEdgeConfig } from "./tools/marketplaceUpdateInstallationIntegrationEdgeConfig.js";
 import { tool$marketplaceUpdateInvoice } from "./tools/marketplaceUpdateInvoice.js";
+import { tool$marketplaceUpdateResource } from "./tools/marketplaceUpdateResource.js";
 import { tool$marketplaceUpdateResourceSecrets } from "./tools/marketplaceUpdateResourceSecrets.js";
 import { tool$marketplaceUpdateResourceSecretsById } from "./tools/marketplaceUpdateResourceSecretsById.js";
 import { tool$projectMembersAddProjectMember } from "./tools/projectMembersAddProjectMember.js";
@@ -155,6 +173,7 @@ import { tool$projectsUpdateProject } from "./tools/projectsUpdateProject.js";
 import { tool$projectsUpdateProjectDataCache } from "./tools/projectsUpdateProjectDataCache.js";
 import { tool$projectsUpdateProjectDomain } from "./tools/projectsUpdateProjectDomain.js";
 import { tool$projectsUpdateProjectProtectionBypass } from "./tools/projectsUpdateProjectProtectionBypass.js";
+import { tool$projectsUploadProjectClientCert } from "./tools/projectsUploadProjectClientCert.js";
 import { tool$projectsVerifyProjectDomain } from "./tools/projectsVerifyProjectDomain.js";
 import { tool$rollingReleaseApproveRollingReleaseStage } from "./tools/rollingReleaseApproveRollingReleaseStage.js";
 import { tool$rollingReleaseCompleteRollingRelease } from "./tools/rollingReleaseCompleteRollingRelease.js";
@@ -167,6 +186,7 @@ import { tool$securityAddBypassIp } from "./tools/securityAddBypassIp.js";
 import { tool$securityGetActiveAttackStatus } from "./tools/securityGetActiveAttackStatus.js";
 import { tool$securityGetBypassIp } from "./tools/securityGetBypassIp.js";
 import { tool$securityGetFirewallConfig } from "./tools/securityGetFirewallConfig.js";
+import { tool$securityGetV1SecurityFirewallEvents } from "./tools/securityGetV1SecurityFirewallEvents.js";
 import { tool$securityPutFirewallConfig } from "./tools/securityPutFirewallConfig.js";
 import { tool$securityRemoveBypassIp } from "./tools/securityRemoveBypassIp.js";
 import { tool$securityUpdateAttackChallengeMode } from "./tools/securityUpdateAttackChallengeMode.js";
@@ -202,7 +222,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Vercel",
-    version: "1.12.1",
+    version: "1.13.0",
   });
 
   const client = new VercelCore({
@@ -272,6 +292,7 @@ export function createMCPServer(deps: {
   tool(tool$projectsRemoveProjectEnv);
   tool(tool$projectsEditProjectEnv);
   tool(tool$projectsBatchRemoveProjectEnv);
+  tool(tool$projectsUploadProjectClientCert);
   tool(tool$projectsCreateProjectTransferRequest);
   tool(tool$projectsAcceptProjectTransferRequest);
   tool(tool$projectsUpdateProjectProtectionBypass);
@@ -310,6 +331,21 @@ export function createMCPServer(deps: {
   tool(tool$dnsCreateRecord);
   tool(tool$dnsUpdateRecord);
   tool(tool$dnsRemoveRecord);
+  tool(tool$domainsRegistrarGetSupportedTlds);
+  tool(tool$domainsRegistrarGetTldPrice);
+  tool(tool$domainsRegistrarGetDomainAvailability);
+  tool(tool$domainsRegistrarGetDomainPrice);
+  tool(tool$domainsRegistrarGetBulkAvailability);
+  tool(tool$domainsRegistrarGetDomainAuthCode);
+  tool(tool$domainsRegistrarBuySingleDomain);
+  tool(tool$domainsRegistrarBuyDomains);
+  tool(tool$domainsRegistrarTransferInDomain);
+  tool(tool$domainsRegistrarGetDomainTransferIn);
+  tool(tool$domainsRegistrarRenewDomain);
+  tool(tool$domainsRegistrarUpdateDomainAutoRenew);
+  tool(tool$domainsRegistrarUpdateDomainNameservers);
+  tool(tool$domainsRegistrarGetContactInfoSchema);
+  tool(tool$domainsRegistrarGetOrder);
   tool(tool$edgeCacheInvalidateByTags);
   tool(tool$edgeCacheDangerouslyDeleteByTags);
   tool(tool$edgeConfigGetEdgeConfigs);
@@ -332,6 +368,7 @@ export function createMCPServer(deps: {
   tool(tool$userListUserEvents);
   tool(tool$userGetAuthUser);
   tool(tool$userRequestDelete);
+  tool(tool$marketplaceUpdateInstallation);
   tool(tool$marketplaceGetAccountInfo);
   tool(tool$marketplaceGetMember);
   tool(tool$marketplaceCreateEvent);
@@ -339,6 +376,7 @@ export function createMCPServer(deps: {
   tool(tool$marketplaceGetIntegrationResource);
   tool(tool$marketplaceDeleteIntegrationResource);
   tool(tool$marketplaceImportResource);
+  tool(tool$marketplaceUpdateResource);
   tool(tool$marketplaceSubmitBillingData);
   tool(tool$marketplaceSubmitInvoice);
   tool(tool$marketplaceGetInvoice);
@@ -363,6 +401,7 @@ export function createMCPServer(deps: {
   tool(tool$projectMembersGetProjectMembers);
   tool(tool$projectMembersAddProjectMember);
   tool(tool$projectMembersRemoveProjectMember);
+  tool(tool$connectUpdateSharedConnectLinks);
   tool(tool$environmentCreateCustomEnvironment);
   tool(tool$environmentGetV9ProjectsIdOrNameCustomEnvironments);
   tool(tool$environmentGetCustomEnvironment);
@@ -383,6 +422,7 @@ export function createMCPServer(deps: {
   tool(tool$securityGetBypassIp);
   tool(tool$securityAddBypassIp);
   tool(tool$securityRemoveBypassIp);
+  tool(tool$securityGetV1SecurityFirewallEvents);
   tool(tool$teamsGetTeamMembers);
   tool(tool$teamsInviteUserToTeam);
   tool(tool$teamsRequestAccessToTeam);

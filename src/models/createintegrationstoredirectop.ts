@@ -117,6 +117,7 @@ export const CreateIntegrationStoreDirectFramework = {
   Vuepress: "vuepress",
   Parcel: "parcel",
   Fastapi: "fastapi",
+  Flask: "flask",
   Fasthtml: "fasthtml",
   SanityV3: "sanity-v3",
   Sanity: "sanity",
@@ -125,6 +126,7 @@ export const CreateIntegrationStoreDirectFramework = {
   Hono: "hono",
   Express: "express",
   H3: "h3",
+  Nestjs: "nestjs",
   Xmcp: "xmcp",
 } as const;
 export type CreateIntegrationStoreDirectFramework = ClosedEnum<
@@ -149,14 +151,14 @@ export type CreateIntegrationStoreDirectIntegrationsEnvironments = ClosedEnum<
   typeof CreateIntegrationStoreDirectIntegrationsEnvironments
 >;
 
-export type Actions = {
+export type CreateIntegrationStoreDirectActions = {
   slug: string;
   environments: Array<CreateIntegrationStoreDirectIntegrationsEnvironments>;
 };
 
 export type CreateIntegrationStoreDirectDeployments = {
   required: boolean;
-  actions: Array<Actions>;
+  actions: Array<CreateIntegrationStoreDirectActions>;
 };
 
 export type ProjectsMetadata = {
@@ -171,6 +173,30 @@ export type ProjectsMetadata = {
   deployments?: CreateIntegrationStoreDirectDeployments | undefined;
 };
 
+export const Providers2 = {
+  Wildcard: "*",
+} as const;
+export type Providers2 = ClosedEnum<typeof Providers2>;
+
+export const Providers1 = {
+  Github: "github",
+  Gitlab: "gitlab",
+  Bitbucket: "bitbucket",
+} as const;
+export type Providers1 = ClosedEnum<typeof Providers1>;
+
+export type Providers = Array<Providers1> | Providers2;
+
+export type Git = {
+  providers: Array<Providers1> | Providers2;
+  owners?: Array<string> | undefined;
+  repos?: Array<string> | undefined;
+};
+
+export type ProjectFilter = {
+  git?: Git | undefined;
+};
+
 export const CreateIntegrationStoreDirectStatus = {
   Available: "available",
   Error: "error",
@@ -178,6 +204,7 @@ export const CreateIntegrationStoreDirectStatus = {
   LimitsExceededSuspended: "limits-exceeded-suspended",
   LimitsExceededSuspendedStoreCount: "limits-exceeded-suspended-store-count",
   Initializing: "initializing",
+  Onboarding: "onboarding",
   Uninstalled: "uninstalled",
 } as const;
 export type CreateIntegrationStoreDirectStatus = ClosedEnum<
@@ -198,6 +225,7 @@ export type Capabilities = {
   sso?: boolean | undefined;
   billable?: boolean | undefined;
   secretsSync?: boolean | undefined;
+  projects?: boolean | undefined;
 };
 
 export type CreateIntegrationStoreDirectMetadata =
@@ -210,6 +238,7 @@ export type CreateIntegrationStoreDirectMetadata =
 export const ExternalResourceStatus = {
   Error: "error",
   Suspended: "suspended",
+  Onboarding: "onboarding",
   Uninstalled: "uninstalled",
   Ready: "ready",
   Pending: "pending",
@@ -224,6 +253,7 @@ export type CreateIntegrationStoreDirectCapabilities = {
   secretsSync?: boolean | undefined;
   sandbox?: boolean | undefined;
   linking?: boolean | undefined;
+  projects?: boolean | undefined;
 };
 
 export const CreateIntegrationStoreDirectIntegrationsType = {
@@ -233,12 +263,12 @@ export type CreateIntegrationStoreDirectIntegrationsType = ClosedEnum<
   typeof CreateIntegrationStoreDirectIntegrationsType
 >;
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesValue = {
-  atBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486;
+  atBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646;
 };
 
 export const CreateIntegrationStoreDirectDisabled3 = {
@@ -307,31 +337,31 @@ export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applica
     typeof CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductUiControl
   >;
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MaxLength =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646;
   };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MinLength =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646;
   };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Pattern =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646;
   };
 
 export const CreateIntegrationStoreDirectUiReadOnlyIntegrationsResponse200ApplicationJSONResponseBodyStoreProduct3 =
@@ -469,10 +499,10 @@ export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applica
     typeof CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreUiControl
   >;
 
-export type CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486 = {};
+export type CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646 = {};
 
 export type CreateIntegrationStoreDirectUiOptionsValue = {
-  atBRANDAt8486: CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486;
+  atBRANDAt8646: CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646;
 };
 
 export const CreateIntegrationStoreDirectDisabledIntegrationsResponse2003 = {
@@ -523,10 +553,10 @@ export type CreateIntegrationStoreDirectUiOptions3 = {
     | undefined;
 };
 
-export type UiOptionsAtBRANDAt8486 = {};
+export type UiOptionsAtBRANDAt8646 = {};
 
 export type CreateIntegrationStoreDirectUiOptions2 = {
-  atBRANDAt8486: UiOptionsAtBRANDAt8486;
+  atBRANDAt8646: UiOptionsAtBRANDAt8646;
 };
 
 export const CreateIntegrationStoreDirectDisabledIntegrationsResponse200ApplicationJson3 =
@@ -589,31 +619,31 @@ export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseUiOptions 
   | CreateIntegrationStoreDirectUiOptions2
   | CreateIntegrationStoreDirectUiOptions3;
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseMaxLength =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646;
   };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseMinLength =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646;
   };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponsePattern =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646;
   };
 
 export const CreateIntegrationStoreDirectUiReadOnlyIntegrationsResponse200ApplicationJSONResponseBodyStore3 =
@@ -756,31 +786,31 @@ export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applica
     typeof CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6Type
   >;
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONMinLength =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646;
   };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONMaxLength =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646;
   };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONPattern =
   {
-    atBRANDAt8486:
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486;
+    atBRANDAt8646:
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646;
   };
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsItems = {
@@ -1035,28 +1065,28 @@ export type CreateIntegrationStoreDirectPropertiesUiOptions = {
     | undefined;
 };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsMaxLength = {
-  atBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486;
+  atBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646;
 };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsMinLength = {
-  atBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486;
+  atBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646;
 };
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesIntegrationsPattern = {
-  atBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486;
+  atBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646;
 };
 
 export const CreateIntegrationStoreDirectUiReadOnlyIntegrationsResponse200ApplicationJson3 =
@@ -1559,24 +1589,24 @@ export type CreateIntegrationStoreDirectPropertiesUiControl = ClosedEnum<
   typeof CreateIntegrationStoreDirectPropertiesUiControl
 >;
 
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486 =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646 =
   {};
 
 export type CreateIntegrationStoreDirectPropertiesMaxLength = {
-  atBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486;
+  atBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646;
 };
 
-export type PropertiesAtBRANDAt8486 = {};
+export type PropertiesAtBRANDAt8646 = {};
 
 export type CreateIntegrationStoreDirectPropertiesMinLength = {
-  atBRANDAt8486: PropertiesAtBRANDAt8486;
+  atBRANDAt8646: PropertiesAtBRANDAt8646;
 };
 
-export type CreateIntegrationStoreDirectPropertiesAtBRANDAt8486 = {};
+export type CreateIntegrationStoreDirectPropertiesAtBRANDAt8646 = {};
 
 export type CreateIntegrationStoreDirectPropertiesPattern = {
-  atBRANDAt8486: CreateIntegrationStoreDirectPropertiesAtBRANDAt8486;
+  atBRANDAt8646: CreateIntegrationStoreDirectPropertiesAtBRANDAt8646;
 };
 
 export const CreateIntegrationStoreDirectUiReadOnly3 = {
@@ -1729,11 +1759,15 @@ export const CreateIntegrationStoreDirectTags = {
   Other: "other",
   Mysql: "mysql",
   Vector: "vector",
+  TagAgents: "tag_agents",
   TagAi: "tag_ai",
   TagAnalytics: "tag_analytics",
   TagAuthentication: "tag_authentication",
   TagCms: "tag_cms",
   TagCodeRepository: "tag_code_repository",
+  TagCodeReview: "tag_code_review",
+  TagCodeSecurity: "tag_code_security",
+  TagCodeTesting: "tag_code_testing",
   TagCommerce: "tag_commerce",
   TagDatabases: "tag_databases",
   TagDevTools: "tag_dev_tools",
@@ -1748,8 +1782,10 @@ export const CreateIntegrationStoreDirectTags = {
   TagProductivity: "tag_productivity",
   TagSearching: "tag_searching",
   TagSecurity: "tag_security",
+  TagSupportAgent: "tag_support_agent",
   TagTesting: "tag_testing",
   TagVideo: "tag_video",
+  TagWebAutomation: "tag_web_automation",
   TagWorkflow: "tag_workflow",
   TagChecks: "tag_checks",
   TagStorage: "tag_storage",
@@ -1789,19 +1825,20 @@ export type Repl = {
 export const CreateIntegrationStoreDirectIntegrationsResponseType = {
   ConnectToProject: "connect_to_project",
   ConfigureProjectConnections: "configure_project_connections",
+  AddDrain: "add_drain",
 } as const;
 export type CreateIntegrationStoreDirectIntegrationsResponseType = ClosedEnum<
   typeof CreateIntegrationStoreDirectIntegrationsResponseType
 >;
 
-export type CreateIntegrationStoreDirectActions = {
+export type CreateIntegrationStoreDirectIntegrationsActions = {
   type: CreateIntegrationStoreDirectIntegrationsResponseType;
 };
 
 export type Steps = {
   title: string;
   content: string;
-  actions?: Array<CreateIntegrationStoreDirectActions> | undefined;
+  actions?: Array<CreateIntegrationStoreDirectIntegrationsActions> | undefined;
 };
 
 export type Guides = {
@@ -1810,10 +1847,10 @@ export type Guides = {
   steps: Array<Steps>;
 };
 
-export type AtBRANDAt8486 = {};
+export type AtBRANDAt8646 = {};
 
 export type CreateIntegrationStoreDirectValue = {
-  atBRANDAt8486: AtBRANDAt8486;
+  atBRANDAt8646: AtBRANDAt8646;
 };
 
 export const Disabled3 = {
@@ -1946,6 +1983,7 @@ export type CreateIntegrationStoreDirectBillingPlan = {
 
 export type CreateIntegrationStoreDirectStore = {
   projectsMetadata: Array<ProjectsMetadata>;
+  projectFilter?: ProjectFilter | undefined;
   totalConnectedProjects?: number | undefined;
   usageQuotaExceeded: boolean;
   status: CreateIntegrationStoreDirectStatus | null;
@@ -2286,25 +2324,28 @@ export namespace CreateIntegrationStoreDirectIntegrationsEnvironments$ {
 }
 
 /** @internal */
-export const Actions$inboundSchema: z.ZodType<Actions, z.ZodTypeDef, unknown> =
-  z.object({
-    slug: z.string(),
-    environments: z.array(
-      CreateIntegrationStoreDirectIntegrationsEnvironments$inboundSchema,
-    ),
-  });
+export const CreateIntegrationStoreDirectActions$inboundSchema: z.ZodType<
+  CreateIntegrationStoreDirectActions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  slug: z.string(),
+  environments: z.array(
+    CreateIntegrationStoreDirectIntegrationsEnvironments$inboundSchema,
+  ),
+});
 
 /** @internal */
-export type Actions$Outbound = {
+export type CreateIntegrationStoreDirectActions$Outbound = {
   slug: string;
   environments: Array<string>;
 };
 
 /** @internal */
-export const Actions$outboundSchema: z.ZodType<
-  Actions$Outbound,
+export const CreateIntegrationStoreDirectActions$outboundSchema: z.ZodType<
+  CreateIntegrationStoreDirectActions$Outbound,
   z.ZodTypeDef,
-  Actions
+  CreateIntegrationStoreDirectActions
 > = z.object({
   slug: z.string(),
   environments: z.array(
@@ -2316,26 +2357,35 @@ export const Actions$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Actions$ {
-  /** @deprecated use `Actions$inboundSchema` instead. */
-  export const inboundSchema = Actions$inboundSchema;
-  /** @deprecated use `Actions$outboundSchema` instead. */
-  export const outboundSchema = Actions$outboundSchema;
-  /** @deprecated use `Actions$Outbound` instead. */
-  export type Outbound = Actions$Outbound;
+export namespace CreateIntegrationStoreDirectActions$ {
+  /** @deprecated use `CreateIntegrationStoreDirectActions$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateIntegrationStoreDirectActions$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectActions$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateIntegrationStoreDirectActions$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectActions$Outbound` instead. */
+  export type Outbound = CreateIntegrationStoreDirectActions$Outbound;
 }
 
-export function actionsToJSON(actions: Actions): string {
-  return JSON.stringify(Actions$outboundSchema.parse(actions));
+export function createIntegrationStoreDirectActionsToJSON(
+  createIntegrationStoreDirectActions: CreateIntegrationStoreDirectActions,
+): string {
+  return JSON.stringify(
+    CreateIntegrationStoreDirectActions$outboundSchema.parse(
+      createIntegrationStoreDirectActions,
+    ),
+  );
 }
 
-export function actionsFromJSON(
+export function createIntegrationStoreDirectActionsFromJSON(
   jsonString: string,
-): SafeParseResult<Actions, SDKValidationError> {
+): SafeParseResult<CreateIntegrationStoreDirectActions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Actions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Actions' from JSON`,
+    (x) =>
+      CreateIntegrationStoreDirectActions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateIntegrationStoreDirectActions' from JSON`,
   );
 }
 
@@ -2346,13 +2396,15 @@ export const CreateIntegrationStoreDirectDeployments$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   required: z.boolean(),
-  actions: z.array(z.lazy(() => Actions$inboundSchema)),
+  actions: z.array(
+    z.lazy(() => CreateIntegrationStoreDirectActions$inboundSchema),
+  ),
 });
 
 /** @internal */
 export type CreateIntegrationStoreDirectDeployments$Outbound = {
   required: boolean;
-  actions: Array<Actions$Outbound>;
+  actions: Array<CreateIntegrationStoreDirectActions$Outbound>;
 };
 
 /** @internal */
@@ -2362,7 +2414,9 @@ export const CreateIntegrationStoreDirectDeployments$outboundSchema: z.ZodType<
   CreateIntegrationStoreDirectDeployments
 > = z.object({
   required: z.boolean(),
-  actions: z.array(z.lazy(() => Actions$outboundSchema)),
+  actions: z.array(
+    z.lazy(() => CreateIntegrationStoreDirectActions$outboundSchema),
+  ),
 });
 
 /**
@@ -2494,6 +2548,194 @@ export function projectsMetadataFromJSON(
 }
 
 /** @internal */
+export const Providers2$inboundSchema: z.ZodNativeEnum<typeof Providers2> = z
+  .nativeEnum(Providers2);
+
+/** @internal */
+export const Providers2$outboundSchema: z.ZodNativeEnum<typeof Providers2> =
+  Providers2$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Providers2$ {
+  /** @deprecated use `Providers2$inboundSchema` instead. */
+  export const inboundSchema = Providers2$inboundSchema;
+  /** @deprecated use `Providers2$outboundSchema` instead. */
+  export const outboundSchema = Providers2$outboundSchema;
+}
+
+/** @internal */
+export const Providers1$inboundSchema: z.ZodNativeEnum<typeof Providers1> = z
+  .nativeEnum(Providers1);
+
+/** @internal */
+export const Providers1$outboundSchema: z.ZodNativeEnum<typeof Providers1> =
+  Providers1$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Providers1$ {
+  /** @deprecated use `Providers1$inboundSchema` instead. */
+  export const inboundSchema = Providers1$inboundSchema;
+  /** @deprecated use `Providers1$outboundSchema` instead. */
+  export const outboundSchema = Providers1$outboundSchema;
+}
+
+/** @internal */
+export const Providers$inboundSchema: z.ZodType<
+  Providers,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.array(Providers1$inboundSchema), Providers2$inboundSchema]);
+
+/** @internal */
+export type Providers$Outbound = Array<string> | string;
+
+/** @internal */
+export const Providers$outboundSchema: z.ZodType<
+  Providers$Outbound,
+  z.ZodTypeDef,
+  Providers
+> = z.union([z.array(Providers1$outboundSchema), Providers2$outboundSchema]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Providers$ {
+  /** @deprecated use `Providers$inboundSchema` instead. */
+  export const inboundSchema = Providers$inboundSchema;
+  /** @deprecated use `Providers$outboundSchema` instead. */
+  export const outboundSchema = Providers$outboundSchema;
+  /** @deprecated use `Providers$Outbound` instead. */
+  export type Outbound = Providers$Outbound;
+}
+
+export function providersToJSON(providers: Providers): string {
+  return JSON.stringify(Providers$outboundSchema.parse(providers));
+}
+
+export function providersFromJSON(
+  jsonString: string,
+): SafeParseResult<Providers, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Providers$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Providers' from JSON`,
+  );
+}
+
+/** @internal */
+export const Git$inboundSchema: z.ZodType<Git, z.ZodTypeDef, unknown> = z
+  .object({
+    providers: z.union([
+      z.array(Providers1$inboundSchema),
+      Providers2$inboundSchema,
+    ]),
+    owners: z.array(z.string()).optional(),
+    repos: z.array(z.string()).optional(),
+  });
+
+/** @internal */
+export type Git$Outbound = {
+  providers: Array<string> | string;
+  owners?: Array<string> | undefined;
+  repos?: Array<string> | undefined;
+};
+
+/** @internal */
+export const Git$outboundSchema: z.ZodType<Git$Outbound, z.ZodTypeDef, Git> = z
+  .object({
+    providers: z.union([
+      z.array(Providers1$outboundSchema),
+      Providers2$outboundSchema,
+    ]),
+    owners: z.array(z.string()).optional(),
+    repos: z.array(z.string()).optional(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Git$ {
+  /** @deprecated use `Git$inboundSchema` instead. */
+  export const inboundSchema = Git$inboundSchema;
+  /** @deprecated use `Git$outboundSchema` instead. */
+  export const outboundSchema = Git$outboundSchema;
+  /** @deprecated use `Git$Outbound` instead. */
+  export type Outbound = Git$Outbound;
+}
+
+export function gitToJSON(git: Git): string {
+  return JSON.stringify(Git$outboundSchema.parse(git));
+}
+
+export function gitFromJSON(
+  jsonString: string,
+): SafeParseResult<Git, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Git$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Git' from JSON`,
+  );
+}
+
+/** @internal */
+export const ProjectFilter$inboundSchema: z.ZodType<
+  ProjectFilter,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  git: z.lazy(() => Git$inboundSchema).optional(),
+});
+
+/** @internal */
+export type ProjectFilter$Outbound = {
+  git?: Git$Outbound | undefined;
+};
+
+/** @internal */
+export const ProjectFilter$outboundSchema: z.ZodType<
+  ProjectFilter$Outbound,
+  z.ZodTypeDef,
+  ProjectFilter
+> = z.object({
+  git: z.lazy(() => Git$outboundSchema).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ProjectFilter$ {
+  /** @deprecated use `ProjectFilter$inboundSchema` instead. */
+  export const inboundSchema = ProjectFilter$inboundSchema;
+  /** @deprecated use `ProjectFilter$outboundSchema` instead. */
+  export const outboundSchema = ProjectFilter$outboundSchema;
+  /** @deprecated use `ProjectFilter$Outbound` instead. */
+  export type Outbound = ProjectFilter$Outbound;
+}
+
+export function projectFilterToJSON(projectFilter: ProjectFilter): string {
+  return JSON.stringify(ProjectFilter$outboundSchema.parse(projectFilter));
+}
+
+export function projectFilterFromJSON(
+  jsonString: string,
+): SafeParseResult<ProjectFilter, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ProjectFilter$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ProjectFilter' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateIntegrationStoreDirectStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateIntegrationStoreDirectStatus
 > = z.nativeEnum(CreateIntegrationStoreDirectStatus);
@@ -2549,6 +2791,7 @@ export const Capabilities$inboundSchema: z.ZodType<
   sso: z.boolean().optional(),
   billable: z.boolean().optional(),
   secretsSync: z.boolean().optional(),
+  projects: z.boolean().optional(),
 });
 
 /** @internal */
@@ -2557,6 +2800,7 @@ export type Capabilities$Outbound = {
   sso?: boolean | undefined;
   billable?: boolean | undefined;
   secretsSync?: boolean | undefined;
+  projects?: boolean | undefined;
 };
 
 /** @internal */
@@ -2569,6 +2813,7 @@ export const Capabilities$outboundSchema: z.ZodType<
   sso: z.boolean().optional(),
   billable: z.boolean().optional(),
   secretsSync: z.boolean().optional(),
+  projects: z.boolean().optional(),
 });
 
 /**
@@ -2701,6 +2946,7 @@ export const CreateIntegrationStoreDirectCapabilities$inboundSchema: z.ZodType<
   secretsSync: z.boolean().optional(),
   sandbox: z.boolean().optional(),
   linking: z.boolean().optional(),
+  projects: z.boolean().optional(),
 });
 
 /** @internal */
@@ -2711,6 +2957,7 @@ export type CreateIntegrationStoreDirectCapabilities$Outbound = {
   secretsSync?: boolean | undefined;
   sandbox?: boolean | undefined;
   linking?: boolean | undefined;
+  projects?: boolean | undefined;
 };
 
 /** @internal */
@@ -2725,6 +2972,7 @@ export const CreateIntegrationStoreDirectCapabilities$outboundSchema: z.ZodType<
   secretsSync: z.boolean().optional(),
   sandbox: z.boolean().optional(),
   linking: z.boolean().optional(),
+  projects: z.boolean().optional(),
 });
 
 /**
@@ -2793,65 +3041,65 @@ export namespace CreateIntegrationStoreDirectIntegrationsType$ {
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646' from JSON`,
   );
 }
 
@@ -2862,19 +3110,19 @@ export const CreateIntegrationStoreDirectPropertiesValue$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesValue$Outbound = {
-  "__@BRAND@8486":
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$Outbound;
+  "__@BRAND@8646":
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$Outbound;
 };
 
 /** @internal */
@@ -2884,12 +3132,12 @@ export const CreateIntegrationStoreDirectPropertiesValue$outboundSchema:
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesValue
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema9AtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -3401,65 +3649,65 @@ export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Ap
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -3470,20 +3718,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MaxLen
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MaxLength$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -3493,12 +3741,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MaxLen
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MaxLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -3546,65 +3794,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsResponse200Max
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -3615,20 +3863,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MinLen
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MinLength$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -3638,12 +3886,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MinLen
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponse200MinLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchemaAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -3691,65 +3939,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsResponse200Min
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646' from JSON`,
   );
 }
 
@@ -3760,20 +4008,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Patter
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Pattern$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -3783,12 +4031,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Patter
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Pattern
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema8AtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -4844,64 +5092,64 @@ export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Ap
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486,
+    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$Outbound = {};
+export type CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$Outbound = {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486
+    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectUiOptionsAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectUiOptionsAtBRANDAt8486:
-    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486,
+export function createIntegrationStoreDirectUiOptionsAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectUiOptionsAtBRANDAt8646:
+    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$outboundSchema.parse(
-      createIntegrationStoreDirectUiOptionsAtBRANDAt8486,
+    CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$outboundSchema.parse(
+      createIntegrationStoreDirectUiOptionsAtBRANDAt8646,
     ),
   );
 }
 
-export function createIntegrationStoreDirectUiOptionsAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectUiOptionsAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486,
+  CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$inboundSchema.parse(
+      CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -4909,18 +5157,18 @@ export function createIntegrationStoreDirectUiOptionsAtBRANDAt8486FromJSON(
 export const CreateIntegrationStoreDirectUiOptionsValue$inboundSchema:
   z.ZodType<CreateIntegrationStoreDirectUiOptionsValue, z.ZodTypeDef, unknown> =
     z.object({
-      "__@BRAND@8486": z.lazy(() =>
-        CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$inboundSchema
+      "__@BRAND@8646": z.lazy(() =>
+        CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$inboundSchema
       ),
     }).transform((v) => {
       return remap$(v, {
-        "__@BRAND@8486": "atBRANDAt8486",
+        "__@BRAND@8646": "atBRANDAt8646",
       });
     });
 
 /** @internal */
 export type CreateIntegrationStoreDirectUiOptionsValue$Outbound = {
-  "__@BRAND@8486": CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$Outbound;
+  "__@BRAND@8646": CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$Outbound;
 };
 
 /** @internal */
@@ -4930,12 +5178,12 @@ export const CreateIntegrationStoreDirectUiOptionsValue$outboundSchema:
     z.ZodTypeDef,
     CreateIntegrationStoreDirectUiOptionsValue
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectUiOptionsAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectUiOptionsAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -5419,50 +5667,50 @@ export function createIntegrationStoreDirectUiOptions3FromJSON(
 }
 
 /** @internal */
-export const UiOptionsAtBRANDAt8486$inboundSchema: z.ZodType<
-  UiOptionsAtBRANDAt8486,
+export const UiOptionsAtBRANDAt8646$inboundSchema: z.ZodType<
+  UiOptionsAtBRANDAt8646,
   z.ZodTypeDef,
   unknown
 > = z.object({});
 
 /** @internal */
-export type UiOptionsAtBRANDAt8486$Outbound = {};
+export type UiOptionsAtBRANDAt8646$Outbound = {};
 
 /** @internal */
-export const UiOptionsAtBRANDAt8486$outboundSchema: z.ZodType<
-  UiOptionsAtBRANDAt8486$Outbound,
+export const UiOptionsAtBRANDAt8646$outboundSchema: z.ZodType<
+  UiOptionsAtBRANDAt8646$Outbound,
   z.ZodTypeDef,
-  UiOptionsAtBRANDAt8486
+  UiOptionsAtBRANDAt8646
 > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UiOptionsAtBRANDAt8486$ {
-  /** @deprecated use `UiOptionsAtBRANDAt8486$inboundSchema` instead. */
-  export const inboundSchema = UiOptionsAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `UiOptionsAtBRANDAt8486$outboundSchema` instead. */
-  export const outboundSchema = UiOptionsAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `UiOptionsAtBRANDAt8486$Outbound` instead. */
-  export type Outbound = UiOptionsAtBRANDAt8486$Outbound;
+export namespace UiOptionsAtBRANDAt8646$ {
+  /** @deprecated use `UiOptionsAtBRANDAt8646$inboundSchema` instead. */
+  export const inboundSchema = UiOptionsAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `UiOptionsAtBRANDAt8646$outboundSchema` instead. */
+  export const outboundSchema = UiOptionsAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `UiOptionsAtBRANDAt8646$Outbound` instead. */
+  export type Outbound = UiOptionsAtBRANDAt8646$Outbound;
 }
 
-export function uiOptionsAtBRANDAt8486ToJSON(
-  uiOptionsAtBRANDAt8486: UiOptionsAtBRANDAt8486,
+export function uiOptionsAtBRANDAt8646ToJSON(
+  uiOptionsAtBRANDAt8646: UiOptionsAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    UiOptionsAtBRANDAt8486$outboundSchema.parse(uiOptionsAtBRANDAt8486),
+    UiOptionsAtBRANDAt8646$outboundSchema.parse(uiOptionsAtBRANDAt8646),
   );
 }
 
-export function uiOptionsAtBRANDAt8486FromJSON(
+export function uiOptionsAtBRANDAt8646FromJSON(
   jsonString: string,
-): SafeParseResult<UiOptionsAtBRANDAt8486, SDKValidationError> {
+): SafeParseResult<UiOptionsAtBRANDAt8646, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UiOptionsAtBRANDAt8486$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UiOptionsAtBRANDAt8486' from JSON`,
+    (x) => UiOptionsAtBRANDAt8646$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UiOptionsAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -5472,16 +5720,16 @@ export const CreateIntegrationStoreDirectUiOptions2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "__@BRAND@8486": z.lazy(() => UiOptionsAtBRANDAt8486$inboundSchema),
+  "__@BRAND@8646": z.lazy(() => UiOptionsAtBRANDAt8646$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    "__@BRAND@8486": "atBRANDAt8486",
+    "__@BRAND@8646": "atBRANDAt8646",
   });
 });
 
 /** @internal */
 export type CreateIntegrationStoreDirectUiOptions2$Outbound = {
-  "__@BRAND@8486": UiOptionsAtBRANDAt8486$Outbound;
+  "__@BRAND@8646": UiOptionsAtBRANDAt8646$Outbound;
 };
 
 /** @internal */
@@ -5490,10 +5738,10 @@ export const CreateIntegrationStoreDirectUiOptions2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateIntegrationStoreDirectUiOptions2
 > = z.object({
-  atBRANDAt8486: z.lazy(() => UiOptionsAtBRANDAt8486$outboundSchema),
+  atBRANDAt8646: z.lazy(() => UiOptionsAtBRANDAt8646$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    atBRANDAt8486: "__@BRAND@8486",
+    atBRANDAt8646: "__@BRAND@8646",
   });
 });
 
@@ -6055,65 +6303,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsResponseUiOpti
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -6124,20 +6372,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponseMaxLength
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseMaxLength$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -6147,12 +6395,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponseMaxLength
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponseMaxLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -6200,65 +6448,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsResponseMaxLen
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -6269,20 +6517,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponseMinLength
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseMinLength$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -6292,12 +6540,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponseMinLength
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponseMinLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -6345,65 +6593,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsResponseMinLen
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -6414,20 +6662,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponsePattern$i
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponsePattern$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -6437,12 +6685,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponsePattern$o
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponsePattern
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -7517,65 +7765,65 @@ export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Ap
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -7586,20 +7834,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applic
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONMinLength$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -7609,12 +7857,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applic
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONMinLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -7662,65 +7910,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsResponse200App
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -7731,20 +7979,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applic
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONMaxLength$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -7754,12 +8002,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applic
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONMaxLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6ItemsMaxLengthAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -7807,65 +8055,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsResponse200App
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646' from JSON`,
   );
 }
 
@@ -7876,20 +8124,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applic
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONPattern$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -7899,12 +8147,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200Applic
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONPattern
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema6AtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -9975,63 +10223,63 @@ export function createIntegrationStoreDirectPropertiesUiOptionsFromJSON(
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$outboundSchema
-      .parse(createIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486),
+    CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$outboundSchema
+      .parse(createIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -10042,20 +10290,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsMaxLength$inbound
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsMaxLength$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -10065,12 +10313,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsMaxLength$outboun
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsMaxLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -10116,65 +10364,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsMaxLengthFromJ
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -10185,20 +10433,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsMinLength$inbound
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsMinLength$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -10208,12 +10456,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsMinLength$outboun
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsMinLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponseAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -10259,65 +10507,65 @@ export function createIntegrationStoreDirectPropertiesIntegrationsMinLengthFromJ
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646' from JSON`,
   );
 }
 
@@ -10328,20 +10576,20 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsPattern$inboundSc
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesIntegrationsPattern$Outbound =
   {
-    "__@BRAND@8486":
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$Outbound;
+    "__@BRAND@8646":
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$Outbound;
   };
 
 /** @internal */
@@ -10351,12 +10599,12 @@ export const CreateIntegrationStoreDirectPropertiesIntegrationsPattern$outboundS
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesIntegrationsPattern
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200AtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -14419,65 +14667,65 @@ export namespace CreateIntegrationStoreDirectPropertiesUiControl$ {
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$Outbound =
+export type CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$Outbound =
   {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$outboundSchema
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$outboundSchema
       .parse(
-        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486,
+        createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646,
       ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$inboundSchema
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646' from JSON`,
   );
 }
 
@@ -14488,19 +14736,19 @@ export const CreateIntegrationStoreDirectPropertiesMaxLength$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesMaxLength$Outbound = {
-  "__@BRAND@8486":
-    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$Outbound;
+  "__@BRAND@8646":
+    CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$Outbound;
 };
 
 /** @internal */
@@ -14510,12 +14758,12 @@ export const CreateIntegrationStoreDirectPropertiesMaxLength$outboundSchema:
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesMaxLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesIntegrationsResponse200ApplicationJSONResponseBodyStoreProductMetadataSchema1AtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -14563,50 +14811,50 @@ export function createIntegrationStoreDirectPropertiesMaxLengthFromJSON(
 }
 
 /** @internal */
-export const PropertiesAtBRANDAt8486$inboundSchema: z.ZodType<
-  PropertiesAtBRANDAt8486,
+export const PropertiesAtBRANDAt8646$inboundSchema: z.ZodType<
+  PropertiesAtBRANDAt8646,
   z.ZodTypeDef,
   unknown
 > = z.object({});
 
 /** @internal */
-export type PropertiesAtBRANDAt8486$Outbound = {};
+export type PropertiesAtBRANDAt8646$Outbound = {};
 
 /** @internal */
-export const PropertiesAtBRANDAt8486$outboundSchema: z.ZodType<
-  PropertiesAtBRANDAt8486$Outbound,
+export const PropertiesAtBRANDAt8646$outboundSchema: z.ZodType<
+  PropertiesAtBRANDAt8646$Outbound,
   z.ZodTypeDef,
-  PropertiesAtBRANDAt8486
+  PropertiesAtBRANDAt8646
 > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PropertiesAtBRANDAt8486$ {
-  /** @deprecated use `PropertiesAtBRANDAt8486$inboundSchema` instead. */
-  export const inboundSchema = PropertiesAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `PropertiesAtBRANDAt8486$outboundSchema` instead. */
-  export const outboundSchema = PropertiesAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `PropertiesAtBRANDAt8486$Outbound` instead. */
-  export type Outbound = PropertiesAtBRANDAt8486$Outbound;
+export namespace PropertiesAtBRANDAt8646$ {
+  /** @deprecated use `PropertiesAtBRANDAt8646$inboundSchema` instead. */
+  export const inboundSchema = PropertiesAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `PropertiesAtBRANDAt8646$outboundSchema` instead. */
+  export const outboundSchema = PropertiesAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `PropertiesAtBRANDAt8646$Outbound` instead. */
+  export type Outbound = PropertiesAtBRANDAt8646$Outbound;
 }
 
-export function propertiesAtBRANDAt8486ToJSON(
-  propertiesAtBRANDAt8486: PropertiesAtBRANDAt8486,
+export function propertiesAtBRANDAt8646ToJSON(
+  propertiesAtBRANDAt8646: PropertiesAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    PropertiesAtBRANDAt8486$outboundSchema.parse(propertiesAtBRANDAt8486),
+    PropertiesAtBRANDAt8646$outboundSchema.parse(propertiesAtBRANDAt8646),
   );
 }
 
-export function propertiesAtBRANDAt8486FromJSON(
+export function propertiesAtBRANDAt8646FromJSON(
   jsonString: string,
-): SafeParseResult<PropertiesAtBRANDAt8486, SDKValidationError> {
+): SafeParseResult<PropertiesAtBRANDAt8646, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PropertiesAtBRANDAt8486$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PropertiesAtBRANDAt8486' from JSON`,
+    (x) => PropertiesAtBRANDAt8646$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PropertiesAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -14617,16 +14865,16 @@ export const CreateIntegrationStoreDirectPropertiesMinLength$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() => PropertiesAtBRANDAt8486$inboundSchema),
+    "__@BRAND@8646": z.lazy(() => PropertiesAtBRANDAt8646$inboundSchema),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesMinLength$Outbound = {
-  "__@BRAND@8486": PropertiesAtBRANDAt8486$Outbound;
+  "__@BRAND@8646": PropertiesAtBRANDAt8646$Outbound;
 };
 
 /** @internal */
@@ -14636,10 +14884,10 @@ export const CreateIntegrationStoreDirectPropertiesMinLength$outboundSchema:
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesMinLength
   > = z.object({
-    atBRANDAt8486: z.lazy(() => PropertiesAtBRANDAt8486$outboundSchema),
+    atBRANDAt8646: z.lazy(() => PropertiesAtBRANDAt8646$outboundSchema),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -14687,64 +14935,64 @@ export function createIntegrationStoreDirectPropertiesMinLengthFromJSON(
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$inboundSchema:
+export const CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$inboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesAtBRANDAt8646,
     z.ZodTypeDef,
     unknown
   > = z.object({});
 
 /** @internal */
-export type CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$Outbound = {};
+export type CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$Outbound = {};
 
 /** @internal */
-export const CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$outboundSchema:
+export const CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$outboundSchema:
   z.ZodType<
-    CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$Outbound,
+    CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$Outbound,
     z.ZodTypeDef,
-    CreateIntegrationStoreDirectPropertiesAtBRANDAt8486
+    CreateIntegrationStoreDirectPropertiesAtBRANDAt8646
   > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$ {
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$ {
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$outboundSchema` instead. */
+    CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$Outbound` instead. */
+    CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$Outbound` instead. */
   export type Outbound =
-    CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$Outbound;
+    CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$Outbound;
 }
 
-export function createIntegrationStoreDirectPropertiesAtBRANDAt8486ToJSON(
-  createIntegrationStoreDirectPropertiesAtBRANDAt8486:
-    CreateIntegrationStoreDirectPropertiesAtBRANDAt8486,
+export function createIntegrationStoreDirectPropertiesAtBRANDAt8646ToJSON(
+  createIntegrationStoreDirectPropertiesAtBRANDAt8646:
+    CreateIntegrationStoreDirectPropertiesAtBRANDAt8646,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$outboundSchema.parse(
-      createIntegrationStoreDirectPropertiesAtBRANDAt8486,
+    CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$outboundSchema.parse(
+      createIntegrationStoreDirectPropertiesAtBRANDAt8646,
     ),
   );
 }
 
-export function createIntegrationStoreDirectPropertiesAtBRANDAt8486FromJSON(
+export function createIntegrationStoreDirectPropertiesAtBRANDAt8646FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateIntegrationStoreDirectPropertiesAtBRANDAt8486,
+  CreateIntegrationStoreDirectPropertiesAtBRANDAt8646,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$inboundSchema.parse(
+      CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateIntegrationStoreDirectPropertiesAtBRANDAt8486' from JSON`,
+    `Failed to parse 'CreateIntegrationStoreDirectPropertiesAtBRANDAt8646' from JSON`,
   );
 }
 
@@ -14755,18 +15003,18 @@ export const CreateIntegrationStoreDirectPropertiesPattern$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    "__@BRAND@8486": z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$inboundSchema
+    "__@BRAND@8646": z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$inboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      "__@BRAND@8486": "atBRANDAt8486",
+      "__@BRAND@8646": "atBRANDAt8646",
     });
   });
 
 /** @internal */
 export type CreateIntegrationStoreDirectPropertiesPattern$Outbound = {
-  "__@BRAND@8486": CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$Outbound;
+  "__@BRAND@8646": CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$Outbound;
 };
 
 /** @internal */
@@ -14776,12 +15024,12 @@ export const CreateIntegrationStoreDirectPropertiesPattern$outboundSchema:
     z.ZodTypeDef,
     CreateIntegrationStoreDirectPropertiesPattern
   > = z.object({
-    atBRANDAt8486: z.lazy(() =>
-      CreateIntegrationStoreDirectPropertiesAtBRANDAt8486$outboundSchema
+    atBRANDAt8646: z.lazy(() =>
+      CreateIntegrationStoreDirectPropertiesAtBRANDAt8646$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
-      atBRANDAt8486: "__@BRAND@8486",
+      atBRANDAt8646: "__@BRAND@8646",
     });
   });
 
@@ -16059,61 +16307,70 @@ export namespace CreateIntegrationStoreDirectIntegrationsResponseType$ {
 }
 
 /** @internal */
-export const CreateIntegrationStoreDirectActions$inboundSchema: z.ZodType<
-  CreateIntegrationStoreDirectActions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateIntegrationStoreDirectIntegrationsResponseType$inboundSchema,
-});
+export const CreateIntegrationStoreDirectIntegrationsActions$inboundSchema:
+  z.ZodType<
+    CreateIntegrationStoreDirectIntegrationsActions,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: CreateIntegrationStoreDirectIntegrationsResponseType$inboundSchema,
+  });
 
 /** @internal */
-export type CreateIntegrationStoreDirectActions$Outbound = {
+export type CreateIntegrationStoreDirectIntegrationsActions$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const CreateIntegrationStoreDirectActions$outboundSchema: z.ZodType<
-  CreateIntegrationStoreDirectActions$Outbound,
-  z.ZodTypeDef,
-  CreateIntegrationStoreDirectActions
-> = z.object({
-  type: CreateIntegrationStoreDirectIntegrationsResponseType$outboundSchema,
-});
+export const CreateIntegrationStoreDirectIntegrationsActions$outboundSchema:
+  z.ZodType<
+    CreateIntegrationStoreDirectIntegrationsActions$Outbound,
+    z.ZodTypeDef,
+    CreateIntegrationStoreDirectIntegrationsActions
+  > = z.object({
+    type: CreateIntegrationStoreDirectIntegrationsResponseType$outboundSchema,
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateIntegrationStoreDirectActions$ {
-  /** @deprecated use `CreateIntegrationStoreDirectActions$inboundSchema` instead. */
+export namespace CreateIntegrationStoreDirectIntegrationsActions$ {
+  /** @deprecated use `CreateIntegrationStoreDirectIntegrationsActions$inboundSchema` instead. */
   export const inboundSchema =
-    CreateIntegrationStoreDirectActions$inboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectActions$outboundSchema` instead. */
+    CreateIntegrationStoreDirectIntegrationsActions$inboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectIntegrationsActions$outboundSchema` instead. */
   export const outboundSchema =
-    CreateIntegrationStoreDirectActions$outboundSchema;
-  /** @deprecated use `CreateIntegrationStoreDirectActions$Outbound` instead. */
-  export type Outbound = CreateIntegrationStoreDirectActions$Outbound;
+    CreateIntegrationStoreDirectIntegrationsActions$outboundSchema;
+  /** @deprecated use `CreateIntegrationStoreDirectIntegrationsActions$Outbound` instead. */
+  export type Outbound =
+    CreateIntegrationStoreDirectIntegrationsActions$Outbound;
 }
 
-export function createIntegrationStoreDirectActionsToJSON(
-  createIntegrationStoreDirectActions: CreateIntegrationStoreDirectActions,
+export function createIntegrationStoreDirectIntegrationsActionsToJSON(
+  createIntegrationStoreDirectIntegrationsActions:
+    CreateIntegrationStoreDirectIntegrationsActions,
 ): string {
   return JSON.stringify(
-    CreateIntegrationStoreDirectActions$outboundSchema.parse(
-      createIntegrationStoreDirectActions,
+    CreateIntegrationStoreDirectIntegrationsActions$outboundSchema.parse(
+      createIntegrationStoreDirectIntegrationsActions,
     ),
   );
 }
 
-export function createIntegrationStoreDirectActionsFromJSON(
+export function createIntegrationStoreDirectIntegrationsActionsFromJSON(
   jsonString: string,
-): SafeParseResult<CreateIntegrationStoreDirectActions, SDKValidationError> {
+): SafeParseResult<
+  CreateIntegrationStoreDirectIntegrationsActions,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      CreateIntegrationStoreDirectActions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateIntegrationStoreDirectActions' from JSON`,
+      CreateIntegrationStoreDirectIntegrationsActions$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateIntegrationStoreDirectIntegrationsActions' from JSON`,
   );
 }
 
@@ -16123,7 +16380,9 @@ export const Steps$inboundSchema: z.ZodType<Steps, z.ZodTypeDef, unknown> = z
     title: z.string(),
     content: z.string(),
     actions: z.array(
-      z.lazy(() => CreateIntegrationStoreDirectActions$inboundSchema),
+      z.lazy(() =>
+        CreateIntegrationStoreDirectIntegrationsActions$inboundSchema
+      ),
     ).optional(),
   });
 
@@ -16131,7 +16390,9 @@ export const Steps$inboundSchema: z.ZodType<Steps, z.ZodTypeDef, unknown> = z
 export type Steps$Outbound = {
   title: string;
   content: string;
-  actions?: Array<CreateIntegrationStoreDirectActions$Outbound> | undefined;
+  actions?:
+    | Array<CreateIntegrationStoreDirectIntegrationsActions$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -16143,7 +16404,9 @@ export const Steps$outboundSchema: z.ZodType<
   title: z.string(),
   content: z.string(),
   actions: z.array(
-    z.lazy(() => CreateIntegrationStoreDirectActions$outboundSchema),
+    z.lazy(() =>
+      CreateIntegrationStoreDirectIntegrationsActions$outboundSchema
+    ),
   ).optional(),
 });
 
@@ -16228,46 +16491,46 @@ export function guidesFromJSON(
 }
 
 /** @internal */
-export const AtBRANDAt8486$inboundSchema: z.ZodType<
-  AtBRANDAt8486,
+export const AtBRANDAt8646$inboundSchema: z.ZodType<
+  AtBRANDAt8646,
   z.ZodTypeDef,
   unknown
 > = z.object({});
 
 /** @internal */
-export type AtBRANDAt8486$Outbound = {};
+export type AtBRANDAt8646$Outbound = {};
 
 /** @internal */
-export const AtBRANDAt8486$outboundSchema: z.ZodType<
-  AtBRANDAt8486$Outbound,
+export const AtBRANDAt8646$outboundSchema: z.ZodType<
+  AtBRANDAt8646$Outbound,
   z.ZodTypeDef,
-  AtBRANDAt8486
+  AtBRANDAt8646
 > = z.object({});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace AtBRANDAt8486$ {
-  /** @deprecated use `AtBRANDAt8486$inboundSchema` instead. */
-  export const inboundSchema = AtBRANDAt8486$inboundSchema;
-  /** @deprecated use `AtBRANDAt8486$outboundSchema` instead. */
-  export const outboundSchema = AtBRANDAt8486$outboundSchema;
-  /** @deprecated use `AtBRANDAt8486$Outbound` instead. */
-  export type Outbound = AtBRANDAt8486$Outbound;
+export namespace AtBRANDAt8646$ {
+  /** @deprecated use `AtBRANDAt8646$inboundSchema` instead. */
+  export const inboundSchema = AtBRANDAt8646$inboundSchema;
+  /** @deprecated use `AtBRANDAt8646$outboundSchema` instead. */
+  export const outboundSchema = AtBRANDAt8646$outboundSchema;
+  /** @deprecated use `AtBRANDAt8646$Outbound` instead. */
+  export type Outbound = AtBRANDAt8646$Outbound;
 }
 
-export function atBRANDAt8486ToJSON(atBRANDAt8486: AtBRANDAt8486): string {
-  return JSON.stringify(AtBRANDAt8486$outboundSchema.parse(atBRANDAt8486));
+export function atBRANDAt8646ToJSON(atBRANDAt8646: AtBRANDAt8646): string {
+  return JSON.stringify(AtBRANDAt8646$outboundSchema.parse(atBRANDAt8646));
 }
 
-export function atBRANDAt8486FromJSON(
+export function atBRANDAt8646FromJSON(
   jsonString: string,
-): SafeParseResult<AtBRANDAt8486, SDKValidationError> {
+): SafeParseResult<AtBRANDAt8646, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => AtBRANDAt8486$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AtBRANDAt8486' from JSON`,
+    (x) => AtBRANDAt8646$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AtBRANDAt8646' from JSON`,
   );
 }
 
@@ -16277,16 +16540,16 @@ export const CreateIntegrationStoreDirectValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  "__@BRAND@8486": z.lazy(() => AtBRANDAt8486$inboundSchema),
+  "__@BRAND@8646": z.lazy(() => AtBRANDAt8646$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    "__@BRAND@8486": "atBRANDAt8486",
+    "__@BRAND@8646": "atBRANDAt8646",
   });
 });
 
 /** @internal */
 export type CreateIntegrationStoreDirectValue$Outbound = {
-  "__@BRAND@8486": AtBRANDAt8486$Outbound;
+  "__@BRAND@8646": AtBRANDAt8646$Outbound;
 };
 
 /** @internal */
@@ -16295,10 +16558,10 @@ export const CreateIntegrationStoreDirectValue$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateIntegrationStoreDirectValue
 > = z.object({
-  atBRANDAt8486: z.lazy(() => AtBRANDAt8486$outboundSchema),
+  atBRANDAt8646: z.lazy(() => AtBRANDAt8646$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    atBRANDAt8486: "__@BRAND@8486",
+    atBRANDAt8646: "__@BRAND@8646",
   });
 });
 
@@ -17368,6 +17631,7 @@ export const CreateIntegrationStoreDirectStore$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   projectsMetadata: z.array(z.lazy(() => ProjectsMetadata$inboundSchema)),
+  projectFilter: z.lazy(() => ProjectFilter$inboundSchema).optional(),
   totalConnectedProjects: z.number().optional(),
   usageQuotaExceeded: z.boolean(),
   status: z.nullable(CreateIntegrationStoreDirectStatus$inboundSchema),
@@ -17403,6 +17667,7 @@ export const CreateIntegrationStoreDirectStore$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateIntegrationStoreDirectStore$Outbound = {
   projectsMetadata: Array<ProjectsMetadata$Outbound>;
+  projectFilter?: ProjectFilter$Outbound | undefined;
   totalConnectedProjects?: number | undefined;
   usageQuotaExceeded: boolean;
   status: string | null;
@@ -17429,6 +17694,7 @@ export const CreateIntegrationStoreDirectStore$outboundSchema: z.ZodType<
   CreateIntegrationStoreDirectStore
 > = z.object({
   projectsMetadata: z.array(z.lazy(() => ProjectsMetadata$outboundSchema)),
+  projectFilter: z.lazy(() => ProjectFilter$outboundSchema).optional(),
   totalConnectedProjects: z.number().optional(),
   usageQuotaExceeded: z.boolean(),
   status: z.nullable(CreateIntegrationStoreDirectStatus$outboundSchema),

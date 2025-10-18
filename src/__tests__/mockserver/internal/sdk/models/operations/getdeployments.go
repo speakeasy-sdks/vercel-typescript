@@ -702,6 +702,7 @@ const (
 	GetDeploymentsFrameworkVuepress       GetDeploymentsFramework = "vuepress"
 	GetDeploymentsFrameworkParcel         GetDeploymentsFramework = "parcel"
 	GetDeploymentsFrameworkFastapi        GetDeploymentsFramework = "fastapi"
+	GetDeploymentsFrameworkFlask          GetDeploymentsFramework = "flask"
 	GetDeploymentsFrameworkFasthtml       GetDeploymentsFramework = "fasthtml"
 	GetDeploymentsFrameworkSanityV3       GetDeploymentsFramework = "sanity-v3"
 	GetDeploymentsFrameworkSanity         GetDeploymentsFramework = "sanity"
@@ -710,6 +711,7 @@ const (
 	GetDeploymentsFrameworkHono           GetDeploymentsFramework = "hono"
 	GetDeploymentsFrameworkExpress        GetDeploymentsFramework = "express"
 	GetDeploymentsFrameworkH3             GetDeploymentsFramework = "h3"
+	GetDeploymentsFrameworkNestjs         GetDeploymentsFramework = "nestjs"
 	GetDeploymentsFrameworkXmcp           GetDeploymentsFramework = "xmcp"
 )
 
@@ -808,6 +810,8 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "fastapi":
 		fallthrough
+	case "flask":
+		fallthrough
 	case "fasthtml":
 		fallthrough
 	case "sanity-v3":
@@ -823,6 +827,8 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 	case "express":
 		fallthrough
 	case "h3":
+		fallthrough
+	case "nestjs":
 		fallthrough
 	case "xmcp":
 		*e = GetDeploymentsFramework(v)
