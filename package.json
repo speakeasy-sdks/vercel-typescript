@@ -1,6 +1,6 @@
 {
   "name": "@vercel/sdk",
-  "version": "1.12.1",
+  "version": "1.13.0",
   "author": "Speakeasy",
   "type": "module",
   "bin": {
@@ -28,7 +28,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/vercel/sdk.git"
+    "url": "https://github.com/speakeasy-sdks/vercel-typescript.git"
   },
   "scripts": {
     "test": "vitest run src --reporter=junit --outputFile=.speakeasy/reports/tests.xml --reporter=default",
@@ -60,6 +60,6 @@
     "vitest": "^3.0.2"
   },
   "dependencies": {
-    "zod": "^3.20.0"
+    "zod": "^3.25.0 || ^4.0.0"
   }
 }
