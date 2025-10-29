@@ -8,17 +8,7 @@ The payload of the event, if requested.
 import { SeventyEight } from "@vercel/sdk/models/userevent.js";
 
 let value: SeventyEight = {
-  projectId: "<id>",
-  projectAnalytics: {
-    id: "<id>",
-    disabledAt: 9651.51,
-    enabledAt: 1242.8,
-  },
-  prevProjectAnalytics: {
-    id: "<id>",
-    disabledAt: 1378.58,
-    enabledAt: 7641.68,
-  },
+  plan: "<value>",
 };
 ```
 
@@ -26,7 +16,10 @@ let value: SeventyEight = {
 
 | Field                                                            | Type                                                             | Required                                                         | Description                                                      |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `projectName`                                                    | *string*                                                         | :heavy_minus_sign:                                               | N/A                                                              |
-| `projectId`                                                      | *string*                                                         | :heavy_check_mark:                                               | N/A                                                              |
-| `projectAnalytics`                                               | [models.ProjectAnalytics](../models/projectanalytics.md)         | :heavy_check_mark:                                               | N/A                                                              |
-| `prevProjectAnalytics`                                           | [models.PrevProjectAnalytics](../models/prevprojectanalytics.md) | :heavy_check_mark:                                               | N/A                                                              |
+| `plan`                                                           | *string*                                                         | :heavy_check_mark:                                               | N/A                                                              |
+| `removedUsers`                                                   | Record<string, [models.RemovedUsers](../models/removedusers.md)> | :heavy_minus_sign:                                               | N/A                                                              |
+| `priorPlan`                                                      | *string*                                                         | :heavy_minus_sign:                                               | N/A                                                              |
+| `isDowngrade`                                                    | *boolean*                                                        | :heavy_minus_sign:                                               | N/A                                                              |
+| `userAgent`                                                      | *string*                                                         | :heavy_minus_sign:                                               | N/A                                                              |
+| `isReactivate`                                                   | *boolean*                                                        | :heavy_minus_sign:                                               | N/A                                                              |
+| `isTrialUpgrade`                                                 | *boolean*                                                        | :heavy_minus_sign:                                               | N/A                                                              |

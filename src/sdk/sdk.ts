@@ -9,9 +9,12 @@ import { Artifacts } from "./artifacts.js";
 import { Authentication } from "./authentication.js";
 import { Certs } from "./certs.js";
 import { Checks } from "./checks.js";
+import { Connect } from "./connect.js";
 import { Deployments } from "./deployments.js";
 import { Dns } from "./dns.js";
 import { Domains } from "./domains.js";
+import { DomainsRegistrar } from "./domainsregistrar.js";
+import { Drains } from "./drains.js";
 import { EdgeCache } from "./edgecache.js";
 import { EdgeConfig } from "./edgeconfig.js";
 import { Environment } from "./environment.js";
@@ -23,6 +26,7 @@ import { ProjectMembers } from "./projectmembers.js";
 import { Projects } from "./projects.js";
 import { RollingRelease } from "./rollingrelease.js";
 import { Security } from "./security.js";
+import { StaticIps } from "./staticips.js";
 import { Teams } from "./teams.js";
 import { User } from "./user.js";
 import { Webhooks } from "./webhooks.js";
@@ -68,6 +72,21 @@ export class Vercel extends ClientSDK {
     return (this._dns ??= new Dns(this._options));
   }
 
+  private _domainsRegistrar?: DomainsRegistrar;
+  get domainsRegistrar(): DomainsRegistrar {
+    return (this._domainsRegistrar ??= new DomainsRegistrar(this._options));
+  }
+
+  private _logDrains?: LogDrains;
+  get logDrains(): LogDrains {
+    return (this._logDrains ??= new LogDrains(this._options));
+  }
+
+  private _drains?: Drains;
+  get drains(): Drains {
+    return (this._drains ??= new Drains(this._options));
+  }
+
   private _edgeCache?: EdgeCache;
   get edgeCache(): EdgeCache {
     return (this._edgeCache ??= new EdgeCache(this._options));
@@ -76,6 +95,11 @@ export class Vercel extends ClientSDK {
   private _edgeConfig?: EdgeConfig;
   get edgeConfig(): EdgeConfig {
     return (this._edgeConfig ??= new EdgeConfig(this._options));
+  }
+
+  private _environment?: Environment;
+  get environment(): Environment {
+    return (this._environment ??= new Environment(this._options));
   }
 
   private _user?: User;
@@ -93,11 +117,6 @@ export class Vercel extends ClientSDK {
     return (this._authentication ??= new Authentication(this._options));
   }
 
-  private _logDrains?: LogDrains;
-  get logDrains(): LogDrains {
-    return (this._logDrains ??= new LogDrains(this._options));
-  }
-
   private _logs?: Logs;
   get logs(): Logs {
     return (this._logs ??= new Logs(this._options));
@@ -108,9 +127,14 @@ export class Vercel extends ClientSDK {
     return (this._projectMembers ??= new ProjectMembers(this._options));
   }
 
-  private _environment?: Environment;
-  get environment(): Environment {
-    return (this._environment ??= new Environment(this._options));
+  private _connect?: Connect;
+  get connect(): Connect {
+    return (this._connect ??= new Connect(this._options));
+  }
+
+  private _staticIps?: StaticIps;
+  get staticIps(): StaticIps {
+    return (this._staticIps ??= new StaticIps(this._options));
   }
 
   private _rollingRelease?: RollingRelease;

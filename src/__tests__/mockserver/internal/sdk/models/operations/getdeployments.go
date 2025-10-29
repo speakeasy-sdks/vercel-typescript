@@ -702,6 +702,7 @@ const (
 	GetDeploymentsFrameworkVuepress       GetDeploymentsFramework = "vuepress"
 	GetDeploymentsFrameworkParcel         GetDeploymentsFramework = "parcel"
 	GetDeploymentsFrameworkFastapi        GetDeploymentsFramework = "fastapi"
+	GetDeploymentsFrameworkFlask          GetDeploymentsFramework = "flask"
 	GetDeploymentsFrameworkFasthtml       GetDeploymentsFramework = "fasthtml"
 	GetDeploymentsFrameworkSanityV3       GetDeploymentsFramework = "sanity-v3"
 	GetDeploymentsFrameworkSanity         GetDeploymentsFramework = "sanity"
@@ -710,6 +711,8 @@ const (
 	GetDeploymentsFrameworkHono           GetDeploymentsFramework = "hono"
 	GetDeploymentsFrameworkExpress        GetDeploymentsFramework = "express"
 	GetDeploymentsFrameworkH3             GetDeploymentsFramework = "h3"
+	GetDeploymentsFrameworkNestjs         GetDeploymentsFramework = "nestjs"
+	GetDeploymentsFrameworkFastify        GetDeploymentsFramework = "fastify"
 	GetDeploymentsFrameworkXmcp           GetDeploymentsFramework = "xmcp"
 )
 
@@ -808,6 +811,8 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "fastapi":
 		fallthrough
+	case "flask":
+		fallthrough
 	case "fasthtml":
 		fallthrough
 	case "sanity-v3":
@@ -824,6 +829,10 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "h3":
 		fallthrough
+	case "nestjs":
+		fallthrough
+	case "fastify":
+		fallthrough
 	case "xmcp":
 		*e = GetDeploymentsFramework(v)
 		return nil
@@ -835,6 +844,7 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 type GetDeploymentsNodeVersion string
 
 const (
+	GetDeploymentsNodeVersionTwentyFourDotX GetDeploymentsNodeVersion = "24.x"
 	GetDeploymentsNodeVersionTwentyTwoDotX  GetDeploymentsNodeVersion = "22.x"
 	GetDeploymentsNodeVersionTwentyDotX     GetDeploymentsNodeVersion = "20.x"
 	GetDeploymentsNodeVersionEighteenDotX   GetDeploymentsNodeVersion = "18.x"
@@ -854,6 +864,8 @@ func (e *GetDeploymentsNodeVersion) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "24.x":
+		fallthrough
 	case "22.x":
 		fallthrough
 	case "20.x":

@@ -7,19 +7,21 @@ The payload of the event, if requested.
 ```typescript
 import { FiftyFive } from "@vercel/sdk/models/userevent.js";
 
-let value: FiftyFive = {};
+let value: FiftyFive = {
+  sha: "<value>",
+  gitUserPlatform: "<value>",
+  projectName: "<value>",
+  gitCommitterName: "<value>",
+  source: "<value>",
+};
 ```
 
 ## Fields
 
-| Field               | Type                | Required            | Description         |
-| ------------------- | ------------------- | ------------------- | ------------------- |
-| `key`               | *string*            | :heavy_minus_sign:  | N/A                 |
-| `projectId`         | *string*            | :heavy_minus_sign:  | N/A                 |
-| `projectName`       | *string*            | :heavy_minus_sign:  | N/A                 |
-| `target`            | *models.Target*     | :heavy_minus_sign:  | N/A                 |
-| `id`                | *string*            | :heavy_minus_sign:  | N/A                 |
-| `gitBranch`         | *string*            | :heavy_minus_sign:  | N/A                 |
-| `edgeConfigId`      | *string*            | :heavy_minus_sign:  | N/A                 |
-| `edgeConfigTokenId` | *string*            | :heavy_minus_sign:  | N/A                 |
-| `source`            | *string*            | :heavy_minus_sign:  | N/A                 |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `sha`              | *string*           | :heavy_check_mark: | N/A                |
+| `gitUserPlatform`  | *string*           | :heavy_check_mark: | N/A                |
+| `projectName`      | *string*           | :heavy_check_mark: | N/A                |
+| `gitCommitterName` | *string*           | :heavy_check_mark: | N/A                |
+| `source`           | *string*           | :heavy_check_mark: | N/A                |

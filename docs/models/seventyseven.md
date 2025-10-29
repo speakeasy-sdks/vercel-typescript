@@ -9,7 +9,6 @@ import { SeventySeven } from "@vercel/sdk/models/userevent.js";
 
 let value: SeventySeven = {
   projectName: "<value>",
-  branch: "<value>",
 };
 ```
 
@@ -18,4 +17,3 @@ let value: SeventySeven = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `projectName`      | *string*           | :heavy_check_mark: | N/A                |
-| `branch`           | *string*           | :heavy_check_mark: | N/A                |
