@@ -8,7 +8,8 @@ The payload of the event, if requested.
 import { EightyNine } from "@vercel/sdk/models/userevent.js";
 
 let value: EightyNine = {
-  projectId: "<id>",
+  name: "<value>",
+  ownerId: "<id>",
 };
 ```
 
@@ -16,4 +17,5 @@ let value: EightyNine = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `projectId`        | *string*           | :heavy_check_mark: | N/A                |
+| `name`             | *string*           | :heavy_check_mark: | N/A                |
+| `ownerId`          | *string*           | :heavy_check_mark: | N/A                |

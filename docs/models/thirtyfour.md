@@ -8,15 +8,21 @@ The payload of the event, if requested.
 import { ThirtyFour } from "@vercel/sdk/models/userevent.js";
 
 let value: ThirtyFour = {
-  gitlabLogin: "<value>",
-  gitlabEmail: "<value>",
+  team: {
+    id: "<id>",
+    name: "<value>",
+  },
+  configuration: {
+    id: "<id>",
+  },
+  newName: "<value>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `gitlabLogin`      | *string*           | :heavy_check_mark: | N/A                |
-| `gitlabEmail`      | *string*           | :heavy_check_mark: | N/A                |
-| `gitlabName`       | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `team`                                                                                 | [models.UserEventPayload34Team](../models/usereventpayload34team.md)                   | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `configuration`                                                                        | [models.UserEventPayload34Configuration](../models/usereventpayload34configuration.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `newName`                                                                              | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |

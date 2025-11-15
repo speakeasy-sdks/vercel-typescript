@@ -8,12 +8,23 @@ The payload of the event, if requested.
 import { ThirtyThree } from "@vercel/sdk/models/userevent.js";
 
 let value: ThirtyThree = {
-  githubLogin: "<value>",
+  team: {
+    id: "<id>",
+    name: "<value>",
+  },
+  configuration: {
+    id: "<id>",
+  },
+  project: {
+    id: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `githubLogin`      | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `team`                                                                             | [models.UserEventPayloadTeam](../models/usereventpayloadteam.md)                   | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `configuration`                                                                    | [models.UserEventPayloadConfiguration](../models/usereventpayloadconfiguration.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `project`                                                                          | [models.UserEventPayload33Project](../models/usereventpayload33project.md)         | :heavy_check_mark:                                                                 | N/A                                                                                |

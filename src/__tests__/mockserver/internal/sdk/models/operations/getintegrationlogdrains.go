@@ -37,7 +37,6 @@ type GetIntegrationLogDrainsDeliveryFormat string
 const (
 	GetIntegrationLogDrainsDeliveryFormatJSON     GetIntegrationLogDrainsDeliveryFormat = "json"
 	GetIntegrationLogDrainsDeliveryFormatNdjson   GetIntegrationLogDrainsDeliveryFormat = "ndjson"
-	GetIntegrationLogDrainsDeliveryFormatSyslog   GetIntegrationLogDrainsDeliveryFormat = "syslog"
 	GetIntegrationLogDrainsDeliveryFormatProtobuf GetIntegrationLogDrainsDeliveryFormat = "protobuf"
 )
 
@@ -53,8 +52,6 @@ func (e *GetIntegrationLogDrainsDeliveryFormat) UnmarshalJSON(data []byte) error
 	case "json":
 		fallthrough
 	case "ndjson":
-		fallthrough
-	case "syslog":
 		fallthrough
 	case "protobuf":
 		*e = GetIntegrationLogDrainsDeliveryFormat(v)
@@ -74,6 +71,7 @@ const (
 	GetIntegrationLogDrainsSourceEnumStatic   GetIntegrationLogDrainsSourceEnum = "static"
 	GetIntegrationLogDrainsSourceEnumExternal GetIntegrationLogDrainsSourceEnum = "external"
 	GetIntegrationLogDrainsSourceEnumFirewall GetIntegrationLogDrainsSourceEnum = "firewall"
+	GetIntegrationLogDrainsSourceEnumRedirect GetIntegrationLogDrainsSourceEnum = "redirect"
 )
 
 func (e GetIntegrationLogDrainsSourceEnum) ToPointer() *GetIntegrationLogDrainsSourceEnum {
@@ -96,6 +94,8 @@ func (e *GetIntegrationLogDrainsSourceEnum) UnmarshalJSON(data []byte) error {
 	case "external":
 		fallthrough
 	case "firewall":
+		fallthrough
+	case "redirect":
 		*e = GetIntegrationLogDrainsSourceEnum(v)
 		return nil
 	default:

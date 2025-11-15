@@ -8,14 +8,21 @@ The payload of the event, if requested.
 import { OneHundredAndFiftyFour } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndFiftyFour = {
-  oldName: "<value>",
-  newName: "<value>",
+  project: {
+    id: "<id>",
+    name: "<value>",
+  },
+  group: {
+    id: "<id>",
+    slug: "<value>",
+    name: "<value>",
+  },
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `oldName`          | *string*           | :heavy_check_mark: | N/A                |
-| `newName`          | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `project`                                                                    | [models.UserEventPayload154Project](../models/usereventpayload154project.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `group`                                                                      | [models.Group](../models/group.md)                                           | :heavy_check_mark:                                                           | N/A                                                                          |

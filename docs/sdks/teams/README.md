@@ -103,11 +103,11 @@ run();
 
 ## inviteUserToTeam
 
-Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user can be specified with an email or an ID. If both email and ID are provided, ID will take priority.
+Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user to be invited must be specified by email.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="inviteUserToTeam" method="post" path="/v1/teams/{teamId}/members" -->
+<!-- UsageSnippet language="typescript" operationID="inviteUserToTeam" method="post" path="/v2/teams/{teamId}/members" -->
 ```typescript
 import { Vercel } from "@vercel/sdk";
 
@@ -116,9 +116,8 @@ const vercel = new Vercel({
 });
 
 async function run() {
-  const result = await vercel.teams.inviteUserToTeam({
-    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
-    requestBody: {
+  const result = await vercel.teams.inviteUserToTeam([
+    {
       email: "john@example.com",
       role: "DEVELOPER",
       projects: [
@@ -132,7 +131,7 @@ async function run() {
         },
       ],
     },
-  });
+  ]);
 
   console.log(result);
 }
@@ -155,9 +154,8 @@ const vercel = new VercelCore({
 });
 
 async function run() {
-  const res = await teamsInviteUserToTeam(vercel, {
-    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
-    requestBody: {
+  const res = await teamsInviteUserToTeam(vercel, [
+    {
       email: "john@example.com",
       role: "DEVELOPER",
       projects: [
@@ -171,7 +169,7 @@ async function run() {
         },
       ],
     },
-  });
+  ]);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -187,14 +185,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.InviteUserToTeamRequest](../../models/inviteusertoteamrequest.md)                                                                                                      | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.InviteUserToTeamRequestBody[]](../../models/.md)                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.InviteUserToTeamResponseBody](../../models/inviteusertoteamresponsebody.md)\>**
+**Promise\<[models.InvitedTeamMember](../../models/invitedteammember.md)\>**
 
 ### Errors
 
@@ -480,7 +478,7 @@ async function run() {
     teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
     requestBody: {
       confirmed: true,
-      role: "[\"MEMBER\",\"VIEWER\"]",
+      role: "VIEWER",
       projects: [
         {
           projectId: "prj_ndlgr43fadlPyCtREAqxxdyFK",
@@ -524,7 +522,7 @@ async function run() {
     teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
     requestBody: {
       confirmed: true,
-      role: "[\"MEMBER\",\"VIEWER\"]",
+      role: "VIEWER",
       projects: [
         {
           projectId: "prj_ndlgr43fadlPyCtREAqxxdyFK",

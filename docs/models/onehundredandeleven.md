@@ -7,13 +7,11 @@ The payload of the event, if requested.
 ```typescript
 import { OneHundredAndEleven } from "@vercel/sdk/models/userevent.js";
 
-let value: OneHundredAndEleven = {
-  slug: "<value>",
-};
+let value: OneHundredAndEleven = {};
 ```
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `slug`             | *string*           | :heavy_check_mark: | N/A                |
+| `webhookUrl`       | *string*           | :heavy_minus_sign: | N/A                |

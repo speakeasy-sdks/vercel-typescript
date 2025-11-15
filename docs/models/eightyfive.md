@@ -9,13 +9,19 @@ import { EightyFive } from "@vercel/sdk/models/userevent.js";
 
 let value: EightyFive = {
   projectName: "<value>",
-  action: "disabled",
+  passwordProtection: {
+    deploymentType: "prod_deployment_urls_and_all_previews",
+  },
+  oldPasswordProtection: {
+    deploymentType: "prod_deployment_urls_and_all_previews",
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `projectName`                                                            | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
-| `action`                                                                 | [models.UserEventPayload85Action](../models/usereventpayload85action.md) | :heavy_check_mark:                                                       | N/A                                                                      |
+| Field                              | Type                               | Required                           | Description                        |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| `projectName`                      | *string*                           | :heavy_check_mark:                 | N/A                                |
+| `passwordProtection`               | *models.PayloadPasswordProtection* | :heavy_check_mark:                 | N/A                                |
+| `oldPasswordProtection`            | *models.OldPasswordProtection*     | :heavy_check_mark:                 | N/A                                |

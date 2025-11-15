@@ -967,3 +967,73 @@ test("Projects Batch Remove Project Env", async () => {
     ],
   });
 });
+
+test("Projects Upload Project Client Cert", async () => {
+  const testHttpClient = createTestHTTPClient("uploadProjectClientCert");
+
+  const vercel = new Vercel({
+    serverURL: process.env["TEST_SERVER_URL"] ?? "http://localhost:18080",
+    httpClient: testHttpClient,
+    bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
+  });
+
+  const result = await vercel.projects.uploadProjectClientCert({
+    idOrName: "prj_XLKmu1DyR1eY7zq8UgeRKbA7yVLA",
+    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
+    slug: "my-team-url-slug",
+    requestBody: {
+      cert: "-----BEGIN CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----",
+      key: "-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----",
+      ca: "-----BEGIN CERTIFICATE-----\\n...\\n-----END CERTIFICATE-----",
+      origin: "https://api.example.com",
+    },
+  });
+  expect(result).toBeDefined();
+  expect(result).toEqual({
+    updated: false,
+    origin: "<value>",
+    certId: "<id>",
+  });
+});
+
+test("Projects Get Project Client Certs", async () => {
+  const testHttpClient = createTestHTTPClient("getProjectClientCerts");
+
+  const vercel = new Vercel({
+    serverURL: process.env["TEST_SERVER_URL"] ?? "http://localhost:18080",
+    httpClient: testHttpClient,
+    bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
+  });
+
+  const result = await vercel.projects.getProjectClientCerts({
+    idOrName: "prj_XLKmu1DyR1eY7zq8UgeRKbA7yVLA",
+    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
+    slug: "my-team-url-slug",
+  });
+  expect(result).toBeDefined();
+  expect(result).toEqual({
+    clientCerts: [],
+  });
+});
+
+test("Projects Delete Project Client Cert", async () => {
+  const testHttpClient = createTestHTTPClient("deleteProjectClientCert");
+
+  const vercel = new Vercel({
+    serverURL: process.env["TEST_SERVER_URL"] ?? "http://localhost:18080",
+    httpClient: testHttpClient,
+    bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
+  });
+
+  const result = await vercel.projects.deleteProjectClientCert({
+    idOrName: "prj_XLKmu1DyR1eY7zq8UgeRKbA7yVLA",
+    certId: "cert_a1b2c3d4e5f6g7h8",
+    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
+    slug: "my-team-url-slug",
+  });
+  expect(result).toBeDefined();
+  expect(result).toEqual({
+    origin: "<value>",
+    certId: "<id>",
+  });
+});

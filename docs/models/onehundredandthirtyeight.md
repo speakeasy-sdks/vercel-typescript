@@ -8,20 +8,21 @@ The payload of the event, if requested.
 import { OneHundredAndThirtyEight } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndThirtyEight = {
-  project: {
-    name: "<value>",
-  },
-  projectMembership: {
-    role: "PROJECT_VIEWER",
-    uid: "<id>",
-    createdAt: 3187.55,
-  },
+  projectId: "<id>",
+  projectName: "<value>",
+  originAccountName: "<value>",
+  destinationAccountName: "<value>",
+  destinationAccountId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `project`                                                                    | [models.UserEventPayload138Project](../models/usereventpayload138project.md) | :heavy_check_mark:                                                           | N/A                                                                          |
-| `projectMembership`                                                          | [models.ProjectMembership](../models/projectmembership.md)                   | :heavy_check_mark:                                                           | N/A                                                                          |
+| Field                    | Type                     | Required                 | Description              |
+| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| `projectId`              | *string*                 | :heavy_check_mark:       | N/A                      |
+| `projectName`            | *string*                 | :heavy_check_mark:       | N/A                      |
+| `originAccountName`      | *string*                 | :heavy_check_mark:       | N/A                      |
+| `destinationAccountName` | *string*                 | :heavy_check_mark:       | N/A                      |
+| `destinationAccountId`   | *string*                 | :heavy_check_mark:       | N/A                      |
+| `transferId`             | *string*                 | :heavy_minus_sign:       | N/A                      |

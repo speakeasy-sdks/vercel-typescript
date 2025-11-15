@@ -6,7 +6,7 @@
 import { CreateIntegrationStoreDirectPropertiesPattern } from "@vercel/sdk/models/createintegrationstoredirectop.js";
 
 let value: CreateIntegrationStoreDirectPropertiesPattern = {
-  atBRANDAt8486: {},
+  atBRANDAt8768: {},
 };
 ```
 
@@ -14,4 +14,4 @@ let value: CreateIntegrationStoreDirectPropertiesPattern = {
 
 | Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `atBRANDAt8486`                                                                                                                | [models.CreateIntegrationStoreDirectPropertiesAtBRANDAt8486](../models/createintegrationstoredirectpropertiesatbrandat8486.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `atBRANDAt8768`                                                                                                                | [models.CreateIntegrationStoreDirectPropertiesAtBRANDAt8768](../models/createintegrationstoredirectpropertiesatbrandat8768.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |

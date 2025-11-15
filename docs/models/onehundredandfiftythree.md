@@ -8,7 +8,12 @@ The payload of the event, if requested.
 import { OneHundredAndFiftyThree } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndFiftyThree = {
-  tier: "pro",
+  id: "<id>",
+  prev: {
+    name: "<value>",
+    slug: "<value>",
+    fallbackEnvironment: "<value>",
+  },
 };
 ```
 
@@ -16,4 +21,8 @@ let value: OneHundredAndFiftyThree = {
 
 | Field                            | Type                             | Required                         | Description                      |
 | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `tier`                           | [models.Tier](../models/tier.md) | :heavy_check_mark:               | N/A                              |
+| `id`                             | *string*                         | :heavy_check_mark:               | N/A                              |
+| `slug`                           | *string*                         | :heavy_minus_sign:               | N/A                              |
+| `name`                           | *string*                         | :heavy_minus_sign:               | N/A                              |
+| `fallbackEnvironment`            | *string*                         | :heavy_minus_sign:               | N/A                              |
+| `prev`                           | [models.Prev](../models/prev.md) | :heavy_check_mark:               | N/A                              |
