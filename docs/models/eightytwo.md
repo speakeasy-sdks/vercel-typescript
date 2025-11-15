@@ -8,20 +8,15 @@ The payload of the event, if requested.
 import { EightyTwo } from "@vercel/sdk/models/userevent.js";
 
 let value: EightyTwo = {
-  projectName: "<value>",
-  passwordProtection: {
-    deploymentType: "preview",
-  },
-  oldPasswordProtection: {
-    deploymentType: "all_except_custom_domains",
-  },
+  projectId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `projectName`                      | *string*                           | :heavy_check_mark:                 | N/A                                |
-| `passwordProtection`               | *models.PayloadPasswordProtection* | :heavy_check_mark:                 | N/A                                |
-| `oldPasswordProtection`            | *models.OldPasswordProtection*     | :heavy_check_mark:                 | N/A                                |
+| Field                  | Type                   | Required               | Description            |
+| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `projectName`          | *string*               | :heavy_minus_sign:     | N/A                    |
+| `projectId`            | *string*               | :heavy_check_mark:     | N/A                    |
+| `projectAnalytics`     | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| `prevProjectAnalytics` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |

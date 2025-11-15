@@ -8,7 +8,7 @@ The payload of the event, if requested.
 import { OneHundredAndNineteen } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndNineteen = {
-  enforced: true,
+  uid: "<id>",
 };
 ```
 
@@ -16,4 +16,9 @@ let value: OneHundredAndNineteen = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `enforced`         | *boolean*          | :heavy_check_mark: | N/A                |
+| `role`             | *string*           | :heavy_minus_sign: | N/A                |
+| `uid`              | *string*           | :heavy_check_mark: | N/A                |
+| `origin`           | *string*           | :heavy_minus_sign: | N/A                |
+| `teamRoles`        | *string*[]         | :heavy_minus_sign: | N/A                |
+| `teamPermissions`  | *string*[]         | :heavy_minus_sign: | N/A                |
+| `entitlements`     | *string*[]         | :heavy_minus_sign: | N/A                |

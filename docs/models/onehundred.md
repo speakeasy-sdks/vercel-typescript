@@ -8,10 +8,8 @@ The payload of the event, if requested.
 import { OneHundred } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundred = {
-  uid: "<id>",
-  name: {
-    name: "<value>",
-  },
+  email: "Melba_Bode@hotmail.com",
+  verified: true,
 };
 ```
 
@@ -19,5 +17,5 @@ let value: OneHundred = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `uid`              | *string*           | :heavy_check_mark: | N/A                |
-| `name`             | *models.Name*      | :heavy_check_mark: | N/A                |
+| `email`            | *string*           | :heavy_check_mark: | N/A                |
+| `verified`         | *boolean*          | :heavy_check_mark: | N/A                |

@@ -114,6 +114,8 @@ const (
 	GetWebhooksEvent2MarketplaceInvoiceRefunded                         GetWebhooksEvent2 = "marketplace.invoice.refunded"
 	GetWebhooksEvent2ObservabilityAnomaly                               GetWebhooksEvent2 = "observability.anomaly"
 	GetWebhooksEvent2ObservabilityAnomalyError                          GetWebhooksEvent2 = "observability.anomaly-error"
+	GetWebhooksEvent2ObservabilityUsageAnomaly                          GetWebhooksEvent2 = "observability.usage-anomaly"
+	GetWebhooksEvent2ObservabilityErrorAnomaly                          GetWebhooksEvent2 = "observability.error-anomaly"
 	GetWebhooksEvent2ObservabilityAnomalyBotId                          GetWebhooksEvent2 = "observability.anomaly-botId"
 	GetWebhooksEvent2TestWebhook                                        GetWebhooksEvent2 = "test-webhook"
 )
@@ -269,6 +271,10 @@ func (e *GetWebhooksEvent2) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "observability.anomaly-error":
 		fallthrough
+	case "observability.usage-anomaly":
+		fallthrough
+	case "observability.error-anomaly":
+		fallthrough
 	case "observability.anomaly-botId":
 		fallthrough
 	case "test-webhook":
@@ -398,10 +404,12 @@ const (
 	GetWebhooksFrameworkZola           GetWebhooksFramework = "zola"
 	GetWebhooksFrameworkHydrogen       GetWebhooksFramework = "hydrogen"
 	GetWebhooksFrameworkVite           GetWebhooksFramework = "vite"
+	GetWebhooksFrameworkTanstackStart  GetWebhooksFramework = "tanstack-start"
 	GetWebhooksFrameworkVitepress      GetWebhooksFramework = "vitepress"
 	GetWebhooksFrameworkVuepress       GetWebhooksFramework = "vuepress"
 	GetWebhooksFrameworkParcel         GetWebhooksFramework = "parcel"
 	GetWebhooksFrameworkFastapi        GetWebhooksFramework = "fastapi"
+	GetWebhooksFrameworkFlask          GetWebhooksFramework = "flask"
 	GetWebhooksFrameworkFasthtml       GetWebhooksFramework = "fasthtml"
 	GetWebhooksFrameworkSanityV3       GetWebhooksFramework = "sanity-v3"
 	GetWebhooksFrameworkSanity         GetWebhooksFramework = "sanity"
@@ -410,6 +418,9 @@ const (
 	GetWebhooksFrameworkHono           GetWebhooksFramework = "hono"
 	GetWebhooksFrameworkExpress        GetWebhooksFramework = "express"
 	GetWebhooksFrameworkH3             GetWebhooksFramework = "h3"
+	GetWebhooksFrameworkNestjs         GetWebhooksFramework = "nestjs"
+	GetWebhooksFrameworkElysia         GetWebhooksFramework = "elysia"
+	GetWebhooksFrameworkFastify        GetWebhooksFramework = "fastify"
 	GetWebhooksFrameworkXmcp           GetWebhooksFramework = "xmcp"
 )
 
@@ -500,6 +511,8 @@ func (e *GetWebhooksFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "vite":
 		fallthrough
+	case "tanstack-start":
+		fallthrough
 	case "vitepress":
 		fallthrough
 	case "vuepress":
@@ -507,6 +520,8 @@ func (e *GetWebhooksFramework) UnmarshalJSON(data []byte) error {
 	case "parcel":
 		fallthrough
 	case "fastapi":
+		fallthrough
+	case "flask":
 		fallthrough
 	case "fasthtml":
 		fallthrough
@@ -523,6 +538,12 @@ func (e *GetWebhooksFramework) UnmarshalJSON(data []byte) error {
 	case "express":
 		fallthrough
 	case "h3":
+		fallthrough
+	case "nestjs":
+		fallthrough
+	case "elysia":
+		fallthrough
+	case "fastify":
 		fallthrough
 	case "xmcp":
 		*e = GetWebhooksFramework(v)
@@ -653,6 +674,8 @@ const (
 	GetWebhooksEvent1MarketplaceInvoiceRefunded                         GetWebhooksEvent1 = "marketplace.invoice.refunded"
 	GetWebhooksEvent1ObservabilityAnomaly                               GetWebhooksEvent1 = "observability.anomaly"
 	GetWebhooksEvent1ObservabilityAnomalyError                          GetWebhooksEvent1 = "observability.anomaly-error"
+	GetWebhooksEvent1ObservabilityUsageAnomaly                          GetWebhooksEvent1 = "observability.usage-anomaly"
+	GetWebhooksEvent1ObservabilityErrorAnomaly                          GetWebhooksEvent1 = "observability.error-anomaly"
 	GetWebhooksEvent1ObservabilityAnomalyBotId                          GetWebhooksEvent1 = "observability.anomaly-botId"
 	GetWebhooksEvent1TestWebhook                                        GetWebhooksEvent1 = "test-webhook"
 )
@@ -807,6 +830,10 @@ func (e *GetWebhooksEvent1) UnmarshalJSON(data []byte) error {
 	case "observability.anomaly":
 		fallthrough
 	case "observability.anomaly-error":
+		fallthrough
+	case "observability.usage-anomaly":
+		fallthrough
+	case "observability.error-anomaly":
 		fallthrough
 	case "observability.anomaly-botId":
 		fallthrough

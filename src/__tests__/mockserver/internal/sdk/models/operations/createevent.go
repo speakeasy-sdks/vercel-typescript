@@ -36,7 +36,7 @@ func (e *TypeResourceUpdated) UnmarshalJSON(data []byte) error {
 type EventResourceUpdated struct {
 	Type TypeResourceUpdated `json:"type"`
 	// Partner-provided product slug or id
-	ProductID string `json:"productId"`
+	ProductID *string `json:"productId,omitempty"`
 	// Partner provided resource ID
 	ResourceID string `json:"resourceId"`
 }
@@ -46,7 +46,7 @@ func (e EventResourceUpdated) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EventResourceUpdated) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"type", "productId", "resourceId"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"type", "resourceId"}); err != nil {
 		return err
 	}
 	return nil
@@ -59,9 +59,9 @@ func (o *EventResourceUpdated) GetType() TypeResourceUpdated {
 	return o.Type
 }
 
-func (o *EventResourceUpdated) GetProductID() string {
+func (o *EventResourceUpdated) GetProductID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ProductID
 }
@@ -203,7 +203,7 @@ func (o *CreateEventRequestBody) GetEvent() Event {
 
 type CreateEventRequest struct {
 	IntegrationConfigurationID string                 `pathParam:"style=simple,explode=false,name=integrationConfigurationId"`
-	RequestBody                CreateEventRequestBody `request:"mediaType=application/json"`
+	Body                       CreateEventRequestBody `request:"mediaType=application/json"`
 }
 
 func (o *CreateEventRequest) GetIntegrationConfigurationID() string {
@@ -213,11 +213,11 @@ func (o *CreateEventRequest) GetIntegrationConfigurationID() string {
 	return o.IntegrationConfigurationID
 }
 
-func (o *CreateEventRequest) GetRequestBody() CreateEventRequestBody {
+func (o *CreateEventRequest) GetBody() CreateEventRequestBody {
 	if o == nil {
 		return CreateEventRequestBody{}
 	}
-	return o.RequestBody
+	return o.Body
 }
 
 type CreateEventResponse struct {

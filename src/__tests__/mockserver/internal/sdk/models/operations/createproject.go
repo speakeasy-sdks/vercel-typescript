@@ -259,10 +259,12 @@ const (
 	CreateProjectFrameworkRequestZola           CreateProjectFrameworkRequest = "zola"
 	CreateProjectFrameworkRequestHydrogen       CreateProjectFrameworkRequest = "hydrogen"
 	CreateProjectFrameworkRequestVite           CreateProjectFrameworkRequest = "vite"
+	CreateProjectFrameworkRequestTanstackStart  CreateProjectFrameworkRequest = "tanstack-start"
 	CreateProjectFrameworkRequestVitepress      CreateProjectFrameworkRequest = "vitepress"
 	CreateProjectFrameworkRequestVuepress       CreateProjectFrameworkRequest = "vuepress"
 	CreateProjectFrameworkRequestParcel         CreateProjectFrameworkRequest = "parcel"
 	CreateProjectFrameworkRequestFastapi        CreateProjectFrameworkRequest = "fastapi"
+	CreateProjectFrameworkRequestFlask          CreateProjectFrameworkRequest = "flask"
 	CreateProjectFrameworkRequestFasthtml       CreateProjectFrameworkRequest = "fasthtml"
 	CreateProjectFrameworkRequestSanityV3       CreateProjectFrameworkRequest = "sanity-v3"
 	CreateProjectFrameworkRequestSanity         CreateProjectFrameworkRequest = "sanity"
@@ -271,6 +273,9 @@ const (
 	CreateProjectFrameworkRequestHono           CreateProjectFrameworkRequest = "hono"
 	CreateProjectFrameworkRequestExpress        CreateProjectFrameworkRequest = "express"
 	CreateProjectFrameworkRequestH3             CreateProjectFrameworkRequest = "h3"
+	CreateProjectFrameworkRequestNestjs         CreateProjectFrameworkRequest = "nestjs"
+	CreateProjectFrameworkRequestElysia         CreateProjectFrameworkRequest = "elysia"
+	CreateProjectFrameworkRequestFastify        CreateProjectFrameworkRequest = "fastify"
 	CreateProjectFrameworkRequestXmcp           CreateProjectFrameworkRequest = "xmcp"
 )
 
@@ -361,6 +366,8 @@ func (e *CreateProjectFrameworkRequest) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "vite":
 		fallthrough
+	case "tanstack-start":
+		fallthrough
 	case "vitepress":
 		fallthrough
 	case "vuepress":
@@ -368,6 +375,8 @@ func (e *CreateProjectFrameworkRequest) UnmarshalJSON(data []byte) error {
 	case "parcel":
 		fallthrough
 	case "fastapi":
+		fallthrough
+	case "flask":
 		fallthrough
 	case "fasthtml":
 		fallthrough
@@ -384,6 +393,12 @@ func (e *CreateProjectFrameworkRequest) UnmarshalJSON(data []byte) error {
 	case "express":
 		fallthrough
 	case "h3":
+		fallthrough
+	case "nestjs":
+		fallthrough
+	case "elysia":
+		fallthrough
+	case "fastify":
 		fallthrough
 	case "xmcp":
 		*e = CreateProjectFrameworkRequest(v)
@@ -876,8 +891,8 @@ type CreateProjectRequest struct {
 	// The Team identifier to perform the request on behalf of.
 	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 	// The Team slug to perform the request on behalf of.
-	Slug        *string                   `queryParam:"style=form,explode=true,name=slug"`
-	RequestBody *CreateProjectRequestBody `request:"mediaType=application/json"`
+	Slug *string                   `queryParam:"style=form,explode=true,name=slug"`
+	Body *CreateProjectRequestBody `request:"mediaType=application/json"`
 }
 
 func (o *CreateProjectRequest) GetTeamID() *string {
@@ -894,11 +909,11 @@ func (o *CreateProjectRequest) GetSlug() *string {
 	return o.Slug
 }
 
-func (o *CreateProjectRequest) GetRequestBody() *CreateProjectRequestBody {
+func (o *CreateProjectRequest) GetBody() *CreateProjectRequestBody {
 	if o == nil {
 		return nil
 	}
-	return o.RequestBody
+	return o.Body
 }
 
 type CreateProjectAnalytics struct {
@@ -3210,10 +3225,12 @@ const (
 	CreateProjectFrameworkResponseBodyZola           CreateProjectFrameworkResponseBody = "zola"
 	CreateProjectFrameworkResponseBodyHydrogen       CreateProjectFrameworkResponseBody = "hydrogen"
 	CreateProjectFrameworkResponseBodyVite           CreateProjectFrameworkResponseBody = "vite"
+	CreateProjectFrameworkResponseBodyTanstackStart  CreateProjectFrameworkResponseBody = "tanstack-start"
 	CreateProjectFrameworkResponseBodyVitepress      CreateProjectFrameworkResponseBody = "vitepress"
 	CreateProjectFrameworkResponseBodyVuepress       CreateProjectFrameworkResponseBody = "vuepress"
 	CreateProjectFrameworkResponseBodyParcel         CreateProjectFrameworkResponseBody = "parcel"
 	CreateProjectFrameworkResponseBodyFastapi        CreateProjectFrameworkResponseBody = "fastapi"
+	CreateProjectFrameworkResponseBodyFlask          CreateProjectFrameworkResponseBody = "flask"
 	CreateProjectFrameworkResponseBodyFasthtml       CreateProjectFrameworkResponseBody = "fasthtml"
 	CreateProjectFrameworkResponseBodySanityV3       CreateProjectFrameworkResponseBody = "sanity-v3"
 	CreateProjectFrameworkResponseBodySanity         CreateProjectFrameworkResponseBody = "sanity"
@@ -3222,6 +3239,9 @@ const (
 	CreateProjectFrameworkResponseBodyHono           CreateProjectFrameworkResponseBody = "hono"
 	CreateProjectFrameworkResponseBodyExpress        CreateProjectFrameworkResponseBody = "express"
 	CreateProjectFrameworkResponseBodyH3             CreateProjectFrameworkResponseBody = "h3"
+	CreateProjectFrameworkResponseBodyNestjs         CreateProjectFrameworkResponseBody = "nestjs"
+	CreateProjectFrameworkResponseBodyElysia         CreateProjectFrameworkResponseBody = "elysia"
+	CreateProjectFrameworkResponseBodyFastify        CreateProjectFrameworkResponseBody = "fastify"
 	CreateProjectFrameworkResponseBodyXmcp           CreateProjectFrameworkResponseBody = "xmcp"
 )
 
@@ -3312,6 +3332,8 @@ func (e *CreateProjectFrameworkResponseBody) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "vite":
 		fallthrough
+	case "tanstack-start":
+		fallthrough
 	case "vitepress":
 		fallthrough
 	case "vuepress":
@@ -3319,6 +3341,8 @@ func (e *CreateProjectFrameworkResponseBody) UnmarshalJSON(data []byte) error {
 	case "parcel":
 		fallthrough
 	case "fastapi":
+		fallthrough
+	case "flask":
 		fallthrough
 	case "fasthtml":
 		fallthrough
@@ -3335,6 +3359,12 @@ func (e *CreateProjectFrameworkResponseBody) UnmarshalJSON(data []byte) error {
 	case "express":
 		fallthrough
 	case "h3":
+		fallthrough
+	case "nestjs":
+		fallthrough
+	case "elysia":
+		fallthrough
+	case "fastify":
 		fallthrough
 	case "xmcp":
 		*e = CreateProjectFrameworkResponseBody(v)
@@ -4715,10 +4745,68 @@ func (u CreateProjectLinkUnion) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type CreateProjectLinkUnion: all fields are null")
 }
 
+type CreateProjectMicrofrontends3 struct {
+	UpdatedAt                  float64 `json:"updatedAt"`
+	GroupIds                   []any   `json:"groupIds"`
+	Enabled                    bool    `json:"enabled"`
+	FreeProjectForLegacyLimits *bool   `json:"freeProjectForLegacyLimits,omitempty"`
+}
+
+func (c CreateProjectMicrofrontends3) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateProjectMicrofrontends3) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"updatedAt", "groupIds", "enabled"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateProjectMicrofrontends3) GetUpdatedAt() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.UpdatedAt
+}
+
+func (o *CreateProjectMicrofrontends3) GetGroupIds() []any {
+	if o == nil {
+		return []any{}
+	}
+	return o.GroupIds
+}
+
+func (o *CreateProjectMicrofrontends3) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateProjectMicrofrontends3) GetFreeProjectForLegacyLimits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.FreeProjectForLegacyLimits
+}
+
 type CreateProjectMicrofrontends2 struct {
+	IsDefaultApp *bool `json:"isDefaultApp,omitempty"`
+	// Whether observability data should be routed to this microfrontend project or a root project.
+	RouteObservabilityToThisProject *bool `json:"routeObservabilityToThisProject,omitempty"`
+	// Whether to add microfrontends routing to aliases. This means domains in this project will route as a microfrontend.
+	DoNotRouteWithMicrofrontendsRouting *bool `json:"doNotRouteWithMicrofrontendsRouting,omitempty"`
+	// Timestamp when the microfrontends settings were last updated.
 	UpdatedAt float64 `json:"updatedAt"`
-	GroupIds  []any   `json:"groupIds"`
-	Enabled   bool    `json:"enabled"`
+	// The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+	GroupIds []string `json:"groupIds"`
+	// Whether microfrontends are enabled for this project.
+	Enabled bool `json:"enabled"`
+	// A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
+	DefaultRoute *string `json:"defaultRoute,omitempty"`
+	// Whether the project was part of the legacy limits for hobby and pro-trial before billing was added. This field is only set when the team is upgraded to a paid plan and we are backfilling the subscription status. We cap the subscription to 2 projects and set this field for the 3rd project. When this field is set, the project is not charged for and we do not call any billing APIs for this project.
+	FreeProjectForLegacyLimits *bool `json:"freeProjectForLegacyLimits,omitempty"`
 }
 
 func (c CreateProjectMicrofrontends2) MarshalJSON() ([]byte, error) {
@@ -4732,6 +4820,27 @@ func (c *CreateProjectMicrofrontends2) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+func (o *CreateProjectMicrofrontends2) GetIsDefaultApp() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsDefaultApp
+}
+
+func (o *CreateProjectMicrofrontends2) GetRouteObservabilityToThisProject() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.RouteObservabilityToThisProject
+}
+
+func (o *CreateProjectMicrofrontends2) GetDoNotRouteWithMicrofrontendsRouting() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.DoNotRouteWithMicrofrontendsRouting
+}
+
 func (o *CreateProjectMicrofrontends2) GetUpdatedAt() float64 {
 	if o == nil {
 		return 0.0
@@ -4739,9 +4848,9 @@ func (o *CreateProjectMicrofrontends2) GetUpdatedAt() float64 {
 	return o.UpdatedAt
 }
 
-func (o *CreateProjectMicrofrontends2) GetGroupIds() []any {
+func (o *CreateProjectMicrofrontends2) GetGroupIds() []string {
 	if o == nil {
-		return []any{}
+		return []string{}
 	}
 	return o.GroupIds
 }
@@ -4753,19 +4862,32 @@ func (o *CreateProjectMicrofrontends2) GetEnabled() bool {
 	return o.Enabled
 }
 
+func (o *CreateProjectMicrofrontends2) GetDefaultRoute() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DefaultRoute
+}
+
+func (o *CreateProjectMicrofrontends2) GetFreeProjectForLegacyLimits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.FreeProjectForLegacyLimits
+}
+
 type CreateProjectMicrofrontends1 struct {
+	IsDefaultApp bool `json:"isDefaultApp"`
 	// Timestamp when the microfrontends settings were last updated.
 	UpdatedAt float64 `json:"updatedAt"`
 	// The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
 	GroupIds []string `json:"groupIds"`
 	// Whether microfrontends are enabled for this project.
 	Enabled bool `json:"enabled"`
-	// Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
-	IsDefaultApp *bool `json:"isDefaultApp,omitempty"`
 	// A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
 	DefaultRoute *string `json:"defaultRoute,omitempty"`
-	// Whether observability data should be routed to this microfrontend project or a root project.
-	RouteObservabilityToThisProject *bool `json:"routeObservabilityToThisProject,omitempty"`
+	// Whether the project was part of the legacy limits for hobby and pro-trial before billing was added. This field is only set when the team is upgraded to a paid plan and we are backfilling the subscription status. We cap the subscription to 2 projects and set this field for the 3rd project. When this field is set, the project is not charged for and we do not call any billing APIs for this project.
+	FreeProjectForLegacyLimits *bool `json:"freeProjectForLegacyLimits,omitempty"`
 }
 
 func (c CreateProjectMicrofrontends1) MarshalJSON() ([]byte, error) {
@@ -4773,10 +4895,17 @@ func (c CreateProjectMicrofrontends1) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CreateProjectMicrofrontends1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"updatedAt", "groupIds", "enabled"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"isDefaultApp", "updatedAt", "groupIds", "enabled"}); err != nil {
 		return err
 	}
 	return nil
+}
+
+func (o *CreateProjectMicrofrontends1) GetIsDefaultApp() bool {
+	if o == nil {
+		return false
+	}
+	return o.IsDefaultApp
 }
 
 func (o *CreateProjectMicrofrontends1) GetUpdatedAt() float64 {
@@ -4800,13 +4929,6 @@ func (o *CreateProjectMicrofrontends1) GetEnabled() bool {
 	return o.Enabled
 }
 
-func (o *CreateProjectMicrofrontends1) GetIsDefaultApp() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.IsDefaultApp
-}
-
 func (o *CreateProjectMicrofrontends1) GetDefaultRoute() *string {
 	if o == nil {
 		return nil
@@ -4814,11 +4936,11 @@ func (o *CreateProjectMicrofrontends1) GetDefaultRoute() *string {
 	return o.DefaultRoute
 }
 
-func (o *CreateProjectMicrofrontends1) GetRouteObservabilityToThisProject() *bool {
+func (o *CreateProjectMicrofrontends1) GetFreeProjectForLegacyLimits() *bool {
 	if o == nil {
 		return nil
 	}
-	return o.RouteObservabilityToThisProject
+	return o.FreeProjectForLegacyLimits
 }
 
 type CreateProjectMicrofrontendsUnionType string
@@ -4826,11 +4948,13 @@ type CreateProjectMicrofrontendsUnionType string
 const (
 	CreateProjectMicrofrontendsUnionTypeCreateProjectMicrofrontends1 CreateProjectMicrofrontendsUnionType = "createProject_microfrontends_1"
 	CreateProjectMicrofrontendsUnionTypeCreateProjectMicrofrontends2 CreateProjectMicrofrontendsUnionType = "createProject_microfrontends_2"
+	CreateProjectMicrofrontendsUnionTypeCreateProjectMicrofrontends3 CreateProjectMicrofrontendsUnionType = "createProject_microfrontends_3"
 )
 
 type CreateProjectMicrofrontendsUnion struct {
 	CreateProjectMicrofrontends1 *CreateProjectMicrofrontends1 `queryParam:"inline"`
 	CreateProjectMicrofrontends2 *CreateProjectMicrofrontends2 `queryParam:"inline"`
+	CreateProjectMicrofrontends3 *CreateProjectMicrofrontends3 `queryParam:"inline"`
 
 	Type CreateProjectMicrofrontendsUnionType
 }
@@ -4853,6 +4977,15 @@ func CreateCreateProjectMicrofrontendsUnionCreateProjectMicrofrontends2(createPr
 	}
 }
 
+func CreateCreateProjectMicrofrontendsUnionCreateProjectMicrofrontends3(createProjectMicrofrontends3 CreateProjectMicrofrontends3) CreateProjectMicrofrontendsUnion {
+	typ := CreateProjectMicrofrontendsUnionTypeCreateProjectMicrofrontends3
+
+	return CreateProjectMicrofrontendsUnion{
+		CreateProjectMicrofrontends3: &createProjectMicrofrontends3,
+		Type:                         typ,
+	}
+}
+
 func (u *CreateProjectMicrofrontendsUnion) UnmarshalJSON(data []byte) error {
 
 	var createProjectMicrofrontends1 CreateProjectMicrofrontends1 = CreateProjectMicrofrontends1{}
@@ -4869,6 +5002,13 @@ func (u *CreateProjectMicrofrontendsUnion) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	var createProjectMicrofrontends3 CreateProjectMicrofrontends3 = CreateProjectMicrofrontends3{}
+	if err := utils.UnmarshalJSON(data, &createProjectMicrofrontends3, "", true, nil); err == nil {
+		u.CreateProjectMicrofrontends3 = &createProjectMicrofrontends3
+		u.Type = CreateProjectMicrofrontendsUnionTypeCreateProjectMicrofrontends3
+		return nil
+	}
+
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateProjectMicrofrontendsUnion", string(data))
 }
 
@@ -4881,12 +5021,17 @@ func (u CreateProjectMicrofrontendsUnion) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.CreateProjectMicrofrontends2, "", true)
 	}
 
+	if u.CreateProjectMicrofrontends3 != nil {
+		return utils.MarshalJSON(u.CreateProjectMicrofrontends3, "", true)
+	}
+
 	return nil, errors.New("could not marshal union type CreateProjectMicrofrontendsUnion: all fields are null")
 }
 
 type CreateProjectNodeVersion string
 
 const (
+	CreateProjectNodeVersionTwentyFourDotX CreateProjectNodeVersion = "24.x"
 	CreateProjectNodeVersionTwentyTwoDotX  CreateProjectNodeVersion = "22.x"
 	CreateProjectNodeVersionTwentyDotX     CreateProjectNodeVersion = "20.x"
 	CreateProjectNodeVersionEighteenDotX   CreateProjectNodeVersion = "18.x"
@@ -4906,6 +5051,8 @@ func (e *CreateProjectNodeVersion) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "24.x":
+		fallthrough
 	case "22.x":
 		fallthrough
 	case "20.x":
@@ -5308,6 +5455,33 @@ func (o *CreateProjectDefaultResourceConfig) GetIsNSNBDisabled() *bool {
 	return o.IsNSNBDisabled
 }
 
+type CreateProjectStaticIps struct {
+	Builds  bool     `json:"builds"`
+	Enabled bool     `json:"enabled"`
+	Regions []string `json:"regions"`
+}
+
+func (o *CreateProjectStaticIps) GetBuilds() bool {
+	if o == nil {
+		return false
+	}
+	return o.Builds
+}
+
+func (o *CreateProjectStaticIps) GetEnabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.Enabled
+}
+
+func (o *CreateProjectStaticIps) GetRegions() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.Regions
+}
+
 type CreateProjectSsoProtectionDeploymentTypeResponse string
 
 const (
@@ -5625,6 +5799,7 @@ type CreateProjectOidcTokenClaims struct {
 	Project     string `json:"project"`
 	ProjectID   string `json:"project_id"`
 	Environment string `json:"environment"`
+	Plan        string `json:"plan"`
 }
 
 func (o *CreateProjectOidcTokenClaims) GetIss() string {
@@ -5688,6 +5863,13 @@ func (o *CreateProjectOidcTokenClaims) GetEnvironment() string {
 		return ""
 	}
 	return o.Environment
+}
+
+func (o *CreateProjectOidcTokenClaims) GetPlan() string {
+	if o == nil {
+		return ""
+	}
+	return o.Plan
 }
 
 type CreateProjectPlan string
@@ -6108,9 +6290,17 @@ type CreateProjectPermissions struct {
 	UserSudo                                 []components.ACLAction `json:"userSudo,omitempty"`
 	WebAuthn                                 []components.ACLAction `json:"webAuthn,omitempty"`
 	AccessGroup                              []components.ACLAction `json:"accessGroup,omitempty"`
+	Agent                                    []components.ACLAction `json:"agent,omitempty"`
+	Alerts                                   []components.ACLAction `json:"alerts,omitempty"`
 	AliasGlobal                              []components.ACLAction `json:"aliasGlobal,omitempty"`
 	AnalyticsSampling                        []components.ACLAction `json:"analyticsSampling,omitempty"`
 	AnalyticsUsage                           []components.ACLAction `json:"analyticsUsage,omitempty"`
+	APIKey                                   []components.ACLAction `json:"apiKey,omitempty"`
+	APIKeyAiGateway                          []components.ACLAction `json:"apiKeyAiGateway,omitempty"`
+	APIKeyOwnedBySelf                        []components.ACLAction `json:"apiKeyOwnedBySelf,omitempty"`
+	Oauth2Application                        []components.ACLAction `json:"oauth2Application,omitempty"`
+	VercelAppInstallation                    []components.ACLAction `json:"vercelAppInstallation,omitempty"`
+	VercelAppInstallationRequest             []components.ACLAction `json:"vercelAppInstallationRequest,omitempty"`
 	AuditLog                                 []components.ACLAction `json:"auditLog,omitempty"`
 	BillingAddress                           []components.ACLAction `json:"billingAddress,omitempty"`
 	BillingInformation                       []components.ACLAction `json:"billingInformation,omitempty"`
@@ -6122,6 +6312,7 @@ type CreateProjectPermissions struct {
 	BillingRefund                            []components.ACLAction `json:"billingRefund,omitempty"`
 	BillingTaxID                             []components.ACLAction `json:"billingTaxId,omitempty"`
 	Blob                                     []components.ACLAction `json:"blob,omitempty"`
+	BlobStoreTokenSet                        []components.ACLAction `json:"blobStoreTokenSet,omitempty"`
 	Budget                                   []components.ACLAction `json:"budget,omitempty"`
 	CacheArtifact                            []components.ACLAction `json:"cacheArtifact,omitempty"`
 	CacheArtifactUsageEvent                  []components.ACLAction `json:"cacheArtifactUsageEvent,omitempty"`
@@ -6129,6 +6320,7 @@ type CreateProjectPermissions struct {
 	ConcurrentBuilds                         []components.ACLAction `json:"concurrentBuilds,omitempty"`
 	Connect                                  []components.ACLAction `json:"connect,omitempty"`
 	ConnectConfiguration                     []components.ACLAction `json:"connectConfiguration,omitempty"`
+	DataCacheBillingSettings                 []components.ACLAction `json:"dataCacheBillingSettings,omitempty"`
 	DefaultDeploymentProtection              []components.ACLAction `json:"defaultDeploymentProtection,omitempty"`
 	Domain                                   []components.ACLAction `json:"domain,omitempty"`
 	DomainAcceptDelegation                   []components.ACLAction `json:"domainAcceptDelegation,omitempty"`
@@ -6139,40 +6331,48 @@ type CreateProjectPermissions struct {
 	DomainPurchase                           []components.ACLAction `json:"domainPurchase,omitempty"`
 	DomainRecord                             []components.ACLAction `json:"domainRecord,omitempty"`
 	DomainTransferIn                         []components.ACLAction `json:"domainTransferIn,omitempty"`
+	Drain                                    []components.ACLAction `json:"drain,omitempty"`
+	EdgeConfig                               []components.ACLAction `json:"edgeConfig,omitempty"`
+	EdgeConfigItem                           []components.ACLAction `json:"edgeConfigItem,omitempty"`
+	EdgeConfigSchema                         []components.ACLAction `json:"edgeConfigSchema,omitempty"`
+	EdgeConfigToken                          []components.ACLAction `json:"edgeConfigToken,omitempty"`
+	EndpointVerification                     []components.ACLAction `json:"endpointVerification,omitempty"`
 	Event                                    []components.ACLAction `json:"event,omitempty"`
-	OwnEvent                                 []components.ACLAction `json:"ownEvent,omitempty"`
-	SensitiveEnvironmentVariablePolicy       []components.ACLAction `json:"sensitiveEnvironmentVariablePolicy,omitempty"`
 	FileUpload                               []components.ACLAction `json:"fileUpload,omitempty"`
 	FlagsExplorerSubscription                []components.ACLAction `json:"flagsExplorerSubscription,omitempty"`
 	GitRepository                            []components.ACLAction `json:"gitRepository,omitempty"`
-	IPBlocking                               []components.ACLAction `json:"ipBlocking,omitempty"`
 	ImageOptimizationNewPrice                []components.ACLAction `json:"imageOptimizationNewPrice,omitempty"`
 	Integration                              []components.ACLAction `json:"integration,omitempty"`
 	IntegrationAccount                       []components.ACLAction `json:"integrationAccount,omitempty"`
 	IntegrationConfiguration                 []components.ACLAction `json:"integrationConfiguration,omitempty"`
-	IntegrationConfigurationTransfer         []components.ACLAction `json:"integrationConfigurationTransfer,omitempty"`
 	IntegrationConfigurationProjects         []components.ACLAction `json:"integrationConfigurationProjects,omitempty"`
-	IntegrationVercelConfigurationOverride   []components.ACLAction `json:"integrationVercelConfigurationOverride,omitempty"`
 	IntegrationConfigurationRole             []components.ACLAction `json:"integrationConfigurationRole,omitempty"`
-	IntegrationSSOSession                    []components.ACLAction `json:"integrationSSOSession,omitempty"`
-	IntegrationResource                      []components.ACLAction `json:"integrationResource,omitempty"`
-	IntegrationEvent                         []components.ACLAction `json:"integrationEvent,omitempty"`
-	IntegrationResourceSecrets               []components.ACLAction `json:"integrationResourceSecrets,omitempty"`
+	IntegrationConfigurationTransfer         []components.ACLAction `json:"integrationConfigurationTransfer,omitempty"`
 	IntegrationDeploymentAction              []components.ACLAction `json:"integrationDeploymentAction,omitempty"`
-	MarketplaceInstallationMember            []components.ACLAction `json:"marketplaceInstallationMember,omitempty"`
+	IntegrationEvent                         []components.ACLAction `json:"integrationEvent,omitempty"`
+	IntegrationLog                           []components.ACLAction `json:"integrationLog,omitempty"`
+	IntegrationResource                      []components.ACLAction `json:"integrationResource,omitempty"`
+	IntegrationResourceReplCommand           []components.ACLAction `json:"integrationResourceReplCommand,omitempty"`
+	IntegrationResourceSecrets               []components.ACLAction `json:"integrationResourceSecrets,omitempty"`
+	IntegrationSSOSession                    []components.ACLAction `json:"integrationSSOSession,omitempty"`
+	IntegrationStoreTokenSet                 []components.ACLAction `json:"integrationStoreTokenSet,omitempty"`
+	IntegrationVercelConfigurationOverride   []components.ACLAction `json:"integrationVercelConfigurationOverride,omitempty"`
+	IntegrationPullRequest                   []components.ACLAction `json:"integrationPullRequest,omitempty"`
+	IPBlocking                               []components.ACLAction `json:"ipBlocking,omitempty"`
+	JobGlobal                                []components.ACLAction `json:"jobGlobal,omitempty"`
+	LogDrain                                 []components.ACLAction `json:"logDrain,omitempty"`
 	MarketplaceBillingData                   []components.ACLAction `json:"marketplaceBillingData,omitempty"`
+	MarketplaceExperimentationEdgeConfigData []components.ACLAction `json:"marketplaceExperimentationEdgeConfigData,omitempty"`
+	MarketplaceExperimentationItem           []components.ACLAction `json:"marketplaceExperimentationItem,omitempty"`
+	MarketplaceInstallationMember            []components.ACLAction `json:"marketplaceInstallationMember,omitempty"`
 	MarketplaceInvoice                       []components.ACLAction `json:"marketplaceInvoice,omitempty"`
 	MarketplaceSettings                      []components.ACLAction `json:"marketplaceSettings,omitempty"`
-	MarketplaceExperimentationItem           []components.ACLAction `json:"marketplaceExperimentationItem,omitempty"`
-	MarketplaceExperimentationEdgeConfigData []components.ACLAction `json:"marketplaceExperimentationEdgeConfigData,omitempty"`
-	JobGlobal                                []components.ACLAction `json:"jobGlobal,omitempty"`
-	Drain                                    []components.ACLAction `json:"drain,omitempty"`
-	LogDrain                                 []components.ACLAction `json:"logDrain,omitempty"`
 	Monitoring                               []components.ACLAction `json:"Monitoring,omitempty"`
-	MonitoringSettings                       []components.ACLAction `json:"monitoringSettings,omitempty"`
-	MonitoringQuery                          []components.ACLAction `json:"monitoringQuery,omitempty"`
-	MonitoringChart                          []components.ACLAction `json:"monitoringChart,omitempty"`
 	MonitoringAlert                          []components.ACLAction `json:"monitoringAlert,omitempty"`
+	MonitoringChart                          []components.ACLAction `json:"monitoringChart,omitempty"`
+	MonitoringQuery                          []components.ACLAction `json:"monitoringQuery,omitempty"`
+	MonitoringSettings                       []components.ACLAction `json:"monitoringSettings,omitempty"`
+	NotificationCustomerBudget               []components.ACLAction `json:"notificationCustomerBudget,omitempty"`
 	NotificationDeploymentFailed             []components.ACLAction `json:"notificationDeploymentFailed,omitempty"`
 	NotificationDomainConfiguration          []components.ACLAction `json:"notificationDomainConfiguration,omitempty"`
 	NotificationDomainExpire                 []components.ACLAction `json:"notificationDomainExpire,omitempty"`
@@ -6183,42 +6383,39 @@ type CreateProjectPermissions struct {
 	NotificationDomainUnverified             []components.ACLAction `json:"notificationDomainUnverified,omitempty"`
 	NotificationMonitoringAlert              []components.ACLAction `json:"NotificationMonitoringAlert,omitempty"`
 	NotificationPaymentFailed                []components.ACLAction `json:"notificationPaymentFailed,omitempty"`
-	NotificationUsageAlert                   []components.ACLAction `json:"notificationUsageAlert,omitempty"`
 	NotificationPreferences                  []components.ACLAction `json:"notificationPreferences,omitempty"`
-	NotificationCustomerBudget               []components.ACLAction `json:"notificationCustomerBudget,omitempty"`
 	NotificationStatementOfReasons           []components.ACLAction `json:"notificationStatementOfReasons,omitempty"`
+	NotificationUsageAlert                   []components.ACLAction `json:"notificationUsageAlert,omitempty"`
 	ObservabilityConfiguration               []components.ACLAction `json:"observabilityConfiguration,omitempty"`
-	Alerts                                   []components.ACLAction `json:"alerts,omitempty"`
-	ObservabilityNotebook                    []components.ACLAction `json:"observabilityNotebook,omitempty"`
 	ObservabilityFunnel                      []components.ACLAction `json:"observabilityFunnel,omitempty"`
+	ObservabilityNotebook                    []components.ACLAction `json:"observabilityNotebook,omitempty"`
 	OpenTelemetryEndpoint                    []components.ACLAction `json:"openTelemetryEndpoint,omitempty"`
-	VercelAppInstallation                    []components.ACLAction `json:"vercelAppInstallation,omitempty"`
-	VercelAppInstallationRequest             []components.ACLAction `json:"vercelAppInstallationRequest,omitempty"`
+	OwnEvent                                 []components.ACLAction `json:"ownEvent,omitempty"`
+	OrganizationDomain                       []components.ACLAction `json:"organizationDomain,omitempty"`
+	PasswordProtectionInvoiceItem            []components.ACLAction `json:"passwordProtectionInvoiceItem,omitempty"`
 	PaymentMethod                            []components.ACLAction `json:"paymentMethod,omitempty"`
 	Permissions                              []components.ACLAction `json:"permissions,omitempty"`
 	Postgres                                 []components.ACLAction `json:"postgres,omitempty"`
+	PostgresStoreTokenSet                    []components.ACLAction `json:"postgresStoreTokenSet,omitempty"`
 	PreviewDeploymentSuffix                  []components.ACLAction `json:"previewDeploymentSuffix,omitempty"`
+	ProjectTransferIn                        []components.ACLAction `json:"projectTransferIn,omitempty"`
 	ProTrialOnboarding                       []components.ACLAction `json:"proTrialOnboarding,omitempty"`
+	RateLimit                                []components.ACLAction `json:"rateLimit,omitempty"`
+	Redis                                    []components.ACLAction `json:"redis,omitempty"`
+	RedisStoreTokenSet                       []components.ACLAction `json:"redisStoreTokenSet,omitempty"`
+	RemoteCaching                            []components.ACLAction `json:"remoteCaching,omitempty"`
+	Repository                               []components.ACLAction `json:"repository,omitempty"`
+	SamlConfig                               []components.ACLAction `json:"samlConfig,omitempty"`
+	Secret                                   []components.ACLAction `json:"secret,omitempty"`
+	SecurityPlusConfiguration                []components.ACLAction `json:"securityPlusConfiguration,omitempty"`
+	SensitiveEnvironmentVariablePolicy       []components.ACLAction `json:"sensitiveEnvironmentVariablePolicy,omitempty"`
 	SharedEnvVars                            []components.ACLAction `json:"sharedEnvVars,omitempty"`
 	SharedEnvVarsProduction                  []components.ACLAction `json:"sharedEnvVarsProduction,omitempty"`
 	Space                                    []components.ACLAction `json:"space,omitempty"`
 	SpaceRun                                 []components.ACLAction `json:"spaceRun,omitempty"`
-	PasswordProtectionInvoiceItem            []components.ACLAction `json:"passwordProtectionInvoiceItem,omitempty"`
-	RateLimit                                []components.ACLAction `json:"rateLimit,omitempty"`
-	Redis                                    []components.ACLAction `json:"redis,omitempty"`
-	Repository                               []components.ACLAction `json:"repository,omitempty"`
-	RemoteCaching                            []components.ACLAction `json:"remoteCaching,omitempty"`
-	SamlConfig                               []components.ACLAction `json:"samlConfig,omitempty"`
-	Secret                                   []components.ACLAction `json:"secret,omitempty"`
-	RedisStoreTokenSet                       []components.ACLAction `json:"redisStoreTokenSet,omitempty"`
-	BlobStoreTokenSet                        []components.ACLAction `json:"blobStoreTokenSet,omitempty"`
-	PostgresStoreTokenSet                    []components.ACLAction `json:"postgresStoreTokenSet,omitempty"`
-	IntegrationStoreTokenSet                 []components.ACLAction `json:"integrationStoreTokenSet,omitempty"`
-	IntegrationResourceReplCommand           []components.ACLAction `json:"integrationResourceReplCommand,omitempty"`
 	StoreTransfer                            []components.ACLAction `json:"storeTransfer,omitempty"`
 	SupportCase                              []components.ACLAction `json:"supportCase,omitempty"`
 	SupportCaseComment                       []components.ACLAction `json:"supportCaseComment,omitempty"`
-	DataCacheBillingSettings                 []components.ACLAction `json:"dataCacheBillingSettings,omitempty"`
 	Team                                     []components.ACLAction `json:"team,omitempty"`
 	TeamAccessRequest                        []components.ACLAction `json:"teamAccessRequest,omitempty"`
 	TeamFellowMembership                     []components.ACLAction `json:"teamFellowMembership,omitempty"`
@@ -6233,26 +6430,15 @@ type CreateProjectPermissions struct {
 	Token                                    []components.ACLAction `json:"token,omitempty"`
 	Usage                                    []components.ACLAction `json:"usage,omitempty"`
 	UsageCycle                               []components.ACLAction `json:"usageCycle,omitempty"`
-	VpcPeeringConnection                     []components.ACLAction `json:"vpcPeeringConnection,omitempty"`
-	WebAnalyticsPlan                         []components.ACLAction `json:"webAnalyticsPlan,omitempty"`
-	EdgeConfig                               []components.ACLAction `json:"edgeConfig,omitempty"`
-	EdgeConfigItem                           []components.ACLAction `json:"edgeConfigItem,omitempty"`
-	EdgeConfigSchema                         []components.ACLAction `json:"edgeConfigSchema,omitempty"`
-	EdgeConfigToken                          []components.ACLAction `json:"edgeConfigToken,omitempty"`
-	Webhook                                  []components.ACLAction `json:"webhook,omitempty"`
-	WebhookEvent                             []components.ACLAction `json:"webhook-event,omitempty"`
-	EndpointVerification                     []components.ACLAction `json:"endpointVerification,omitempty"`
-	ProjectTransferIn                        []components.ACLAction `json:"projectTransferIn,omitempty"`
-	Oauth2Application                        []components.ACLAction `json:"oauth2Application,omitempty"`
 	VercelRun                                []components.ACLAction `json:"vercelRun,omitempty"`
 	VercelRunExec                            []components.ACLAction `json:"vercelRunExec,omitempty"`
-	APIKey                                   []components.ACLAction `json:"apiKey,omitempty"`
-	APIKeyOwnedBySelf                        []components.ACLAction `json:"apiKeyOwnedBySelf,omitempty"`
-	APIKeyAiGateway                          []components.ACLAction `json:"apiKeyAiGateway,omitempty"`
+	VpcPeeringConnection                     []components.ACLAction `json:"vpcPeeringConnection,omitempty"`
+	WebAnalyticsPlan                         []components.ACLAction `json:"webAnalyticsPlan,omitempty"`
+	Webhook                                  []components.ACLAction `json:"webhook,omitempty"`
+	WebhookEvent                             []components.ACLAction `json:"webhook-event,omitempty"`
 	AliasProject                             []components.ACLAction `json:"aliasProject,omitempty"`
 	AliasProtectionBypass                    []components.ACLAction `json:"aliasProtectionBypass,omitempty"`
 	BuildMachine                             []components.ACLAction `json:"buildMachine,omitempty"`
-	ProductionAliasProtectionBypass          []components.ACLAction `json:"productionAliasProtectionBypass,omitempty"`
 	ConnectConfigurationLink                 []components.ACLAction `json:"connectConfigurationLink,omitempty"`
 	DataCacheNamespace                       []components.ACLAction `json:"dataCacheNamespace,omitempty"`
 	Deployment                               []components.ACLAction `json:"deployment,omitempty"`
@@ -6268,54 +6454,55 @@ type CreateProjectPermissions struct {
 	DeploymentRollback                       []components.ACLAction `json:"deploymentRollback,omitempty"`
 	EdgeCacheNamespace                       []components.ACLAction `json:"edgeCacheNamespace,omitempty"`
 	Environments                             []components.ACLAction `json:"environments,omitempty"`
+	Job                                      []components.ACLAction `json:"job,omitempty"`
 	Logs                                     []components.ACLAction `json:"logs,omitempty"`
 	LogsPreset                               []components.ACLAction `json:"logsPreset,omitempty"`
-	PasswordProtection                       []components.ACLAction `json:"passwordProtection,omitempty"`
-	OptionsAllowlist                         []components.ACLAction `json:"optionsAllowlist,omitempty"`
-	Job                                      []components.ACLAction `json:"job,omitempty"`
 	ObservabilityData                        []components.ACLAction `json:"observabilityData,omitempty"`
 	OnDemandBuild                            []components.ACLAction `json:"onDemandBuild,omitempty"`
 	OnDemandConcurrency                      []components.ACLAction `json:"onDemandConcurrency,omitempty"`
+	OptionsAllowlist                         []components.ACLAction `json:"optionsAllowlist,omitempty"`
+	PasswordProtection                       []components.ACLAction `json:"passwordProtection,omitempty"`
+	ProductionAliasProtectionBypass          []components.ACLAction `json:"productionAliasProtectionBypass,omitempty"`
 	Project                                  []components.ACLAction `json:"project,omitempty"`
-	ProjectFromV0                            []components.ACLAction `json:"projectFromV0,omitempty"`
 	ProjectAccessGroup                       []components.ACLAction `json:"projectAccessGroup,omitempty"`
 	ProjectAnalyticsSampling                 []components.ACLAction `json:"projectAnalyticsSampling,omitempty"`
+	ProjectAnalyticsUsage                    []components.ACLAction `json:"projectAnalyticsUsage,omitempty"`
 	ProjectCheck                             []components.ACLAction `json:"projectCheck,omitempty"`
 	ProjectCheckRun                          []components.ACLAction `json:"projectCheckRun,omitempty"`
+	ProjectDeploymentExpiration              []components.ACLAction `json:"projectDeploymentExpiration,omitempty"`
 	ProjectDeploymentHook                    []components.ACLAction `json:"projectDeploymentHook,omitempty"`
 	ProjectDomain                            []components.ACLAction `json:"projectDomain,omitempty"`
-	ProjectDomainMove                        []components.ACLAction `json:"projectDomainMove,omitempty"`
 	ProjectDomainCheckConfig                 []components.ACLAction `json:"projectDomainCheckConfig,omitempty"`
+	ProjectDomainMove                        []components.ACLAction `json:"projectDomainMove,omitempty"`
 	ProjectEnvVars                           []components.ACLAction `json:"projectEnvVars,omitempty"`
 	ProjectEnvVarsProduction                 []components.ACLAction `json:"projectEnvVarsProduction,omitempty"`
 	ProjectEnvVarsUnownedByIntegration       []components.ACLAction `json:"projectEnvVarsUnownedByIntegration,omitempty"`
 	ProjectFlags                             []components.ACLAction `json:"projectFlags,omitempty"`
+	ProjectFlagsProduction                   []components.ACLAction `json:"projectFlagsProduction,omitempty"`
+	ProjectFromV0                            []components.ACLAction `json:"projectFromV0,omitempty"`
 	ProjectID                                []components.ACLAction `json:"projectId,omitempty"`
 	ProjectIntegrationConfiguration          []components.ACLAction `json:"projectIntegrationConfiguration,omitempty"`
 	ProjectLink                              []components.ACLAction `json:"projectLink,omitempty"`
 	ProjectMember                            []components.ACLAction `json:"projectMember,omitempty"`
 	ProjectMonitoring                        []components.ACLAction `json:"projectMonitoring,omitempty"`
+	ProjectOIDCToken                         []components.ACLAction `json:"projectOIDCToken,omitempty"`
 	ProjectPermissions                       []components.ACLAction `json:"projectPermissions,omitempty"`
 	ProjectProductionBranch                  []components.ACLAction `json:"projectProductionBranch,omitempty"`
-	ProjectTransfer                          []components.ACLAction `json:"projectTransfer,omitempty"`
-	ProjectTransferOut                       []components.ACLAction `json:"projectTransferOut,omitempty"`
 	ProjectProtectionBypass                  []components.ACLAction `json:"projectProtectionBypass,omitempty"`
-	ProjectUsage                             []components.ACLAction `json:"projectUsage,omitempty"`
-	ProjectAnalyticsUsage                    []components.ACLAction `json:"projectAnalyticsUsage,omitempty"`
+	ProjectRollingRelease                    []components.ACLAction `json:"projectRollingRelease,omitempty"`
 	ProjectSupportCase                       []components.ACLAction `json:"projectSupportCase,omitempty"`
 	ProjectSupportCaseComment                []components.ACLAction `json:"projectSupportCaseComment,omitempty"`
-	ProjectDeploymentExpiration              []components.ACLAction `json:"projectDeploymentExpiration,omitempty"`
-	ProjectRollingRelease                    []components.ACLAction `json:"projectRollingRelease,omitempty"`
 	ProjectTier                              []components.ACLAction `json:"projectTier,omitempty"`
-	ProjectOIDCToken                         []components.ACLAction `json:"projectOIDCToken,omitempty"`
+	ProjectTransfer                          []components.ACLAction `json:"projectTransfer,omitempty"`
+	ProjectTransferOut                       []components.ACLAction `json:"projectTransferOut,omitempty"`
+	ProjectUsage                             []components.ACLAction `json:"projectUsage,omitempty"`
 	SeawallConfig                            []components.ACLAction `json:"seawallConfig,omitempty"`
+	SharedEnvVarConnection                   []components.ACLAction `json:"sharedEnvVarConnection,omitempty"`
 	SkewProtection                           []components.ACLAction `json:"skewProtection,omitempty"`
 	Analytics                                []components.ACLAction `json:"analytics,omitempty"`
 	TrustedIps                               []components.ACLAction `json:"trustedIps,omitempty"`
 	V0Chat                                   []components.ACLAction `json:"v0Chat,omitempty"`
 	WebAnalytics                             []components.ACLAction `json:"webAnalytics,omitempty"`
-	SharedEnvVarConnection                   []components.ACLAction `json:"sharedEnvVarConnection,omitempty"`
-	Sonar                                    []components.ACLAction `json:"sonar,omitempty"`
 }
 
 func (o *CreateProjectPermissions) GetOauth2Connection() []components.ACLAction {
@@ -6360,6 +6547,20 @@ func (o *CreateProjectPermissions) GetAccessGroup() []components.ACLAction {
 	return o.AccessGroup
 }
 
+func (o *CreateProjectPermissions) GetAgent() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.Agent
+}
+
+func (o *CreateProjectPermissions) GetAlerts() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.Alerts
+}
+
 func (o *CreateProjectPermissions) GetAliasGlobal() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -6379,6 +6580,48 @@ func (o *CreateProjectPermissions) GetAnalyticsUsage() []components.ACLAction {
 		return nil
 	}
 	return o.AnalyticsUsage
+}
+
+func (o *CreateProjectPermissions) GetAPIKey() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.APIKey
+}
+
+func (o *CreateProjectPermissions) GetAPIKeyAiGateway() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.APIKeyAiGateway
+}
+
+func (o *CreateProjectPermissions) GetAPIKeyOwnedBySelf() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.APIKeyOwnedBySelf
+}
+
+func (o *CreateProjectPermissions) GetOauth2Application() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.Oauth2Application
+}
+
+func (o *CreateProjectPermissions) GetVercelAppInstallation() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.VercelAppInstallation
+}
+
+func (o *CreateProjectPermissions) GetVercelAppInstallationRequest() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.VercelAppInstallationRequest
 }
 
 func (o *CreateProjectPermissions) GetAuditLog() []components.ACLAction {
@@ -6458,6 +6701,13 @@ func (o *CreateProjectPermissions) GetBlob() []components.ACLAction {
 	return o.Blob
 }
 
+func (o *CreateProjectPermissions) GetBlobStoreTokenSet() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.BlobStoreTokenSet
+}
+
 func (o *CreateProjectPermissions) GetBudget() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -6505,6 +6755,13 @@ func (o *CreateProjectPermissions) GetConnectConfiguration() []components.ACLAct
 		return nil
 	}
 	return o.ConnectConfiguration
+}
+
+func (o *CreateProjectPermissions) GetDataCacheBillingSettings() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.DataCacheBillingSettings
 }
 
 func (o *CreateProjectPermissions) GetDefaultDeploymentProtection() []components.ACLAction {
@@ -6577,25 +6834,53 @@ func (o *CreateProjectPermissions) GetDomainTransferIn() []components.ACLAction 
 	return o.DomainTransferIn
 }
 
+func (o *CreateProjectPermissions) GetDrain() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.Drain
+}
+
+func (o *CreateProjectPermissions) GetEdgeConfig() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.EdgeConfig
+}
+
+func (o *CreateProjectPermissions) GetEdgeConfigItem() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.EdgeConfigItem
+}
+
+func (o *CreateProjectPermissions) GetEdgeConfigSchema() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.EdgeConfigSchema
+}
+
+func (o *CreateProjectPermissions) GetEdgeConfigToken() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.EdgeConfigToken
+}
+
+func (o *CreateProjectPermissions) GetEndpointVerification() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.EndpointVerification
+}
+
 func (o *CreateProjectPermissions) GetEvent() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
 	return o.Event
-}
-
-func (o *CreateProjectPermissions) GetOwnEvent() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.OwnEvent
-}
-
-func (o *CreateProjectPermissions) GetSensitiveEnvironmentVariablePolicy() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.SensitiveEnvironmentVariablePolicy
 }
 
 func (o *CreateProjectPermissions) GetFileUpload() []components.ACLAction {
@@ -6617,13 +6902,6 @@ func (o *CreateProjectPermissions) GetGitRepository() []components.ACLAction {
 		return nil
 	}
 	return o.GitRepository
-}
-
-func (o *CreateProjectPermissions) GetIPBlocking() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.IPBlocking
 }
 
 func (o *CreateProjectPermissions) GetImageOptimizationNewPrice() []components.ACLAction {
@@ -6654,25 +6932,11 @@ func (o *CreateProjectPermissions) GetIntegrationConfiguration() []components.AC
 	return o.IntegrationConfiguration
 }
 
-func (o *CreateProjectPermissions) GetIntegrationConfigurationTransfer() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.IntegrationConfigurationTransfer
-}
-
 func (o *CreateProjectPermissions) GetIntegrationConfigurationProjects() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
 	return o.IntegrationConfigurationProjects
-}
-
-func (o *CreateProjectPermissions) GetIntegrationVercelConfigurationOverride() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.IntegrationVercelConfigurationOverride
 }
 
 func (o *CreateProjectPermissions) GetIntegrationConfigurationRole() []components.ACLAction {
@@ -6682,32 +6946,11 @@ func (o *CreateProjectPermissions) GetIntegrationConfigurationRole() []component
 	return o.IntegrationConfigurationRole
 }
 
-func (o *CreateProjectPermissions) GetIntegrationSSOSession() []components.ACLAction {
+func (o *CreateProjectPermissions) GetIntegrationConfigurationTransfer() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.IntegrationSSOSession
-}
-
-func (o *CreateProjectPermissions) GetIntegrationResource() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.IntegrationResource
-}
-
-func (o *CreateProjectPermissions) GetIntegrationEvent() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.IntegrationEvent
-}
-
-func (o *CreateProjectPermissions) GetIntegrationResourceSecrets() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.IntegrationResourceSecrets
+	return o.IntegrationConfigurationTransfer
 }
 
 func (o *CreateProjectPermissions) GetIntegrationDeploymentAction() []components.ACLAction {
@@ -6717,11 +6960,88 @@ func (o *CreateProjectPermissions) GetIntegrationDeploymentAction() []components
 	return o.IntegrationDeploymentAction
 }
 
-func (o *CreateProjectPermissions) GetMarketplaceInstallationMember() []components.ACLAction {
+func (o *CreateProjectPermissions) GetIntegrationEvent() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.MarketplaceInstallationMember
+	return o.IntegrationEvent
+}
+
+func (o *CreateProjectPermissions) GetIntegrationLog() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IntegrationLog
+}
+
+func (o *CreateProjectPermissions) GetIntegrationResource() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IntegrationResource
+}
+
+func (o *CreateProjectPermissions) GetIntegrationResourceReplCommand() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IntegrationResourceReplCommand
+}
+
+func (o *CreateProjectPermissions) GetIntegrationResourceSecrets() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IntegrationResourceSecrets
+}
+
+func (o *CreateProjectPermissions) GetIntegrationSSOSession() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IntegrationSSOSession
+}
+
+func (o *CreateProjectPermissions) GetIntegrationStoreTokenSet() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IntegrationStoreTokenSet
+}
+
+func (o *CreateProjectPermissions) GetIntegrationVercelConfigurationOverride() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IntegrationVercelConfigurationOverride
+}
+
+func (o *CreateProjectPermissions) GetIntegrationPullRequest() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IntegrationPullRequest
+}
+
+func (o *CreateProjectPermissions) GetIPBlocking() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.IPBlocking
+}
+
+func (o *CreateProjectPermissions) GetJobGlobal() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.JobGlobal
+}
+
+func (o *CreateProjectPermissions) GetLogDrain() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.LogDrain
 }
 
 func (o *CreateProjectPermissions) GetMarketplaceBillingData() []components.ACLAction {
@@ -6729,6 +7049,27 @@ func (o *CreateProjectPermissions) GetMarketplaceBillingData() []components.ACLA
 		return nil
 	}
 	return o.MarketplaceBillingData
+}
+
+func (o *CreateProjectPermissions) GetMarketplaceExperimentationEdgeConfigData() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.MarketplaceExperimentationEdgeConfigData
+}
+
+func (o *CreateProjectPermissions) GetMarketplaceExperimentationItem() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.MarketplaceExperimentationItem
+}
+
+func (o *CreateProjectPermissions) GetMarketplaceInstallationMember() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.MarketplaceInstallationMember
 }
 
 func (o *CreateProjectPermissions) GetMarketplaceInvoice() []components.ACLAction {
@@ -6745,41 +7086,6 @@ func (o *CreateProjectPermissions) GetMarketplaceSettings() []components.ACLActi
 	return o.MarketplaceSettings
 }
 
-func (o *CreateProjectPermissions) GetMarketplaceExperimentationItem() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.MarketplaceExperimentationItem
-}
-
-func (o *CreateProjectPermissions) GetMarketplaceExperimentationEdgeConfigData() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.MarketplaceExperimentationEdgeConfigData
-}
-
-func (o *CreateProjectPermissions) GetJobGlobal() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.JobGlobal
-}
-
-func (o *CreateProjectPermissions) GetDrain() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Drain
-}
-
-func (o *CreateProjectPermissions) GetLogDrain() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.LogDrain
-}
-
 func (o *CreateProjectPermissions) GetMonitoring() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -6787,18 +7093,11 @@ func (o *CreateProjectPermissions) GetMonitoring() []components.ACLAction {
 	return o.Monitoring
 }
 
-func (o *CreateProjectPermissions) GetMonitoringSettings() []components.ACLAction {
+func (o *CreateProjectPermissions) GetMonitoringAlert() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.MonitoringSettings
-}
-
-func (o *CreateProjectPermissions) GetMonitoringQuery() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.MonitoringQuery
+	return o.MonitoringAlert
 }
 
 func (o *CreateProjectPermissions) GetMonitoringChart() []components.ACLAction {
@@ -6808,11 +7107,25 @@ func (o *CreateProjectPermissions) GetMonitoringChart() []components.ACLAction {
 	return o.MonitoringChart
 }
 
-func (o *CreateProjectPermissions) GetMonitoringAlert() []components.ACLAction {
+func (o *CreateProjectPermissions) GetMonitoringQuery() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.MonitoringAlert
+	return o.MonitoringQuery
+}
+
+func (o *CreateProjectPermissions) GetMonitoringSettings() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.MonitoringSettings
+}
+
+func (o *CreateProjectPermissions) GetNotificationCustomerBudget() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.NotificationCustomerBudget
 }
 
 func (o *CreateProjectPermissions) GetNotificationDeploymentFailed() []components.ACLAction {
@@ -6885,25 +7198,11 @@ func (o *CreateProjectPermissions) GetNotificationPaymentFailed() []components.A
 	return o.NotificationPaymentFailed
 }
 
-func (o *CreateProjectPermissions) GetNotificationUsageAlert() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.NotificationUsageAlert
-}
-
 func (o *CreateProjectPermissions) GetNotificationPreferences() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
 	return o.NotificationPreferences
-}
-
-func (o *CreateProjectPermissions) GetNotificationCustomerBudget() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.NotificationCustomerBudget
 }
 
 func (o *CreateProjectPermissions) GetNotificationStatementOfReasons() []components.ACLAction {
@@ -6913,25 +7212,18 @@ func (o *CreateProjectPermissions) GetNotificationStatementOfReasons() []compone
 	return o.NotificationStatementOfReasons
 }
 
+func (o *CreateProjectPermissions) GetNotificationUsageAlert() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.NotificationUsageAlert
+}
+
 func (o *CreateProjectPermissions) GetObservabilityConfiguration() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
 	return o.ObservabilityConfiguration
-}
-
-func (o *CreateProjectPermissions) GetAlerts() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Alerts
-}
-
-func (o *CreateProjectPermissions) GetObservabilityNotebook() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ObservabilityNotebook
 }
 
 func (o *CreateProjectPermissions) GetObservabilityFunnel() []components.ACLAction {
@@ -6941,6 +7233,13 @@ func (o *CreateProjectPermissions) GetObservabilityFunnel() []components.ACLActi
 	return o.ObservabilityFunnel
 }
 
+func (o *CreateProjectPermissions) GetObservabilityNotebook() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ObservabilityNotebook
+}
+
 func (o *CreateProjectPermissions) GetOpenTelemetryEndpoint() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -6948,18 +7247,25 @@ func (o *CreateProjectPermissions) GetOpenTelemetryEndpoint() []components.ACLAc
 	return o.OpenTelemetryEndpoint
 }
 
-func (o *CreateProjectPermissions) GetVercelAppInstallation() []components.ACLAction {
+func (o *CreateProjectPermissions) GetOwnEvent() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.VercelAppInstallation
+	return o.OwnEvent
 }
 
-func (o *CreateProjectPermissions) GetVercelAppInstallationRequest() []components.ACLAction {
+func (o *CreateProjectPermissions) GetOrganizationDomain() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.VercelAppInstallationRequest
+	return o.OrganizationDomain
+}
+
+func (o *CreateProjectPermissions) GetPasswordProtectionInvoiceItem() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.PasswordProtectionInvoiceItem
 }
 
 func (o *CreateProjectPermissions) GetPaymentMethod() []components.ACLAction {
@@ -6983,6 +7289,13 @@ func (o *CreateProjectPermissions) GetPostgres() []components.ACLAction {
 	return o.Postgres
 }
 
+func (o *CreateProjectPermissions) GetPostgresStoreTokenSet() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.PostgresStoreTokenSet
+}
+
 func (o *CreateProjectPermissions) GetPreviewDeploymentSuffix() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -6990,11 +7303,81 @@ func (o *CreateProjectPermissions) GetPreviewDeploymentSuffix() []components.ACL
 	return o.PreviewDeploymentSuffix
 }
 
+func (o *CreateProjectPermissions) GetProjectTransferIn() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectTransferIn
+}
+
 func (o *CreateProjectPermissions) GetProTrialOnboarding() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
 	return o.ProTrialOnboarding
+}
+
+func (o *CreateProjectPermissions) GetRateLimit() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.RateLimit
+}
+
+func (o *CreateProjectPermissions) GetRedis() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.Redis
+}
+
+func (o *CreateProjectPermissions) GetRedisStoreTokenSet() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.RedisStoreTokenSet
+}
+
+func (o *CreateProjectPermissions) GetRemoteCaching() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteCaching
+}
+
+func (o *CreateProjectPermissions) GetRepository() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.Repository
+}
+
+func (o *CreateProjectPermissions) GetSamlConfig() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.SamlConfig
+}
+
+func (o *CreateProjectPermissions) GetSecret() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.Secret
+}
+
+func (o *CreateProjectPermissions) GetSecurityPlusConfiguration() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.SecurityPlusConfiguration
+}
+
+func (o *CreateProjectPermissions) GetSensitiveEnvironmentVariablePolicy() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.SensitiveEnvironmentVariablePolicy
 }
 
 func (o *CreateProjectPermissions) GetSharedEnvVars() []components.ACLAction {
@@ -7025,90 +7408,6 @@ func (o *CreateProjectPermissions) GetSpaceRun() []components.ACLAction {
 	return o.SpaceRun
 }
 
-func (o *CreateProjectPermissions) GetPasswordProtectionInvoiceItem() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.PasswordProtectionInvoiceItem
-}
-
-func (o *CreateProjectPermissions) GetRateLimit() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.RateLimit
-}
-
-func (o *CreateProjectPermissions) GetRedis() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Redis
-}
-
-func (o *CreateProjectPermissions) GetRepository() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Repository
-}
-
-func (o *CreateProjectPermissions) GetRemoteCaching() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.RemoteCaching
-}
-
-func (o *CreateProjectPermissions) GetSamlConfig() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.SamlConfig
-}
-
-func (o *CreateProjectPermissions) GetSecret() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Secret
-}
-
-func (o *CreateProjectPermissions) GetRedisStoreTokenSet() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.RedisStoreTokenSet
-}
-
-func (o *CreateProjectPermissions) GetBlobStoreTokenSet() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.BlobStoreTokenSet
-}
-
-func (o *CreateProjectPermissions) GetPostgresStoreTokenSet() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.PostgresStoreTokenSet
-}
-
-func (o *CreateProjectPermissions) GetIntegrationStoreTokenSet() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.IntegrationStoreTokenSet
-}
-
-func (o *CreateProjectPermissions) GetIntegrationResourceReplCommand() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.IntegrationResourceReplCommand
-}
-
 func (o *CreateProjectPermissions) GetStoreTransfer() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -7128,13 +7427,6 @@ func (o *CreateProjectPermissions) GetSupportCaseComment() []components.ACLActio
 		return nil
 	}
 	return o.SupportCaseComment
-}
-
-func (o *CreateProjectPermissions) GetDataCacheBillingSettings() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.DataCacheBillingSettings
 }
 
 func (o *CreateProjectPermissions) GetTeam() []components.ACLAction {
@@ -7235,83 +7527,6 @@ func (o *CreateProjectPermissions) GetUsageCycle() []components.ACLAction {
 	return o.UsageCycle
 }
 
-func (o *CreateProjectPermissions) GetVpcPeeringConnection() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.VpcPeeringConnection
-}
-
-func (o *CreateProjectPermissions) GetWebAnalyticsPlan() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.WebAnalyticsPlan
-}
-
-func (o *CreateProjectPermissions) GetEdgeConfig() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.EdgeConfig
-}
-
-func (o *CreateProjectPermissions) GetEdgeConfigItem() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.EdgeConfigItem
-}
-
-func (o *CreateProjectPermissions) GetEdgeConfigSchema() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.EdgeConfigSchema
-}
-
-func (o *CreateProjectPermissions) GetEdgeConfigToken() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.EdgeConfigToken
-}
-
-func (o *CreateProjectPermissions) GetWebhook() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Webhook
-}
-
-func (o *CreateProjectPermissions) GetWebhookEvent() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.WebhookEvent
-}
-
-func (o *CreateProjectPermissions) GetEndpointVerification() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.EndpointVerification
-}
-
-func (o *CreateProjectPermissions) GetProjectTransferIn() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProjectTransferIn
-}
-
-func (o *CreateProjectPermissions) GetOauth2Application() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Oauth2Application
-}
-
 func (o *CreateProjectPermissions) GetVercelRun() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -7326,25 +7541,32 @@ func (o *CreateProjectPermissions) GetVercelRunExec() []components.ACLAction {
 	return o.VercelRunExec
 }
 
-func (o *CreateProjectPermissions) GetAPIKey() []components.ACLAction {
+func (o *CreateProjectPermissions) GetVpcPeeringConnection() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.APIKey
+	return o.VpcPeeringConnection
 }
 
-func (o *CreateProjectPermissions) GetAPIKeyOwnedBySelf() []components.ACLAction {
+func (o *CreateProjectPermissions) GetWebAnalyticsPlan() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.APIKeyOwnedBySelf
+	return o.WebAnalyticsPlan
 }
 
-func (o *CreateProjectPermissions) GetAPIKeyAiGateway() []components.ACLAction {
+func (o *CreateProjectPermissions) GetWebhook() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.APIKeyAiGateway
+	return o.Webhook
+}
+
+func (o *CreateProjectPermissions) GetWebhookEvent() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.WebhookEvent
 }
 
 func (o *CreateProjectPermissions) GetAliasProject() []components.ACLAction {
@@ -7366,13 +7588,6 @@ func (o *CreateProjectPermissions) GetBuildMachine() []components.ACLAction {
 		return nil
 	}
 	return o.BuildMachine
-}
-
-func (o *CreateProjectPermissions) GetProductionAliasProtectionBypass() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProductionAliasProtectionBypass
 }
 
 func (o *CreateProjectPermissions) GetConnectConfigurationLink() []components.ACLAction {
@@ -7480,6 +7695,13 @@ func (o *CreateProjectPermissions) GetEnvironments() []components.ACLAction {
 	return o.Environments
 }
 
+func (o *CreateProjectPermissions) GetJob() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.Job
+}
+
 func (o *CreateProjectPermissions) GetLogs() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -7492,27 +7714,6 @@ func (o *CreateProjectPermissions) GetLogsPreset() []components.ACLAction {
 		return nil
 	}
 	return o.LogsPreset
-}
-
-func (o *CreateProjectPermissions) GetPasswordProtection() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.PasswordProtection
-}
-
-func (o *CreateProjectPermissions) GetOptionsAllowlist() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.OptionsAllowlist
-}
-
-func (o *CreateProjectPermissions) GetJob() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Job
 }
 
 func (o *CreateProjectPermissions) GetObservabilityData() []components.ACLAction {
@@ -7536,18 +7737,32 @@ func (o *CreateProjectPermissions) GetOnDemandConcurrency() []components.ACLActi
 	return o.OnDemandConcurrency
 }
 
+func (o *CreateProjectPermissions) GetOptionsAllowlist() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.OptionsAllowlist
+}
+
+func (o *CreateProjectPermissions) GetPasswordProtection() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.PasswordProtection
+}
+
+func (o *CreateProjectPermissions) GetProductionAliasProtectionBypass() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProductionAliasProtectionBypass
+}
+
 func (o *CreateProjectPermissions) GetProject() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
 	return o.Project
-}
-
-func (o *CreateProjectPermissions) GetProjectFromV0() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProjectFromV0
 }
 
 func (o *CreateProjectPermissions) GetProjectAccessGroup() []components.ACLAction {
@@ -7564,6 +7779,13 @@ func (o *CreateProjectPermissions) GetProjectAnalyticsSampling() []components.AC
 	return o.ProjectAnalyticsSampling
 }
 
+func (o *CreateProjectPermissions) GetProjectAnalyticsUsage() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectAnalyticsUsage
+}
+
 func (o *CreateProjectPermissions) GetProjectCheck() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -7576,6 +7798,13 @@ func (o *CreateProjectPermissions) GetProjectCheckRun() []components.ACLAction {
 		return nil
 	}
 	return o.ProjectCheckRun
+}
+
+func (o *CreateProjectPermissions) GetProjectDeploymentExpiration() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectDeploymentExpiration
 }
 
 func (o *CreateProjectPermissions) GetProjectDeploymentHook() []components.ACLAction {
@@ -7592,18 +7821,18 @@ func (o *CreateProjectPermissions) GetProjectDomain() []components.ACLAction {
 	return o.ProjectDomain
 }
 
-func (o *CreateProjectPermissions) GetProjectDomainMove() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProjectDomainMove
-}
-
 func (o *CreateProjectPermissions) GetProjectDomainCheckConfig() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
 	return o.ProjectDomainCheckConfig
+}
+
+func (o *CreateProjectPermissions) GetProjectDomainMove() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectDomainMove
 }
 
 func (o *CreateProjectPermissions) GetProjectEnvVars() []components.ACLAction {
@@ -7632,6 +7861,20 @@ func (o *CreateProjectPermissions) GetProjectFlags() []components.ACLAction {
 		return nil
 	}
 	return o.ProjectFlags
+}
+
+func (o *CreateProjectPermissions) GetProjectFlagsProduction() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectFlagsProduction
+}
+
+func (o *CreateProjectPermissions) GetProjectFromV0() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectFromV0
 }
 
 func (o *CreateProjectPermissions) GetProjectID() []components.ACLAction {
@@ -7669,6 +7912,13 @@ func (o *CreateProjectPermissions) GetProjectMonitoring() []components.ACLAction
 	return o.ProjectMonitoring
 }
 
+func (o *CreateProjectPermissions) GetProjectOIDCToken() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectOIDCToken
+}
+
 func (o *CreateProjectPermissions) GetProjectPermissions() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -7683,20 +7933,6 @@ func (o *CreateProjectPermissions) GetProjectProductionBranch() []components.ACL
 	return o.ProjectProductionBranch
 }
 
-func (o *CreateProjectPermissions) GetProjectTransfer() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProjectTransfer
-}
-
-func (o *CreateProjectPermissions) GetProjectTransferOut() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProjectTransferOut
-}
-
 func (o *CreateProjectPermissions) GetProjectProtectionBypass() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -7704,18 +7940,11 @@ func (o *CreateProjectPermissions) GetProjectProtectionBypass() []components.ACL
 	return o.ProjectProtectionBypass
 }
 
-func (o *CreateProjectPermissions) GetProjectUsage() []components.ACLAction {
+func (o *CreateProjectPermissions) GetProjectRollingRelease() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.ProjectUsage
-}
-
-func (o *CreateProjectPermissions) GetProjectAnalyticsUsage() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProjectAnalyticsUsage
+	return o.ProjectRollingRelease
 }
 
 func (o *CreateProjectPermissions) GetProjectSupportCase() []components.ACLAction {
@@ -7732,20 +7961,6 @@ func (o *CreateProjectPermissions) GetProjectSupportCaseComment() []components.A
 	return o.ProjectSupportCaseComment
 }
 
-func (o *CreateProjectPermissions) GetProjectDeploymentExpiration() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProjectDeploymentExpiration
-}
-
-func (o *CreateProjectPermissions) GetProjectRollingRelease() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.ProjectRollingRelease
-}
-
 func (o *CreateProjectPermissions) GetProjectTier() []components.ACLAction {
 	if o == nil {
 		return nil
@@ -7753,11 +7968,25 @@ func (o *CreateProjectPermissions) GetProjectTier() []components.ACLAction {
 	return o.ProjectTier
 }
 
-func (o *CreateProjectPermissions) GetProjectOIDCToken() []components.ACLAction {
+func (o *CreateProjectPermissions) GetProjectTransfer() []components.ACLAction {
 	if o == nil {
 		return nil
 	}
-	return o.ProjectOIDCToken
+	return o.ProjectTransfer
+}
+
+func (o *CreateProjectPermissions) GetProjectTransferOut() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectTransferOut
+}
+
+func (o *CreateProjectPermissions) GetProjectUsage() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.ProjectUsage
 }
 
 func (o *CreateProjectPermissions) GetSeawallConfig() []components.ACLAction {
@@ -7765,6 +7994,13 @@ func (o *CreateProjectPermissions) GetSeawallConfig() []components.ACLAction {
 		return nil
 	}
 	return o.SeawallConfig
+}
+
+func (o *CreateProjectPermissions) GetSharedEnvVarConnection() []components.ACLAction {
+	if o == nil {
+		return nil
+	}
+	return o.SharedEnvVarConnection
 }
 
 func (o *CreateProjectPermissions) GetSkewProtection() []components.ACLAction {
@@ -7800,20 +8036,6 @@ func (o *CreateProjectPermissions) GetWebAnalytics() []components.ACLAction {
 		return nil
 	}
 	return o.WebAnalytics
-}
-
-func (o *CreateProjectPermissions) GetSharedEnvVarConnection() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.SharedEnvVarConnection
-}
-
-func (o *CreateProjectPermissions) GetSonar() []components.ACLAction {
-	if o == nil {
-		return nil
-	}
-	return o.Sonar
 }
 
 type CreateProjectLastRollbackTarget struct {
@@ -8435,6 +8657,8 @@ type CreateProjectGitProviderOptions struct {
 	CreateDeployments CreateProjectCreateDeployments `json:"createDeployments"`
 	// Whether the Vercel bot should not automatically create GitHub repository-dispatch events on deployment events. https://vercel.com/docs/git/vercel-for-github#repository-dispatch-events
 	DisableRepositoryDispatchEvents *bool `json:"disableRepositoryDispatchEvents,omitempty"`
+	// Whether the project requires commits to be signed before deployments will be created.
+	RequireVerifiedCommits *bool `json:"requireVerifiedCommits,omitempty"`
 }
 
 func (o *CreateProjectGitProviderOptions) GetCreateDeployments() CreateProjectCreateDeployments {
@@ -8449,6 +8673,13 @@ func (o *CreateProjectGitProviderOptions) GetDisableRepositoryDispatchEvents() *
 		return nil
 	}
 	return o.DisableRepositoryDispatchEvents
+}
+
+func (o *CreateProjectGitProviderOptions) GetRequireVerifiedCommits() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.RequireVerifiedCommits
 }
 
 type CreateProjectWebAnalytics struct {
@@ -10326,6 +10557,7 @@ type CreateProjectAbuse struct {
 	UpdatedAt    float64                          `json:"updatedAt"`
 	Block        *CreateProjectBlock              `json:"block,omitempty"`
 	BlockHistory []CreateProjectBlockHistoryUnion `json:"blockHistory,omitempty"`
+	Interstitial *bool                            `json:"interstitial,omitempty"`
 }
 
 func (o *CreateProjectAbuse) GetScanner() *string {
@@ -10361,6 +10593,13 @@ func (o *CreateProjectAbuse) GetBlockHistory() []CreateProjectBlockHistoryUnion 
 		return nil
 	}
 	return o.BlockHistory
+}
+
+func (o *CreateProjectAbuse) GetInterstitial() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Interstitial
 }
 
 type CreateProjectInternalRouteTypeHost string
@@ -10783,6 +11022,377 @@ func (u CreateProjectInternalRouteUnion) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type CreateProjectInternalRouteUnion: all fields are null")
 }
 
+type CreateProjectDismissedToastAction string
+
+const (
+	CreateProjectDismissedToastActionCancel CreateProjectDismissedToastAction = "cancel"
+	CreateProjectDismissedToastActionAccept CreateProjectDismissedToastAction = "accept"
+	CreateProjectDismissedToastActionDelete CreateProjectDismissedToastAction = "delete"
+)
+
+func (e CreateProjectDismissedToastAction) ToPointer() *CreateProjectDismissedToastAction {
+	return &e
+}
+func (e *CreateProjectDismissedToastAction) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "cancel":
+		fallthrough
+	case "accept":
+		fallthrough
+	case "delete":
+		*e = CreateProjectDismissedToastAction(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateProjectDismissedToastAction: %v", v)
+	}
+}
+
+type CreateProjectPreviousValueType string
+
+const (
+	CreateProjectPreviousValueTypeStr     CreateProjectPreviousValueType = "str"
+	CreateProjectPreviousValueTypeNumber  CreateProjectPreviousValueType = "number"
+	CreateProjectPreviousValueTypeBoolean CreateProjectPreviousValueType = "boolean"
+)
+
+type CreateProjectPreviousValue struct {
+	Str     *string  `queryParam:"inline"`
+	Number  *float64 `queryParam:"inline"`
+	Boolean *bool    `queryParam:"inline"`
+
+	Type CreateProjectPreviousValueType
+}
+
+func CreateCreateProjectPreviousValueStr(str string) CreateProjectPreviousValue {
+	typ := CreateProjectPreviousValueTypeStr
+
+	return CreateProjectPreviousValue{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateProjectPreviousValueNumber(number float64) CreateProjectPreviousValue {
+	typ := CreateProjectPreviousValueTypeNumber
+
+	return CreateProjectPreviousValue{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateCreateProjectPreviousValueBoolean(boolean bool) CreateProjectPreviousValue {
+	typ := CreateProjectPreviousValueTypeBoolean
+
+	return CreateProjectPreviousValue{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func (u *CreateProjectPreviousValue) UnmarshalJSON(data []byte) error {
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = CreateProjectPreviousValueTypeStr
+		return nil
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
+		u.Number = &number
+		u.Type = CreateProjectPreviousValueTypeNumber
+		return nil
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		u.Boolean = &boolean
+		u.Type = CreateProjectPreviousValueTypeBoolean
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateProjectPreviousValue", string(data))
+}
+
+func (u CreateProjectPreviousValue) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type CreateProjectPreviousValue: all fields are null")
+}
+
+type CreateProjectCurrentValueType string
+
+const (
+	CreateProjectCurrentValueTypeStr     CreateProjectCurrentValueType = "str"
+	CreateProjectCurrentValueTypeNumber  CreateProjectCurrentValueType = "number"
+	CreateProjectCurrentValueTypeBoolean CreateProjectCurrentValueType = "boolean"
+)
+
+type CreateProjectCurrentValue struct {
+	Str     *string  `queryParam:"inline"`
+	Number  *float64 `queryParam:"inline"`
+	Boolean *bool    `queryParam:"inline"`
+
+	Type CreateProjectCurrentValueType
+}
+
+func CreateCreateProjectCurrentValueStr(str string) CreateProjectCurrentValue {
+	typ := CreateProjectCurrentValueTypeStr
+
+	return CreateProjectCurrentValue{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateProjectCurrentValueNumber(number float64) CreateProjectCurrentValue {
+	typ := CreateProjectCurrentValueTypeNumber
+
+	return CreateProjectCurrentValue{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateCreateProjectCurrentValueBoolean(boolean bool) CreateProjectCurrentValue {
+	typ := CreateProjectCurrentValueTypeBoolean
+
+	return CreateProjectCurrentValue{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func (u *CreateProjectCurrentValue) UnmarshalJSON(data []byte) error {
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = CreateProjectCurrentValueTypeStr
+		return nil
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
+		u.Number = &number
+		u.Type = CreateProjectCurrentValueTypeNumber
+		return nil
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		u.Boolean = &boolean
+		u.Type = CreateProjectCurrentValueTypeBoolean
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateProjectCurrentValue", string(data))
+}
+
+func (u CreateProjectCurrentValue) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type CreateProjectCurrentValue: all fields are null")
+}
+
+type CreateProjectValueDismissedToast struct {
+	PreviousValue CreateProjectPreviousValue `json:"previousValue"`
+	CurrentValue  CreateProjectCurrentValue  `json:"currentValue"`
+}
+
+func (c CreateProjectValueDismissedToast) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateProjectValueDismissedToast) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"previousValue", "currentValue"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateProjectValueDismissedToast) GetPreviousValue() CreateProjectPreviousValue {
+	if o == nil {
+		return CreateProjectPreviousValue{}
+	}
+	return o.PreviousValue
+}
+
+func (o *CreateProjectValueDismissedToast) GetCurrentValue() CreateProjectCurrentValue {
+	if o == nil {
+		return CreateProjectCurrentValue{}
+	}
+	return o.CurrentValue
+}
+
+type CreateProjectValueUnionType string
+
+const (
+	CreateProjectValueUnionTypeStr                              CreateProjectValueUnionType = "str"
+	CreateProjectValueUnionTypeNumber                           CreateProjectValueUnionType = "number"
+	CreateProjectValueUnionTypeBoolean                          CreateProjectValueUnionType = "boolean"
+	CreateProjectValueUnionTypeCreateProjectValueDismissedToast CreateProjectValueUnionType = "createProject_value_dismissedToast"
+)
+
+type CreateProjectValueUnion struct {
+	Str                              *string                           `queryParam:"inline"`
+	Number                           *float64                          `queryParam:"inline"`
+	Boolean                          *bool                             `queryParam:"inline"`
+	CreateProjectValueDismissedToast *CreateProjectValueDismissedToast `queryParam:"inline"`
+
+	Type CreateProjectValueUnionType
+}
+
+func CreateCreateProjectValueUnionStr(str string) CreateProjectValueUnion {
+	typ := CreateProjectValueUnionTypeStr
+
+	return CreateProjectValueUnion{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateProjectValueUnionNumber(number float64) CreateProjectValueUnion {
+	typ := CreateProjectValueUnionTypeNumber
+
+	return CreateProjectValueUnion{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateCreateProjectValueUnionBoolean(boolean bool) CreateProjectValueUnion {
+	typ := CreateProjectValueUnionTypeBoolean
+
+	return CreateProjectValueUnion{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func CreateCreateProjectValueUnionCreateProjectValueDismissedToast(createProjectValueDismissedToast CreateProjectValueDismissedToast) CreateProjectValueUnion {
+	typ := CreateProjectValueUnionTypeCreateProjectValueDismissedToast
+
+	return CreateProjectValueUnion{
+		CreateProjectValueDismissedToast: &createProjectValueDismissedToast,
+		Type:                             typ,
+	}
+}
+
+func (u *CreateProjectValueUnion) UnmarshalJSON(data []byte) error {
+
+	var createProjectValueDismissedToast CreateProjectValueDismissedToast = CreateProjectValueDismissedToast{}
+	if err := utils.UnmarshalJSON(data, &createProjectValueDismissedToast, "", true, nil); err == nil {
+		u.CreateProjectValueDismissedToast = &createProjectValueDismissedToast
+		u.Type = CreateProjectValueUnionTypeCreateProjectValueDismissedToast
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = CreateProjectValueUnionTypeStr
+		return nil
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
+		u.Number = &number
+		u.Type = CreateProjectValueUnionTypeNumber
+		return nil
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		u.Boolean = &boolean
+		u.Type = CreateProjectValueUnionTypeBoolean
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateProjectValueUnion", string(data))
+}
+
+func (u CreateProjectValueUnion) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.CreateProjectValueDismissedToast != nil {
+		return utils.MarshalJSON(u.CreateProjectValueDismissedToast, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type CreateProjectValueUnion: all fields are null")
+}
+
+type CreateProjectDismissedToast struct {
+	Key         string                            `json:"key"`
+	DismissedAt float64                           `json:"dismissedAt"`
+	Action      CreateProjectDismissedToastAction `json:"action"`
+	Value       *CreateProjectValueUnion          `json:"value"`
+}
+
+func (o *CreateProjectDismissedToast) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *CreateProjectDismissedToast) GetDismissedAt() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.DismissedAt
+}
+
+func (o *CreateProjectDismissedToast) GetAction() CreateProjectDismissedToastAction {
+	if o == nil {
+		return CreateProjectDismissedToastAction("")
+	}
+	return o.Action
+}
+
+func (o *CreateProjectDismissedToast) GetValue() *CreateProjectValueUnion {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // CreateProjectResponseBody - The project was successfuly created
 type CreateProjectResponseBody struct {
 	AccountID                        string                              `json:"accountId"`
@@ -10834,6 +11444,7 @@ type CreateProjectResponseBody struct {
 	SkewProtectionBoundaryAt             *float64                                      `json:"skewProtectionBoundaryAt,omitempty"`
 	SkewProtectionMaxAge                 *float64                                      `json:"skewProtectionMaxAge,omitempty"`
 	SkipGitConnectDuringLink             *bool                                         `json:"skipGitConnectDuringLink,omitempty"`
+	StaticIps                            *CreateProjectStaticIps                       `json:"staticIps,omitempty"`
 	SourceFilesOutsideRootDirectory      *bool                                         `json:"sourceFilesOutsideRootDirectory,omitempty"`
 	EnableAffectedProjectsDeployments    *bool                                         `json:"enableAffectedProjectsDeployments,omitempty"`
 	SsoProtection                        *CreateProjectSsoProtectionResponse           `json:"ssoProtection,omitempty"`
@@ -10864,6 +11475,8 @@ type CreateProjectResponseBody struct {
 	V0                                   *bool                                         `json:"v0,omitempty"`
 	Abuse                                *CreateProjectAbuse                           `json:"abuse,omitempty"`
 	InternalRoutes                       []CreateProjectInternalRouteUnion             `json:"internalRoutes,omitempty"`
+	HasDeployments                       *bool                                         `json:"hasDeployments,omitempty"`
+	DismissedToasts                      []CreateProjectDismissedToast                 `json:"dismissedToasts,omitempty"`
 }
 
 func (o *CreateProjectResponseBody) GetAccountID() string {
@@ -11188,6 +11801,13 @@ func (o *CreateProjectResponseBody) GetSkipGitConnectDuringLink() *bool {
 	return o.SkipGitConnectDuringLink
 }
 
+func (o *CreateProjectResponseBody) GetStaticIps() *CreateProjectStaticIps {
+	if o == nil {
+		return nil
+	}
+	return o.StaticIps
+}
+
 func (o *CreateProjectResponseBody) GetSourceFilesOutsideRootDirectory() *bool {
 	if o == nil {
 		return nil
@@ -11396,6 +12016,20 @@ func (o *CreateProjectResponseBody) GetInternalRoutes() []CreateProjectInternalR
 		return nil
 	}
 	return o.InternalRoutes
+}
+
+func (o *CreateProjectResponseBody) GetHasDeployments() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.HasDeployments
+}
+
+func (o *CreateProjectResponseBody) GetDismissedToasts() []CreateProjectDismissedToast {
+	if o == nil {
+		return nil
+	}
+	return o.DismissedToasts
 }
 
 type CreateProjectResponse struct {

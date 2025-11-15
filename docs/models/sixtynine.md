@@ -13,9 +13,7 @@ let value: SixtyNine = {
   integrationSlug: "<value>",
   integrationName: "<value>",
   ownerId: "<id>",
-  confirmedScopes: [
-    "<value 1>",
-  ],
+  billingPlanId: "<id>",
 };
 ```
 
@@ -28,5 +26,5 @@ let value: SixtyNine = {
 | `integrationSlug`  | *string*           | :heavy_check_mark: | N/A                |
 | `integrationName`  | *string*           | :heavy_check_mark: | N/A                |
 | `ownerId`          | *string*           | :heavy_check_mark: | N/A                |
-| `projectIds`       | *string*[]         | :heavy_minus_sign: | N/A                |
-| `confirmedScopes`  | *string*[]         | :heavy_check_mark: | N/A                |
+| `billingPlanId`    | *string*           | :heavy_check_mark: | N/A                |
+| `billingPlanName`  | *string*           | :heavy_minus_sign: | N/A                |

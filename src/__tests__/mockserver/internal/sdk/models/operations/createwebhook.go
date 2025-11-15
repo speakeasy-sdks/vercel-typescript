@@ -82,6 +82,8 @@ const (
 	CreateWebhookEventRequestMarketplaceInvoiceRefunded                         CreateWebhookEventRequest = "marketplace.invoice.refunded"
 	CreateWebhookEventRequestObservabilityAnomaly                               CreateWebhookEventRequest = "observability.anomaly"
 	CreateWebhookEventRequestObservabilityAnomalyError                          CreateWebhookEventRequest = "observability.anomaly-error"
+	CreateWebhookEventRequestObservabilityUsageAnomaly                          CreateWebhookEventRequest = "observability.usage-anomaly"
+	CreateWebhookEventRequestObservabilityErrorAnomaly                          CreateWebhookEventRequest = "observability.error-anomaly"
 	CreateWebhookEventRequestObservabilityAnomalyBotId                          CreateWebhookEventRequest = "observability.anomaly-botId"
 	CreateWebhookEventRequestTestWebhook                                        CreateWebhookEventRequest = "test-webhook"
 )
@@ -237,6 +239,10 @@ func (e *CreateWebhookEventRequest) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "observability.anomaly-error":
 		fallthrough
+	case "observability.usage-anomaly":
+		fallthrough
+	case "observability.error-anomaly":
+		fallthrough
 	case "observability.anomaly-botId":
 		fallthrough
 	case "test-webhook":
@@ -278,8 +284,8 @@ type CreateWebhookRequest struct {
 	// The Team identifier to perform the request on behalf of.
 	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 	// The Team slug to perform the request on behalf of.
-	Slug        *string                  `queryParam:"style=form,explode=true,name=slug"`
-	RequestBody CreateWebhookRequestBody `request:"mediaType=application/json"`
+	Slug *string                  `queryParam:"style=form,explode=true,name=slug"`
+	Body CreateWebhookRequestBody `request:"mediaType=application/json"`
 }
 
 func (o *CreateWebhookRequest) GetTeamID() *string {
@@ -296,11 +302,11 @@ func (o *CreateWebhookRequest) GetSlug() *string {
 	return o.Slug
 }
 
-func (o *CreateWebhookRequest) GetRequestBody() CreateWebhookRequestBody {
+func (o *CreateWebhookRequest) GetBody() CreateWebhookRequestBody {
 	if o == nil {
 		return CreateWebhookRequestBody{}
 	}
-	return o.RequestBody
+	return o.Body
 }
 
 // CreateWebhookEventResponse - The webhooks events
@@ -378,6 +384,8 @@ const (
 	CreateWebhookEventResponseMarketplaceInvoiceRefunded                         CreateWebhookEventResponse = "marketplace.invoice.refunded"
 	CreateWebhookEventResponseObservabilityAnomaly                               CreateWebhookEventResponse = "observability.anomaly"
 	CreateWebhookEventResponseObservabilityAnomalyError                          CreateWebhookEventResponse = "observability.anomaly-error"
+	CreateWebhookEventResponseObservabilityUsageAnomaly                          CreateWebhookEventResponse = "observability.usage-anomaly"
+	CreateWebhookEventResponseObservabilityErrorAnomaly                          CreateWebhookEventResponse = "observability.error-anomaly"
 	CreateWebhookEventResponseObservabilityAnomalyBotId                          CreateWebhookEventResponse = "observability.anomaly-botId"
 	CreateWebhookEventResponseTestWebhook                                        CreateWebhookEventResponse = "test-webhook"
 )
@@ -532,6 +540,10 @@ func (e *CreateWebhookEventResponse) UnmarshalJSON(data []byte) error {
 	case "observability.anomaly":
 		fallthrough
 	case "observability.anomaly-error":
+		fallthrough
+	case "observability.usage-anomaly":
+		fallthrough
+	case "observability.error-anomaly":
 		fallthrough
 	case "observability.anomaly-botId":
 		fallthrough

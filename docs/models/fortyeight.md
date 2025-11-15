@@ -9,15 +9,13 @@ import { FortyEight } from "@vercel/sdk/models/userevent.js";
 
 let value: FortyEight = {
   name: "<value>",
-  fromId: "<id>",
-  fromName: "<value>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `name`             | *string*           | :heavy_check_mark: | N/A                |
-| `fromId`           | *string*           | :heavy_check_mark: | N/A                |
-| `fromName`         | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `name`                                                                     | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
+| `oldTeam`                                                                  | [models.UserEventPayload48OldTeam](../models/usereventpayload48oldteam.md) | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `newTeam`                                                                  | [models.UserEventPayload48NewTeam](../models/usereventpayload48newteam.md) | :heavy_minus_sign:                                                         | N/A                                                                        |

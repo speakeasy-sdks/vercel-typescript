@@ -8,19 +8,14 @@ The payload of the event, if requested.
 import { SixtyEight } from "@vercel/sdk/models/userevent.js";
 
 let value: SixtyEight = {
-  projectId: "<id>",
-  fromDeploymentId: "<id>",
-  toDeploymentId: "<id>",
-  projectName: "<value>",
+  configurations: [],
+  ownerId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `projectId`        | *string*           | :heavy_check_mark: | N/A                |
-| `fromDeploymentId` | *string*           | :heavy_check_mark: | N/A                |
-| `toDeploymentId`   | *string*           | :heavy_check_mark: | N/A                |
-| `projectName`      | *string*           | :heavy_check_mark: | N/A                |
-| `reason`           | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                  | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `configurations`                                       | [models.Configurations](../models/configurations.md)[] | :heavy_check_mark:                                     | N/A                                                    |
+| `ownerId`                                              | *string*                                               | :heavy_check_mark:                                     | N/A                                                    |

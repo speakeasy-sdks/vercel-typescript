@@ -8,13 +8,14 @@ The payload of the event, if requested.
 import { EightyEight } from "@vercel/sdk/models/userevent.js";
 
 let value: EightyEight = {
-  projectId: "<id>",
+  projectName: "<value>",
+  action: "regenerated",
 };
 ```
 
 ## Fields
 
-| Field                                        | Type                                         | Required                                     | Description                                  |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| `projectId`                                  | *string*                                     | :heavy_check_mark:                           | N/A                                          |
-| `reasonCode`                                 | [models.ReasonCode](../models/reasoncode.md) | :heavy_minus_sign:                           | N/A                                          |
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `projectName`                                                            | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
+| `action`                                                                 | [models.UserEventPayload88Action](../models/usereventpayload88action.md) | :heavy_check_mark:                                                       | N/A                                                                      |

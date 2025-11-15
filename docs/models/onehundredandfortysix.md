@@ -8,9 +8,8 @@ The payload of the event, if requested.
 import { OneHundredAndFortySix } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndFortySix = {
-  edgeConfigId: "<id>",
-  edgeConfigSlug: "<value>",
-  edgeConfigTokenIds: [
+  projectName: "<value>",
+  tags: [
     "<value 1>",
     "<value 2>",
   ],
@@ -19,8 +18,8 @@ let value: OneHundredAndFortySix = {
 
 ## Fields
 
-| Field                 | Type                  | Required              | Description           |
-| --------------------- | --------------------- | --------------------- | --------------------- |
-| `edgeConfigId`        | *string*              | :heavy_check_mark:    | N/A                   |
-| `edgeConfigSlug`      | *string*              | :heavy_check_mark:    | N/A                   |
-| `edgeConfigTokenIds`  | *string*[]            | :heavy_check_mark:    | ids of deleted tokens |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `projectName`      | *string*           | :heavy_check_mark: | N/A                |
+| `tags`             | *string*[]         | :heavy_check_mark: | N/A                |
+| `target`           | *string*           | :heavy_minus_sign: | N/A                |

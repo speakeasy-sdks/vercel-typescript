@@ -7,16 +7,17 @@ The payload of the event, if requested.
 ```typescript
 import { OneHundredAndFourteen } from "@vercel/sdk/models/userevent.js";
 
-let value: OneHundredAndFourteen = {};
+let value: OneHundredAndFourteen = {
+  store: {
+    name: "<value>",
+    id: "<id>",
+  },
+};
 ```
 
 ## Fields
 
-| Field                                          | Type                                           | Required                                       | Description                                    |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `deletedUser`                                  | [models.DeletedUser](../models/deleteduser.md) | :heavy_minus_sign:                             | N/A                                            |
-| `deletedUid`                                   | *string*                                       | :heavy_minus_sign:                             | N/A                                            |
-| `githubUsername`                               | *string*                                       | :heavy_minus_sign:                             | N/A                                            |
-| `gitlabUsername`                               | *string*                                       | :heavy_minus_sign:                             | N/A                                            |
-| `bitbucketUsername`                            | *string*                                       | :heavy_minus_sign:                             | N/A                                            |
-| `directoryType`                                | *string*                                       | :heavy_minus_sign:                             | N/A                                            |
+| Field                              | Type                               | Required                           | Description                        |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| `store`                            | [models.Store](../models/store.md) | :heavy_check_mark:                 | N/A                                |
+| `ownerId`                          | *string*                           | :heavy_minus_sign:                 | N/A                                |

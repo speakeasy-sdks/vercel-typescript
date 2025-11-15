@@ -9,7 +9,6 @@ import { FortyFour } from "@vercel/sdk/models/userevent.js";
 
 let value: FortyFour = {
   name: "<value>",
-  cdnEnabled: false,
 };
 ```
 
@@ -18,4 +17,3 @@ let value: FortyFour = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `name`             | *string*           | :heavy_check_mark: | N/A                |
-| `cdnEnabled`       | *boolean*          | :heavy_check_mark: | N/A                |

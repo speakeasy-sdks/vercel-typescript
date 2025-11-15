@@ -5,20 +5,20 @@
 
 ### Available Operations
 
-* [buyDomain](#buydomain) - Purchase a domain
-* [checkDomainPrice](#checkdomainprice) - Check the price for a domain
-* [checkDomainStatus](#checkdomainstatus) - Check a Domain Availability
-* [getDomainTransfer](#getdomaintransfer) - Get domain transfer info.
+* [buyDomain](#buydomain) - Purchase a domain (deprecated)
+* [checkDomainPrice](#checkdomainprice) - Check the price for a domain (deprecated)
+* [checkDomainStatus](#checkdomainstatus) - Check a Domain Availability (deprecated)
+* [getDomainTransfer](#getdomaintransfer) - Get domain transfer info (deprecated)
 * [getDomainConfig](#getdomainconfig) - Get a Domain's configuration
 * [getDomain](#getdomain) - Get Information for a Single Domain
 * [getDomains](#getdomains) - List all the domains
-* [createOrTransferDomain](#createortransferdomain) - Register or transfer-in a new Domain
+* [createOrTransferDomain](#createortransferdomain) - Add an existing domain to the Vercel platform
 * [patchDomain](#patchdomain) - Update or move apex domain
 * [deleteDomain](#deletedomain) - Remove a domain by name
 
 ## buyDomain
 
-Allows to purchase the specified domain.
+This endpoint is deprecated and replaced with the endpoint [Buy a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/buy-a-domain). Purchases the specified domain.
 
 ### Example Usage
 
@@ -126,7 +126,7 @@ run();
 
 ## checkDomainPrice
 
-Check the price to purchase a domain and how long a single purchase period is.
+This endpoint is deprecated and replaced with the endpoint [Get price data for a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/get-price-data-for-a-domain). Check the price to purchase a domain and how long a single purchase period is.
 
 ### Example Usage
 
@@ -203,11 +203,12 @@ run();
 | ---------------------------- | ---------------------------- | ---------------------------- |
 | models.VercelBadRequestError | 400                          | application/json             |
 | models.VercelForbiddenError  | 401                          | application/json             |
+| models.VercelNotFoundError   | 404                          | application/json             |
 | models.SDKError              | 4XX, 5XX                     | \*/\*                        |
 
 ## checkDomainStatus
 
-Check if a domain name is available for purchase.
+This endpoint is deprecated and replaced with the endpoint [Get availability for a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/get-availability-for-a-domain). Check if a domain name is available for purchase.
 
 ### Example Usage
 
@@ -286,7 +287,7 @@ run();
 
 ## getDomainTransfer
 
-Fetch domain transfer availability or transfer status if a transfer is in progress.
+This endpoint is deprecated and replaced with the endpoint [Get a domain's transfer status](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/get-a-domains-transfer-status). Fetch domain transfer availability or transfer status if a transfer is in progress.
 
 ### Example Usage
 
@@ -607,7 +608,7 @@ run();
 
 ## createOrTransferDomain
 
-This endpoint is used for adding a new apex domain name with Vercel for the authenticating user. Can also be used for initiating a domain transfer request from an external Registrar to Vercel.
+This endpoint is used for adding a new apex domain name with Vercel for the authenticating user. Note: This endpoint is no longer used for initiating domain transfers from external registrars to Vercel. For this, please use the endpoint [Transfer-in a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/transfer-in-a-domain).
 
 ### Example Usage
 
@@ -695,7 +696,7 @@ run();
 
 ## patchDomain
 
-Update or move apex domain.
+Update or move apex domain. Note: This endpoint is no longer used for updating auto-renew or nameservers. For this, please use the endpoints [Update auto-renew for a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/update-auto-renew-for-a-domain) and [Update nameservers for a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/update-nameservers-for-a-domain).
 
 ### Example Usage
 
