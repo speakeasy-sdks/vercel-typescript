@@ -12,6 +12,7 @@ import { teamsGetTeams } from "../funcs/teamsGetTeams.js";
 import { teamsInviteUserToTeam } from "../funcs/teamsInviteUserToTeam.js";
 import { teamsJoinTeam } from "../funcs/teamsJoinTeam.js";
 import { teamsPatchTeam } from "../funcs/teamsPatchTeam.js";
+import { teamsPostTeamDsyncRoles } from "../funcs/teamsPostTeamDsyncRoles.js";
 import { teamsRemoveTeamMember } from "../funcs/teamsRemoveTeamMember.js";
 import { teamsRequestAccessToTeam } from "../funcs/teamsRequestAccessToTeam.js";
 import { teamsUpdateTeamMember } from "../funcs/teamsUpdateTeamMember.js";
@@ -38,12 +39,14 @@ import {
 } from "../models/getteammembersop.js";
 import { GetTeamRequest } from "../models/getteamop.js";
 import { GetTeamsRequest, GetTeamsResponseBody } from "../models/getteamsop.js";
-import {
-  InviteUserToTeamRequest,
-  InviteUserToTeamResponseBody,
-} from "../models/inviteusertoteamop.js";
+import { InvitedTeamMember } from "../models/invitedteammember.js";
+import { InviteUserToTeamRequestBody } from "../models/inviteusertoteamop.js";
 import { JoinTeamRequest, JoinTeamResponseBody } from "../models/jointeamop.js";
 import { PatchTeamRequest } from "../models/patchteamop.js";
+import {
+  PostTeamDsyncRolesRequest,
+  PostTeamDsyncRolesResponseBody,
+} from "../models/postteamdsyncrolesop.js";
 import {
   RemoveTeamMemberRequest,
   RemoveTeamMemberResponseBody,
@@ -81,12 +84,12 @@ export class Teams extends ClientSDK {
    * Invite a user
    *
    * @remarks
-   * Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user can be specified with an email or an ID. If both email and ID are provided, ID will take priority.
+   * Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user to be invited must be specified by email.
    */
   async inviteUserToTeam(
-    request: InviteUserToTeamRequest,
+    request?: Array<InviteUserToTeamRequestBody> | undefined,
     options?: RequestOptions,
-  ): Promise<InviteUserToTeamResponseBody> {
+  ): Promise<InvitedTeamMember> {
     return unwrapAsync(teamsInviteUserToTeam(
       this,
       request,
@@ -241,6 +244,23 @@ export class Teams extends ClientSDK {
     options?: RequestOptions,
   ): Promise<CreateTeamResponseBody> {
     return unwrapAsync(teamsCreateTeam(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update Team Directory Sync Role Mappings
+   *
+   * @remarks
+   * Update the Directory Sync role mappings for a Team. This endpoint allows updating the mapping between directory groups and team roles or access groups.
+   */
+  async postTeamDsyncRoles(
+    request: PostTeamDsyncRolesRequest,
+    options?: RequestOptions,
+  ): Promise<PostTeamDsyncRolesResponseBody> {
+    return unwrapAsync(teamsPostTeamDsyncRoles(
       this,
       request,
       options,

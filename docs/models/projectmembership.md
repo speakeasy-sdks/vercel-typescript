@@ -14,9 +14,9 @@ let value: ProjectMembership = {
 
 ## Fields
 
-| Field                                          | Type                                           | Required                                       | Description                                    |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `role`                                         | [models.PayloadRole](../models/payloadrole.md) | :heavy_check_mark:                             | N/A                                            |
-| `uid`                                          | *string*                                       | :heavy_check_mark:                             | N/A                                            |
-| `createdAt`                                    | *number*                                       | :heavy_check_mark:                             | N/A                                            |
-| `username`                                     | *string*                                       | :heavy_minus_sign:                             | N/A                                            |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `role`                                                                 | [models.UserEventPayload147Role](../models/usereventpayload147role.md) | :heavy_check_mark:                                                     | N/A                                                                    |
+| `uid`                                                                  | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `createdAt`                                                            | *number*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `username`                                                             | *string*                                                               | :heavy_minus_sign:                                                     | N/A                                                                    |

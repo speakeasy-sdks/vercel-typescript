@@ -49,10 +49,14 @@ func (o *GetDeploymentRequest) GetSlug() *string {
 	return o.Slug
 }
 
+// GetDeploymentCreator2 - Information about the deployment creator
 type GetDeploymentCreator2 struct {
-	UID      string  `json:"uid"`
+	// The ID of the user that created the deployment
+	UID string `json:"uid"`
+	// The username of the user that created the deployment
 	Username *string `json:"username,omitempty"`
-	Avatar   *string `json:"avatar,omitempty"`
+	// The avatar of the user that created the deployment
+	Avatar *string `json:"avatar,omitempty"`
 }
 
 func (g GetDeploymentCreator2) MarshalJSON() ([]byte, error) {
@@ -250,6 +254,7 @@ func (e *GetDeploymentStatus2) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentTeam2 - The team that owns the deployment if any
 type GetDeploymentTeam2 struct {
 	ID     string  `json:"id"`
 	Name   string  `json:"name"`
@@ -296,6 +301,7 @@ func (o *GetDeploymentTeam2) GetAvatar() *string {
 	return o.Avatar
 }
 
+// GetDeploymentCustomEnvironment4 - If the deployment was created using a Custom Environment, then this property contains information regarding the environment used.
 type GetDeploymentCustomEnvironment4 struct {
 	ID string `json:"id"`
 }
@@ -563,7 +569,7 @@ func (o *GetDeploymentDomain2) GetVerification() []GetDeploymentVerification2 {
 	return o.Verification
 }
 
-// GetDeploymentCustomEnvironment3 - Internal representation of a custom environment with all required properties
+// GetDeploymentCustomEnvironment3 - If the deployment was created using a Custom Environment, then this property contains information regarding the environment used.
 type GetDeploymentCustomEnvironment3 struct {
 	// Unique identifier for the custom environment (format: env_*)
 	ID string `json:"id"`
@@ -791,6 +797,7 @@ func (o *GetDeploymentAliasWarning2) GetAction() *string {
 	return o.Action
 }
 
+// GetDeploymentReadyState2 - The state of the deployment depending on the process of deploying, or if it is ready or in an error state
 type GetDeploymentReadyState2 string
 
 const (
@@ -852,6 +859,7 @@ func (e *GetDeploymentTypeLambdas2) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentAliasError2 - An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
 type GetDeploymentAliasError2 struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -941,6 +949,91 @@ func (e *GetDeploymentChecksConclusion2) UnmarshalJSON(data []byte) error {
 	default:
 		return fmt.Errorf("invalid value for GetDeploymentChecksConclusion2: %v", v)
 	}
+}
+
+type GetDeploymentCve2 struct {
+	ID          string  `json:"id"`
+	Score       float64 `json:"score"`
+	Description *string `json:"description,omitempty"`
+	Link        *string `json:"link,omitempty"`
+}
+
+func (g GetDeploymentCve2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetDeploymentCve2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"id", "score"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetDeploymentCve2) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetDeploymentCve2) GetScore() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Score
+}
+
+func (o *GetDeploymentCve2) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *GetDeploymentCve2) GetLink() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Link
+}
+
+// GetDeploymentCveVulnerability2 - Since December 2025 - Temporary for Christmas hackathon 2025 CVE vulnerabilities found during build, only populated when CVE Shield is enabled and vulnerabilities are detected. Only accessible when CveShieldEnabled feature flag is enabled
+type GetDeploymentCveVulnerability2 struct {
+	PackageName    string            `json:"packageName"`
+	PackageVersion string            `json:"packageVersion"`
+	Cve            GetDeploymentCve2 `json:"cve"`
+}
+
+func (g GetDeploymentCveVulnerability2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetDeploymentCveVulnerability2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"packageName", "packageVersion", "cve"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetDeploymentCveVulnerability2) GetPackageName() string {
+	if o == nil {
+		return ""
+	}
+	return o.PackageName
+}
+
+func (o *GetDeploymentCveVulnerability2) GetPackageVersion() string {
+	if o == nil {
+		return ""
+	}
+	return o.PackageVersion
+}
+
+func (o *GetDeploymentCveVulnerability2) GetCve() GetDeploymentCve2 {
+	if o == nil {
+		return GetDeploymentCve2{}
+	}
+	return o.Cve
 }
 
 type GetDeploymentGitSourceTypeBitbucket6 string
@@ -2792,6 +2885,7 @@ func (u GetDeploymentGitSourceUnion2) MarshalJSON() ([]byte, error) {
 type GetDeploymentNodeVersion2 string
 
 const (
+	GetDeploymentNodeVersion2TwentyFourDotX GetDeploymentNodeVersion2 = "24.x"
 	GetDeploymentNodeVersion2TwentyTwoDotX  GetDeploymentNodeVersion2 = "22.x"
 	GetDeploymentNodeVersion2TwentyDotX     GetDeploymentNodeVersion2 = "20.x"
 	GetDeploymentNodeVersion2EighteenDotX   GetDeploymentNodeVersion2 = "18.x"
@@ -2811,6 +2905,8 @@ func (e *GetDeploymentNodeVersion2) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "24.x":
+		fallthrough
 	case "22.x":
 		fallthrough
 	case "20.x":
@@ -2833,6 +2929,7 @@ func (e *GetDeploymentNodeVersion2) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentProject2 - The public project information associated with the deployment.
 type GetDeploymentProject2 struct {
 	ID        string  `json:"id"`
 	Name      string  `json:"name"`
@@ -2901,6 +2998,7 @@ func (e *GetDeploymentReadySubstate2) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentSource2 - Where was the deployment created from
 type GetDeploymentSource2 string
 
 const (
@@ -2945,6 +3043,7 @@ func (e *GetDeploymentSource2) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentTargetEnum2 - If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned. `null` value indicates the "preview" deployment.
 type GetDeploymentTargetEnum2 string
 
 const (
@@ -2972,15 +3071,16 @@ func (e *GetDeploymentTargetEnum2) UnmarshalJSON(data []byte) error {
 }
 
 type GetDeploymentOidcTokenClaims2 struct {
-	Iss         string `json:"iss"`
-	Sub         string `json:"sub"`
-	Scope       string `json:"scope"`
-	Aud         string `json:"aud"`
-	Owner       string `json:"owner"`
-	OwnerID     string `json:"owner_id"`
-	Project     string `json:"project"`
-	ProjectID   string `json:"project_id"`
-	Environment string `json:"environment"`
+	Iss         string  `json:"iss"`
+	Sub         string  `json:"sub"`
+	Scope       string  `json:"scope"`
+	Aud         string  `json:"aud"`
+	Owner       string  `json:"owner"`
+	OwnerID     string  `json:"owner_id"`
+	Project     string  `json:"project"`
+	ProjectID   string  `json:"project_id"`
+	Environment string  `json:"environment"`
+	Plan        *string `json:"plan,omitempty"`
 }
 
 func (g GetDeploymentOidcTokenClaims2) MarshalJSON() ([]byte, error) {
@@ -3057,50 +3157,72 @@ func (o *GetDeploymentOidcTokenClaims2) GetEnvironment() string {
 	return o.Environment
 }
 
+func (o *GetDeploymentOidcTokenClaims2) GetPlan() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Plan
+}
+
 // Lambdas2 - The deployment including only public information
 type Lambdas2 struct {
-	Alias         []string `json:"alias,omitempty"`
-	AliasAssigned bool     `json:"aliasAssigned"`
-	BootedAt      float64  `json:"bootedAt"`
-	BuildingAt    float64  `json:"buildingAt"`
+	// A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
+	Alias []string `json:"alias,omitempty"`
+	// A boolean that will be true when the aliases from the alias property were assigned successfully
+	AliasAssigned bool    `json:"aliasAssigned"`
+	BootedAt      float64 `json:"bootedAt"`
+	BuildingAt    float64 `json:"buildingAt"`
 	// Since April 2025 it necessary for On-Demand Concurrency Minutes calculation
-	BuildContainerFinishedAt *float64                              `json:"buildContainerFinishedAt,omitempty"`
-	BuildSkipped             bool                                  `json:"buildSkipped"`
-	Creator                  GetDeploymentCreator2                 `json:"creator"`
-	InitReadyAt              *float64                              `json:"initReadyAt,omitempty"`
-	IsFirstBranchDeployment  *bool                                 `json:"isFirstBranchDeployment,omitempty"`
-	Lambdas                  []GetDeploymentLambda2                `json:"lambdas,omitempty"`
-	Public                   bool                                  `json:"public"`
-	Ready                    *float64                              `json:"ready,omitempty"`
-	Status                   GetDeploymentStatus2                  `json:"status"`
-	Team                     *GetDeploymentTeam2                   `json:"team,omitempty"`
-	UserAliases              []string                              `json:"userAliases,omitempty"`
-	PreviewCommentsEnabled   *bool                                 `json:"previewCommentsEnabled,omitempty"`
-	TtyBuildLogs             *bool                                 `json:"ttyBuildLogs,omitempty"`
-	CustomEnvironment        *GetDeploymentCustomEnvironmentUnion2 `json:"customEnvironment,omitempty"`
-	OomReport                *GetDeploymentOomReport2              `json:"oomReport,omitempty"`
-	AliasWarning             *GetDeploymentAliasWarning2           `json:"aliasWarning,omitempty"`
-	ID                       string                                `json:"id"`
-	CreatedAt                float64                               `json:"createdAt"`
-	ReadyState               GetDeploymentReadyState2              `json:"readyState"`
-	Name                     string                                `json:"name"`
-	Type                     GetDeploymentTypeLambdas2             `json:"type"`
-	AliasError               *GetDeploymentAliasError2             `json:"aliasError,omitempty"`
-	AliasFinal               *string                               `json:"aliasFinal,omitempty"`
+	BuildContainerFinishedAt *float64 `json:"buildContainerFinishedAt,omitempty"`
+	BuildSkipped             bool     `json:"buildSkipped"`
+	// Information about the deployment creator
+	Creator                 GetDeploymentCreator2  `json:"creator"`
+	InitReadyAt             *float64               `json:"initReadyAt,omitempty"`
+	IsFirstBranchDeployment *bool                  `json:"isFirstBranchDeployment,omitempty"`
+	Lambdas                 []GetDeploymentLambda2 `json:"lambdas,omitempty"`
+	// A boolean representing if the deployment is public or not. By default this is `false`
+	Public bool                 `json:"public"`
+	Ready  *float64             `json:"ready,omitempty"`
+	Status GetDeploymentStatus2 `json:"status"`
+	// The team that owns the deployment if any
+	Team *GetDeploymentTeam2 `json:"team,omitempty"`
+	// An array of domains that were provided by the user when creating the Deployment.
+	UserAliases []string `json:"userAliases,omitempty"`
+	// Whether or not preview comments are enabled for the deployment
+	PreviewCommentsEnabled *bool                                 `json:"previewCommentsEnabled,omitempty"`
+	TtyBuildLogs           *bool                                 `json:"ttyBuildLogs,omitempty"`
+	CustomEnvironment      *GetDeploymentCustomEnvironmentUnion2 `json:"customEnvironment,omitempty"`
+	OomReport              *GetDeploymentOomReport2              `json:"oomReport,omitempty"`
+	AliasWarning           *GetDeploymentAliasWarning2           `json:"aliasWarning,omitempty"`
+	// A string holding the unique ID of the deployment
+	ID string `json:"id"`
+	// A number containing the date when the deployment was created in milliseconds
+	CreatedAt float64 `json:"createdAt"`
+	// The state of the deployment depending on the process of deploying, or if it is ready or in an error state
+	ReadyState GetDeploymentReadyState2 `json:"readyState"`
+	// The name of the project associated with the deployment at the time that the deployment was created
+	Name string                    `json:"name"`
+	Type GetDeploymentTypeLambdas2 `json:"type"`
+	// An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
+	AliasError *GetDeploymentAliasError2 `json:"aliasError,omitempty"`
+	AliasFinal *string                   `json:"aliasFinal,omitempty"`
 	// applies to custom domains only, defaults to `true`
 	AutoAssignCustomDomains *bool                           `json:"autoAssignCustomDomains,omitempty"`
 	AutomaticAliases        []string                        `json:"automaticAliases,omitempty"`
 	BuildErrorAt            *float64                        `json:"buildErrorAt,omitempty"`
 	ChecksState             *GetDeploymentChecksState2      `json:"checksState,omitempty"`
 	ChecksConclusion        *GetDeploymentChecksConclusion2 `json:"checksConclusion,omitempty"`
-	DeletedAt               *float64                        `json:"deletedAt,omitempty"`
+	// A number containing the date when the deployment was deleted at milliseconds
+	DeletedAt *float64 `json:"deletedAt,omitempty"`
 	// Computed field that is only available for deployments with a microfrontend configuration.
 	DefaultRoute *string  `json:"defaultRoute,omitempty"`
 	CanceledAt   *float64 `json:"canceledAt,omitempty"`
-	ErrorCode    *string  `json:"errorCode,omitempty"`
-	ErrorLink    *string  `json:"errorLink,omitempty"`
-	ErrorMessage *string  `json:"errorMessage,omitempty"`
-	ErrorStep    *string  `json:"errorStep,omitempty"`
+	// Since December 2025 - Temporary for Christmas hackathon 2025 CVE vulnerabilities found during build, only populated when CVE Shield is enabled and vulnerabilities are detected. Only accessible when CveShieldEnabled feature flag is enabled
+	CveVulnerabilities []GetDeploymentCveVulnerability2 `json:"cveVulnerabilities,omitempty"`
+	ErrorCode          *string                          `json:"errorCode,omitempty"`
+	ErrorLink          *string                          `json:"errorLink,omitempty"`
+	ErrorMessage       *string                          `json:"errorMessage,omitempty"`
+	ErrorStep          *string                          `json:"errorStep,omitempty"`
 	// Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
 	PassiveRegions    []string                      `json:"passiveRegions,omitempty"`
 	GitSource         *GetDeploymentGitSourceUnion2 `json:"gitSource,omitempty"`
@@ -3108,17 +3230,26 @@ type Lambdas2 struct {
 	OriginCacheRegion *string                       `json:"originCacheRegion,omitempty"`
 	// If set it overrides the `projectSettings.nodeVersion` for this deployment.
 	NodeVersion *GetDeploymentNodeVersion2 `json:"nodeVersion,omitempty"`
-	Project     *GetDeploymentProject2     `json:"project,omitempty"`
+	// The public project information associated with the deployment.
+	Project  *GetDeploymentProject2 `json:"project,omitempty"`
+	Prebuilt *bool                  `json:"prebuilt,omitempty"`
 	// Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - ROLLING: in the process of having production traffic gradually transitioned. - PROMOTED: has seen production traffic
-	ReadySubstate          *GetDeploymentReadySubstate2   `json:"readySubstate,omitempty"`
-	Regions                []string                       `json:"regions"`
-	SoftDeletedByRetention *bool                          `json:"softDeletedByRetention,omitempty"`
-	Source                 *GetDeploymentSource2          `json:"source,omitempty"`
-	Target                 *GetDeploymentTargetEnum2      `json:"target,omitempty"`
-	UndeletedAt            *float64                       `json:"undeletedAt,omitempty"`
-	URL                    string                         `json:"url"`
-	Version                float64                        `json:"version"`
-	OidcTokenClaims        *GetDeploymentOidcTokenClaims2 `json:"oidcTokenClaims,omitempty"`
+	ReadySubstate *GetDeploymentReadySubstate2 `json:"readySubstate,omitempty"`
+	// The regions the deployment exists in
+	Regions []string `json:"regions"`
+	// flag to indicate if the deployment was deleted by retention policy
+	SoftDeletedByRetention *bool `json:"softDeletedByRetention,omitempty"`
+	// Where was the deployment created from
+	Source *GetDeploymentSource2 `json:"source,omitempty"`
+	// If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned. `null` value indicates the "preview" deployment.
+	Target *GetDeploymentTargetEnum2 `json:"target,omitempty"`
+	// A number containing the date when the deployment was undeleted at milliseconds
+	UndeletedAt *float64 `json:"undeletedAt,omitempty"`
+	// A string with the unique URL of the deployment
+	URL string `json:"url"`
+	// The platform version that was used to create the deployment.
+	Version         float64                        `json:"version"`
+	OidcTokenClaims *GetDeploymentOidcTokenClaims2 `json:"oidcTokenClaims,omitempty"`
 }
 
 func (l Lambdas2) MarshalJSON() ([]byte, error) {
@@ -3377,6 +3508,13 @@ func (o *Lambdas2) GetCanceledAt() *float64 {
 	return o.CanceledAt
 }
 
+func (o *Lambdas2) GetCveVulnerabilities() []GetDeploymentCveVulnerability2 {
+	if o == nil {
+		return nil
+	}
+	return o.CveVulnerabilities
+}
+
 func (o *Lambdas2) GetErrorCode() *string {
 	if o == nil {
 		return nil
@@ -3445,6 +3583,13 @@ func (o *Lambdas2) GetProject() *GetDeploymentProject2 {
 		return nil
 	}
 	return o.Project
+}
+
+func (o *Lambdas2) GetPrebuilt() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prebuilt
 }
 
 func (o *Lambdas2) GetReadySubstate() *GetDeploymentReadySubstate2 {
@@ -3633,6 +3778,53 @@ func (o *GetDeploymentBuild2) GetConfig() map[string]any {
 	return o.Config
 }
 
+type GetDeploymentProjectSettingsNodeVersion string
+
+const (
+	GetDeploymentProjectSettingsNodeVersionTwentyFourDotX GetDeploymentProjectSettingsNodeVersion = "24.x"
+	GetDeploymentProjectSettingsNodeVersionTwentyTwoDotX  GetDeploymentProjectSettingsNodeVersion = "22.x"
+	GetDeploymentProjectSettingsNodeVersionTwentyDotX     GetDeploymentProjectSettingsNodeVersion = "20.x"
+	GetDeploymentProjectSettingsNodeVersionEighteenDotX   GetDeploymentProjectSettingsNodeVersion = "18.x"
+	GetDeploymentProjectSettingsNodeVersionSixteenDotX    GetDeploymentProjectSettingsNodeVersion = "16.x"
+	GetDeploymentProjectSettingsNodeVersionFourteenDotX   GetDeploymentProjectSettingsNodeVersion = "14.x"
+	GetDeploymentProjectSettingsNodeVersionTwelveDotX     GetDeploymentProjectSettingsNodeVersion = "12.x"
+	GetDeploymentProjectSettingsNodeVersionTenDotX        GetDeploymentProjectSettingsNodeVersion = "10.x"
+	GetDeploymentProjectSettingsNodeVersionEightDot10DotX GetDeploymentProjectSettingsNodeVersion = "8.10.x"
+)
+
+func (e GetDeploymentProjectSettingsNodeVersion) ToPointer() *GetDeploymentProjectSettingsNodeVersion {
+	return &e
+}
+func (e *GetDeploymentProjectSettingsNodeVersion) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "24.x":
+		fallthrough
+	case "22.x":
+		fallthrough
+	case "20.x":
+		fallthrough
+	case "18.x":
+		fallthrough
+	case "16.x":
+		fallthrough
+	case "14.x":
+		fallthrough
+	case "12.x":
+		fallthrough
+	case "10.x":
+		fallthrough
+	case "8.10.x":
+		*e = GetDeploymentProjectSettingsNodeVersion(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for GetDeploymentProjectSettingsNodeVersion: %v", v)
+	}
+}
+
 type GetDeploymentFramework string
 
 const (
@@ -3675,10 +3867,12 @@ const (
 	GetDeploymentFrameworkZola           GetDeploymentFramework = "zola"
 	GetDeploymentFrameworkHydrogen       GetDeploymentFramework = "hydrogen"
 	GetDeploymentFrameworkVite           GetDeploymentFramework = "vite"
+	GetDeploymentFrameworkTanstackStart  GetDeploymentFramework = "tanstack-start"
 	GetDeploymentFrameworkVitepress      GetDeploymentFramework = "vitepress"
 	GetDeploymentFrameworkVuepress       GetDeploymentFramework = "vuepress"
 	GetDeploymentFrameworkParcel         GetDeploymentFramework = "parcel"
 	GetDeploymentFrameworkFastapi        GetDeploymentFramework = "fastapi"
+	GetDeploymentFrameworkFlask          GetDeploymentFramework = "flask"
 	GetDeploymentFrameworkFasthtml       GetDeploymentFramework = "fasthtml"
 	GetDeploymentFrameworkSanityV3       GetDeploymentFramework = "sanity-v3"
 	GetDeploymentFrameworkSanity         GetDeploymentFramework = "sanity"
@@ -3687,6 +3881,9 @@ const (
 	GetDeploymentFrameworkHono           GetDeploymentFramework = "hono"
 	GetDeploymentFrameworkExpress        GetDeploymentFramework = "express"
 	GetDeploymentFrameworkH3             GetDeploymentFramework = "h3"
+	GetDeploymentFrameworkNestjs         GetDeploymentFramework = "nestjs"
+	GetDeploymentFrameworkElysia         GetDeploymentFramework = "elysia"
+	GetDeploymentFrameworkFastify        GetDeploymentFramework = "fastify"
 	GetDeploymentFrameworkXmcp           GetDeploymentFramework = "xmcp"
 )
 
@@ -3777,6 +3974,8 @@ func (e *GetDeploymentFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "vite":
 		fallthrough
+	case "tanstack-start":
+		fallthrough
 	case "vitepress":
 		fallthrough
 	case "vuepress":
@@ -3784,6 +3983,8 @@ func (e *GetDeploymentFramework) UnmarshalJSON(data []byte) error {
 	case "parcel":
 		fallthrough
 	case "fastapi":
+		fallthrough
+	case "flask":
 		fallthrough
 	case "fasthtml":
 		fallthrough
@@ -3800,6 +4001,12 @@ func (e *GetDeploymentFramework) UnmarshalJSON(data []byte) error {
 	case "express":
 		fallthrough
 	case "h3":
+		fallthrough
+	case "nestjs":
+		fallthrough
+	case "elysia":
+		fallthrough
+	case "fastify":
 		fallthrough
 	case "xmcp":
 		*e = GetDeploymentFramework(v)
@@ -3926,14 +4133,15 @@ func (o *GetDeploymentWebAnalytics) GetHasData() *bool {
 }
 
 type GetDeploymentProjectSettings struct {
-	BuildCommand                *string                     `json:"buildCommand,omitempty"`
-	DevCommand                  *string                     `json:"devCommand,omitempty"`
-	Framework                   *GetDeploymentFramework     `json:"framework,omitempty"`
-	CommandForIgnoringBuildStep *string                     `json:"commandForIgnoringBuildStep,omitempty"`
-	InstallCommand              *string                     `json:"installCommand,omitempty"`
-	OutputDirectory             *string                     `json:"outputDirectory,omitempty"`
-	SpeedInsights               *GetDeploymentSpeedInsights `json:"speedInsights,omitempty"`
-	WebAnalytics                *GetDeploymentWebAnalytics  `json:"webAnalytics,omitempty"`
+	NodeVersion                 *GetDeploymentProjectSettingsNodeVersion `json:"nodeVersion,omitempty"`
+	BuildCommand                *string                                  `json:"buildCommand,omitempty"`
+	DevCommand                  *string                                  `json:"devCommand,omitempty"`
+	Framework                   *GetDeploymentFramework                  `json:"framework,omitempty"`
+	CommandForIgnoringBuildStep *string                                  `json:"commandForIgnoringBuildStep,omitempty"`
+	InstallCommand              *string                                  `json:"installCommand,omitempty"`
+	OutputDirectory             *string                                  `json:"outputDirectory,omitempty"`
+	SpeedInsights               *GetDeploymentSpeedInsights              `json:"speedInsights,omitempty"`
+	WebAnalytics                *GetDeploymentWebAnalytics               `json:"webAnalytics,omitempty"`
 }
 
 func (g GetDeploymentProjectSettings) MarshalJSON() ([]byte, error) {
@@ -3945,6 +4153,13 @@ func (g *GetDeploymentProjectSettings) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (o *GetDeploymentProjectSettings) GetNodeVersion() *GetDeploymentProjectSettingsNodeVersion {
+	if o == nil {
+		return nil
+	}
+	return o.NodeVersion
 }
 
 func (o *GetDeploymentProjectSettings) GetBuildCommand() *string {
@@ -4356,10 +4571,14 @@ func (o *GetDeploymentImages) GetContentDispositionType() *GetDeploymentContentD
 	return o.ContentDispositionType
 }
 
+// GetDeploymentCreator1 - Information about the deployment creator
 type GetDeploymentCreator1 struct {
-	UID      string  `json:"uid"`
+	// The ID of the user that created the deployment
+	UID string `json:"uid"`
+	// The username of the user that created the deployment
 	Username *string `json:"username,omitempty"`
-	Avatar   *string `json:"avatar,omitempty"`
+	// The avatar of the user that created the deployment
+	Avatar *string `json:"avatar,omitempty"`
 }
 
 func (g GetDeploymentCreator1) MarshalJSON() ([]byte, error) {
@@ -4557,6 +4776,7 @@ func (e *GetDeploymentStatus1) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentTeam1 - The team that owns the deployment if any
 type GetDeploymentTeam1 struct {
 	ID     string  `json:"id"`
 	Name   string  `json:"name"`
@@ -4603,6 +4823,7 @@ func (o *GetDeploymentTeam1) GetAvatar() *string {
 	return o.Avatar
 }
 
+// GetDeploymentCustomEnvironment2 - If the deployment was created using a Custom Environment, then this property contains information regarding the environment used.
 type GetDeploymentCustomEnvironment2 struct {
 	ID string `json:"id"`
 }
@@ -4870,7 +5091,7 @@ func (o *GetDeploymentDomain1) GetVerification() []GetDeploymentVerification1 {
 	return o.Verification
 }
 
-// GetDeploymentCustomEnvironment1 - Internal representation of a custom environment with all required properties
+// GetDeploymentCustomEnvironment1 - If the deployment was created using a Custom Environment, then this property contains information regarding the environment used.
 type GetDeploymentCustomEnvironment1 struct {
 	// Unique identifier for the custom environment (format: env_*)
 	ID string `json:"id"`
@@ -5098,6 +5319,7 @@ func (o *GetDeploymentAliasWarning1) GetAction() *string {
 	return o.Action
 }
 
+// GetDeploymentReadyState1 - The state of the deployment depending on the process of deploying, or if it is ready or in an error state
 type GetDeploymentReadyState1 string
 
 const (
@@ -5159,6 +5381,7 @@ func (e *GetDeploymentTypeLambdas1) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentAliasError1 - An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
 type GetDeploymentAliasError1 struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -5248,6 +5471,91 @@ func (e *GetDeploymentChecksConclusion1) UnmarshalJSON(data []byte) error {
 	default:
 		return fmt.Errorf("invalid value for GetDeploymentChecksConclusion1: %v", v)
 	}
+}
+
+type GetDeploymentCve1 struct {
+	ID          string  `json:"id"`
+	Score       float64 `json:"score"`
+	Description *string `json:"description,omitempty"`
+	Link        *string `json:"link,omitempty"`
+}
+
+func (g GetDeploymentCve1) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetDeploymentCve1) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"id", "score"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetDeploymentCve1) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *GetDeploymentCve1) GetScore() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Score
+}
+
+func (o *GetDeploymentCve1) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *GetDeploymentCve1) GetLink() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Link
+}
+
+// GetDeploymentCveVulnerability1 - Since December 2025 - Temporary for Christmas hackathon 2025 CVE vulnerabilities found during build, only populated when CVE Shield is enabled and vulnerabilities are detected. Only accessible when CveShieldEnabled feature flag is enabled
+type GetDeploymentCveVulnerability1 struct {
+	PackageName    string            `json:"packageName"`
+	PackageVersion string            `json:"packageVersion"`
+	Cve            GetDeploymentCve1 `json:"cve"`
+}
+
+func (g GetDeploymentCveVulnerability1) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetDeploymentCveVulnerability1) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"packageName", "packageVersion", "cve"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetDeploymentCveVulnerability1) GetPackageName() string {
+	if o == nil {
+		return ""
+	}
+	return o.PackageName
+}
+
+func (o *GetDeploymentCveVulnerability1) GetPackageVersion() string {
+	if o == nil {
+		return ""
+	}
+	return o.PackageVersion
+}
+
+func (o *GetDeploymentCveVulnerability1) GetCve() GetDeploymentCve1 {
+	if o == nil {
+		return GetDeploymentCve1{}
+	}
+	return o.Cve
 }
 
 type GetDeploymentGitSourceTypeBitbucket3 string
@@ -7099,6 +7407,7 @@ func (u GetDeploymentGitSourceUnion1) MarshalJSON() ([]byte, error) {
 type GetDeploymentNodeVersion1 string
 
 const (
+	GetDeploymentNodeVersion1TwentyFourDotX GetDeploymentNodeVersion1 = "24.x"
 	GetDeploymentNodeVersion1TwentyTwoDotX  GetDeploymentNodeVersion1 = "22.x"
 	GetDeploymentNodeVersion1TwentyDotX     GetDeploymentNodeVersion1 = "20.x"
 	GetDeploymentNodeVersion1EighteenDotX   GetDeploymentNodeVersion1 = "18.x"
@@ -7118,6 +7427,8 @@ func (e *GetDeploymentNodeVersion1) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "24.x":
+		fallthrough
 	case "22.x":
 		fallthrough
 	case "20.x":
@@ -7140,6 +7451,7 @@ func (e *GetDeploymentNodeVersion1) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentProject1 - The public project information associated with the deployment.
 type GetDeploymentProject1 struct {
 	ID        string  `json:"id"`
 	Name      string  `json:"name"`
@@ -7208,6 +7520,7 @@ func (e *GetDeploymentReadySubstate1) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentSource1 - Where was the deployment created from
 type GetDeploymentSource1 string
 
 const (
@@ -7252,6 +7565,7 @@ func (e *GetDeploymentSource1) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// GetDeploymentTargetEnum1 - If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned. `null` value indicates the "preview" deployment.
 type GetDeploymentTargetEnum1 string
 
 const (
@@ -7279,15 +7593,16 @@ func (e *GetDeploymentTargetEnum1) UnmarshalJSON(data []byte) error {
 }
 
 type GetDeploymentOidcTokenClaims1 struct {
-	Iss         string `json:"iss"`
-	Sub         string `json:"sub"`
-	Scope       string `json:"scope"`
-	Aud         string `json:"aud"`
-	Owner       string `json:"owner"`
-	OwnerID     string `json:"owner_id"`
-	Project     string `json:"project"`
-	ProjectID   string `json:"project_id"`
-	Environment string `json:"environment"`
+	Iss         string  `json:"iss"`
+	Sub         string  `json:"sub"`
+	Scope       string  `json:"scope"`
+	Aud         string  `json:"aud"`
+	Owner       string  `json:"owner"`
+	OwnerID     string  `json:"owner_id"`
+	Project     string  `json:"project"`
+	ProjectID   string  `json:"project_id"`
+	Environment string  `json:"environment"`
+	Plan        *string `json:"plan,omitempty"`
 }
 
 func (g GetDeploymentOidcTokenClaims1) MarshalJSON() ([]byte, error) {
@@ -7362,6 +7677,13 @@ func (o *GetDeploymentOidcTokenClaims1) GetEnvironment() string {
 		return ""
 	}
 	return o.Environment
+}
+
+func (o *GetDeploymentOidcTokenClaims1) GetPlan() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Plan
 }
 
 type GetDeploymentPlan string
@@ -8321,8 +8643,10 @@ func (o *GetDeploymentHasHost) GetValue() GetDeploymentHasValueUnion1 {
 type GetDeploymentHasUnionType string
 
 const (
-	GetDeploymentHasUnionTypeGetDeploymentHasHost GetDeploymentHasUnionType = "getDeployment_has_Host"
-	GetDeploymentHasUnionTypeGetDeploymentHas     GetDeploymentHasUnionType = "getDeployment_has"
+	GetDeploymentHasUnionTypeHost   GetDeploymentHasUnionType = "host"
+	GetDeploymentHasUnionTypeHeader GetDeploymentHasUnionType = "header"
+	GetDeploymentHasUnionTypeCookie GetDeploymentHasUnionType = "cookie"
+	GetDeploymentHasUnionTypeQuery  GetDeploymentHasUnionType = "query"
 )
 
 type GetDeploymentHasUnion struct {
@@ -8332,37 +8656,101 @@ type GetDeploymentHasUnion struct {
 	Type GetDeploymentHasUnionType
 }
 
-func CreateGetDeploymentHasUnionGetDeploymentHasHost(getDeploymentHasHost GetDeploymentHasHost) GetDeploymentHasUnion {
-	typ := GetDeploymentHasUnionTypeGetDeploymentHasHost
+func CreateGetDeploymentHasUnionHost(host GetDeploymentHasHost) GetDeploymentHasUnion {
+	typ := GetDeploymentHasUnionTypeHost
+
+	typStr := GetDeploymentHasTypeHost(typ)
+	host.Type = typStr
 
 	return GetDeploymentHasUnion{
-		GetDeploymentHasHost: &getDeploymentHasHost,
+		GetDeploymentHasHost: &host,
 		Type:                 typ,
 	}
 }
 
-func CreateGetDeploymentHasUnionGetDeploymentHas(getDeploymentHas GetDeploymentHas) GetDeploymentHasUnion {
-	typ := GetDeploymentHasUnionTypeGetDeploymentHas
+func CreateGetDeploymentHasUnionHeader(header GetDeploymentHas) GetDeploymentHasUnion {
+	typ := GetDeploymentHasUnionTypeHeader
+
+	typStr := GetDeploymentHasType(typ)
+	header.Type = typStr
 
 	return GetDeploymentHasUnion{
-		GetDeploymentHas: &getDeploymentHas,
+		GetDeploymentHas: &header,
+		Type:             typ,
+	}
+}
+
+func CreateGetDeploymentHasUnionCookie(cookie GetDeploymentHas) GetDeploymentHasUnion {
+	typ := GetDeploymentHasUnionTypeCookie
+
+	typStr := GetDeploymentHasType(typ)
+	cookie.Type = typStr
+
+	return GetDeploymentHasUnion{
+		GetDeploymentHas: &cookie,
+		Type:             typ,
+	}
+}
+
+func CreateGetDeploymentHasUnionQuery(query GetDeploymentHas) GetDeploymentHasUnion {
+	typ := GetDeploymentHasUnionTypeQuery
+
+	typStr := GetDeploymentHasType(typ)
+	query.Type = typStr
+
+	return GetDeploymentHasUnion{
+		GetDeploymentHas: &query,
 		Type:             typ,
 	}
 }
 
 func (u *GetDeploymentHasUnion) UnmarshalJSON(data []byte) error {
 
-	var getDeploymentHasHost GetDeploymentHasHost = GetDeploymentHasHost{}
-	if err := utils.UnmarshalJSON(data, &getDeploymentHasHost, "", true, nil); err == nil {
-		u.GetDeploymentHasHost = &getDeploymentHasHost
-		u.Type = GetDeploymentHasUnionTypeGetDeploymentHasHost
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var getDeploymentHas GetDeploymentHas = GetDeploymentHas{}
-	if err := utils.UnmarshalJSON(data, &getDeploymentHas, "", true, nil); err == nil {
-		u.GetDeploymentHas = &getDeploymentHas
-		u.Type = GetDeploymentHasUnionTypeGetDeploymentHas
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Type {
+	case "host":
+		getDeploymentHasHost := new(GetDeploymentHasHost)
+		if err := utils.UnmarshalJSON(data, &getDeploymentHasHost, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == host) type GetDeploymentHasHost within GetDeploymentHasUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentHasHost = getDeploymentHasHost
+		u.Type = GetDeploymentHasUnionTypeHost
+		return nil
+	case "header":
+		getDeploymentHas := new(GetDeploymentHas)
+		if err := utils.UnmarshalJSON(data, &getDeploymentHas, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == header) type GetDeploymentHas within GetDeploymentHasUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentHas = getDeploymentHas
+		u.Type = GetDeploymentHasUnionTypeHeader
+		return nil
+	case "cookie":
+		getDeploymentHas := new(GetDeploymentHas)
+		if err := utils.UnmarshalJSON(data, &getDeploymentHas, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == cookie) type GetDeploymentHas within GetDeploymentHasUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentHas = getDeploymentHas
+		u.Type = GetDeploymentHasUnionTypeCookie
+		return nil
+	case "query":
+		getDeploymentHas := new(GetDeploymentHas)
+		if err := utils.UnmarshalJSON(data, &getDeploymentHas, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == query) type GetDeploymentHas within GetDeploymentHasUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentHas = getDeploymentHas
+		u.Type = GetDeploymentHasUnionTypeQuery
 		return nil
 	}
 
@@ -8960,8 +9348,10 @@ func (o *GetDeploymentMissingHost) GetValue() GetDeploymentMissingValueUnion1 {
 type GetDeploymentMissingUnionType string
 
 const (
-	GetDeploymentMissingUnionTypeGetDeploymentMissingHost GetDeploymentMissingUnionType = "getDeployment_missing_Host"
-	GetDeploymentMissingUnionTypeGetDeploymentMissing     GetDeploymentMissingUnionType = "getDeployment_missing"
+	GetDeploymentMissingUnionTypeHost   GetDeploymentMissingUnionType = "host"
+	GetDeploymentMissingUnionTypeHeader GetDeploymentMissingUnionType = "header"
+	GetDeploymentMissingUnionTypeCookie GetDeploymentMissingUnionType = "cookie"
+	GetDeploymentMissingUnionTypeQuery  GetDeploymentMissingUnionType = "query"
 )
 
 type GetDeploymentMissingUnion struct {
@@ -8971,37 +9361,101 @@ type GetDeploymentMissingUnion struct {
 	Type GetDeploymentMissingUnionType
 }
 
-func CreateGetDeploymentMissingUnionGetDeploymentMissingHost(getDeploymentMissingHost GetDeploymentMissingHost) GetDeploymentMissingUnion {
-	typ := GetDeploymentMissingUnionTypeGetDeploymentMissingHost
+func CreateGetDeploymentMissingUnionHost(host GetDeploymentMissingHost) GetDeploymentMissingUnion {
+	typ := GetDeploymentMissingUnionTypeHost
+
+	typStr := GetDeploymentMissingTypeHost(typ)
+	host.Type = typStr
 
 	return GetDeploymentMissingUnion{
-		GetDeploymentMissingHost: &getDeploymentMissingHost,
+		GetDeploymentMissingHost: &host,
 		Type:                     typ,
 	}
 }
 
-func CreateGetDeploymentMissingUnionGetDeploymentMissing(getDeploymentMissing GetDeploymentMissing) GetDeploymentMissingUnion {
-	typ := GetDeploymentMissingUnionTypeGetDeploymentMissing
+func CreateGetDeploymentMissingUnionHeader(header GetDeploymentMissing) GetDeploymentMissingUnion {
+	typ := GetDeploymentMissingUnionTypeHeader
+
+	typStr := GetDeploymentMissingType(typ)
+	header.Type = typStr
 
 	return GetDeploymentMissingUnion{
-		GetDeploymentMissing: &getDeploymentMissing,
+		GetDeploymentMissing: &header,
+		Type:                 typ,
+	}
+}
+
+func CreateGetDeploymentMissingUnionCookie(cookie GetDeploymentMissing) GetDeploymentMissingUnion {
+	typ := GetDeploymentMissingUnionTypeCookie
+
+	typStr := GetDeploymentMissingType(typ)
+	cookie.Type = typStr
+
+	return GetDeploymentMissingUnion{
+		GetDeploymentMissing: &cookie,
+		Type:                 typ,
+	}
+}
+
+func CreateGetDeploymentMissingUnionQuery(query GetDeploymentMissing) GetDeploymentMissingUnion {
+	typ := GetDeploymentMissingUnionTypeQuery
+
+	typStr := GetDeploymentMissingType(typ)
+	query.Type = typStr
+
+	return GetDeploymentMissingUnion{
+		GetDeploymentMissing: &query,
 		Type:                 typ,
 	}
 }
 
 func (u *GetDeploymentMissingUnion) UnmarshalJSON(data []byte) error {
 
-	var getDeploymentMissingHost GetDeploymentMissingHost = GetDeploymentMissingHost{}
-	if err := utils.UnmarshalJSON(data, &getDeploymentMissingHost, "", true, nil); err == nil {
-		u.GetDeploymentMissingHost = &getDeploymentMissingHost
-		u.Type = GetDeploymentMissingUnionTypeGetDeploymentMissingHost
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var getDeploymentMissing GetDeploymentMissing = GetDeploymentMissing{}
-	if err := utils.UnmarshalJSON(data, &getDeploymentMissing, "", true, nil); err == nil {
-		u.GetDeploymentMissing = &getDeploymentMissing
-		u.Type = GetDeploymentMissingUnionTypeGetDeploymentMissing
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Type {
+	case "host":
+		getDeploymentMissingHost := new(GetDeploymentMissingHost)
+		if err := utils.UnmarshalJSON(data, &getDeploymentMissingHost, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == host) type GetDeploymentMissingHost within GetDeploymentMissingUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentMissingHost = getDeploymentMissingHost
+		u.Type = GetDeploymentMissingUnionTypeHost
+		return nil
+	case "header":
+		getDeploymentMissing := new(GetDeploymentMissing)
+		if err := utils.UnmarshalJSON(data, &getDeploymentMissing, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == header) type GetDeploymentMissing within GetDeploymentMissingUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentMissing = getDeploymentMissing
+		u.Type = GetDeploymentMissingUnionTypeHeader
+		return nil
+	case "cookie":
+		getDeploymentMissing := new(GetDeploymentMissing)
+		if err := utils.UnmarshalJSON(data, &getDeploymentMissing, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == cookie) type GetDeploymentMissing within GetDeploymentMissingUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentMissing = getDeploymentMissing
+		u.Type = GetDeploymentMissingUnionTypeCookie
+		return nil
+	case "query":
+		getDeploymentMissing := new(GetDeploymentMissing)
+		if err := utils.UnmarshalJSON(data, &getDeploymentMissing, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == query) type GetDeploymentMissing within GetDeploymentMissingUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentMissing = getDeploymentMissing
+		u.Type = GetDeploymentMissingUnionTypeQuery
 		return nil
 	}
 
@@ -9436,6 +9890,7 @@ type GetDeploymentTransform struct {
 	Op     GetDeploymentOp            `json:"op"`
 	Target GetDeploymentRouteTarget   `json:"target"`
 	Args   *GetDeploymentArgs         `json:"args,omitempty"`
+	Env    []string                   `json:"env,omitempty"`
 }
 
 func (g GetDeploymentTransform) MarshalJSON() ([]byte, error) {
@@ -9475,6 +9930,13 @@ func (o *GetDeploymentTransform) GetArgs() *GetDeploymentArgs {
 		return nil
 	}
 	return o.Args
+}
+
+func (o *GetDeploymentTransform) GetEnv() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Env
 }
 
 type GetDeploymentLocale struct {
@@ -9522,6 +9984,7 @@ type GetDeploymentRoute1 struct {
 	Missing       []GetDeploymentMissingUnion `json:"missing,omitempty"`
 	Mitigate      *GetDeploymentMitigate      `json:"mitigate,omitempty"`
 	Transforms    []GetDeploymentTransform    `json:"transforms,omitempty"`
+	Env           []string                    `json:"env,omitempty"`
 	Locale        *GetDeploymentLocale        `json:"locale,omitempty"`
 	// A middleware key within the `output` key under the build result. Overrides a `middleware` definition.
 	MiddlewarePath *string `json:"middlewarePath,omitempty"`
@@ -9638,6 +10101,13 @@ func (o *GetDeploymentRoute1) GetTransforms() []GetDeploymentTransform {
 		return nil
 	}
 	return o.Transforms
+}
+
+func (o *GetDeploymentRoute1) GetEnv() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Env
 }
 
 func (o *GetDeploymentRoute1) GetLocale() *GetDeploymentLocale {
@@ -10177,9 +10647,9 @@ func (o *GetDeploymentGitRepoGitlab) GetOwnerType() GetDeploymentOwnerType1 {
 type GetDeploymentGitRepoUnionType string
 
 const (
-	GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoGitlab    GetDeploymentGitRepoUnionType = "getDeployment_gitRepo_Gitlab"
-	GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoGithub    GetDeploymentGitRepoUnionType = "getDeployment_gitRepo_Github"
-	GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoBitbucket GetDeploymentGitRepoUnionType = "getDeployment_gitRepo_Bitbucket"
+	GetDeploymentGitRepoUnionTypeGitlab    GetDeploymentGitRepoUnionType = "gitlab"
+	GetDeploymentGitRepoUnionTypeGithub    GetDeploymentGitRepoUnionType = "github"
+	GetDeploymentGitRepoUnionTypeBitbucket GetDeploymentGitRepoUnionType = "bitbucket"
 )
 
 type GetDeploymentGitRepoUnion struct {
@@ -10190,53 +10660,80 @@ type GetDeploymentGitRepoUnion struct {
 	Type GetDeploymentGitRepoUnionType
 }
 
-func CreateGetDeploymentGitRepoUnionGetDeploymentGitRepoGitlab(getDeploymentGitRepoGitlab GetDeploymentGitRepoGitlab) GetDeploymentGitRepoUnion {
-	typ := GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoGitlab
+func CreateGetDeploymentGitRepoUnionGitlab(gitlab GetDeploymentGitRepoGitlab) GetDeploymentGitRepoUnion {
+	typ := GetDeploymentGitRepoUnionTypeGitlab
+
+	typStr := GetDeploymentGitRepoTypeGitlab(typ)
+	gitlab.Type = typStr
 
 	return GetDeploymentGitRepoUnion{
-		GetDeploymentGitRepoGitlab: &getDeploymentGitRepoGitlab,
+		GetDeploymentGitRepoGitlab: &gitlab,
 		Type:                       typ,
 	}
 }
 
-func CreateGetDeploymentGitRepoUnionGetDeploymentGitRepoGithub(getDeploymentGitRepoGithub GetDeploymentGitRepoGithub) GetDeploymentGitRepoUnion {
-	typ := GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoGithub
+func CreateGetDeploymentGitRepoUnionGithub(github GetDeploymentGitRepoGithub) GetDeploymentGitRepoUnion {
+	typ := GetDeploymentGitRepoUnionTypeGithub
+
+	typStr := GetDeploymentGitRepoTypeGithub(typ)
+	github.Type = typStr
 
 	return GetDeploymentGitRepoUnion{
-		GetDeploymentGitRepoGithub: &getDeploymentGitRepoGithub,
+		GetDeploymentGitRepoGithub: &github,
 		Type:                       typ,
 	}
 }
 
-func CreateGetDeploymentGitRepoUnionGetDeploymentGitRepoBitbucket(getDeploymentGitRepoBitbucket GetDeploymentGitRepoBitbucket) GetDeploymentGitRepoUnion {
-	typ := GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoBitbucket
+func CreateGetDeploymentGitRepoUnionBitbucket(bitbucket GetDeploymentGitRepoBitbucket) GetDeploymentGitRepoUnion {
+	typ := GetDeploymentGitRepoUnionTypeBitbucket
+
+	typStr := GetDeploymentGitRepoTypeBitbucket(typ)
+	bitbucket.Type = typStr
 
 	return GetDeploymentGitRepoUnion{
-		GetDeploymentGitRepoBitbucket: &getDeploymentGitRepoBitbucket,
+		GetDeploymentGitRepoBitbucket: &bitbucket,
 		Type:                          typ,
 	}
 }
 
 func (u *GetDeploymentGitRepoUnion) UnmarshalJSON(data []byte) error {
 
-	var getDeploymentGitRepoGithub GetDeploymentGitRepoGithub = GetDeploymentGitRepoGithub{}
-	if err := utils.UnmarshalJSON(data, &getDeploymentGitRepoGithub, "", true, nil); err == nil {
-		u.GetDeploymentGitRepoGithub = &getDeploymentGitRepoGithub
-		u.Type = GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoGithub
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var getDeploymentGitRepoBitbucket GetDeploymentGitRepoBitbucket = GetDeploymentGitRepoBitbucket{}
-	if err := utils.UnmarshalJSON(data, &getDeploymentGitRepoBitbucket, "", true, nil); err == nil {
-		u.GetDeploymentGitRepoBitbucket = &getDeploymentGitRepoBitbucket
-		u.Type = GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoBitbucket
-		return nil
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
-	var getDeploymentGitRepoGitlab GetDeploymentGitRepoGitlab = GetDeploymentGitRepoGitlab{}
-	if err := utils.UnmarshalJSON(data, &getDeploymentGitRepoGitlab, "", true, nil); err == nil {
-		u.GetDeploymentGitRepoGitlab = &getDeploymentGitRepoGitlab
-		u.Type = GetDeploymentGitRepoUnionTypeGetDeploymentGitRepoGitlab
+	switch dis.Type {
+	case "gitlab":
+		getDeploymentGitRepoGitlab := new(GetDeploymentGitRepoGitlab)
+		if err := utils.UnmarshalJSON(data, &getDeploymentGitRepoGitlab, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == gitlab) type GetDeploymentGitRepoGitlab within GetDeploymentGitRepoUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentGitRepoGitlab = getDeploymentGitRepoGitlab
+		u.Type = GetDeploymentGitRepoUnionTypeGitlab
+		return nil
+	case "github":
+		getDeploymentGitRepoGithub := new(GetDeploymentGitRepoGithub)
+		if err := utils.UnmarshalJSON(data, &getDeploymentGitRepoGithub, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == github) type GetDeploymentGitRepoGithub within GetDeploymentGitRepoUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentGitRepoGithub = getDeploymentGitRepoGithub
+		u.Type = GetDeploymentGitRepoUnionTypeGithub
+		return nil
+	case "bitbucket":
+		getDeploymentGitRepoBitbucket := new(GetDeploymentGitRepoBitbucket)
+		if err := utils.UnmarshalJSON(data, &getDeploymentGitRepoBitbucket, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == bitbucket) type GetDeploymentGitRepoBitbucket within GetDeploymentGitRepoUnion: %w", string(data), err)
+		}
+
+		u.GetDeploymentGitRepoBitbucket = getDeploymentGitRepoBitbucket
+		u.Type = GetDeploymentGitRepoUnionTypeBitbucket
 		return nil
 	}
 
@@ -10428,55 +10925,6 @@ func (u GetDeploymentFlagsUnion) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type GetDeploymentFlagsUnion: all fields are null")
 }
 
-// GetDeploymentApplications - A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment. Note: this field will be removed when MFE alias routing is fully rolled out.
-type GetDeploymentApplications struct {
-	IsDefaultApp *bool `json:"isDefaultApp,omitempty"`
-	// This is the production alias, it will always show the most up to date of each application.
-	ProductionHost string `json:"productionHost"`
-	// Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
-	DeploymentAlias *string `json:"deploymentAlias,omitempty"`
-	DeploymentHost  *string `json:"deploymentHost,omitempty"`
-}
-
-func (g GetDeploymentApplications) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GetDeploymentApplications) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"productionHost"}); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *GetDeploymentApplications) GetIsDefaultApp() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.IsDefaultApp
-}
-
-func (o *GetDeploymentApplications) GetProductionHost() string {
-	if o == nil {
-		return ""
-	}
-	return o.ProductionHost
-}
-
-func (o *GetDeploymentApplications) GetDeploymentAlias() *string {
-	if o == nil {
-		return nil
-	}
-	return o.DeploymentAlias
-}
-
-func (o *GetDeploymentApplications) GetDeploymentHost() *string {
-	if o == nil {
-		return nil
-	}
-	return o.DeploymentHost
-}
-
 // GetDeploymentMfeConfigUploadState - The result of the microfrontends config upload during deployment creation / build. Only set for default app deployments. The config upload is attempted during deployment create, and then again during the build. If the config is not in the root directory, or the deployment is prebuilt, the config cannot be uploaded during deployment create. The upload during deployment build finds the config even if it's not in the root directory, as it has access to all files. Uploading the config during create is ideal, as then all child deployments are guaranteed to have access to the default app deployment config even if the default app has not yet started building. If the config is not uploaded, the child app will show as building until the config has been uploaded during the default app build. - `success` - The config was uploaded successfully, either when the deployment was created or during the build. - `waiting_on_build` - The config could not be uploaded during deployment create, will be attempted again during the build. - `no_config` - No config was found. Only set once the build has not found the config in any of the deployment's files. - `undefined` - Legacy deployments, or there was an error uploading the config during deployment create.
 type GetDeploymentMfeConfigUploadState string
 
@@ -10509,8 +10957,6 @@ func (e *GetDeploymentMfeConfigUploadState) UnmarshalJSON(data []byte) error {
 
 type GetDeploymentMicrofrontends2 struct {
 	IsDefaultApp bool `json:"isDefaultApp"`
-	// A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment. Note: this field will be removed when MFE alias routing is fully rolled out.
-	Applications map[string]GetDeploymentApplications `json:"applications,omitempty"`
 	// The result of the microfrontends config upload during deployment creation / build. Only set for default app deployments. The config upload is attempted during deployment create, and then again during the build. If the config is not in the root directory, or the deployment is prebuilt, the config cannot be uploaded during deployment create. The upload during deployment build finds the config even if it's not in the root directory, as it has access to all files. Uploading the config during create is ideal, as then all child deployments are guaranteed to have access to the default app deployment config even if the default app has not yet started building. If the config is not uploaded, the child app will show as building until the config has been uploaded during the default app build. - `success` - The config was uploaded successfully, either when the deployment was created or during the build. - `waiting_on_build` - The config could not be uploaded during deployment create, will be attempted again during the build. - `no_config` - No config was found. Only set once the build has not found the config in any of the deployment's files. - `undefined` - Legacy deployments, or there was an error uploading the config during deployment create.
 	MfeConfigUploadState *GetDeploymentMfeConfigUploadState `json:"mfeConfigUploadState,omitempty"`
 	// The project name of the default app of this deployment's microfrontends group.
@@ -10519,10 +10965,6 @@ type GetDeploymentMicrofrontends2 struct {
 	DefaultRoute *string `json:"defaultRoute,omitempty"`
 	// The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
 	GroupIds []string `json:"groupIds"`
-	// Whether the MicrofrontendsAlias2 team flag should be considered enabled for this deployment or not.
-	MicrofrontendsAlias2Enabled *bool `json:"microfrontendsAlias2Enabled,omitempty"`
-	// Temporary flag to safely test MFE alias routing in vercel-site production for specific production hosts (not vercel.com)
-	MicrofrontendsAliasRoutingVercelSiteProdTestHost *bool `json:"microfrontendsAliasRoutingVercelSiteProdTestHost,omitempty"`
 }
 
 func (g GetDeploymentMicrofrontends2) MarshalJSON() ([]byte, error) {
@@ -10541,13 +10983,6 @@ func (o *GetDeploymentMicrofrontends2) GetIsDefaultApp() bool {
 		return false
 	}
 	return o.IsDefaultApp
-}
-
-func (o *GetDeploymentMicrofrontends2) GetApplications() map[string]GetDeploymentApplications {
-	if o == nil {
-		return nil
-	}
-	return o.Applications
 }
 
 func (o *GetDeploymentMicrofrontends2) GetMfeConfigUploadState() *GetDeploymentMfeConfigUploadState {
@@ -10578,20 +11013,6 @@ func (o *GetDeploymentMicrofrontends2) GetGroupIds() []string {
 	return o.GroupIds
 }
 
-func (o *GetDeploymentMicrofrontends2) GetMicrofrontendsAlias2Enabled() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.MicrofrontendsAlias2Enabled
-}
-
-func (o *GetDeploymentMicrofrontends2) GetMicrofrontendsAliasRoutingVercelSiteProdTestHost() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.MicrofrontendsAliasRoutingVercelSiteProdTestHost
-}
-
 type GetDeploymentMicrofrontends1 struct {
 	IsDefaultApp *bool `json:"isDefaultApp,omitempty"`
 	// The project name of the default app of this deployment's microfrontends group.
@@ -10600,10 +11021,6 @@ type GetDeploymentMicrofrontends1 struct {
 	DefaultRoute *string `json:"defaultRoute,omitempty"`
 	// The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
 	GroupIds []string `json:"groupIds"`
-	// Whether the MicrofrontendsAlias2 team flag should be considered enabled for this deployment or not.
-	MicrofrontendsAlias2Enabled *bool `json:"microfrontendsAlias2Enabled,omitempty"`
-	// Temporary flag to safely test MFE alias routing in vercel-site production for specific production hosts (not vercel.com)
-	MicrofrontendsAliasRoutingVercelSiteProdTestHost *bool `json:"microfrontendsAliasRoutingVercelSiteProdTestHost,omitempty"`
 }
 
 func (g GetDeploymentMicrofrontends1) MarshalJSON() ([]byte, error) {
@@ -10643,20 +11060,6 @@ func (o *GetDeploymentMicrofrontends1) GetGroupIds() []string {
 		return []string{}
 	}
 	return o.GroupIds
-}
-
-func (o *GetDeploymentMicrofrontends1) GetMicrofrontendsAlias2Enabled() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.MicrofrontendsAlias2Enabled
-}
-
-func (o *GetDeploymentMicrofrontends1) GetMicrofrontendsAliasRoutingVercelSiteProdTestHost() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.MicrofrontendsAliasRoutingVercelSiteProdTestHost
 }
 
 type GetDeploymentMicrofrontendsUnionType string
@@ -10954,48 +11357,63 @@ type Lambdas1 struct {
 	ReadyStateReason          *string                       `json:"readyStateReason,omitempty"`
 	Integrations              *GetDeploymentIntegrations    `json:"integrations,omitempty"`
 	Images                    *GetDeploymentImages          `json:"images,omitempty"`
-	Alias                     []string                      `json:"alias,omitempty"`
-	AliasAssigned             bool                          `json:"aliasAssigned"`
-	BootedAt                  float64                       `json:"bootedAt"`
-	BuildingAt                float64                       `json:"buildingAt"`
+	// A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
+	Alias []string `json:"alias,omitempty"`
+	// A boolean that will be true when the aliases from the alias property were assigned successfully
+	AliasAssigned bool    `json:"aliasAssigned"`
+	BootedAt      float64 `json:"bootedAt"`
+	BuildingAt    float64 `json:"buildingAt"`
 	// Since April 2025 it necessary for On-Demand Concurrency Minutes calculation
-	BuildContainerFinishedAt *float64                              `json:"buildContainerFinishedAt,omitempty"`
-	BuildSkipped             bool                                  `json:"buildSkipped"`
-	Creator                  GetDeploymentCreator1                 `json:"creator"`
-	InitReadyAt              *float64                              `json:"initReadyAt,omitempty"`
-	IsFirstBranchDeployment  *bool                                 `json:"isFirstBranchDeployment,omitempty"`
-	Lambdas                  []GetDeploymentLambda1                `json:"lambdas,omitempty"`
-	Public                   bool                                  `json:"public"`
-	Ready                    *float64                              `json:"ready,omitempty"`
-	Status                   GetDeploymentStatus1                  `json:"status"`
-	Team                     *GetDeploymentTeam1                   `json:"team,omitempty"`
-	UserAliases              []string                              `json:"userAliases,omitempty"`
-	PreviewCommentsEnabled   *bool                                 `json:"previewCommentsEnabled,omitempty"`
-	TtyBuildLogs             *bool                                 `json:"ttyBuildLogs,omitempty"`
-	CustomEnvironment        *GetDeploymentCustomEnvironmentUnion1 `json:"customEnvironment,omitempty"`
-	OomReport                *GetDeploymentOomReport1              `json:"oomReport,omitempty"`
-	AliasWarning             *GetDeploymentAliasWarning1           `json:"aliasWarning,omitempty"`
-	ID                       string                                `json:"id"`
-	CreatedAt                float64                               `json:"createdAt"`
-	ReadyState               GetDeploymentReadyState1              `json:"readyState"`
-	Name                     string                                `json:"name"`
-	Type                     GetDeploymentTypeLambdas1             `json:"type"`
-	AliasError               *GetDeploymentAliasError1             `json:"aliasError,omitempty"`
-	AliasFinal               *string                               `json:"aliasFinal,omitempty"`
+	BuildContainerFinishedAt *float64 `json:"buildContainerFinishedAt,omitempty"`
+	BuildSkipped             bool     `json:"buildSkipped"`
+	// Information about the deployment creator
+	Creator                 GetDeploymentCreator1  `json:"creator"`
+	InitReadyAt             *float64               `json:"initReadyAt,omitempty"`
+	IsFirstBranchDeployment *bool                  `json:"isFirstBranchDeployment,omitempty"`
+	Lambdas                 []GetDeploymentLambda1 `json:"lambdas,omitempty"`
+	// A boolean representing if the deployment is public or not. By default this is `false`
+	Public bool                 `json:"public"`
+	Ready  *float64             `json:"ready,omitempty"`
+	Status GetDeploymentStatus1 `json:"status"`
+	// The team that owns the deployment if any
+	Team *GetDeploymentTeam1 `json:"team,omitempty"`
+	// An array of domains that were provided by the user when creating the Deployment.
+	UserAliases []string `json:"userAliases,omitempty"`
+	// Whether or not preview comments are enabled for the deployment
+	PreviewCommentsEnabled *bool                                 `json:"previewCommentsEnabled,omitempty"`
+	TtyBuildLogs           *bool                                 `json:"ttyBuildLogs,omitempty"`
+	CustomEnvironment      *GetDeploymentCustomEnvironmentUnion1 `json:"customEnvironment,omitempty"`
+	OomReport              *GetDeploymentOomReport1              `json:"oomReport,omitempty"`
+	AliasWarning           *GetDeploymentAliasWarning1           `json:"aliasWarning,omitempty"`
+	// A string holding the unique ID of the deployment
+	ID string `json:"id"`
+	// A number containing the date when the deployment was created in milliseconds
+	CreatedAt float64 `json:"createdAt"`
+	// The state of the deployment depending on the process of deploying, or if it is ready or in an error state
+	ReadyState GetDeploymentReadyState1 `json:"readyState"`
+	// The name of the project associated with the deployment at the time that the deployment was created
+	Name string                    `json:"name"`
+	Type GetDeploymentTypeLambdas1 `json:"type"`
+	// An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
+	AliasError *GetDeploymentAliasError1 `json:"aliasError,omitempty"`
+	AliasFinal *string                   `json:"aliasFinal,omitempty"`
 	// applies to custom domains only, defaults to `true`
 	AutoAssignCustomDomains *bool                           `json:"autoAssignCustomDomains,omitempty"`
 	AutomaticAliases        []string                        `json:"automaticAliases,omitempty"`
 	BuildErrorAt            *float64                        `json:"buildErrorAt,omitempty"`
 	ChecksState             *GetDeploymentChecksState1      `json:"checksState,omitempty"`
 	ChecksConclusion        *GetDeploymentChecksConclusion1 `json:"checksConclusion,omitempty"`
-	DeletedAt               *float64                        `json:"deletedAt,omitempty"`
+	// A number containing the date when the deployment was deleted at milliseconds
+	DeletedAt *float64 `json:"deletedAt,omitempty"`
 	// Computed field that is only available for deployments with a microfrontend configuration.
 	DefaultRoute *string  `json:"defaultRoute,omitempty"`
 	CanceledAt   *float64 `json:"canceledAt,omitempty"`
-	ErrorCode    *string  `json:"errorCode,omitempty"`
-	ErrorLink    *string  `json:"errorLink,omitempty"`
-	ErrorMessage *string  `json:"errorMessage,omitempty"`
-	ErrorStep    *string  `json:"errorStep,omitempty"`
+	// Since December 2025 - Temporary for Christmas hackathon 2025 CVE vulnerabilities found during build, only populated when CVE Shield is enabled and vulnerabilities are detected. Only accessible when CveShieldEnabled feature flag is enabled
+	CveVulnerabilities []GetDeploymentCveVulnerability1 `json:"cveVulnerabilities,omitempty"`
+	ErrorCode          *string                          `json:"errorCode,omitempty"`
+	ErrorLink          *string                          `json:"errorLink,omitempty"`
+	ErrorMessage       *string                          `json:"errorMessage,omitempty"`
+	ErrorStep          *string                          `json:"errorStep,omitempty"`
 	// Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
 	PassiveRegions    []string                      `json:"passiveRegions,omitempty"`
 	GitSource         *GetDeploymentGitSourceUnion1 `json:"gitSource,omitempty"`
@@ -11003,15 +11421,24 @@ type Lambdas1 struct {
 	OriginCacheRegion *string                       `json:"originCacheRegion,omitempty"`
 	// If set it overrides the `projectSettings.nodeVersion` for this deployment.
 	NodeVersion *GetDeploymentNodeVersion1 `json:"nodeVersion,omitempty"`
-	Project     *GetDeploymentProject1     `json:"project,omitempty"`
+	// The public project information associated with the deployment.
+	Project  *GetDeploymentProject1 `json:"project,omitempty"`
+	Prebuilt *bool                  `json:"prebuilt,omitempty"`
 	// Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - ROLLING: in the process of having production traffic gradually transitioned. - PROMOTED: has seen production traffic
-	ReadySubstate          *GetDeploymentReadySubstate1      `json:"readySubstate,omitempty"`
-	Regions                []string                          `json:"regions"`
-	SoftDeletedByRetention *bool                             `json:"softDeletedByRetention,omitempty"`
-	Source                 *GetDeploymentSource1             `json:"source,omitempty"`
-	Target                 *GetDeploymentTargetEnum1         `json:"target,omitempty"`
-	UndeletedAt            *float64                          `json:"undeletedAt,omitempty"`
-	URL                    string                            `json:"url"`
+	ReadySubstate *GetDeploymentReadySubstate1 `json:"readySubstate,omitempty"`
+	// The regions the deployment exists in
+	Regions []string `json:"regions"`
+	// flag to indicate if the deployment was deleted by retention policy
+	SoftDeletedByRetention *bool `json:"softDeletedByRetention,omitempty"`
+	// Where was the deployment created from
+	Source *GetDeploymentSource1 `json:"source,omitempty"`
+	// If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned. `null` value indicates the "preview" deployment.
+	Target *GetDeploymentTargetEnum1 `json:"target,omitempty"`
+	// A number containing the date when the deployment was undeleted at milliseconds
+	UndeletedAt *float64 `json:"undeletedAt,omitempty"`
+	// A string with the unique URL of the deployment
+	URL string `json:"url"`
+	// The platform version that was used to create the deployment.
 	Version                float64                           `json:"version"`
 	OidcTokenClaims        *GetDeploymentOidcTokenClaims1    `json:"oidcTokenClaims,omitempty"`
 	ProjectID              string                            `json:"projectId"`
@@ -11381,6 +11808,13 @@ func (o *Lambdas1) GetCanceledAt() *float64 {
 	return o.CanceledAt
 }
 
+func (o *Lambdas1) GetCveVulnerabilities() []GetDeploymentCveVulnerability1 {
+	if o == nil {
+		return nil
+	}
+	return o.CveVulnerabilities
+}
+
 func (o *Lambdas1) GetErrorCode() *string {
 	if o == nil {
 		return nil
@@ -11449,6 +11883,13 @@ func (o *Lambdas1) GetProject() *GetDeploymentProject1 {
 		return nil
 	}
 	return o.Project
+}
+
+func (o *Lambdas1) GetPrebuilt() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prebuilt
 }
 
 func (o *Lambdas1) GetReadySubstate() *GetDeploymentReadySubstate1 {
@@ -11596,6 +12037,27 @@ func (o *Lambdas1) GetGitRepo() *GetDeploymentGitRepoUnion {
 		return nil
 	}
 	return o.GitRepo
+}
+
+func (o *Lambdas1) GetGitRepoGitlab() *GetDeploymentGitRepoGitlab {
+	if v := o.GetGitRepo(); v != nil {
+		return v.GetDeploymentGitRepoGitlab
+	}
+	return nil
+}
+
+func (o *Lambdas1) GetGitRepoGithub() *GetDeploymentGitRepoGithub {
+	if v := o.GetGitRepo(); v != nil {
+		return v.GetDeploymentGitRepoGithub
+	}
+	return nil
+}
+
+func (o *Lambdas1) GetGitRepoBitbucket() *GetDeploymentGitRepoBitbucket {
+	if v := o.GetGitRepo(); v != nil {
+		return v.GetDeploymentGitRepoBitbucket
+	}
+	return nil
 }
 
 func (o *Lambdas1) GetFlags() *GetDeploymentFlagsUnion {

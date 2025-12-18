@@ -195,11 +195,7 @@ const vercel = new Vercel({
 });
 
 async function run() {
-  const result = await vercel.accessGroups.readAccessGroup({
-    idOrName: "ag_1a2b3c4d5e6f7g8h9i0j",
-    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
-    slug: "my-team-url-slug",
-  });
+  const result = await vercel.putV1BulkRedirects();
 
   console.log(result);
 }
@@ -285,7 +281,17 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [accessGroups](docs/sdks/accessgroups/README.md)
+### [Vercel SDK](docs/sdks/vercel/README.md)
+
+* [putV1BulkRedirects](docs/sdks/vercel/README.md#putv1bulkredirects)
+* [getV1BulkRedirects](docs/sdks/vercel/README.md#getv1bulkredirects) - Get the version history for a project's bulk redirects
+* [deleteV1BulkRedirects](docs/sdks/vercel/README.md#deletev1bulkredirects) - Deletes the provided redirects from the latest version of the projects' bulk redirects. Stages a new change with the new redirects and returns the alias for the new version in the response.
+* [patchV1BulkRedirects](docs/sdks/vercel/README.md#patchv1bulkredirects) - Edits a single redirect identified by its source path. Stages a new change with the modified redirect and returns the alias for the new version in the response.
+* [postV1BulkRedirectsRestore](docs/sdks/vercel/README.md#postv1bulkredirectsrestore) - Restores the provided redirects in the staging version to the value in the production version. If no production version exists, removes the redirects from staging.
+* [getV1BulkRedirectsVersions](docs/sdks/vercel/README.md#getv1bulkredirectsversions) - Get the version history for a project's bulk redirects
+* [postV1BulkRedirectsVersions](docs/sdks/vercel/README.md#postv1bulkredirectsversions) - Update a version by promoting staging to production or restoring a previous production version
+
+### [AccessGroups](docs/sdks/accessgroups/README.md)
 
 * [readAccessGroup](docs/sdks/accessgroups/README.md#readaccessgroup) - Reads an access group
 * [updateAccessGroup](docs/sdks/accessgroups/README.md#updateaccessgroup) - Update an access group
@@ -299,7 +305,7 @@ run();
 * [updateAccessGroupProject](docs/sdks/accessgroups/README.md#updateaccessgroupproject) - Update an access group project
 * [deleteAccessGroupProject](docs/sdks/accessgroups/README.md#deleteaccessgroupproject) - Delete an access group project
 
-### [aliases](docs/sdks/aliases/README.md)
+### [Aliases](docs/sdks/aliases/README.md)
 
 * [listDeploymentAliases](docs/sdks/aliases/README.md#listdeploymentaliases) - List Deployment Aliases
 * [assignAlias](docs/sdks/aliases/README.md#assignalias) - Assign an Alias
@@ -308,7 +314,7 @@ run();
 * [deleteAlias](docs/sdks/aliases/README.md#deletealias) - Delete an Alias
 * [patchUrlProtectionBypass](docs/sdks/aliases/README.md#patchurlprotectionbypass) - Update the protection bypass for a URL
 
-### [artifacts](docs/sdks/artifacts/README.md)
+### [Artifacts](docs/sdks/artifacts/README.md)
 
 * [recordEvents](docs/sdks/artifacts/README.md#recordevents) - Record an artifacts cache usage event
 * [status](docs/sdks/artifacts/README.md#status) - Get status of Remote Caching for this principal
@@ -317,7 +323,7 @@ run();
 * [artifactExists](docs/sdks/artifacts/README.md#artifactexists) - Check if a cache artifact exists
 * [artifactQuery](docs/sdks/artifacts/README.md#artifactquery) - Query information about an artifact
 
-### [authentication](docs/sdks/authentication/README.md)
+### [Authentication](docs/sdks/authentication/README.md)
 
 * [exchangeSsoToken](docs/sdks/authentication/README.md#exchangessotoken) - SSO Token Exchange
 * [listAuthTokens](docs/sdks/authentication/README.md#listauthtokens) - List Auth Tokens
@@ -325,14 +331,14 @@ run();
 * [getAuthToken](docs/sdks/authentication/README.md#getauthtoken) - Get Auth Token Metadata
 * [deleteAuthToken](docs/sdks/authentication/README.md#deleteauthtoken) - Delete an authentication token
 
-### [certs](docs/sdks/certs/README.md)
+### [Certs](docs/sdks/certs/README.md)
 
 * [getCertById](docs/sdks/certs/README.md#getcertbyid) - Get cert by id
 * [removeCert](docs/sdks/certs/README.md#removecert) - Remove cert
 * [issueCert](docs/sdks/certs/README.md#issuecert) - Issue a new cert
 * [uploadCert](docs/sdks/certs/README.md#uploadcert) - Upload a cert
 
-### [checks](docs/sdks/checks/README.md)
+### [Checks](docs/sdks/checks/README.md)
 
 * [createCheck](docs/sdks/checks/README.md#createcheck) - Creates a new Check
 * [getAllChecks](docs/sdks/checks/README.md#getallchecks) - Retrieve a list of all checks
@@ -340,7 +346,11 @@ run();
 * [updateCheck](docs/sdks/checks/README.md#updatecheck) - Update a check
 * [rerequestCheck](docs/sdks/checks/README.md#rerequestcheck) - Rerequest a check
 
-### [deployments](docs/sdks/deployments/README.md)
+### [Connect](docs/sdks/connect/README.md)
+
+* [updateStaticIps](docs/sdks/connect/README.md#updatestaticips) - Configures Static IPs for a project
+
+### [Deployments](docs/sdks/deployments/README.md)
 
 * [getDeploymentEvents](docs/sdks/deployments/README.md#getdeploymentevents) - Get deployment events
 * [updateIntegrationDeploymentAction](docs/sdks/deployments/README.md#updateintegrationdeploymentaction) - Update deployment integration action
@@ -353,32 +363,59 @@ run();
 * [getDeployments](docs/sdks/deployments/README.md#getdeployments) - List deployments
 * [deleteDeployment](docs/sdks/deployments/README.md#deletedeployment) - Delete a Deployment
 
-### [dns](docs/sdks/dns/README.md)
+### [Dns](docs/sdks/dns/README.md)
 
 * [getRecords](docs/sdks/dns/README.md#getrecords) - List existing DNS records
 * [createRecord](docs/sdks/dns/README.md#createrecord) - Create a DNS record
 * [updateRecord](docs/sdks/dns/README.md#updaterecord) - Update an existing DNS record
 * [removeRecord](docs/sdks/dns/README.md#removerecord) - Delete a DNS record
 
-### [domains](docs/sdks/domains/README.md)
+### [Domains](docs/sdks/domains/README.md)
 
-* [buyDomain](docs/sdks/domains/README.md#buydomain) - Purchase a domain
-* [checkDomainPrice](docs/sdks/domains/README.md#checkdomainprice) - Check the price for a domain
-* [checkDomainStatus](docs/sdks/domains/README.md#checkdomainstatus) - Check a Domain Availability
-* [getDomainTransfer](docs/sdks/domains/README.md#getdomaintransfer) - Get domain transfer info.
+* [checkDomainPrice](docs/sdks/domains/README.md#checkdomainprice) - Check the price for a domain (deprecated)
+* [checkDomainStatus](docs/sdks/domains/README.md#checkdomainstatus) - Check a Domain Availability (deprecated)
 * [getDomainConfig](docs/sdks/domains/README.md#getdomainconfig) - Get a Domain's configuration
 * [getDomain](docs/sdks/domains/README.md#getdomain) - Get Information for a Single Domain
 * [getDomains](docs/sdks/domains/README.md#getdomains) - List all the domains
-* [createOrTransferDomain](docs/sdks/domains/README.md#createortransferdomain) - Register or transfer-in a new Domain
+* [createOrTransferDomain](docs/sdks/domains/README.md#createortransferdomain) - Add an existing domain to the Vercel platform
 * [patchDomain](docs/sdks/domains/README.md#patchdomain) - Update or move apex domain
 * [deleteDomain](docs/sdks/domains/README.md#deletedomain) - Remove a domain by name
 
-### [edgeCache](docs/sdks/edgecache/README.md)
+### [DomainsRegistrar](docs/sdks/domainsregistrar/README.md)
+
+* [getSupportedTlds](docs/sdks/domainsregistrar/README.md#getsupportedtlds) - Get supported TLDs
+* [getTldPrice](docs/sdks/domainsregistrar/README.md#gettldprice) - Get TLD price data
+* [getDomainAvailability](docs/sdks/domainsregistrar/README.md#getdomainavailability) - Get availability for a domain
+* [getDomainPrice](docs/sdks/domainsregistrar/README.md#getdomainprice) - Get price data for a domain
+* [getBulkAvailability](docs/sdks/domainsregistrar/README.md#getbulkavailability) - Get availability for multiple domains
+* [getDomainAuthCode](docs/sdks/domainsregistrar/README.md#getdomainauthcode) - Get the auth code for a domain
+* [buySingleDomain](docs/sdks/domainsregistrar/README.md#buysingledomain) - Buy a domain
+* [buyDomains](docs/sdks/domainsregistrar/README.md#buydomains) - Buy multiple domains
+* [transferInDomain](docs/sdks/domainsregistrar/README.md#transferindomain) - Transfer-in a domain
+* [getDomainTransferIn](docs/sdks/domainsregistrar/README.md#getdomaintransferin) - Get a domain's transfer status
+* [renewDomain](docs/sdks/domainsregistrar/README.md#renewdomain) - Renew a domain
+* [updateDomainAutoRenew](docs/sdks/domainsregistrar/README.md#updatedomainautorenew) - Update auto-renew for a domain
+* [updateDomainNameservers](docs/sdks/domainsregistrar/README.md#updatedomainnameservers) - Update nameservers for a domain
+* [getContactInfoSchema](docs/sdks/domainsregistrar/README.md#getcontactinfoschema) - Get contact info schema
+* [getOrder](docs/sdks/domainsregistrar/README.md#getorder) - Get a domain order
+
+### [Drains](docs/sdks/drains/README.md)
+
+* [createDrain](docs/sdks/drains/README.md#createdrain) - Create a new Drain
+* [getDrains](docs/sdks/drains/README.md#getdrains) - Retrieve a list of all Drains
+* [deleteDrain](docs/sdks/drains/README.md#deletedrain) - Delete a drain
+* [getDrain](docs/sdks/drains/README.md#getdrain) - Find a Drain by id
+* [updateDrain](docs/sdks/drains/README.md#updatedrain) - Update an existing Drain
+* [testDrain](docs/sdks/drains/README.md#testdrain) - Validate Drain delivery configuration
+
+### [EdgeCache](docs/sdks/edgecache/README.md)
 
 * [invalidateByTags](docs/sdks/edgecache/README.md#invalidatebytags) - Invalidate by tag
 * [dangerouslyDeleteByTags](docs/sdks/edgecache/README.md#dangerouslydeletebytags) - Dangerously delete by tag
+* [invalidateBySrcImages](docs/sdks/edgecache/README.md#invalidatebysrcimages) - Invalidate by source image
+* [dangerouslyDeleteBySrcImages](docs/sdks/edgecache/README.md#dangerouslydeletebysrcimages) - Dangerously delete by source image
 
-### [edgeConfig](docs/sdks/edgeconfig/README.md)
+### [EdgeConfig](docs/sdks/edgeconfig/README.md)
 
 * [getEdgeConfigs](docs/sdks/edgeconfig/README.md#getedgeconfigs) - Get Edge Configs
 * [createEdgeConfig](docs/sdks/edgeconfig/README.md#createedgeconfig) - Create an Edge Config
@@ -398,15 +435,21 @@ run();
 * [getEdgeConfigBackup](docs/sdks/edgeconfig/README.md#getedgeconfigbackup) - Get Edge Config backup
 * [getEdgeConfigBackups](docs/sdks/edgeconfig/README.md#getedgeconfigbackups) - Get Edge Config backups
 
-### [environment](docs/sdks/environment/README.md)
+### [Environment](docs/sdks/environment/README.md)
 
+* [createSharedEnvVariable](docs/sdks/environment/README.md#createsharedenvvariable) - Create one or more shared environment variables
+* [listSharedEnvVariable](docs/sdks/environment/README.md#listsharedenvvariable) - Lists all Shared Environment Variables for a team
+* [updateSharedEnvVariable](docs/sdks/environment/README.md#updatesharedenvvariable) - Updates one or more shared environment variables
+* [deleteSharedEnvVariable](docs/sdks/environment/README.md#deletesharedenvvariable) - Delete one or more Env Var
+* [getSharedEnvVar](docs/sdks/environment/README.md#getsharedenvvar) - Retrieve the decrypted value of a Shared Environment Variable by id.
+* [unlinkSharedEnvVariable](docs/sdks/environment/README.md#unlinksharedenvvariable) - Disconnects a shared environment variable for a given project
 * [createCustomEnvironment](docs/sdks/environment/README.md#createcustomenvironment) - Create a custom environment for the current project.
 * [getV9ProjectsIdOrNameCustomEnvironments](docs/sdks/environment/README.md#getv9projectsidornamecustomenvironments) - Retrieve custom environments
 * [getCustomEnvironment](docs/sdks/environment/README.md#getcustomenvironment) - Retrieve a custom environment
 * [updateCustomEnvironment](docs/sdks/environment/README.md#updatecustomenvironment) - Update a custom environment
 * [removeCustomEnvironment](docs/sdks/environment/README.md#removecustomenvironment) - Remove a custom environment
 
-### [integrations](docs/sdks/integrations/README.md)
+### [Integrations](docs/sdks/integrations/README.md)
 
 * [updateIntegrationDeploymentAction](docs/sdks/integrations/README.md#updateintegrationdeploymentaction) - Update deployment integration action
 * [getBillingPlans](docs/sdks/integrations/README.md#getbillingplans) - List integration billing plans
@@ -417,18 +460,23 @@ run();
 * [getConfigurationProducts](docs/sdks/integrations/README.md#getconfigurationproducts) - List products for integration configuration
 * [createIntegrationStoreDirect](docs/sdks/integrations/README.md#createintegrationstoredirect) - Create integration store (free and paid plans)
 
-### [logDrains](docs/sdks/logdrains/README.md)
+### [LogDrains](docs/sdks/logdrains/README.md)
 
-* [getIntegrationLogDrains](docs/sdks/logdrains/README.md#getintegrationlogdrains) - Retrieves a list of Integration log drains
-* [createLogDrain](docs/sdks/logdrains/README.md#createlogdrain) - Creates a new Integration Log Drain
-* [deleteIntegrationLogDrain](docs/sdks/logdrains/README.md#deleteintegrationlogdrain) - Deletes the Integration log drain with the provided `id`
+* [getConfigurableLogDrain](docs/sdks/logdrains/README.md#getconfigurablelogdrain) - Retrieves a Configurable Log Drain (deprecated)
+* [deleteConfigurableLogDrain](docs/sdks/logdrains/README.md#deleteconfigurablelogdrain) - Deletes a Configurable Log Drain (deprecated)
+* [getAllLogDrains](docs/sdks/logdrains/README.md#getalllogdrains) - Retrieves a list of all the Log Drains (deprecated)
+* [createConfigurableLogDrain](docs/sdks/logdrains/README.md#createconfigurablelogdrain) - Creates a Configurable Log Drain (deprecated)
+* [getIntegrationLogDrains](docs/sdks/logdrains/README.md#getintegrationlogdrains) - Retrieves a list of Integration log drains (deprecated)
+* [createLogDrain](docs/sdks/logdrains/README.md#createlogdrain) - Creates a new Integration Log Drain (deprecated)
+* [deleteIntegrationLogDrain](docs/sdks/logdrains/README.md#deleteintegrationlogdrain) - Deletes the Integration log drain with the provided `id` (deprecated)
 
-### [logs](docs/sdks/logs/README.md)
+### [Logs](docs/sdks/logs/README.md)
 
 * [getRuntimeLogs](docs/sdks/logs/README.md#getruntimelogs) - Get logs for a deployment
 
-### [marketplace](docs/sdks/marketplace/README.md)
+### [Marketplace](docs/sdks/marketplace/README.md)
 
+* [updateInstallation](docs/sdks/marketplace/README.md#updateinstallation) - Update Installation
 * [getAccountInfo](docs/sdks/marketplace/README.md#getaccountinfo) - Get Account Information
 * [getMember](docs/sdks/marketplace/README.md#getmember) - Get Member Information
 * [createEvent](docs/sdks/marketplace/README.md#createevent) - Create Event
@@ -436,6 +484,7 @@ run();
 * [getIntegrationResource](docs/sdks/marketplace/README.md#getintegrationresource) - Get Integration Resource
 * [deleteIntegrationResource](docs/sdks/marketplace/README.md#deleteintegrationresource) - Delete Integration Resource
 * [importResource](docs/sdks/marketplace/README.md#importresource) - Import Resource
+* [updateResource](docs/sdks/marketplace/README.md#updateresource) - Update Resource
 * [submitBillingData](docs/sdks/marketplace/README.md#submitbillingdata) - Submit Billing Data
 * [submitInvoice](docs/sdks/marketplace/README.md#submitinvoice) - Submit Invoice
 * [getInvoice](docs/sdks/marketplace/README.md#getinvoice) - Get Invoice
@@ -450,13 +499,13 @@ run();
 * [createInstallationIntegrationEdgeConfig](docs/sdks/marketplace/README.md#createinstallationintegrationedgeconfig) - Get the data of a user-provided Edge Config
 * [updateInstallationIntegrationEdgeConfig](docs/sdks/marketplace/README.md#updateinstallationintegrationedgeconfig) - Push data into a user-provided Edge Config
 
-### [projectMembers](docs/sdks/projectmembers/README.md)
+### [ProjectMembers](docs/sdks/projectmembers/README.md)
 
 * [getProjectMembers](docs/sdks/projectmembers/README.md#getprojectmembers) - List project members
 * [addProjectMember](docs/sdks/projectmembers/README.md#addprojectmember) - Adds a new member to a project.
 * [removeProjectMember](docs/sdks/projectmembers/README.md#removeprojectmember) - Remove a Project Member
 
-### [projects](docs/sdks/projects/README.md)
+### [Projects](docs/sdks/projects/README.md)
 
 * [updateProjectDataCache](docs/sdks/projects/README.md#updateprojectdatacache) - Update the data cache feature
 * [getProjects](docs/sdks/projects/README.md#getprojects) - Retrieve a list of projects
@@ -476,6 +525,9 @@ run();
 * [removeProjectEnv](docs/sdks/projects/README.md#removeprojectenv) - Remove an environment variable
 * [editProjectEnv](docs/sdks/projects/README.md#editprojectenv) - Edit an environment variable
 * [batchRemoveProjectEnv](docs/sdks/projects/README.md#batchremoveprojectenv) - Batch remove environment variables
+* [uploadProjectClientCert](docs/sdks/projects/README.md#uploadprojectclientcert) - Upload client certificate for egress mTLS
+* [getProjectClientCerts](docs/sdks/projects/README.md#getprojectclientcerts) - Get client certificates for a project
+* [deleteProjectClientCert](docs/sdks/projects/README.md#deleteprojectclientcert) - Delete client certificate for egress mTLS
 * [createProjectTransferRequest](docs/sdks/projects/README.md#createprojecttransferrequest) - Create project transfer request
 * [acceptProjectTransferRequest](docs/sdks/projects/README.md#acceptprojecttransferrequest) - Accept project transfer request
 * [updateProjectProtectionBypass](docs/sdks/projects/README.md#updateprojectprotectionbypass) - Update Protection Bypass for Automation
@@ -484,7 +536,7 @@ run();
 * [pauseProject](docs/sdks/projects/README.md#pauseproject) - Pause a project
 * [unpauseProject](docs/sdks/projects/README.md#unpauseproject) - Unpause a project
 
-### [rollingRelease](docs/sdks/rollingrelease/README.md)
+### [RollingRelease](docs/sdks/rollingrelease/README.md)
 
 * [getRollingReleaseBillingStatus](docs/sdks/rollingrelease/README.md#getrollingreleasebillingstatus) - Get rolling release billing status
 * [getRollingReleaseConfig](docs/sdks/rollingrelease/README.md#getrollingreleaseconfig) - Get rolling release configuration
@@ -494,7 +546,7 @@ run();
 * [approveRollingReleaseStage](docs/sdks/rollingrelease/README.md#approverollingreleasestage) - Update the active rolling release to the next stage for a project
 * [completeRollingRelease](docs/sdks/rollingrelease/README.md#completerollingrelease) - Complete the rolling release for the project
 
-### [security](docs/sdks/security/README.md)
+### [Security](docs/sdks/security/README.md)
 
 * [updateAttackChallengeMode](docs/sdks/security/README.md#updateattackchallengemode) - Update Attack Challenge mode
 * [putFirewallConfig](docs/sdks/security/README.md#putfirewallconfig) - Put Firewall Configuration
@@ -504,8 +556,13 @@ run();
 * [getBypassIp](docs/sdks/security/README.md#getbypassip) - Read System Bypass
 * [addBypassIp](docs/sdks/security/README.md#addbypassip) - Create System Bypass Rule
 * [removeBypassIp](docs/sdks/security/README.md#removebypassip) - Remove System Bypass Rule
+* [getV1SecurityFirewallEvents](docs/sdks/security/README.md#getv1securityfirewallevents) - Read Firewall Actions by Project
 
-### [teams](docs/sdks/teams/README.md)
+### [StaticIps](docs/sdks/staticips/README.md)
+
+* [updateStaticIps](docs/sdks/staticips/README.md#updatestaticips) - Configures Static IPs for a project
+
+### [Teams](docs/sdks/teams/README.md)
 
 * [getTeamMembers](docs/sdks/teams/README.md#getteammembers) - List team members
 * [inviteUserToTeam](docs/sdks/teams/README.md#inviteusertoteam) - Invite a user
@@ -518,17 +575,17 @@ run();
 * [patchTeam](docs/sdks/teams/README.md#patchteam) - Update a Team
 * [getTeams](docs/sdks/teams/README.md#getteams) - List all teams
 * [createTeam](docs/sdks/teams/README.md#createteam) - Create a Team
+* [postTeamDsyncRoles](docs/sdks/teams/README.md#postteamdsyncroles) - Update Team Directory Sync Role Mappings
 * [deleteTeam](docs/sdks/teams/README.md#deleteteam) - Delete a Team
 * [deleteTeamInviteCode](docs/sdks/teams/README.md#deleteteaminvitecode) - Delete a Team invite code
 
-### [user](docs/sdks/user/README.md)
+### [User](docs/sdks/user/README.md)
 
 * [listUserEvents](docs/sdks/user/README.md#listuserevents) - List User Events
 * [getAuthUser](docs/sdks/user/README.md#getauthuser) - Get the User
 * [requestDelete](docs/sdks/user/README.md#requestdelete) - Delete User Account
 
-
-### [webhooks](docs/sdks/webhooks/README.md)
+### [Webhooks](docs/sdks/webhooks/README.md)
 
 * [createWebhook](docs/sdks/webhooks/README.md#createwebhook) - Creates a webhook
 * [getWebhooks](docs/sdks/webhooks/README.md#getwebhooks) - Get a list of webhooks
@@ -589,6 +646,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`checksGetCheck`](docs/sdks/checks/README.md#getcheck) - Get a single check
 - [`checksRerequestCheck`](docs/sdks/checks/README.md#rerequestcheck) - Rerequest a check
 - [`checksUpdateCheck`](docs/sdks/checks/README.md#updatecheck) - Update a check
+- [`connectUpdateStaticIps`](docs/sdks/connect/README.md#updatestaticips) - Configures Static IPs for a project
+- [`connectUpdateStaticIps`](docs/sdks/staticips/README.md#updatestaticips) - Configures Static IPs for a project
+- [`deleteV1BulkRedirects`](docs/sdks/vercel/README.md#deletev1bulkredirects) - Deletes the provided redirects from the latest version of the projects' bulk redirects. Stages a new change with the new redirects and returns the alias for the new version in the response.
 - [`deploymentsCancelDeployment`](docs/sdks/deployments/README.md#canceldeployment) - Cancel a deployment
 - [`deploymentsCreateDeployment`](docs/sdks/deployments/README.md#createdeployment) - Create a new deployment
 - [`deploymentsDeleteDeployment`](docs/sdks/deployments/README.md#deletedeployment) - Delete a Deployment
@@ -604,17 +664,38 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`dnsGetRecords`](docs/sdks/dns/README.md#getrecords) - List existing DNS records
 - [`dnsRemoveRecord`](docs/sdks/dns/README.md#removerecord) - Delete a DNS record
 - [`dnsUpdateRecord`](docs/sdks/dns/README.md#updaterecord) - Update an existing DNS record
-- [`domainsBuyDomain`](docs/sdks/domains/README.md#buydomain) - Purchase a domain
-- [`domainsCheckDomainPrice`](docs/sdks/domains/README.md#checkdomainprice) - Check the price for a domain
-- [`domainsCheckDomainStatus`](docs/sdks/domains/README.md#checkdomainstatus) - Check a Domain Availability
-- [`domainsCreateOrTransferDomain`](docs/sdks/domains/README.md#createortransferdomain) - Register or transfer-in a new Domain
+- [`domainsCheckDomainPrice`](docs/sdks/domains/README.md#checkdomainprice) - Check the price for a domain (deprecated)
+- [`domainsCheckDomainStatus`](docs/sdks/domains/README.md#checkdomainstatus) - Check a Domain Availability (deprecated)
+- [`domainsCreateOrTransferDomain`](docs/sdks/domains/README.md#createortransferdomain) - Add an existing domain to the Vercel platform
 - [`domainsDeleteDomain`](docs/sdks/domains/README.md#deletedomain) - Remove a domain by name
 - [`domainsGetDomain`](docs/sdks/domains/README.md#getdomain) - Get Information for a Single Domain
 - [`domainsGetDomainConfig`](docs/sdks/domains/README.md#getdomainconfig) - Get a Domain's configuration
 - [`domainsGetDomains`](docs/sdks/domains/README.md#getdomains) - List all the domains
-- [`domainsGetDomainTransfer`](docs/sdks/domains/README.md#getdomaintransfer) - Get domain transfer info.
 - [`domainsPatchDomain`](docs/sdks/domains/README.md#patchdomain) - Update or move apex domain
+- [`domainsRegistrarBuyDomains`](docs/sdks/domainsregistrar/README.md#buydomains) - Buy multiple domains
+- [`domainsRegistrarBuySingleDomain`](docs/sdks/domainsregistrar/README.md#buysingledomain) - Buy a domain
+- [`domainsRegistrarGetBulkAvailability`](docs/sdks/domainsregistrar/README.md#getbulkavailability) - Get availability for multiple domains
+- [`domainsRegistrarGetContactInfoSchema`](docs/sdks/domainsregistrar/README.md#getcontactinfoschema) - Get contact info schema
+- [`domainsRegistrarGetDomainAuthCode`](docs/sdks/domainsregistrar/README.md#getdomainauthcode) - Get the auth code for a domain
+- [`domainsRegistrarGetDomainAvailability`](docs/sdks/domainsregistrar/README.md#getdomainavailability) - Get availability for a domain
+- [`domainsRegistrarGetDomainPrice`](docs/sdks/domainsregistrar/README.md#getdomainprice) - Get price data for a domain
+- [`domainsRegistrarGetDomainTransferIn`](docs/sdks/domainsregistrar/README.md#getdomaintransferin) - Get a domain's transfer status
+- [`domainsRegistrarGetOrder`](docs/sdks/domainsregistrar/README.md#getorder) - Get a domain order
+- [`domainsRegistrarGetSupportedTlds`](docs/sdks/domainsregistrar/README.md#getsupportedtlds) - Get supported TLDs
+- [`domainsRegistrarGetTldPrice`](docs/sdks/domainsregistrar/README.md#gettldprice) - Get TLD price data
+- [`domainsRegistrarRenewDomain`](docs/sdks/domainsregistrar/README.md#renewdomain) - Renew a domain
+- [`domainsRegistrarTransferInDomain`](docs/sdks/domainsregistrar/README.md#transferindomain) - Transfer-in a domain
+- [`domainsRegistrarUpdateDomainAutoRenew`](docs/sdks/domainsregistrar/README.md#updatedomainautorenew) - Update auto-renew for a domain
+- [`domainsRegistrarUpdateDomainNameservers`](docs/sdks/domainsregistrar/README.md#updatedomainnameservers) - Update nameservers for a domain
+- [`drainsCreateDrain`](docs/sdks/drains/README.md#createdrain) - Create a new Drain
+- [`drainsDeleteDrain`](docs/sdks/drains/README.md#deletedrain) - Delete a drain
+- [`drainsGetDrain`](docs/sdks/drains/README.md#getdrain) - Find a Drain by id
+- [`drainsGetDrains`](docs/sdks/drains/README.md#getdrains) - Retrieve a list of all Drains
+- [`drainsTestDrain`](docs/sdks/drains/README.md#testdrain) - Validate Drain delivery configuration
+- [`drainsUpdateDrain`](docs/sdks/drains/README.md#updatedrain) - Update an existing Drain
+- [`edgeCacheDangerouslyDeleteBySrcImages`](docs/sdks/edgecache/README.md#dangerouslydeletebysrcimages) - Dangerously delete by source image
 - [`edgeCacheDangerouslyDeleteByTags`](docs/sdks/edgecache/README.md#dangerouslydeletebytags) - Dangerously delete by tag
+- [`edgeCacheInvalidateBySrcImages`](docs/sdks/edgecache/README.md#invalidatebysrcimages) - Invalidate by source image
 - [`edgeCacheInvalidateByTags`](docs/sdks/edgecache/README.md#invalidatebytags) - Invalidate by tag
 - [`edgeConfigCreateEdgeConfig`](docs/sdks/edgeconfig/README.md#createedgeconfig) - Create an Edge Config
 - [`edgeConfigCreateEdgeConfigToken`](docs/sdks/edgeconfig/README.md#createedgeconfigtoken) - Create an Edge Config token
@@ -634,10 +715,18 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`edgeConfigPatchEdgeConfigSchema`](docs/sdks/edgeconfig/README.md#patchedgeconfigschema) - Update Edge Config schema
 - [`edgeConfigUpdateEdgeConfig`](docs/sdks/edgeconfig/README.md#updateedgeconfig) - Update an Edge Config
 - [`environmentCreateCustomEnvironment`](docs/sdks/environment/README.md#createcustomenvironment) - Create a custom environment for the current project.
+- [`environmentCreateSharedEnvVariable`](docs/sdks/environment/README.md#createsharedenvvariable) - Create one or more shared environment variables
+- [`environmentDeleteSharedEnvVariable`](docs/sdks/environment/README.md#deletesharedenvvariable) - Delete one or more Env Var
 - [`environmentGetCustomEnvironment`](docs/sdks/environment/README.md#getcustomenvironment) - Retrieve a custom environment
+- [`environmentGetSharedEnvVar`](docs/sdks/environment/README.md#getsharedenvvar) - Retrieve the decrypted value of a Shared Environment Variable by id.
 - [`environmentGetV9ProjectsIdOrNameCustomEnvironments`](docs/sdks/environment/README.md#getv9projectsidornamecustomenvironments) - Retrieve custom environments
+- [`environmentListSharedEnvVariable`](docs/sdks/environment/README.md#listsharedenvvariable) - Lists all Shared Environment Variables for a team
 - [`environmentRemoveCustomEnvironment`](docs/sdks/environment/README.md#removecustomenvironment) - Remove a custom environment
+- [`environmentUnlinkSharedEnvVariable`](docs/sdks/environment/README.md#unlinksharedenvvariable) - Disconnects a shared environment variable for a given project
 - [`environmentUpdateCustomEnvironment`](docs/sdks/environment/README.md#updatecustomenvironment) - Update a custom environment
+- [`environmentUpdateSharedEnvVariable`](docs/sdks/environment/README.md#updatesharedenvvariable) - Updates one or more shared environment variables
+- [`getV1BulkRedirects`](docs/sdks/vercel/README.md#getv1bulkredirects) - Get the version history for a project's bulk redirects
+- [`getV1BulkRedirectsVersions`](docs/sdks/vercel/README.md#getv1bulkredirectsversions) - Get the version history for a project's bulk redirects
 - [`integrationsConnectIntegrationResourceToProject`](docs/sdks/integrations/README.md#connectintegrationresourcetoproject) - Connect integration resource to project
 - [`integrationsCreateIntegrationStoreDirect`](docs/sdks/integrations/README.md#createintegrationstoredirect) - Create integration store (free and paid plans)
 - [`integrationsDeleteConfiguration`](docs/sdks/integrations/README.md#deleteconfiguration) - Delete an integration configuration
@@ -645,9 +734,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`integrationsGetConfiguration`](docs/sdks/integrations/README.md#getconfiguration) - Retrieve an integration configuration
 - [`integrationsGetConfigurationProducts`](docs/sdks/integrations/README.md#getconfigurationproducts) - List products for integration configuration
 - [`integrationsGetConfigurations`](docs/sdks/integrations/README.md#getconfigurations) - Get configurations for the authenticated user or team
-- [`logDrainsCreateLogDrain`](docs/sdks/logdrains/README.md#createlogdrain) - Creates a new Integration Log Drain
-- [`logDrainsDeleteIntegrationLogDrain`](docs/sdks/logdrains/README.md#deleteintegrationlogdrain) - Deletes the Integration log drain with the provided `id`
-- [`logDrainsGetIntegrationLogDrains`](docs/sdks/logdrains/README.md#getintegrationlogdrains) - Retrieves a list of Integration log drains
+- [`logDrainsCreateConfigurableLogDrain`](docs/sdks/logdrains/README.md#createconfigurablelogdrain) - Creates a Configurable Log Drain (deprecated)
+- [`logDrainsCreateLogDrain`](docs/sdks/logdrains/README.md#createlogdrain) - Creates a new Integration Log Drain (deprecated)
+- [`logDrainsDeleteConfigurableLogDrain`](docs/sdks/logdrains/README.md#deleteconfigurablelogdrain) - Deletes a Configurable Log Drain (deprecated)
+- [`logDrainsDeleteIntegrationLogDrain`](docs/sdks/logdrains/README.md#deleteintegrationlogdrain) - Deletes the Integration log drain with the provided `id` (deprecated)
+- [`logDrainsGetAllLogDrains`](docs/sdks/logdrains/README.md#getalllogdrains) - Retrieves a list of all the Log Drains (deprecated)
+- [`logDrainsGetConfigurableLogDrain`](docs/sdks/logdrains/README.md#getconfigurablelogdrain) - Retrieves a Configurable Log Drain (deprecated)
+- [`logDrainsGetIntegrationLogDrains`](docs/sdks/logdrains/README.md#getintegrationlogdrains) - Retrieves a list of Integration log drains (deprecated)
 - [`logsGetRuntimeLogs`](docs/sdks/logs/README.md#getruntimelogs) - Get logs for a deployment
 - [`marketplaceCreateEvent`](docs/sdks/marketplace/README.md#createevent) - Create Event
 - [`marketplaceCreateInstallationIntegrationConfiguration`](docs/sdks/marketplace/README.md#createinstallationintegrationconfiguration) - Create one or multiple experimentation items
@@ -665,11 +758,16 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`marketplaceSubmitBillingData`](docs/sdks/marketplace/README.md#submitbillingdata) - Submit Billing Data
 - [`marketplaceSubmitInvoice`](docs/sdks/marketplace/README.md#submitinvoice) - Submit Invoice
 - [`marketplaceSubmitPrepaymentBalances`](docs/sdks/marketplace/README.md#submitprepaymentbalances) - Submit Prepayment Balances
+- [`marketplaceUpdateInstallation`](docs/sdks/marketplace/README.md#updateinstallation) - Update Installation
 - [`marketplaceUpdateInstallationIntegrationConfiguration`](docs/sdks/marketplace/README.md#updateinstallationintegrationconfiguration) - Patch an existing experimentation item
 - [`marketplaceUpdateInstallationIntegrationEdgeConfig`](docs/sdks/marketplace/README.md#updateinstallationintegrationedgeconfig) - Push data into a user-provided Edge Config
 - [`marketplaceUpdateInvoice`](docs/sdks/marketplace/README.md#updateinvoice) - Invoice Actions
+- [`marketplaceUpdateResource`](docs/sdks/marketplace/README.md#updateresource) - Update Resource
 - [`marketplaceUpdateResourceSecrets`](docs/sdks/marketplace/README.md#updateresourcesecrets) - Update Resource Secrets (Deprecated)
 - [`marketplaceUpdateResourceSecretsById`](docs/sdks/marketplace/README.md#updateresourcesecretsbyid) - Update Resource Secrets
+- [`patchV1BulkRedirects`](docs/sdks/vercel/README.md#patchv1bulkredirects) - Edits a single redirect identified by its source path. Stages a new change with the modified redirect and returns the alias for the new version in the response.
+- [`postV1BulkRedirectsRestore`](docs/sdks/vercel/README.md#postv1bulkredirectsrestore) - Restores the provided redirects in the staging version to the value in the production version. If no production version exists, removes the redirects from staging.
+- [`postV1BulkRedirectsVersions`](docs/sdks/vercel/README.md#postv1bulkredirectsversions) - Update a version by promoting staging to production or restoring a previous production version
 - [`projectMembersAddProjectMember`](docs/sdks/projectmembers/README.md#addprojectmember) - Adds a new member to a project.
 - [`projectMembersGetProjectMembers`](docs/sdks/projectmembers/README.md#getprojectmembers) - List project members
 - [`projectMembersRemoveProjectMember`](docs/sdks/projectmembers/README.md#removeprojectmember) - Remove a Project Member
@@ -680,8 +778,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`projectsCreateProjectEnv`](docs/sdks/projects/README.md#createprojectenv) - Create one or more environment variables
 - [`projectsCreateProjectTransferRequest`](docs/sdks/projects/README.md#createprojecttransferrequest) - Create project transfer request
 - [`projectsDeleteProject`](docs/sdks/projects/README.md#deleteproject) - Delete a Project
+- [`projectsDeleteProjectClientCert`](docs/sdks/projects/README.md#deleteprojectclientcert) - Delete client certificate for egress mTLS
 - [`projectsEditProjectEnv`](docs/sdks/projects/README.md#editprojectenv) - Edit an environment variable
 - [`projectsFilterProjectEnvs`](docs/sdks/projects/README.md#filterprojectenvs) - Retrieve the environment variables of a project by id or name
+- [`projectsGetProjectClientCerts`](docs/sdks/projects/README.md#getprojectclientcerts) - Get client certificates for a project
 - [`projectsGetProjectDomain`](docs/sdks/projects/README.md#getprojectdomain) - Get a project domain
 - [`projectsGetProjectDomains`](docs/sdks/projects/README.md#getprojectdomains) - Retrieve project domains by project by id or name
 - [`projectsGetProjectEnv`](docs/sdks/projects/README.md#getprojectenv) - Retrieve the decrypted value of an environment variable of a project by id
@@ -697,7 +797,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`projectsUpdateProjectDataCache`](docs/sdks/projects/README.md#updateprojectdatacache) - Update the data cache feature
 - [`projectsUpdateProjectDomain`](docs/sdks/projects/README.md#updateprojectdomain) - Update a project domain
 - [`projectsUpdateProjectProtectionBypass`](docs/sdks/projects/README.md#updateprojectprotectionbypass) - Update Protection Bypass for Automation
+- [`projectsUploadProjectClientCert`](docs/sdks/projects/README.md#uploadprojectclientcert) - Upload client certificate for egress mTLS
 - [`projectsVerifyProjectDomain`](docs/sdks/projects/README.md#verifyprojectdomain) - Verify project domain
+- [`putV1BulkRedirects`](docs/sdks/vercel/README.md#putv1bulkredirects)
 - [`rollingReleaseApproveRollingReleaseStage`](docs/sdks/rollingrelease/README.md#approverollingreleasestage) - Update the active rolling release to the next stage for a project
 - [`rollingReleaseCompleteRollingRelease`](docs/sdks/rollingrelease/README.md#completerollingrelease) - Complete the rolling release for the project
 - [`rollingReleaseDeleteRollingReleaseConfig`](docs/sdks/rollingrelease/README.md#deleterollingreleaseconfig) - Delete rolling release configuration
@@ -709,6 +811,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`securityGetActiveAttackStatus`](docs/sdks/security/README.md#getactiveattackstatus) - Read active attack data
 - [`securityGetBypassIp`](docs/sdks/security/README.md#getbypassip) - Read System Bypass
 - [`securityGetFirewallConfig`](docs/sdks/security/README.md#getfirewallconfig) - Read Firewall Configuration
+- [`securityGetV1SecurityFirewallEvents`](docs/sdks/security/README.md#getv1securityfirewallevents) - Read Firewall Actions by Project
 - [`securityPutFirewallConfig`](docs/sdks/security/README.md#putfirewallconfig) - Put Firewall Configuration
 - [`securityRemoveBypassIp`](docs/sdks/security/README.md#removebypassip) - Remove System Bypass Rule
 - [`securityUpdateAttackChallengeMode`](docs/sdks/security/README.md#updateattackchallengemode) - Update Attack Challenge mode
@@ -723,6 +826,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`teamsInviteUserToTeam`](docs/sdks/teams/README.md#inviteusertoteam) - Invite a user
 - [`teamsJoinTeam`](docs/sdks/teams/README.md#jointeam) - Join a team
 - [`teamsPatchTeam`](docs/sdks/teams/README.md#patchteam) - Update a Team
+- [`teamsPostTeamDsyncRoles`](docs/sdks/teams/README.md#postteamdsyncroles) - Update Team Directory Sync Role Mappings
 - [`teamsRemoveTeamMember`](docs/sdks/teams/README.md#removeteammember) - Remove a Team Member
 - [`teamsRequestAccessToTeam`](docs/sdks/teams/README.md#requestaccesstoteam) - Request access to a team
 - [`teamsUpdateTeamMember`](docs/sdks/teams/README.md#updateteammember) - Update a Team Member
@@ -789,16 +893,10 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Vercel } from "@vercel/sdk";
 
-const vercel = new Vercel({
-  bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
-});
+const vercel = new Vercel();
 
 async function run() {
-  const result = await vercel.accessGroups.readAccessGroup({
-    idOrName: "ag_1a2b3c4d5e6f7g8h9i0j",
-    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
-    slug: "my-team-url-slug",
-  }, {
+  const result = await vercel.putV1BulkRedirects({
     retries: {
       strategy: "backoff",
       backoff: {
@@ -833,15 +931,10 @@ const vercel = new Vercel({
     },
     retryConnectionErrors: false,
   },
-  bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 async function run() {
-  const result = await vercel.accessGroups.readAccessGroup({
-    idOrName: "ag_1a2b3c4d5e6f7g8h9i0j",
-    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
-    slug: "my-team-url-slug",
-  });
+  const result = await vercel.putV1BulkRedirects();
 
   console.log(result);
 }
@@ -871,17 +964,11 @@ import { Vercel } from "@vercel/sdk";
 import { VercelBadRequestError } from "@vercel/sdk/models/vercelbadrequesterror.js";
 import { VercelError } from "@vercel/sdk/models/vercelerror.js.js";
 
-const vercel = new Vercel({
-  bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
-});
+const vercel = new Vercel();
 
 async function run() {
   try {
-    const result = await vercel.accessGroups.readAccessGroup({
-      idOrName: "ag_1a2b3c4d5e6f7g8h9i0j",
-      teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
-      slug: "my-team-url-slug",
-    });
+    const result = await vercel.putV1BulkRedirects();
 
     console.log(result);
   } catch (error) {
@@ -910,7 +997,7 @@ run();
   * [`VercelBadRequestError`](./src/models/vercelbadrequesterror.ts): Status code `400`. *
   * [`VercelForbiddenError`](./src/models/vercelforbiddenerror.ts): Status code `401`. *
 
-<details><summary>Less common errors (8)</summary>
+<details><summary>Less common errors (12)</summary>
 
 <br />
 
@@ -923,8 +1010,12 @@ run();
 
 
 **Inherit from [`VercelError`](./src/models/vercelerror.ts)**:
-* [`VercelNotFoundError`](./src/models/vercelnotfounderror.ts): Status code `404`. Applicable to 112 of 180 methods.*
-* [`VercelRateLimitError`](./src/models/vercelratelimiterror.ts): . Status code `429`. Applicable to 5 of 180 methods.*
+* [`VercelNotFoundError`](./src/models/vercelnotfounderror.ts): Status code `404`. Applicable to 142 of 227 methods.*
+* [`VercelRateLimitError`](./src/models/vercelratelimiterror.ts): Status code `429`. Applicable to 20 of 227 methods.*
+* [`NotAuthorizedForScope`](./src/models/notauthorizedforscope.ts): NotAuthorizedForScope. Status code `403`. Applicable to 15 of 227 methods.*
+* [`InternalServerError`](./src/models/internalservererror.ts): InternalServerError. Status code `500`. Applicable to 15 of 227 methods.*
+* [`Forbidden`](./src/models/forbidden.ts): NotAuthorizedForScope. Status code `403`. Applicable to 9 of 227 methods.*
+* [`DomainCannotBeTransferedOutUntil`](./src/models/domaincannotbetransferedoutuntil.ts): The domain cannot be transfered out until the specified date. Status code `409`. Applicable to 1 of 227 methods.*
 * [`ResponseValidationError`](./src/models/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -943,15 +1034,10 @@ import { Vercel } from "@vercel/sdk";
 
 const vercel = new Vercel({
   serverURL: "https://api.vercel.com",
-  bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
 });
 
 async function run() {
-  const result = await vercel.accessGroups.readAccessGroup({
-    idOrName: "ag_1a2b3c4d5e6f7g8h9i0j",
-    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
-    slug: "my-team-url-slug",
-  });
+  const result = await vercel.putV1BulkRedirects();
 
   console.log(result);
 }

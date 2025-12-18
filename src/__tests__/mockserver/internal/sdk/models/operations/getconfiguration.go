@@ -40,39 +40,45 @@ func (o *GetConfigurationRequest) GetSlug() *string {
 	return o.Slug
 }
 
-// GetConfigurationSource2 - Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-type GetConfigurationSource2 string
+// GetConfigurationStatus2 - The configuration status. Optional. If not defined, assume 'ready'.
+type GetConfigurationStatus2 string
 
 const (
-	GetConfigurationSource2Marketplace    GetConfigurationSource2 = "marketplace"
-	GetConfigurationSource2DeployButton   GetConfigurationSource2 = "deploy-button"
-	GetConfigurationSource2External       GetConfigurationSource2 = "external"
-	GetConfigurationSource2V0             GetConfigurationSource2 = "v0"
-	GetConfigurationSource2ResourceClaims GetConfigurationSource2 = "resource-claims"
+	GetConfigurationStatus2Pending     GetConfigurationStatus2 = "pending"
+	GetConfigurationStatus2Ready       GetConfigurationStatus2 = "ready"
+	GetConfigurationStatus2Onboarding  GetConfigurationStatus2 = "onboarding"
+	GetConfigurationStatus2Suspended   GetConfigurationStatus2 = "suspended"
+	GetConfigurationStatus2Resumed     GetConfigurationStatus2 = "resumed"
+	GetConfigurationStatus2Error       GetConfigurationStatus2 = "error"
+	GetConfigurationStatus2Uninstalled GetConfigurationStatus2 = "uninstalled"
 )
 
-func (e GetConfigurationSource2) ToPointer() *GetConfigurationSource2 {
+func (e GetConfigurationStatus2) ToPointer() *GetConfigurationStatus2 {
 	return &e
 }
-func (e *GetConfigurationSource2) UnmarshalJSON(data []byte) error {
+func (e *GetConfigurationStatus2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
-	case "marketplace":
+	case "pending":
 		fallthrough
-	case "deploy-button":
+	case "ready":
 		fallthrough
-	case "external":
+	case "onboarding":
 		fallthrough
-	case "v0":
+	case "suspended":
 		fallthrough
-	case "resource-claims":
-		*e = GetConfigurationSource2(v)
+	case "resumed":
+		fallthrough
+	case "error":
+		fallthrough
+	case "uninstalled":
+		*e = GetConfigurationStatus2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetConfigurationSource2: %v", v)
+		return fmt.Errorf("invalid value for GetConfigurationStatus2: %v", v)
 	}
 }
 
@@ -176,10 +182,14 @@ type GetConfigurationIntegrationConfiguration2 struct {
 	IntegrationID string `json:"integrationId"`
 	// The user or team ID that owns the configuration
 	OwnerID string `json:"ownerId"`
+	// The configuration status. Optional. If not defined, assume 'ready'.
+	Status *GetConfigurationStatus2 `json:"status,omitempty"`
+	// An external identifier defined by the integration vendor.
+	ExternalID *string `json:"externalId,omitempty"`
 	// When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
 	Projects []string `json:"projects,omitempty"`
 	// Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-	Source *GetConfigurationSource2 `json:"source,omitempty"`
+	Source *string `json:"source,omitempty"`
 	// The slug of the integration the configuration is created for.
 	Slug string `json:"slug"`
 	// When the configuration was created for a team, this will show the ID of the team.
@@ -248,6 +258,20 @@ func (o *GetConfigurationIntegrationConfiguration2) GetOwnerID() string {
 	return o.OwnerID
 }
 
+func (o *GetConfigurationIntegrationConfiguration2) GetStatus() *GetConfigurationStatus2 {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *GetConfigurationIntegrationConfiguration2) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
 func (o *GetConfigurationIntegrationConfiguration2) GetProjects() []string {
 	if o == nil {
 		return nil
@@ -255,7 +279,7 @@ func (o *GetConfigurationIntegrationConfiguration2) GetProjects() []string {
 	return o.Projects
 }
 
-func (o *GetConfigurationIntegrationConfiguration2) GetSource() *GetConfigurationSource2 {
+func (o *GetConfigurationIntegrationConfiguration2) GetSource() *string {
 	if o == nil {
 		return nil
 	}
@@ -369,9 +393,9 @@ func (e *ProjectSelection) UnmarshalJSON(data []byte) error {
 type GetConfigurationLevel string
 
 const (
+	GetConfigurationLevelError GetConfigurationLevel = "error"
 	GetConfigurationLevelInfo  GetConfigurationLevel = "info"
 	GetConfigurationLevelWarn  GetConfigurationLevel = "warn"
-	GetConfigurationLevelError GetConfigurationLevel = "error"
 )
 
 func (e GetConfigurationLevel) ToPointer() *GetConfigurationLevel {
@@ -383,11 +407,11 @@ func (e *GetConfigurationLevel) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "error":
+		fallthrough
 	case "info":
 		fallthrough
 	case "warn":
-		fallthrough
-	case "error":
 		*e = GetConfigurationLevel(v)
 		return nil
 	default:
@@ -892,8 +916,8 @@ func (o *TransferRequestTransferToMarketplace) GetAuthorizationID() *string {
 type TransferRequestUnionType string
 
 const (
-	TransferRequestUnionTypeTransferRequestTransferToMarketplace   TransferRequestUnionType = "transferRequest_TransferToMarketplace"
-	TransferRequestUnionTypeTransferRequestTransferFromMarketplace TransferRequestUnionType = "transferRequest_TransferFromMarketplace"
+	TransferRequestUnionTypeTransferToMarketplace   TransferRequestUnionType = "transfer-to-marketplace"
+	TransferRequestUnionTypeTransferFromMarketplace TransferRequestUnionType = "transfer-from-marketplace"
 )
 
 type TransferRequest struct {
@@ -903,37 +927,59 @@ type TransferRequest struct {
 	Type TransferRequestUnionType
 }
 
-func CreateTransferRequestTransferRequestTransferToMarketplace(transferRequestTransferToMarketplace TransferRequestTransferToMarketplace) TransferRequest {
-	typ := TransferRequestUnionTypeTransferRequestTransferToMarketplace
+func CreateTransferRequestTransferToMarketplace(transferToMarketplace TransferRequestTransferToMarketplace) TransferRequest {
+	typ := TransferRequestUnionTypeTransferToMarketplace
+
+	typStr := KindTransferToMarketplace(typ)
+	transferToMarketplace.Kind = typStr
 
 	return TransferRequest{
-		TransferRequestTransferToMarketplace: &transferRequestTransferToMarketplace,
+		TransferRequestTransferToMarketplace: &transferToMarketplace,
 		Type:                                 typ,
 	}
 }
 
-func CreateTransferRequestTransferRequestTransferFromMarketplace(transferRequestTransferFromMarketplace TransferRequestTransferFromMarketplace) TransferRequest {
-	typ := TransferRequestUnionTypeTransferRequestTransferFromMarketplace
+func CreateTransferRequestTransferFromMarketplace(transferFromMarketplace TransferRequestTransferFromMarketplace) TransferRequest {
+	typ := TransferRequestUnionTypeTransferFromMarketplace
+
+	typStr := KindTransferFromMarketplace(typ)
+	transferFromMarketplace.Kind = typStr
 
 	return TransferRequest{
-		TransferRequestTransferFromMarketplace: &transferRequestTransferFromMarketplace,
+		TransferRequestTransferFromMarketplace: &transferFromMarketplace,
 		Type:                                   typ,
 	}
 }
 
 func (u *TransferRequest) UnmarshalJSON(data []byte) error {
 
-	var transferRequestTransferToMarketplace TransferRequestTransferToMarketplace = TransferRequestTransferToMarketplace{}
-	if err := utils.UnmarshalJSON(data, &transferRequestTransferToMarketplace, "", true, nil); err == nil {
-		u.TransferRequestTransferToMarketplace = &transferRequestTransferToMarketplace
-		u.Type = TransferRequestUnionTypeTransferRequestTransferToMarketplace
-		return nil
+	type discriminator struct {
+		Kind string `json:"kind"`
 	}
 
-	var transferRequestTransferFromMarketplace TransferRequestTransferFromMarketplace = TransferRequestTransferFromMarketplace{}
-	if err := utils.UnmarshalJSON(data, &transferRequestTransferFromMarketplace, "", true, nil); err == nil {
-		u.TransferRequestTransferFromMarketplace = &transferRequestTransferFromMarketplace
-		u.Type = TransferRequestUnionTypeTransferRequestTransferFromMarketplace
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Kind {
+	case "transfer-to-marketplace":
+		transferRequestTransferToMarketplace := new(TransferRequestTransferToMarketplace)
+		if err := utils.UnmarshalJSON(data, &transferRequestTransferToMarketplace, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Kind == transfer-to-marketplace) type TransferRequestTransferToMarketplace within TransferRequest: %w", string(data), err)
+		}
+
+		u.TransferRequestTransferToMarketplace = transferRequestTransferToMarketplace
+		u.Type = TransferRequestUnionTypeTransferToMarketplace
+		return nil
+	case "transfer-from-marketplace":
+		transferRequestTransferFromMarketplace := new(TransferRequestTransferFromMarketplace)
+		if err := utils.UnmarshalJSON(data, &transferRequestTransferFromMarketplace, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Kind == transfer-from-marketplace) type TransferRequestTransferFromMarketplace within TransferRequest: %w", string(data), err)
+		}
+
+		u.TransferRequestTransferFromMarketplace = transferRequestTransferFromMarketplace
+		u.Type = TransferRequestUnionTypeTransferFromMarketplace
 		return nil
 	}
 
@@ -990,42 +1036,6 @@ func (e *GetConfigurationDisabledReason1) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// GetConfigurationSource1 - Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-type GetConfigurationSource1 string
-
-const (
-	GetConfigurationSource1Marketplace    GetConfigurationSource1 = "marketplace"
-	GetConfigurationSource1DeployButton   GetConfigurationSource1 = "deploy-button"
-	GetConfigurationSource1External       GetConfigurationSource1 = "external"
-	GetConfigurationSource1V0             GetConfigurationSource1 = "v0"
-	GetConfigurationSource1ResourceClaims GetConfigurationSource1 = "resource-claims"
-)
-
-func (e GetConfigurationSource1) ToPointer() *GetConfigurationSource1 {
-	return &e
-}
-func (e *GetConfigurationSource1) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "marketplace":
-		fallthrough
-	case "deploy-button":
-		fallthrough
-	case "external":
-		fallthrough
-	case "v0":
-		fallthrough
-	case "resource-claims":
-		*e = GetConfigurationSource1(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for GetConfigurationSource1: %v", v)
-	}
-}
-
 // GetConfigurationInstallationType1 - Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
 type GetConfigurationInstallationType1 string
 
@@ -1050,6 +1060,48 @@ func (e *GetConfigurationInstallationType1) UnmarshalJSON(data []byte) error {
 		return nil
 	default:
 		return fmt.Errorf("invalid value for GetConfigurationInstallationType1: %v", v)
+	}
+}
+
+// GetConfigurationStatus1 - The configuration status. Optional. If not defined, assume 'ready'.
+type GetConfigurationStatus1 string
+
+const (
+	GetConfigurationStatus1Pending     GetConfigurationStatus1 = "pending"
+	GetConfigurationStatus1Ready       GetConfigurationStatus1 = "ready"
+	GetConfigurationStatus1Onboarding  GetConfigurationStatus1 = "onboarding"
+	GetConfigurationStatus1Suspended   GetConfigurationStatus1 = "suspended"
+	GetConfigurationStatus1Resumed     GetConfigurationStatus1 = "resumed"
+	GetConfigurationStatus1Error       GetConfigurationStatus1 = "error"
+	GetConfigurationStatus1Uninstalled GetConfigurationStatus1 = "uninstalled"
+)
+
+func (e GetConfigurationStatus1) ToPointer() *GetConfigurationStatus1 {
+	return &e
+}
+func (e *GetConfigurationStatus1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "pending":
+		fallthrough
+	case "ready":
+		fallthrough
+	case "onboarding":
+		fallthrough
+	case "suspended":
+		fallthrough
+	case "resumed":
+		fallthrough
+	case "error":
+		fallthrough
+	case "uninstalled":
+		*e = GetConfigurationStatus1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for GetConfigurationStatus1: %v", v)
 	}
 }
 
@@ -1107,13 +1159,17 @@ type GetConfigurationIntegrationConfiguration1 struct {
 	DisabledAt     *float64                         `json:"disabledAt,omitempty"`
 	DisabledReason *GetConfigurationDisabledReason1 `json:"disabledReason,omitempty"`
 	// Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-	Source                    *GetConfigurationSource1 `json:"source,omitempty"`
-	CanConfigureOpenTelemetry *bool                    `json:"canConfigureOpenTelemetry,omitempty"`
+	Source                    *string `json:"source,omitempty"`
+	CanConfigureOpenTelemetry *bool   `json:"canConfigureOpenTelemetry,omitempty"`
 	// Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
 	InstallationType *GetConfigurationInstallationType1 `json:"installationType,omitempty"`
 	// A timestamp that tells you when the configuration deletion has been started for cases when the deletion needs to be settled/approved by partners, such as when marketplace invoices have been paid.
-	DeleteRequestedAt *float64                                      `json:"deleteRequestedAt,omitempty"`
-	Type              GetConfigurationTypeIntegrationConfiguration1 `json:"type"`
+	DeleteRequestedAt *float64 `json:"deleteRequestedAt,omitempty"`
+	// The configuration status. Optional. If not defined, assume 'ready'.
+	Status *GetConfigurationStatus1 `json:"status,omitempty"`
+	// An external identifier defined by the integration vendor.
+	ExternalID *string                                       `json:"externalId,omitempty"`
+	Type       GetConfigurationTypeIntegrationConfiguration1 `json:"type"`
 	// A timestamp that tells you when the configuration was deleted.
 	DeletedAt *float64 `json:"deletedAt,omitempty"`
 }
@@ -1148,6 +1204,14 @@ func (o *GetConfigurationIntegrationConfiguration1) GetTransferRequest() Transfe
 		return TransferRequest{}
 	}
 	return o.TransferRequest
+}
+
+func (o *GetConfigurationIntegrationConfiguration1) GetTransferRequestTransferToMarketplace() *TransferRequestTransferToMarketplace {
+	return o.GetTransferRequest().TransferRequestTransferToMarketplace
+}
+
+func (o *GetConfigurationIntegrationConfiguration1) GetTransferRequestTransferFromMarketplace() *TransferRequestTransferFromMarketplace {
+	return o.GetTransferRequest().TransferRequestTransferFromMarketplace
 }
 
 func (o *GetConfigurationIntegrationConfiguration1) GetProjects() []string {
@@ -1241,7 +1305,7 @@ func (o *GetConfigurationIntegrationConfiguration1) GetDisabledReason() *GetConf
 	return o.DisabledReason
 }
 
-func (o *GetConfigurationIntegrationConfiguration1) GetSource() *GetConfigurationSource1 {
+func (o *GetConfigurationIntegrationConfiguration1) GetSource() *string {
 	if o == nil {
 		return nil
 	}
@@ -1267,6 +1331,20 @@ func (o *GetConfigurationIntegrationConfiguration1) GetDeleteRequestedAt() *floa
 		return nil
 	}
 	return o.DeleteRequestedAt
+}
+
+func (o *GetConfigurationIntegrationConfiguration1) GetStatus() *GetConfigurationStatus1 {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *GetConfigurationIntegrationConfiguration1) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
 }
 
 func (o *GetConfigurationIntegrationConfiguration1) GetType() GetConfigurationTypeIntegrationConfiguration1 {

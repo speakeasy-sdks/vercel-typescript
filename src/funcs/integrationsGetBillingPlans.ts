@@ -125,8 +125,10 @@ async function $do(
   )(pathParams);
 
   const query = encodeFormQuery({
+    "integrationConfigurationId": payload.integrationConfigurationId,
     "metadata": payload.metadata,
     "slug": payload.slug,
+    "source": payload.source,
     "teamId": payload.teamId,
   });
 
@@ -142,7 +144,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "getBillingPlans",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

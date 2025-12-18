@@ -44,9 +44,13 @@ func (o *PatchDomainRequestBody2) GetDestination() *string {
 // PatchDomainRequestBody1 - update
 type PatchDomainRequestBody1 struct {
 	Op *string `json:"op,omitempty"`
-	// Specifies whether domain should be renewed.
+	// This field is deprecated. Please use PATCH /v1/registrar/domains/{domainName}/auto-renew instead.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Renew *bool `json:"renew,omitempty"`
-	// The custom nameservers for this project.
+	// This field is deprecated. Please use PATCH /v1/registrar/domains/{domainName}/nameservers instead.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	CustomNameservers []string `json:"customNameservers,omitempty"`
 	// Specifies whether this is a DNS zone that intends to use Vercel's nameservers.
 	Zone *bool `json:"zone,omitempty"`
@@ -159,8 +163,8 @@ type PatchDomainRequest struct {
 	// The Team identifier to perform the request on behalf of.
 	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 	// The Team slug to perform the request on behalf of.
-	Slug        *string                `queryParam:"style=form,explode=true,name=slug"`
-	RequestBody PatchDomainRequestBody `request:"mediaType=application/json"`
+	Slug *string                `queryParam:"style=form,explode=true,name=slug"`
+	Body PatchDomainRequestBody `request:"mediaType=application/json"`
 }
 
 func (o *PatchDomainRequest) GetDomain() string {
@@ -184,11 +188,11 @@ func (o *PatchDomainRequest) GetSlug() *string {
 	return o.Slug
 }
 
-func (o *PatchDomainRequest) GetRequestBody() PatchDomainRequestBody {
+func (o *PatchDomainRequest) GetBody() PatchDomainRequestBody {
 	if o == nil {
 		return PatchDomainRequestBody{}
 	}
-	return o.RequestBody
+	return o.Body
 }
 
 type PatchDomainResponseBody3 struct {

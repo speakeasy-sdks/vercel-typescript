@@ -8,17 +8,15 @@ The payload of the event, if requested.
 import { ThirtySix } from "@vercel/sdk/models/userevent.js";
 
 let value: ThirtySix = {
-  project: {
+  team: {
+    id: "<id>",
     name: "<value>",
   },
-  job: {
-    deployHook: {
-      createdAt: 3393.49,
-      id: "<id>",
-      name: "<value>",
-      ref: "<value>",
-    },
-    state: "Wisconsin",
+  configuration: {
+    id: "<id>",
+  },
+  project: {
+    id: "<id>",
   },
 };
 ```
@@ -27,5 +25,7 @@ let value: ThirtySix = {
 
 | Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `team`                                                                     | [models.UserEventPayload36Team](../models/usereventpayload36team.md)       | :heavy_check_mark:                                                         | N/A                                                                        |
+| `configuration`                                                            | [models.PayloadConfiguration](../models/payloadconfiguration.md)           | :heavy_check_mark:                                                         | N/A                                                                        |
 | `project`                                                                  | [models.UserEventPayload36Project](../models/usereventpayload36project.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `job`                                                                      | [models.Job](../models/job.md)                                             | :heavy_check_mark:                                                         | N/A                                                                        |
+| `buildsEnabled`                                                            | *boolean*                                                                  | :heavy_minus_sign:                                                         | N/A                                                                        |

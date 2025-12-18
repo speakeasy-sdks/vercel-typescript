@@ -33,8 +33,8 @@ type CreateEdgeConfigRequest struct {
 	// The Team identifier to perform the request on behalf of.
 	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 	// The Team slug to perform the request on behalf of.
-	Slug        *string                     `queryParam:"style=form,explode=true,name=slug"`
-	RequestBody CreateEdgeConfigRequestBody `request:"mediaType=application/json"`
+	Slug *string                     `queryParam:"style=form,explode=true,name=slug"`
+	Body CreateEdgeConfigRequestBody `request:"mediaType=application/json"`
 }
 
 func (o *CreateEdgeConfigRequest) GetTeamID() *string {
@@ -51,11 +51,11 @@ func (o *CreateEdgeConfigRequest) GetSlug() *string {
 	return o.Slug
 }
 
-func (o *CreateEdgeConfigRequest) GetRequestBody() CreateEdgeConfigRequestBody {
+func (o *CreateEdgeConfigRequest) GetBody() CreateEdgeConfigRequestBody {
 	if o == nil {
 		return CreateEdgeConfigRequestBody{}
 	}
-	return o.RequestBody
+	return o.Body
 }
 
 // CreateEdgeConfigTransfer - Keeps track of the current state of the Edge Config while it gets transferred.
@@ -198,8 +198,8 @@ func (o *CreateEdgeConfigPurposeFlags) GetProjectID() string {
 type CreateEdgeConfigPurposeUnionType string
 
 const (
-	CreateEdgeConfigPurposeUnionTypeCreateEdgeConfigPurposeFlags           CreateEdgeConfigPurposeUnionType = "createEdgeConfig_purpose_Flags"
-	CreateEdgeConfigPurposeUnionTypeCreateEdgeConfigPurposeExperimentation CreateEdgeConfigPurposeUnionType = "createEdgeConfig_purpose_Experimentation"
+	CreateEdgeConfigPurposeUnionTypeFlags           CreateEdgeConfigPurposeUnionType = "flags"
+	CreateEdgeConfigPurposeUnionTypeExperimentation CreateEdgeConfigPurposeUnionType = "experimentation"
 )
 
 type CreateEdgeConfigPurposeUnion struct {
@@ -209,37 +209,59 @@ type CreateEdgeConfigPurposeUnion struct {
 	Type CreateEdgeConfigPurposeUnionType
 }
 
-func CreateCreateEdgeConfigPurposeUnionCreateEdgeConfigPurposeFlags(createEdgeConfigPurposeFlags CreateEdgeConfigPurposeFlags) CreateEdgeConfigPurposeUnion {
-	typ := CreateEdgeConfigPurposeUnionTypeCreateEdgeConfigPurposeFlags
+func CreateCreateEdgeConfigPurposeUnionFlags(flags CreateEdgeConfigPurposeFlags) CreateEdgeConfigPurposeUnion {
+	typ := CreateEdgeConfigPurposeUnionTypeFlags
+
+	typStr := CreateEdgeConfigTypeFlags(typ)
+	flags.Type = typStr
 
 	return CreateEdgeConfigPurposeUnion{
-		CreateEdgeConfigPurposeFlags: &createEdgeConfigPurposeFlags,
+		CreateEdgeConfigPurposeFlags: &flags,
 		Type:                         typ,
 	}
 }
 
-func CreateCreateEdgeConfigPurposeUnionCreateEdgeConfigPurposeExperimentation(createEdgeConfigPurposeExperimentation CreateEdgeConfigPurposeExperimentation) CreateEdgeConfigPurposeUnion {
-	typ := CreateEdgeConfigPurposeUnionTypeCreateEdgeConfigPurposeExperimentation
+func CreateCreateEdgeConfigPurposeUnionExperimentation(experimentation CreateEdgeConfigPurposeExperimentation) CreateEdgeConfigPurposeUnion {
+	typ := CreateEdgeConfigPurposeUnionTypeExperimentation
+
+	typStr := CreateEdgeConfigTypeExperimentation(typ)
+	experimentation.Type = typStr
 
 	return CreateEdgeConfigPurposeUnion{
-		CreateEdgeConfigPurposeExperimentation: &createEdgeConfigPurposeExperimentation,
+		CreateEdgeConfigPurposeExperimentation: &experimentation,
 		Type:                                   typ,
 	}
 }
 
 func (u *CreateEdgeConfigPurposeUnion) UnmarshalJSON(data []byte) error {
 
-	var createEdgeConfigPurposeFlags CreateEdgeConfigPurposeFlags = CreateEdgeConfigPurposeFlags{}
-	if err := utils.UnmarshalJSON(data, &createEdgeConfigPurposeFlags, "", true, nil); err == nil {
-		u.CreateEdgeConfigPurposeFlags = &createEdgeConfigPurposeFlags
-		u.Type = CreateEdgeConfigPurposeUnionTypeCreateEdgeConfigPurposeFlags
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var createEdgeConfigPurposeExperimentation CreateEdgeConfigPurposeExperimentation = CreateEdgeConfigPurposeExperimentation{}
-	if err := utils.UnmarshalJSON(data, &createEdgeConfigPurposeExperimentation, "", true, nil); err == nil {
-		u.CreateEdgeConfigPurposeExperimentation = &createEdgeConfigPurposeExperimentation
-		u.Type = CreateEdgeConfigPurposeUnionTypeCreateEdgeConfigPurposeExperimentation
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Type {
+	case "flags":
+		createEdgeConfigPurposeFlags := new(CreateEdgeConfigPurposeFlags)
+		if err := utils.UnmarshalJSON(data, &createEdgeConfigPurposeFlags, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == flags) type CreateEdgeConfigPurposeFlags within CreateEdgeConfigPurposeUnion: %w", string(data), err)
+		}
+
+		u.CreateEdgeConfigPurposeFlags = createEdgeConfigPurposeFlags
+		u.Type = CreateEdgeConfigPurposeUnionTypeFlags
+		return nil
+	case "experimentation":
+		createEdgeConfigPurposeExperimentation := new(CreateEdgeConfigPurposeExperimentation)
+		if err := utils.UnmarshalJSON(data, &createEdgeConfigPurposeExperimentation, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == experimentation) type CreateEdgeConfigPurposeExperimentation within CreateEdgeConfigPurposeUnion: %w", string(data), err)
+		}
+
+		u.CreateEdgeConfigPurposeExperimentation = createEdgeConfigPurposeExperimentation
+		u.Type = CreateEdgeConfigPurposeUnionTypeExperimentation
 		return nil
 	}
 
@@ -263,7 +285,9 @@ type CreateEdgeConfigResponseBody struct {
 	CreatedAt float64  `json:"createdAt"`
 	UpdatedAt float64  `json:"updatedAt"`
 	DeletedAt *float64 `json:"deletedAt,omitempty"`
-	ID        string   `json:"id"`
+	// The ID of the user who created the Edge Config, optional because it is not always set.
+	CreatedBy *string `json:"createdBy,omitempty"`
+	ID        string  `json:"id"`
 	// Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
 	Slug    string `json:"slug"`
 	OwnerID string `json:"ownerId"`
@@ -297,6 +321,13 @@ func (o *CreateEdgeConfigResponseBody) GetDeletedAt() *float64 {
 		return nil
 	}
 	return o.DeletedAt
+}
+
+func (o *CreateEdgeConfigResponseBody) GetCreatedBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedBy
 }
 
 func (o *CreateEdgeConfigResponseBody) GetID() string {
@@ -346,6 +377,20 @@ func (o *CreateEdgeConfigResponseBody) GetPurpose() *CreateEdgeConfigPurposeUnio
 		return nil
 	}
 	return o.Purpose
+}
+
+func (o *CreateEdgeConfigResponseBody) GetPurposeFlags() *CreateEdgeConfigPurposeFlags {
+	if v := o.GetPurpose(); v != nil {
+		return v.CreateEdgeConfigPurposeFlags
+	}
+	return nil
+}
+
+func (o *CreateEdgeConfigResponseBody) GetPurposeExperimentation() *CreateEdgeConfigPurposeExperimentation {
+	if v := o.GetPurpose(); v != nil {
+		return v.CreateEdgeConfigPurposeExperimentation
+	}
+	return nil
 }
 
 func (o *CreateEdgeConfigResponseBody) GetSyncedToDynamoAt() *float64 {

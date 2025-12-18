@@ -38,6 +38,10 @@ import {
   VercelNotFoundError,
   VercelNotFoundError$inboundSchema,
 } from "../models/vercelnotfounderror.js";
+import {
+  VercelRateLimitError,
+  VercelRateLimitError$inboundSchema,
+} from "../models/vercelratelimiterror.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -57,6 +61,7 @@ export function marketplaceImportResource(
     | VercelBadRequestError
     | VercelForbiddenError
     | VercelNotFoundError
+    | VercelRateLimitError
     | VercelError
     | ResponseValidationError
     | ConnectionError
@@ -85,6 +90,7 @@ async function $do(
       | VercelBadRequestError
       | VercelForbiddenError
       | VercelNotFoundError
+      | VercelRateLimitError
       | VercelError
       | ResponseValidationError
       | ConnectionError
@@ -137,7 +143,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "import-resource",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -165,7 +171,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "403", "404", "409", "422", "4XX", "5XX"],
+    errorCodes: ["400", "401", "403", "404", "409", "422", "429", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -183,6 +189,7 @@ async function $do(
     | VercelBadRequestError
     | VercelForbiddenError
     | VercelNotFoundError
+    | VercelRateLimitError
     | VercelError
     | ResponseValidationError
     | ConnectionError
@@ -196,6 +203,7 @@ async function $do(
     M.jsonErr(400, VercelBadRequestError$inboundSchema),
     M.jsonErr(401, VercelForbiddenError$inboundSchema),
     M.jsonErr(404, VercelNotFoundError$inboundSchema),
+    M.jsonErr(429, VercelRateLimitError$inboundSchema),
     M.fail([403, 409, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

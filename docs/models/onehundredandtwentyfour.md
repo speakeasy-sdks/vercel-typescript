@@ -8,8 +8,7 @@ The payload of the event, if requested.
 import { OneHundredAndTwentyFour } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndTwentyFour = {
-  enabled: false,
-  totpVerified: true,
+  uid: "<id>",
 };
 ```
 
@@ -17,5 +16,9 @@ let value: OneHundredAndTwentyFour = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `enabled`          | *boolean*          | :heavy_check_mark: | N/A                |
-| `totpVerified`     | *boolean*          | :heavy_check_mark: | N/A                |
+| `role`             | *string*           | :heavy_minus_sign: | N/A                |
+| `uid`              | *string*           | :heavy_check_mark: | N/A                |
+| `origin`           | *string*           | :heavy_minus_sign: | N/A                |
+| `teamRoles`        | *string*[]         | :heavy_minus_sign: | N/A                |
+| `teamPermissions`  | *string*[]         | :heavy_minus_sign: | N/A                |
+| `entitlements`     | *string*[]         | :heavy_minus_sign: | N/A                |

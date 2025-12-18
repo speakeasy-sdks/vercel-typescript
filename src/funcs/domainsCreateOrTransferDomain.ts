@@ -42,10 +42,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Register or transfer-in a new Domain
+ * Add an existing domain to the Vercel platform
  *
  * @remarks
- * This endpoint is used for adding a new apex domain name with Vercel for the authenticating user. Can also be used for initiating a domain transfer request from an external Registrar to Vercel.
+ * This endpoint is used for adding a new apex domain name with Vercel for the authenticating user. Note: This endpoint is no longer used for initiating domain transfers from external registrars to Vercel. For this, please use the endpoint [Transfer-in a domain](https://vercel.com/docs/rest-api/reference/endpoints/domains-registrar/transfer-in-a-domain).
  */
 export function domainsCreateOrTransferDomain(
   client: VercelCore,
@@ -128,7 +128,7 @@ async function $do(
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "createOrTransferDomain",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 
@@ -157,7 +157,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "401", "402", "403", "404", "409", "4XX", "500", "5XX"],
+    errorCodes: ["400", "401", "402", "403", "404", "409", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -189,7 +189,7 @@ async function $do(
     M.jsonErr(401, VercelForbiddenError$inboundSchema),
     M.jsonErr(404, VercelNotFoundError$inboundSchema),
     M.fail([402, 403, 409, "4XX"]),
-    M.fail([500, "5XX"]),
+    M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

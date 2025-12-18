@@ -8,12 +8,16 @@ The payload of the event, if requested.
 import { OneHundredAndFiftyThree } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndFiftyThree = {
-  tier: "pro",
+  edgeConfigId: "<id>",
+  edgeConfigSlug: "<value>",
+  edgeConfigDigest: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                            | Type                             | Required                         | Description                      |
-| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `tier`                           | [models.Tier](../models/tier.md) | :heavy_check_mark:               | N/A                              |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `edgeConfigId`     | *string*           | :heavy_check_mark: | N/A                |
+| `edgeConfigSlug`   | *string*           | :heavy_check_mark: | N/A                |
+| `edgeConfigDigest` | *string*           | :heavy_check_mark: | N/A                |

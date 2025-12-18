@@ -8,16 +8,17 @@ The payload of the event, if requested.
 import { OneHundredAndFortyOne } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndFortyOne = {
-  project: {
-    name: "<value>",
-    role: "ADMIN",
-    invitedUserName: "<value>",
-  },
+  teamName: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `project`                                                                    | [models.UserEventPayload141Project](../models/usereventpayload141project.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| Field               | Type                | Required            | Description         |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| `teamName`          | *string*            | :heavy_check_mark:  | N/A                 |
+| `username`          | *string*            | :heavy_minus_sign:  | N/A                 |
+| `gitUsername`       | *string*            | :heavy_minus_sign:  | N/A                 |
+| `githubUsername`    | *string*            | :heavy_minus_sign:  | N/A                 |
+| `gitlabUsername`    | *string*            | :heavy_minus_sign:  | N/A                 |
+| `bitbucketUsername` | *string*            | :heavy_minus_sign:  | N/A                 |

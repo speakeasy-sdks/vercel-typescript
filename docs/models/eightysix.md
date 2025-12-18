@@ -8,14 +8,15 @@ The payload of the event, if requested.
 import { EightySix } from "@vercel/sdk/models/userevent.js";
 
 let value: EightySix = {
-  name: "<value>",
-  ownerId: "<id>",
+  projectId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `name`             | *string*           | :heavy_check_mark: | N/A                |
-| `ownerId`          | *string*           | :heavy_check_mark: | N/A                |
+| Field                  | Type                   | Required               | Description            |
+| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `projectName`          | *string*               | :heavy_minus_sign:     | N/A                    |
+| `projectId`            | *string*               | :heavy_check_mark:     | N/A                    |
+| `projectAnalytics`     | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |
+| `prevProjectAnalytics` | Record<string, *any*>  | :heavy_minus_sign:     | N/A                    |

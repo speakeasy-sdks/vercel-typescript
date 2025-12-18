@@ -39,8 +39,9 @@ func (e *View) UnmarshalJSON(data []byte) error {
 type QueryParamInstallationType string
 
 const (
-	QueryParamInstallationTypeMarketplace QueryParamInstallationType = "marketplace"
-	QueryParamInstallationTypeExternal    QueryParamInstallationType = "external"
+	QueryParamInstallationTypeMarketplace  QueryParamInstallationType = "marketplace"
+	QueryParamInstallationTypeExternal     QueryParamInstallationType = "external"
+	QueryParamInstallationTypeProvisioning QueryParamInstallationType = "provisioning"
 )
 
 func (e QueryParamInstallationType) ToPointer() *QueryParamInstallationType {
@@ -55,6 +56,8 @@ func (e *QueryParamInstallationType) UnmarshalJSON(data []byte) error {
 	case "marketplace":
 		fallthrough
 	case "external":
+		fallthrough
+	case "provisioning":
 		*e = QueryParamInstallationType(v)
 		return nil
 	default:
@@ -111,11 +114,15 @@ func (o *GetConfigurationsRequest) GetSlug() *string {
 type TagID string
 
 const (
+	TagIDTagAgents          TagID = "tag_agents"
 	TagIDTagAi              TagID = "tag_ai"
 	TagIDTagAnalytics       TagID = "tag_analytics"
 	TagIDTagAuthentication  TagID = "tag_authentication"
 	TagIDTagCms             TagID = "tag_cms"
 	TagIDTagCodeRepository  TagID = "tag_code_repository"
+	TagIDTagCodeReview      TagID = "tag_code_review"
+	TagIDTagCodeSecurity    TagID = "tag_code_security"
+	TagIDTagCodeTesting     TagID = "tag_code_testing"
 	TagIDTagCommerce        TagID = "tag_commerce"
 	TagIDTagDatabases       TagID = "tag_databases"
 	TagIDTagDevTools        TagID = "tag_dev_tools"
@@ -130,8 +137,10 @@ const (
 	TagIDTagProductivity    TagID = "tag_productivity"
 	TagIDTagSearching       TagID = "tag_searching"
 	TagIDTagSecurity        TagID = "tag_security"
+	TagIDTagSupportAgent    TagID = "tag_support_agent"
 	TagIDTagTesting         TagID = "tag_testing"
 	TagIDTagVideo           TagID = "tag_video"
+	TagIDTagWebAutomation   TagID = "tag_web_automation"
 	TagIDTagWorkflow        TagID = "tag_workflow"
 )
 
@@ -144,6 +153,8 @@ func (e *TagID) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "tag_agents":
+		fallthrough
 	case "tag_ai":
 		fallthrough
 	case "tag_analytics":
@@ -153,6 +164,12 @@ func (e *TagID) UnmarshalJSON(data []byte) error {
 	case "tag_cms":
 		fallthrough
 	case "tag_code_repository":
+		fallthrough
+	case "tag_code_review":
+		fallthrough
+	case "tag_code_security":
+		fallthrough
+	case "tag_code_testing":
 		fallthrough
 	case "tag_commerce":
 		fallthrough
@@ -182,9 +199,13 @@ func (e *TagID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "tag_security":
 		fallthrough
+	case "tag_support_agent":
+		fallthrough
 	case "tag_testing":
 		fallthrough
 	case "tag_video":
+		fallthrough
+	case "tag_web_automation":
 		fallthrough
 	case "tag_workflow":
 		*e = TagID(v)
@@ -256,39 +277,45 @@ func (o *GetConfigurationsIntegration) GetTagIds() []TagID {
 	return o.TagIds
 }
 
-// GetConfigurationsSource2 - Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-type GetConfigurationsSource2 string
+// GetConfigurationsStatus2 - The configuration status. Optional. If not defined, assume 'ready'.
+type GetConfigurationsStatus2 string
 
 const (
-	GetConfigurationsSource2Marketplace    GetConfigurationsSource2 = "marketplace"
-	GetConfigurationsSource2DeployButton   GetConfigurationsSource2 = "deploy-button"
-	GetConfigurationsSource2External       GetConfigurationsSource2 = "external"
-	GetConfigurationsSource2V0             GetConfigurationsSource2 = "v0"
-	GetConfigurationsSource2ResourceClaims GetConfigurationsSource2 = "resource-claims"
+	GetConfigurationsStatus2Pending     GetConfigurationsStatus2 = "pending"
+	GetConfigurationsStatus2Ready       GetConfigurationsStatus2 = "ready"
+	GetConfigurationsStatus2Onboarding  GetConfigurationsStatus2 = "onboarding"
+	GetConfigurationsStatus2Suspended   GetConfigurationsStatus2 = "suspended"
+	GetConfigurationsStatus2Resumed     GetConfigurationsStatus2 = "resumed"
+	GetConfigurationsStatus2Error       GetConfigurationsStatus2 = "error"
+	GetConfigurationsStatus2Uninstalled GetConfigurationsStatus2 = "uninstalled"
 )
 
-func (e GetConfigurationsSource2) ToPointer() *GetConfigurationsSource2 {
+func (e GetConfigurationsStatus2) ToPointer() *GetConfigurationsStatus2 {
 	return &e
 }
-func (e *GetConfigurationsSource2) UnmarshalJSON(data []byte) error {
+func (e *GetConfigurationsStatus2) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
-	case "marketplace":
+	case "pending":
 		fallthrough
-	case "deploy-button":
+	case "ready":
 		fallthrough
-	case "external":
+	case "onboarding":
 		fallthrough
-	case "v0":
+	case "suspended":
 		fallthrough
-	case "resource-claims":
-		*e = GetConfigurationsSource2(v)
+	case "resumed":
+		fallthrough
+	case "error":
+		fallthrough
+	case "uninstalled":
+		*e = GetConfigurationsStatus2(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetConfigurationsSource2: %v", v)
+		return fmt.Errorf("invalid value for GetConfigurationsStatus2: %v", v)
 	}
 }
 
@@ -392,10 +419,14 @@ type GetConfigurationsIntegrationConfiguration2 struct {
 	IntegrationID string `json:"integrationId"`
 	// The user or team ID that owns the configuration
 	OwnerID string `json:"ownerId"`
+	// The configuration status. Optional. If not defined, assume 'ready'.
+	Status *GetConfigurationsStatus2 `json:"status,omitempty"`
+	// An external identifier defined by the integration vendor.
+	ExternalID *string `json:"externalId,omitempty"`
 	// When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
 	Projects []string `json:"projects,omitempty"`
 	// Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-	Source *GetConfigurationsSource2 `json:"source,omitempty"`
+	Source *string `json:"source,omitempty"`
 	// The slug of the integration the configuration is created for.
 	Slug string `json:"slug"`
 	// When the configuration was created for a team, this will show the ID of the team.
@@ -471,6 +502,20 @@ func (o *GetConfigurationsIntegrationConfiguration2) GetOwnerID() string {
 	return o.OwnerID
 }
 
+func (o *GetConfigurationsIntegrationConfiguration2) GetStatus() *GetConfigurationsStatus2 {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *GetConfigurationsIntegrationConfiguration2) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
 func (o *GetConfigurationsIntegrationConfiguration2) GetProjects() []string {
 	if o == nil {
 		return nil
@@ -478,7 +523,7 @@ func (o *GetConfigurationsIntegrationConfiguration2) GetProjects() []string {
 	return o.Projects
 }
 
-func (o *GetConfigurationsIntegrationConfiguration2) GetSource() *GetConfigurationsSource2 {
+func (o *GetConfigurationsIntegrationConfiguration2) GetSource() *string {
 	if o == nil {
 		return nil
 	}
@@ -562,39 +607,45 @@ func (o *GetConfigurationsIntegrationConfiguration2) GetInstallationType() *GetC
 	return o.InstallationType
 }
 
-// GetConfigurationsSource1 - Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-type GetConfigurationsSource1 string
+// GetConfigurationsStatus1 - The configuration status. Optional. If not defined, assume 'ready'.
+type GetConfigurationsStatus1 string
 
 const (
-	GetConfigurationsSource1Marketplace    GetConfigurationsSource1 = "marketplace"
-	GetConfigurationsSource1DeployButton   GetConfigurationsSource1 = "deploy-button"
-	GetConfigurationsSource1External       GetConfigurationsSource1 = "external"
-	GetConfigurationsSource1V0             GetConfigurationsSource1 = "v0"
-	GetConfigurationsSource1ResourceClaims GetConfigurationsSource1 = "resource-claims"
+	GetConfigurationsStatus1Pending     GetConfigurationsStatus1 = "pending"
+	GetConfigurationsStatus1Ready       GetConfigurationsStatus1 = "ready"
+	GetConfigurationsStatus1Onboarding  GetConfigurationsStatus1 = "onboarding"
+	GetConfigurationsStatus1Suspended   GetConfigurationsStatus1 = "suspended"
+	GetConfigurationsStatus1Resumed     GetConfigurationsStatus1 = "resumed"
+	GetConfigurationsStatus1Error       GetConfigurationsStatus1 = "error"
+	GetConfigurationsStatus1Uninstalled GetConfigurationsStatus1 = "uninstalled"
 )
 
-func (e GetConfigurationsSource1) ToPointer() *GetConfigurationsSource1 {
+func (e GetConfigurationsStatus1) ToPointer() *GetConfigurationsStatus1 {
 	return &e
 }
-func (e *GetConfigurationsSource1) UnmarshalJSON(data []byte) error {
+func (e *GetConfigurationsStatus1) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
-	case "marketplace":
+	case "pending":
 		fallthrough
-	case "deploy-button":
+	case "ready":
 		fallthrough
-	case "external":
+	case "onboarding":
 		fallthrough
-	case "v0":
+	case "suspended":
 		fallthrough
-	case "resource-claims":
-		*e = GetConfigurationsSource1(v)
+	case "resumed":
+		fallthrough
+	case "error":
+		fallthrough
+	case "uninstalled":
+		*e = GetConfigurationsStatus1(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetConfigurationsSource1: %v", v)
+		return fmt.Errorf("invalid value for GetConfigurationsStatus1: %v", v)
 	}
 }
 
@@ -698,10 +749,14 @@ type GetConfigurationsIntegrationConfiguration1 struct {
 	IntegrationID *string `json:"integrationId,omitempty"`
 	// The user or team ID that owns the configuration
 	OwnerID *string `json:"ownerId,omitempty"`
+	// The configuration status. Optional. If not defined, assume 'ready'.
+	Status *GetConfigurationsStatus1 `json:"status,omitempty"`
+	// An external identifier defined by the integration vendor.
+	ExternalID *string `json:"externalId,omitempty"`
 	// When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
 	Projects []string `json:"projects,omitempty"`
 	// Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-	Source *GetConfigurationsSource1 `json:"source,omitempty"`
+	Source *string `json:"source,omitempty"`
 	// The slug of the integration the configuration is created for.
 	Slug *string `json:"slug,omitempty"`
 	// When the configuration was created for a team, this will show the ID of the team.
@@ -770,6 +825,20 @@ func (o *GetConfigurationsIntegrationConfiguration1) GetOwnerID() *string {
 	return o.OwnerID
 }
 
+func (o *GetConfigurationsIntegrationConfiguration1) GetStatus() *GetConfigurationsStatus1 {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *GetConfigurationsIntegrationConfiguration1) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
 func (o *GetConfigurationsIntegrationConfiguration1) GetProjects() []string {
 	if o == nil {
 		return nil
@@ -777,7 +846,7 @@ func (o *GetConfigurationsIntegrationConfiguration1) GetProjects() []string {
 	return o.Projects
 }
 
-func (o *GetConfigurationsIntegrationConfiguration1) GetSource() *GetConfigurationsSource1 {
+func (o *GetConfigurationsIntegrationConfiguration1) GetSource() *string {
 	if o == nil {
 		return nil
 	}

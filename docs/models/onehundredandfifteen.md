@@ -8,17 +8,24 @@ The payload of the event, if requested.
 import { OneHundredAndFifteen } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndFifteen = {
-  uid: "<id>",
+  budget: {
+    type: "fixed",
+    fixedBudget: 9401.51,
+    previousSpend: [
+      9731.65,
+    ],
+    notifiedAt: [],
+    createdAt: 7362.68,
+    isActive: true,
+    teamId: "<id>",
+    id: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `role`             | *string*           | :heavy_minus_sign: | N/A                |
-| `uid`              | *string*           | :heavy_check_mark: | N/A                |
-| `origin`           | *string*           | :heavy_minus_sign: | N/A                |
-| `teamRoles`        | *string*[]         | :heavy_minus_sign: | N/A                |
-| `teamPermissions`  | *string*[]         | :heavy_minus_sign: | N/A                |
-| `entitlements`     | *string*[]         | :heavy_minus_sign: | N/A                |
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `budget`                                                                | [models.UserEventPayloadBudget](../models/usereventpayloadbudget.md)    | :heavy_check_mark:                                                      | Represents a budget for tracking and notifying teams on their spending. |
+| `webhookUrl`                                                            | *string*                                                                | :heavy_minus_sign:                                                      | N/A                                                                     |

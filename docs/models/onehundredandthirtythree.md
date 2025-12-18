@@ -8,17 +8,14 @@ The payload of the event, if requested.
 import { OneHundredAndThirtyThree } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndThirtyThree = {
-  requestedTeamName: "<value>",
+  enabled: false,
+  totpVerified: true,
 };
 ```
 
 ## Fields
 
-| Field               | Type                | Required            | Description         |
-| ------------------- | ------------------- | ------------------- | ------------------- |
-| `requestedTeamName` | *string*            | :heavy_check_mark:  | N/A                 |
-| `requestedUserName` | *string*            | :heavy_minus_sign:  | N/A                 |
-| `gitUsername`       | *string*            | :heavy_minus_sign:  | N/A                 |
-| `githubUsername`    | *string*            | :heavy_minus_sign:  | N/A                 |
-| `gitlabUsername`    | *string*            | :heavy_minus_sign:  | N/A                 |
-| `bitbucketUsername` | *string*            | :heavy_minus_sign:  | N/A                 |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `enabled`          | *boolean*          | :heavy_check_mark: | N/A                |
+| `totpVerified`     | *boolean*          | :heavy_check_mark: | N/A                |

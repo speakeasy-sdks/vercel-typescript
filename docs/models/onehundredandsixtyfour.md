@@ -8,21 +8,17 @@ The payload of the event, if requested.
 import { OneHundredAndSixtyFour } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndSixtyFour = {
-  grantType: "refresh_token",
   appName: "<value>",
-  atTTL: 9181.17,
-  scope: "<value>",
-  authMethod: "app",
+  scopes: [],
 };
 ```
 
 ## Fields
 
-| Field                                        | Type                                         | Required                                     | Description                                  |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| `grantType`                                  | [models.GrantType](../models/granttype.md)   | :heavy_check_mark:                           | N/A                                          |
-| `appName`                                    | *string*                                     | :heavy_check_mark:                           | N/A                                          |
-| `atTTL`                                      | *number*                                     | :heavy_check_mark:                           | access_token TTL                             |
-| `rtTTL`                                      | *number*                                     | :heavy_minus_sign:                           | refresh_token TTL                            |
-| `scope`                                      | *string*                                     | :heavy_check_mark:                           | N/A                                          |
-| `authMethod`                                 | [models.AuthMethod](../models/authmethod.md) | :heavy_check_mark:                           | N/A                                          |
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `appName`                                                            | *string*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `appId`                                                              | *string*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `scopes`                                                             | [models.PayloadScopes](../models/payloadscopes.md)[]                 | :heavy_check_mark:                                                   | N/A                                                                  |
+| `permissions`                                                        | [models.Permissions](../models/permissions.md)[]                     | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `acceptedPermissionSets`                                             | [models.AcceptedPermissionSets](../models/acceptedpermissionsets.md) | :heavy_minus_sign:                                                   | N/A                                                                  |

@@ -8,8 +8,8 @@ The payload of the event, if requested.
 import { TwentySeven } from "@vercel/sdk/models/userevent.js";
 
 let value: TwentySeven = {
-  status: "<value>",
-  suffix: "<value>",
+  src: "<value>",
+  dst: "<value>",
 };
 ```
 
@@ -17,5 +17,5 @@ let value: TwentySeven = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `status`           | *string*           | :heavy_check_mark: | N/A                |
-| `suffix`           | *string*           | :heavy_check_mark: | N/A                |
+| `src`              | *string*           | :heavy_check_mark: | N/A                |
+| `dst`              | *string*           | :heavy_check_mark: | N/A                |

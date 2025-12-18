@@ -110,8 +110,8 @@ type AcceptProjectTransferRequestRequest struct {
 	// The Team identifier to perform the request on behalf of.
 	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 	// The Team slug to perform the request on behalf of.
-	Slug        *string                                  `queryParam:"style=form,explode=true,name=slug"`
-	RequestBody *AcceptProjectTransferRequestRequestBody `request:"mediaType=application/json"`
+	Slug *string                                  `queryParam:"style=form,explode=true,name=slug"`
+	Body *AcceptProjectTransferRequestRequestBody `request:"mediaType=application/json"`
 }
 
 func (o *AcceptProjectTransferRequestRequest) GetCode() string {
@@ -135,11 +135,11 @@ func (o *AcceptProjectTransferRequestRequest) GetSlug() *string {
 	return o.Slug
 }
 
-func (o *AcceptProjectTransferRequestRequest) GetRequestBody() *AcceptProjectTransferRequestRequestBody {
+func (o *AcceptProjectTransferRequestRequest) GetBody() *AcceptProjectTransferRequestRequestBody {
 	if o == nil {
 		return nil
 	}
-	return o.RequestBody
+	return o.Body
 }
 
 type AcceptProjectTransferRequestResponseBody2 struct {
@@ -289,6 +289,7 @@ func (r *ResourceTransferError) UnmarshalJSON(data []byte) error {
 type AcceptProjectTransferRequestResponseBody1 struct {
 	PartnerCalls           []PartnerCall           `json:"partnerCalls"`
 	ResourceTransferErrors []ResourceTransferError `json:"resourceTransferErrors"`
+	TransferredStoreIds    []string                `json:"transferredStoreIds"`
 }
 
 func (a AcceptProjectTransferRequestResponseBody1) MarshalJSON() ([]byte, error) {
@@ -296,7 +297,7 @@ func (a AcceptProjectTransferRequestResponseBody1) MarshalJSON() ([]byte, error)
 }
 
 func (a *AcceptProjectTransferRequestResponseBody1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"partnerCalls", "resourceTransferErrors"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"partnerCalls", "resourceTransferErrors", "transferredStoreIds"}); err != nil {
 		return err
 	}
 	return nil
@@ -314,6 +315,13 @@ func (o *AcceptProjectTransferRequestResponseBody1) GetResourceTransferErrors() 
 		return []ResourceTransferError{}
 	}
 	return o.ResourceTransferErrors
+}
+
+func (o *AcceptProjectTransferRequestResponseBody1) GetTransferredStoreIds() []string {
+	if o == nil {
+		return []string{}
+	}
+	return o.TransferredStoreIds
 }
 
 type AcceptProjectTransferRequestResponseBodyType string

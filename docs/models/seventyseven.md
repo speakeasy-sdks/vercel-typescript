@@ -8,8 +8,12 @@ The payload of the event, if requested.
 import { SeventySeven } from "@vercel/sdk/models/userevent.js";
 
 let value: SeventySeven = {
-  projectName: "<value>",
-  branch: "<value>",
+  integrationId: "<id>",
+  configurationId: "<id>",
+  integrationSlug: "<value>",
+  integrationName: "<value>",
+  ownerId: "<id>",
+  confirmedScopes: [],
 };
 ```
 
@@ -17,5 +21,10 @@ let value: SeventySeven = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `projectName`      | *string*           | :heavy_check_mark: | N/A                |
-| `branch`           | *string*           | :heavy_check_mark: | N/A                |
+| `integrationId`    | *string*           | :heavy_check_mark: | N/A                |
+| `configurationId`  | *string*           | :heavy_check_mark: | N/A                |
+| `integrationSlug`  | *string*           | :heavy_check_mark: | N/A                |
+| `integrationName`  | *string*           | :heavy_check_mark: | N/A                |
+| `ownerId`          | *string*           | :heavy_check_mark: | N/A                |
+| `projectIds`       | *string*[]         | :heavy_minus_sign: | N/A                |
+| `confirmedScopes`  | *string*[]         | :heavy_check_mark: | N/A                |

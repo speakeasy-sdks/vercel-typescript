@@ -8,28 +8,14 @@ The payload of the event, if requested.
 import { NinetyOne } from "@vercel/sdk/models/userevent.js";
 
 let value: NinetyOne = {
-  next: {
-    project: {
-      id: "<id>",
-      staticIps: {
-        enabled: true,
-      },
-    },
-  },
-  previous: {
-    project: {
-      id: "<id>",
-      staticIps: {
-        enabled: false,
-      },
-    },
-  },
+  projectName: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                                    | Type                                     | Required                                 | Description                              |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| `next`                                   | [models.Next](../models/next.md)         | :heavy_check_mark:                       | N/A                                      |
-| `previous`                               | [models.Previous](../models/previous.md) | :heavy_check_mark:                       | N/A                                      |
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `projectName`                                                  | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |
+| `optionsAllowlist`                                             | [models.OptionsAllowlist](../models/optionsallowlist.md)       | :heavy_minus_sign:                                             | N/A                                                            |
+| `oldOptionsAllowlist`                                          | [models.OldOptionsAllowlist](../models/oldoptionsallowlist.md) | :heavy_minus_sign:                                             | N/A                                                            |

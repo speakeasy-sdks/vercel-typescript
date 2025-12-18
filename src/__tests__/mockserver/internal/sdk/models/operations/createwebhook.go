@@ -43,9 +43,13 @@ const (
 	CreateWebhookEventRequestEdgeConfigDeleted                                  CreateWebhookEventRequest = "edge-config.deleted"
 	CreateWebhookEventRequestEdgeConfigItemsUpdated                             CreateWebhookEventRequest = "edge-config.items.updated"
 	CreateWebhookEventRequestFirewallAttack                                     CreateWebhookEventRequest = "firewall.attack"
+	CreateWebhookEventRequestFirewallSystemRuleAnomaly                          CreateWebhookEventRequest = "firewall.system-rule-anomaly"
+	CreateWebhookEventRequestFirewallCustomRuleAnomaly                          CreateWebhookEventRequest = "firewall.custom-rule-anomaly"
+	CreateWebhookEventRequestAlertsTriggered                                    CreateWebhookEventRequest = "alerts.triggered"
 	CreateWebhookEventRequestIntegrationConfigurationPermissionUpgraded         CreateWebhookEventRequest = "integration-configuration.permission-upgraded"
 	CreateWebhookEventRequestIntegrationConfigurationRemoved                    CreateWebhookEventRequest = "integration-configuration.removed"
 	CreateWebhookEventRequestIntegrationConfigurationScopeChangeConfirmed       CreateWebhookEventRequest = "integration-configuration.scope-change-confirmed"
+	CreateWebhookEventRequestIntegrationConfigurationTransferred                CreateWebhookEventRequest = "integration-configuration.transferred"
 	CreateWebhookEventRequestIntegrationResourceProjectConnected                CreateWebhookEventRequest = "integration-resource.project-connected"
 	CreateWebhookEventRequestIntegrationResourceProjectDisconnected             CreateWebhookEventRequest = "integration-resource.project-disconnected"
 	CreateWebhookEventRequestProjectCreated                                     CreateWebhookEventRequest = "project.created"
@@ -82,7 +86,9 @@ const (
 	CreateWebhookEventRequestMarketplaceInvoiceRefunded                         CreateWebhookEventRequest = "marketplace.invoice.refunded"
 	CreateWebhookEventRequestObservabilityAnomaly                               CreateWebhookEventRequest = "observability.anomaly"
 	CreateWebhookEventRequestObservabilityAnomalyError                          CreateWebhookEventRequest = "observability.anomaly-error"
-	CreateWebhookEventRequestObservabilityAnomalyBotId                          CreateWebhookEventRequest = "observability.anomaly-botId"
+	CreateWebhookEventRequestObservabilityUsageAnomaly                          CreateWebhookEventRequest = "observability.usage-anomaly"
+	CreateWebhookEventRequestObservabilityErrorAnomaly                          CreateWebhookEventRequest = "observability.error-anomaly"
+	CreateWebhookEventRequestBotidAnomaly                                       CreateWebhookEventRequest = "botid.anomaly"
 	CreateWebhookEventRequestTestWebhook                                        CreateWebhookEventRequest = "test-webhook"
 )
 
@@ -159,11 +165,19 @@ func (e *CreateWebhookEventRequest) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "firewall.attack":
 		fallthrough
+	case "firewall.system-rule-anomaly":
+		fallthrough
+	case "firewall.custom-rule-anomaly":
+		fallthrough
+	case "alerts.triggered":
+		fallthrough
 	case "integration-configuration.permission-upgraded":
 		fallthrough
 	case "integration-configuration.removed":
 		fallthrough
 	case "integration-configuration.scope-change-confirmed":
+		fallthrough
+	case "integration-configuration.transferred":
 		fallthrough
 	case "integration-resource.project-connected":
 		fallthrough
@@ -237,7 +251,11 @@ func (e *CreateWebhookEventRequest) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "observability.anomaly-error":
 		fallthrough
-	case "observability.anomaly-botId":
+	case "observability.usage-anomaly":
+		fallthrough
+	case "observability.error-anomaly":
+		fallthrough
+	case "botid.anomaly":
 		fallthrough
 	case "test-webhook":
 		*e = CreateWebhookEventRequest(v)
@@ -278,8 +296,8 @@ type CreateWebhookRequest struct {
 	// The Team identifier to perform the request on behalf of.
 	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 	// The Team slug to perform the request on behalf of.
-	Slug        *string                  `queryParam:"style=form,explode=true,name=slug"`
-	RequestBody CreateWebhookRequestBody `request:"mediaType=application/json"`
+	Slug *string                  `queryParam:"style=form,explode=true,name=slug"`
+	Body CreateWebhookRequestBody `request:"mediaType=application/json"`
 }
 
 func (o *CreateWebhookRequest) GetTeamID() *string {
@@ -296,11 +314,11 @@ func (o *CreateWebhookRequest) GetSlug() *string {
 	return o.Slug
 }
 
-func (o *CreateWebhookRequest) GetRequestBody() CreateWebhookRequestBody {
+func (o *CreateWebhookRequest) GetBody() CreateWebhookRequestBody {
 	if o == nil {
 		return CreateWebhookRequestBody{}
 	}
-	return o.RequestBody
+	return o.Body
 }
 
 // CreateWebhookEventResponse - The webhooks events
@@ -339,9 +357,13 @@ const (
 	CreateWebhookEventResponseEdgeConfigDeleted                                  CreateWebhookEventResponse = "edge-config.deleted"
 	CreateWebhookEventResponseEdgeConfigItemsUpdated                             CreateWebhookEventResponse = "edge-config.items.updated"
 	CreateWebhookEventResponseFirewallAttack                                     CreateWebhookEventResponse = "firewall.attack"
+	CreateWebhookEventResponseFirewallSystemRuleAnomaly                          CreateWebhookEventResponse = "firewall.system-rule-anomaly"
+	CreateWebhookEventResponseFirewallCustomRuleAnomaly                          CreateWebhookEventResponse = "firewall.custom-rule-anomaly"
+	CreateWebhookEventResponseAlertsTriggered                                    CreateWebhookEventResponse = "alerts.triggered"
 	CreateWebhookEventResponseIntegrationConfigurationPermissionUpgraded         CreateWebhookEventResponse = "integration-configuration.permission-upgraded"
 	CreateWebhookEventResponseIntegrationConfigurationRemoved                    CreateWebhookEventResponse = "integration-configuration.removed"
 	CreateWebhookEventResponseIntegrationConfigurationScopeChangeConfirmed       CreateWebhookEventResponse = "integration-configuration.scope-change-confirmed"
+	CreateWebhookEventResponseIntegrationConfigurationTransferred                CreateWebhookEventResponse = "integration-configuration.transferred"
 	CreateWebhookEventResponseIntegrationResourceProjectConnected                CreateWebhookEventResponse = "integration-resource.project-connected"
 	CreateWebhookEventResponseIntegrationResourceProjectDisconnected             CreateWebhookEventResponse = "integration-resource.project-disconnected"
 	CreateWebhookEventResponseProjectCreated                                     CreateWebhookEventResponse = "project.created"
@@ -378,7 +400,9 @@ const (
 	CreateWebhookEventResponseMarketplaceInvoiceRefunded                         CreateWebhookEventResponse = "marketplace.invoice.refunded"
 	CreateWebhookEventResponseObservabilityAnomaly                               CreateWebhookEventResponse = "observability.anomaly"
 	CreateWebhookEventResponseObservabilityAnomalyError                          CreateWebhookEventResponse = "observability.anomaly-error"
-	CreateWebhookEventResponseObservabilityAnomalyBotId                          CreateWebhookEventResponse = "observability.anomaly-botId"
+	CreateWebhookEventResponseObservabilityUsageAnomaly                          CreateWebhookEventResponse = "observability.usage-anomaly"
+	CreateWebhookEventResponseObservabilityErrorAnomaly                          CreateWebhookEventResponse = "observability.error-anomaly"
+	CreateWebhookEventResponseBotidAnomaly                                       CreateWebhookEventResponse = "botid.anomaly"
 	CreateWebhookEventResponseTestWebhook                                        CreateWebhookEventResponse = "test-webhook"
 )
 
@@ -455,11 +479,19 @@ func (e *CreateWebhookEventResponse) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "firewall.attack":
 		fallthrough
+	case "firewall.system-rule-anomaly":
+		fallthrough
+	case "firewall.custom-rule-anomaly":
+		fallthrough
+	case "alerts.triggered":
+		fallthrough
 	case "integration-configuration.permission-upgraded":
 		fallthrough
 	case "integration-configuration.removed":
 		fallthrough
 	case "integration-configuration.scope-change-confirmed":
+		fallthrough
+	case "integration-configuration.transferred":
 		fallthrough
 	case "integration-resource.project-connected":
 		fallthrough
@@ -533,7 +565,11 @@ func (e *CreateWebhookEventResponse) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "observability.anomaly-error":
 		fallthrough
-	case "observability.anomaly-botId":
+	case "observability.usage-anomaly":
+		fallthrough
+	case "observability.error-anomaly":
+		fallthrough
+	case "botid.anomaly":
 		fallthrough
 	case "test-webhook":
 		*e = CreateWebhookEventResponse(v)

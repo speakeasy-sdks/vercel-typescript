@@ -8,21 +8,13 @@ The payload of the event, if requested.
 import { ThirtyTwo } from "@vercel/sdk/models/userevent.js";
 
 let value: ThirtyTwo = {
-  team: {
-    id: "<id>",
-    name: "<value>",
-  },
-  configuration: {
-    id: "<id>",
-  },
-  newName: "<value>",
+  suffix: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `team`                                                                                 | [models.UserEventPayload32Team](../models/usereventpayload32team.md)                   | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `configuration`                                                                        | [models.UserEventPayload32Configuration](../models/usereventpayload32configuration.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `newName`                                                                              | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `reason`           | *string*           | :heavy_minus_sign: | N/A                |
+| `suffix`           | *string*           | :heavy_check_mark: | N/A                |

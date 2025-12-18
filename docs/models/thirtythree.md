@@ -8,7 +8,8 @@ The payload of the event, if requested.
 import { ThirtyThree } from "@vercel/sdk/models/userevent.js";
 
 let value: ThirtyThree = {
-  githubLogin: "<value>",
+  status: "<value>",
+  suffix: "<value>",
 };
 ```
 
@@ -16,4 +17,5 @@ let value: ThirtyThree = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `githubLogin`      | *string*           | :heavy_check_mark: | N/A                |
+| `status`           | *string*           | :heavy_check_mark: | N/A                |
+| `suffix`           | *string*           | :heavy_check_mark: | N/A                |

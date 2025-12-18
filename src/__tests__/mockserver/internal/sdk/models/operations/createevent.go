@@ -36,7 +36,7 @@ func (e *TypeResourceUpdated) UnmarshalJSON(data []byte) error {
 type EventResourceUpdated struct {
 	Type TypeResourceUpdated `json:"type"`
 	// Partner-provided product slug or id
-	ProductID string `json:"productId"`
+	ProductID *string `json:"productId,omitempty"`
 	// Partner provided resource ID
 	ResourceID string `json:"resourceId"`
 }
@@ -46,7 +46,7 @@ func (e EventResourceUpdated) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EventResourceUpdated) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"type", "productId", "resourceId"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"type", "resourceId"}); err != nil {
 		return err
 	}
 	return nil
@@ -59,9 +59,9 @@ func (o *EventResourceUpdated) GetType() TypeResourceUpdated {
 	return o.Type
 }
 
-func (o *EventResourceUpdated) GetProductID() string {
+func (o *EventResourceUpdated) GetProductID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ProductID
 }
@@ -130,8 +130,8 @@ func (o *EventInstallationUpdated) GetBillingPlanID() *string {
 type EventType string
 
 const (
-	EventTypeEventInstallationUpdated EventType = "event_InstallationUpdated"
-	EventTypeEventResourceUpdated     EventType = "event_ResourceUpdated"
+	EventTypeInstallationUpdated EventType = "installation.updated"
+	EventTypeResourceUpdated     EventType = "resource.updated"
 )
 
 type Event struct {
@@ -141,37 +141,59 @@ type Event struct {
 	Type EventType
 }
 
-func CreateEventEventInstallationUpdated(eventInstallationUpdated EventInstallationUpdated) Event {
-	typ := EventTypeEventInstallationUpdated
+func CreateEventInstallationUpdated(installationUpdated EventInstallationUpdated) Event {
+	typ := EventTypeInstallationUpdated
+
+	typStr := TypeInstallationUpdated(typ)
+	installationUpdated.Type = typStr
 
 	return Event{
-		EventInstallationUpdated: &eventInstallationUpdated,
+		EventInstallationUpdated: &installationUpdated,
 		Type:                     typ,
 	}
 }
 
-func CreateEventEventResourceUpdated(eventResourceUpdated EventResourceUpdated) Event {
-	typ := EventTypeEventResourceUpdated
+func CreateEventResourceUpdated(resourceUpdated EventResourceUpdated) Event {
+	typ := EventTypeResourceUpdated
+
+	typStr := TypeResourceUpdated(typ)
+	resourceUpdated.Type = typStr
 
 	return Event{
-		EventResourceUpdated: &eventResourceUpdated,
+		EventResourceUpdated: &resourceUpdated,
 		Type:                 typ,
 	}
 }
 
 func (u *Event) UnmarshalJSON(data []byte) error {
 
-	var eventResourceUpdated EventResourceUpdated = EventResourceUpdated{}
-	if err := utils.UnmarshalJSON(data, &eventResourceUpdated, "", true, nil); err == nil {
-		u.EventResourceUpdated = &eventResourceUpdated
-		u.Type = EventTypeEventResourceUpdated
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var eventInstallationUpdated EventInstallationUpdated = EventInstallationUpdated{}
-	if err := utils.UnmarshalJSON(data, &eventInstallationUpdated, "", true, nil); err == nil {
-		u.EventInstallationUpdated = &eventInstallationUpdated
-		u.Type = EventTypeEventInstallationUpdated
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Type {
+	case "installation.updated":
+		eventInstallationUpdated := new(EventInstallationUpdated)
+		if err := utils.UnmarshalJSON(data, &eventInstallationUpdated, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == installation.updated) type EventInstallationUpdated within Event: %w", string(data), err)
+		}
+
+		u.EventInstallationUpdated = eventInstallationUpdated
+		u.Type = EventTypeInstallationUpdated
+		return nil
+	case "resource.updated":
+		eventResourceUpdated := new(EventResourceUpdated)
+		if err := utils.UnmarshalJSON(data, &eventResourceUpdated, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == resource.updated) type EventResourceUpdated within Event: %w", string(data), err)
+		}
+
+		u.EventResourceUpdated = eventResourceUpdated
+		u.Type = EventTypeResourceUpdated
 		return nil
 	}
 
@@ -201,9 +223,17 @@ func (o *CreateEventRequestBody) GetEvent() Event {
 	return o.Event
 }
 
+func (o *CreateEventRequestBody) GetEventInstallationUpdated() *EventInstallationUpdated {
+	return o.GetEvent().EventInstallationUpdated
+}
+
+func (o *CreateEventRequestBody) GetEventResourceUpdated() *EventResourceUpdated {
+	return o.GetEvent().EventResourceUpdated
+}
+
 type CreateEventRequest struct {
 	IntegrationConfigurationID string                 `pathParam:"style=simple,explode=false,name=integrationConfigurationId"`
-	RequestBody                CreateEventRequestBody `request:"mediaType=application/json"`
+	Body                       CreateEventRequestBody `request:"mediaType=application/json"`
 }
 
 func (o *CreateEventRequest) GetIntegrationConfigurationID() string {
@@ -213,11 +243,11 @@ func (o *CreateEventRequest) GetIntegrationConfigurationID() string {
 	return o.IntegrationConfigurationID
 }
 
-func (o *CreateEventRequest) GetRequestBody() CreateEventRequestBody {
+func (o *CreateEventRequest) GetBody() CreateEventRequestBody {
 	if o == nil {
 		return CreateEventRequestBody{}
 	}
-	return o.RequestBody
+	return o.Body
 }
 
 type CreateEventResponse struct {

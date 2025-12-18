@@ -8,16 +8,15 @@ The payload of the event, if requested.
 import { OneHundredAndTen } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndTen = {
-  store: {
-    name: "<value>",
-    id: "<id>",
-  },
+  oldName: "<value>",
+  newName: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `store`                            | [models.Store](../models/store.md) | :heavy_check_mark:                 | N/A                                |
-| `ownerId`                          | *string*                           | :heavy_minus_sign:                 | N/A                                |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `oldName`          | *string*           | :heavy_check_mark: | N/A                |
+| `newName`          | *string*           | :heavy_check_mark: | N/A                |
+| `uid`              | *string*           | :heavy_minus_sign: | N/A                |

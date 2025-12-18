@@ -46,6 +46,7 @@ const (
 	AuthTokenOrigin2Sms       AuthTokenOrigin2 = "sms"
 	AuthTokenOrigin2Invite    AuthTokenOrigin2 = "invite"
 	AuthTokenOrigin2Google    AuthTokenOrigin2 = "google"
+	AuthTokenOrigin2Apple     AuthTokenOrigin2 = "apple"
 	AuthTokenOrigin2App       AuthTokenOrigin2 = "app"
 )
 
@@ -79,6 +80,8 @@ func (e *AuthTokenOrigin2) UnmarshalJSON(data []byte) error {
 	case "invite":
 		fallthrough
 	case "google":
+		fallthrough
+	case "apple":
 		fallthrough
 	case "app":
 		*e = AuthTokenOrigin2(v)
@@ -241,6 +244,7 @@ const (
 	AuthTokenOrigin1Sms       AuthTokenOrigin1 = "sms"
 	AuthTokenOrigin1Invite    AuthTokenOrigin1 = "invite"
 	AuthTokenOrigin1Google    AuthTokenOrigin1 = "google"
+	AuthTokenOrigin1Apple     AuthTokenOrigin1 = "apple"
 	AuthTokenOrigin1App       AuthTokenOrigin1 = "app"
 )
 
@@ -274,6 +278,8 @@ func (e *AuthTokenOrigin1) UnmarshalJSON(data []byte) error {
 	case "invite":
 		fallthrough
 	case "google":
+		fallthrough
+	case "apple":
 		fallthrough
 	case "app":
 		*e = AuthTokenOrigin1(v)
@@ -341,8 +347,8 @@ func (o *ScopeUser) GetExpiresAt() *float64 {
 type ScopeType string
 
 const (
-	ScopeTypeScopeUser ScopeType = "scope_User"
-	ScopeTypeScopeTeam ScopeType = "scope_Team"
+	ScopeTypeUser ScopeType = "user"
+	ScopeTypeTeam ScopeType = "team"
 )
 
 type Scope struct {
@@ -352,37 +358,59 @@ type Scope struct {
 	Type ScopeType
 }
 
-func CreateScopeScopeUser(scopeUser ScopeUser) Scope {
-	typ := ScopeTypeScopeUser
+func CreateScopeUser(user ScopeUser) Scope {
+	typ := ScopeTypeUser
+
+	typStr := AuthTokenTypeUser(typ)
+	user.Type = typStr
 
 	return Scope{
-		ScopeUser: &scopeUser,
+		ScopeUser: &user,
 		Type:      typ,
 	}
 }
 
-func CreateScopeScopeTeam(scopeTeam ScopeTeam) Scope {
-	typ := ScopeTypeScopeTeam
+func CreateScopeTeam(team ScopeTeam) Scope {
+	typ := ScopeTypeTeam
+
+	typStr := TypeTeam(typ)
+	team.Type = typStr
 
 	return Scope{
-		ScopeTeam: &scopeTeam,
+		ScopeTeam: &team,
 		Type:      typ,
 	}
 }
 
 func (u *Scope) UnmarshalJSON(data []byte) error {
 
-	var scopeTeam ScopeTeam = ScopeTeam{}
-	if err := utils.UnmarshalJSON(data, &scopeTeam, "", true, nil); err == nil {
-		u.ScopeTeam = &scopeTeam
-		u.Type = ScopeTypeScopeTeam
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var scopeUser ScopeUser = ScopeUser{}
-	if err := utils.UnmarshalJSON(data, &scopeUser, "", true, nil); err == nil {
-		u.ScopeUser = &scopeUser
-		u.Type = ScopeTypeScopeUser
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Type {
+	case "user":
+		scopeUser := new(ScopeUser)
+		if err := utils.UnmarshalJSON(data, &scopeUser, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == user) type ScopeUser within Scope: %w", string(data), err)
+		}
+
+		u.ScopeUser = scopeUser
+		u.Type = ScopeTypeUser
+		return nil
+	case "team":
+		scopeTeam := new(ScopeTeam)
+		if err := utils.UnmarshalJSON(data, &scopeTeam, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == team) type ScopeTeam within Scope: %w", string(data), err)
+		}
+
+		u.ScopeTeam = scopeTeam
+		u.Type = ScopeTypeTeam
 		return nil
 	}
 

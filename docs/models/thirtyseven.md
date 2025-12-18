@@ -8,23 +8,25 @@ The payload of the event, if requested.
 import { ThirtySeven } from "@vercel/sdk/models/userevent.js";
 
 let value: ThirtySeven = {
-  url: "https://wide-eyed-birdcage.biz/",
+  team: {
+    id: "<id>",
+    name: "<value>",
+  },
+  configuration: {
+    id: "<id>",
+  },
+  project: {
+    id: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                      | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `name`                                                     | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
-| `alias`                                                    | *string*[]                                                 | :heavy_minus_sign:                                         | N/A                                                        |
-| `target`                                                   | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
-| `deployment`                                               | [models.PayloadDeployment](../models/payloaddeployment.md) | :heavy_minus_sign:                                         | N/A                                                        |
-| `url`                                                      | *string*                                                   | :heavy_check_mark:                                         | N/A                                                        |
-| `forced`                                                   | *boolean*                                                  | :heavy_minus_sign:                                         | N/A                                                        |
-| `deploymentId`                                             | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
-| `plan`                                                     | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
-| `project`                                                  | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
-| `projectId`                                                | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
-| `regions`                                                  | *string*[]                                                 | :heavy_minus_sign:                                         | N/A                                                        |
-| `type`                                                     | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `team`                                                                             | [models.PayloadTeam](../models/payloadteam.md)                                     | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `configuration`                                                                    | [models.UserEventPayloadConfiguration](../models/usereventpayloadconfiguration.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `project`                                                                          | [models.UserEventPayload37Project](../models/usereventpayload37project.md)         | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `buildsEnabled`                                                                    | *boolean*                                                                          | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `passive`                                                                          | *boolean*                                                                          | :heavy_minus_sign:                                                                 | N/A                                                                                |

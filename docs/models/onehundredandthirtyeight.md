@@ -7,21 +7,12 @@ The payload of the event, if requested.
 ```typescript
 import { OneHundredAndThirtyEight } from "@vercel/sdk/models/userevent.js";
 
-let value: OneHundredAndThirtyEight = {
-  project: {
-    name: "<value>",
-  },
-  projectMembership: {
-    role: "PROJECT_VIEWER",
-    uid: "<id>",
-    createdAt: 3187.55,
-  },
-};
+let value: OneHundredAndThirtyEight = {};
 ```
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `project`                                                                    | [models.UserEventPayload138Project](../models/usereventpayload138project.md) | :heavy_check_mark:                                                           | N/A                                                                          |
-| `projectMembership`                                                          | [models.ProjectMembership](../models/projectmembership.md)                   | :heavy_check_mark:                                                           | N/A                                                                          |
+| Field                             | Type                              | Required                          | Description                       |
+| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
+| `previewDeploymentSuffix`         | *string*                          | :heavy_minus_sign:                | N/A                               |
+| `previousPreviewDeploymentSuffix` | *string*                          | :heavy_minus_sign:                | N/A                               |

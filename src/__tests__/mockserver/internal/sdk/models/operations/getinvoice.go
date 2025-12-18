@@ -31,6 +31,7 @@ func (o *GetInvoiceRequest) GetInvoiceID() string {
 type GetInvoiceState string
 
 const (
+	GetInvoiceStateDraft           GetInvoiceState = "draft"
 	GetInvoiceStatePending         GetInvoiceState = "pending"
 	GetInvoiceStateScheduled       GetInvoiceState = "scheduled"
 	GetInvoiceStateInvoiced        GetInvoiceState = "invoiced"
@@ -49,6 +50,8 @@ func (e *GetInvoiceState) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "draft":
+		fallthrough
 	case "pending":
 		fallthrough
 	case "scheduled":
@@ -265,6 +268,10 @@ type GetInvoiceResponseBody struct {
 	InvoiceDate string `json:"invoiceDate"`
 	// Subscription period for this billing cycle. ISO 8601 timestamps.
 	Period GetInvoicePeriod `json:"period"`
+	// Moment the invoice was paid. ISO 8601 timestamp.
+	PaidAt *string `json:"paidAt,omitempty"`
+	// Most recent moment the invoice was refunded. ISO 8601 timestamp.
+	RefundedAt *string `json:"refundedAt,omitempty"`
 	// Additional memo for the invoice.
 	Memo *string `json:"memo,omitempty"`
 	// Invoice items.
@@ -330,6 +337,20 @@ func (o *GetInvoiceResponseBody) GetPeriod() GetInvoicePeriod {
 		return GetInvoicePeriod{}
 	}
 	return o.Period
+}
+
+func (o *GetInvoiceResponseBody) GetPaidAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PaidAt
+}
+
+func (o *GetInvoiceResponseBody) GetRefundedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RefundedAt
 }
 
 func (o *GetInvoiceResponseBody) GetMemo() *string {

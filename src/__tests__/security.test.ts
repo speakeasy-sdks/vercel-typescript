@@ -107,49 +107,23 @@ test("Security Put Firewall Config", async () => {
           id: "<id>",
           name: "<value>",
           active: true,
-          conditionGroup: [
-            {
-              conditions: [
-                {
-                  type: "target_path",
-                  op: "pre",
-                },
-              ],
-            },
-            {
-              conditions: [
-                {
-                  type: "target_path",
-                  op: "pre",
-                },
-              ],
-            },
-          ],
+          conditionGroup: [],
           action: {},
+          valid: true,
+          validationErrors: [
+            "<value 1>",
+          ],
         },
         {
           id: "<id>",
           name: "<value>",
           active: true,
-          conditionGroup: [
-            {
-              conditions: [
-                {
-                  type: "target_path",
-                  op: "pre",
-                },
-              ],
-            },
-            {
-              conditions: [
-                {
-                  type: "target_path",
-                  op: "pre",
-                },
-              ],
-            },
-          ],
+          conditionGroup: [],
           action: {},
+          valid: true,
+          validationErrors: [
+            "<value 1>",
+          ],
         },
       ],
       ips: [],
@@ -256,21 +230,10 @@ test("Security Get Firewall Config", async () => {
         id: "<id>",
         name: "<value>",
         active: false,
-        conditionGroup: [
-          {
-            conditions: [
-              {
-                type: "header",
-                op: "ex",
-              },
-              {
-                type: "header",
-                op: "ex",
-              },
-            ],
-          },
-        ],
+        conditionGroup: [],
         action: {},
+        valid: false,
+        validationErrors: [],
       },
     ],
     ips: [
@@ -318,17 +281,7 @@ test("Security Get Bypass Ip", async () => {
   });
   expect(result).toBeDefined();
   expect(result).toEqual({
-    result: [
-      {
-        ownerId: "<id>",
-        id: "<id>",
-        domain: "insignificant-parsnip.info",
-        ip: "f8bb:ce11:0cbd:fbab:2e3e:b95b:ac0d:ddef",
-        createdAt: "1715491040793",
-        updatedAt: "1735640959124",
-        updatedAtHour: "<value>",
-      },
-    ],
+    result: [],
   });
 });
 
@@ -366,5 +319,24 @@ test("Security Remove Bypass Ip", async () => {
   expect(result).toBeDefined();
   expect(result).toEqual({
     ok: false,
+  });
+});
+
+test("Security Get /V1 /Security/firewall/events", async () => {
+  const testHttpClient = createTestHTTPClient(
+    "get_/v1/security/firewall/events",
+  );
+
+  const vercel = new Vercel({
+    serverURL: process.env["TEST_SERVER_URL"] ?? "http://localhost:18080",
+    httpClient: testHttpClient,
+  });
+
+  const result = await vercel.security.getV1SecurityFirewallEvents({
+    projectId: "<id>",
+  });
+  expect(result).toBeDefined();
+  expect(result).toEqual({
+    actions: [],
   });
 });

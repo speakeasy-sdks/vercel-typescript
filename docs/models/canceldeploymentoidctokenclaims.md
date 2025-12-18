@@ -31,3 +31,4 @@ let value: CancelDeploymentOidcTokenClaims = {
 | `project`          | *string*           | :heavy_check_mark: | N/A                |
 | `projectId`        | *string*           | :heavy_check_mark: | N/A                |
 | `environment`      | *string*           | :heavy_check_mark: | N/A                |
+| `plan`             | *string*           | :heavy_minus_sign: | N/A                |

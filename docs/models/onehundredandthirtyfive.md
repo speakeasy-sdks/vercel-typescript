@@ -8,15 +8,14 @@ The payload of the event, if requested.
 import { OneHundredAndThirtyFive } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndThirtyFive = {
-  projectName: "<value>",
-  destinationAccountName: "<value>",
+  email: "Nigel_Little31@yahoo.com",
+  prevEmail: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                    | Type                     | Required                 | Description              |
-| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| `projectName`            | *string*                 | :heavy_check_mark:       | N/A                      |
-| `destinationAccountName` | *string*                 | :heavy_check_mark:       | N/A                      |
-| `transferId`             | *string*                 | :heavy_minus_sign:       | N/A                      |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `email`            | *string*           | :heavy_check_mark: | N/A                |
+| `prevEmail`        | *string*           | :heavy_check_mark: | N/A                |

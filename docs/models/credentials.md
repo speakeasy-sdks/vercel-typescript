@@ -7,7 +7,52 @@
 
 ```typescript
 const value: models.Credentials1 = {
-  type: "google",
+  type: "apple",
+  id: "<id>",
+};
+```
+
+### `models.Credentials1`
+
+```typescript
+const value: models.Credentials1 = {
+  type: "apple",
+  id: "<id>",
+};
+```
+
+### `models.Credentials1`
+
+```typescript
+const value: models.Credentials1 = {
+  type: "apple",
+  id: "<id>",
+};
+```
+
+### `models.Credentials1`
+
+```typescript
+const value: models.Credentials1 = {
+  type: "apple",
+  id: "<id>",
+};
+```
+
+### `models.Credentials1`
+
+```typescript
+const value: models.Credentials1 = {
+  type: "apple",
+  id: "<id>",
+};
+```
+
+### `models.Credentials1`
+
+```typescript
+const value: models.Credentials1 = {
+  type: "apple",
   id: "<id>",
 };
 ```

@@ -8,12 +8,20 @@ The payload of the event, if requested.
 import { OneHundredAndFortySeven } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundredAndFortySeven = {
-  action: "disable",
+  project: {
+    name: "<value>",
+  },
+  projectMembership: {
+    role: "PROJECT_VIEWER",
+    uid: "<id>",
+    createdAt: 4347.12,
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `action`                                                                   | [models.UserEventPayload147Action](../models/usereventpayload147action.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `project`                                                                    | [models.UserEventPayload147Project](../models/usereventpayload147project.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `projectMembership`                                                          | [models.ProjectMembership](../models/projectmembership.md)                   | :heavy_check_mark:                                                           | N/A                                                                          |

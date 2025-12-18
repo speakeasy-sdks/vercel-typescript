@@ -104,55 +104,47 @@ func testPutFirewallConfigPutFirewallConfig0(w http.ResponseWriter, req *http.Re
 					Action: operations.ActiveJavaActionLog,
 				},
 			},
-			Rules: []operations.ActiveRule{
-				operations.ActiveRule{
-					ID:     "<id>",
-					Name:   "<value>",
-					Active: true,
-					ConditionGroup: []operations.ActiveConditionGroup{
-						operations.ActiveConditionGroup{
-							Conditions: []operations.ActiveCondition{
-								operations.ActiveCondition{
-									Type: operations.ActiveTypeTargetPath,
-									Op:   operations.ActiveOpPre,
+			Rules: []operations.ActiveRuleUnion{
+				operations.CreateActiveRuleUnionRuleActive2(
+					operations.RuleActive2{
+						ID:     "<id>",
+						Name:   "<value>",
+						Active: false,
+						ConditionGroup: []operations.ActiveConditionGroup2{
+							operations.ActiveConditionGroup2{
+								Conditions: []operations.ActiveCondition2{
+									operations.ActiveCondition2{
+										Type: operations.ActiveType2Ja4Digest,
+										Op:   operations.ActiveOp2Sub,
+									},
 								},
 							},
 						},
-						operations.ActiveConditionGroup{
-							Conditions: []operations.ActiveCondition{
-								operations.ActiveCondition{
-									Type: operations.ActiveTypeTargetPath,
-									Op:   operations.ActiveOpPre,
-								},
-							},
-						},
+						Action:           operations.RuleActiveAction2{},
+						Valid:            false,
+						ValidationErrors: []string{},
 					},
-					Action: operations.ActiveRuleAction{},
-				},
-				operations.ActiveRule{
-					ID:     "<id>",
-					Name:   "<value>",
-					Active: true,
-					ConditionGroup: []operations.ActiveConditionGroup{
-						operations.ActiveConditionGroup{
-							Conditions: []operations.ActiveCondition{
-								operations.ActiveCondition{
-									Type: operations.ActiveTypeTargetPath,
-									Op:   operations.ActiveOpPre,
+				),
+				operations.CreateActiveRuleUnionRuleActive2(
+					operations.RuleActive2{
+						ID:     "<id>",
+						Name:   "<value>",
+						Active: false,
+						ConditionGroup: []operations.ActiveConditionGroup2{
+							operations.ActiveConditionGroup2{
+								Conditions: []operations.ActiveCondition2{
+									operations.ActiveCondition2{
+										Type: operations.ActiveType2Ja4Digest,
+										Op:   operations.ActiveOp2Sub,
+									},
 								},
 							},
 						},
-						operations.ActiveConditionGroup{
-							Conditions: []operations.ActiveCondition{
-								operations.ActiveCondition{
-									Type: operations.ActiveTypeTargetPath,
-									Op:   operations.ActiveOpPre,
-								},
-							},
-						},
+						Action:           operations.RuleActiveAction2{},
+						Valid:            false,
+						ValidationErrors: []string{},
 					},
-					Action: operations.ActiveRuleAction{},
-				},
+				),
 			},
 			Ips: []operations.ActiveIP{},
 			Changes: []operations.PutFirewallConfigChange{

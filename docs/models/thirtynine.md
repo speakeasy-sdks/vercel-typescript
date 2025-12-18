@@ -8,25 +8,21 @@ The payload of the event, if requested.
 import { ThirtyNine } from "@vercel/sdk/models/userevent.js";
 
 let value: ThirtyNine = {
-  deployment: {
+  team: {
     id: "<id>",
     name: "<value>",
-    url: "https://handy-negotiation.org/",
-    meta: {
-      "key": "<value>",
-      "key1": "<value>",
-      "key2": "<value>",
-    },
   },
-  deploymentId: "<id>",
-  url: "https://inborn-doorpost.name/",
+  configuration: {
+    id: "<id>",
+  },
+  newName: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `deployment`                                                                 | [models.UserEventPayloadDeployment](../models/usereventpayloaddeployment.md) | :heavy_check_mark:                                                           | N/A                                                                          |
-| `deploymentId`                                                               | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
-| `url`                                                                        | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `team`                                                                                 | [models.UserEventPayload39Team](../models/usereventpayload39team.md)                   | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `configuration`                                                                        | [models.UserEventPayload39Configuration](../models/usereventpayload39configuration.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `newName`                                                                              | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |

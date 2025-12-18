@@ -8,20 +8,14 @@ The payload of the event, if requested.
 import { FiftyThree } from "@vercel/sdk/models/userevent.js";
 
 let value: FiftyThree = {
-  sha: "<value>",
-  gitUserPlatform: "<value>",
-  projectName: "<value>",
-  gitCommitterName: "<value>",
-  source: "<value>",
+  name: "<value>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `sha`              | *string*           | :heavy_check_mark: | N/A                |
-| `gitUserPlatform`  | *string*           | :heavy_check_mark: | N/A                |
-| `projectName`      | *string*           | :heavy_check_mark: | N/A                |
-| `gitCommitterName` | *string*           | :heavy_check_mark: | N/A                |
-| `source`           | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `name`                                                                     | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
+| `oldTeam`                                                                  | [models.UserEventPayload53OldTeam](../models/usereventpayload53oldteam.md) | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `newTeam`                                                                  | [models.UserEventPayload53NewTeam](../models/usereventpayload53newteam.md) | :heavy_minus_sign:                                                         | N/A                                                                        |

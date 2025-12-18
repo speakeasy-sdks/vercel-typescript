@@ -7,24 +7,14 @@ The payload of the event, if requested.
 ```typescript
 import { ThirtyOne } from "@vercel/sdk/models/userevent.js";
 
-let value: ThirtyOne = {
-  team: {
-    id: "<id>",
-    name: "<value>",
-  },
-  configuration: {
-    id: "<id>",
-  },
-  project: {
-    id: "<id>",
-  },
-};
+let value: ThirtyOne = {};
 ```
 
 ## Fields
 
-| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `team`                                                                             | [models.UserEventPayloadTeam](../models/usereventpayloadteam.md)                   | :heavy_check_mark:                                                                 | N/A                                                                                |
-| `configuration`                                                                    | [models.UserEventPayloadConfiguration](../models/usereventpayloadconfiguration.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
-| `project`                                                                          | [models.UserEventPayload31Project](../models/usereventpayload31project.md)         | :heavy_check_mark:                                                                 | N/A                                                                                |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `projectId`        | *string*           | :heavy_minus_sign: | N/A                |
+| `projectName`      | *string*           | :heavy_minus_sign: | N/A                |
+| `certId`           | *string*           | :heavy_minus_sign: | N/A                |
+| `origin`           | *string*           | :heavy_minus_sign: | N/A                |

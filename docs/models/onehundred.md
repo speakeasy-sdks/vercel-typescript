@@ -8,16 +8,18 @@ The payload of the event, if requested.
 import { OneHundred } from "@vercel/sdk/models/userevent.js";
 
 let value: OneHundred = {
-  uid: "<id>",
-  name: {
-    name: "<value>",
-  },
+  projectId: "<id>",
+  projectName: "<value>",
+  elasticConcurrencyEnabled: false,
+  oldElasticConcurrencyEnabled: false,
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `uid`              | *string*           | :heavy_check_mark: | N/A                |
-| `name`             | *models.Name*      | :heavy_check_mark: | N/A                |
+| Field                          | Type                           | Required                       | Description                    |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `projectId`                    | *string*                       | :heavy_check_mark:             | N/A                            |
+| `projectName`                  | *string*                       | :heavy_check_mark:             | N/A                            |
+| `elasticConcurrencyEnabled`    | *boolean*                      | :heavy_check_mark:             | N/A                            |
+| `oldElasticConcurrencyEnabled` | *boolean*                      | :heavy_check_mark:             | N/A                            |

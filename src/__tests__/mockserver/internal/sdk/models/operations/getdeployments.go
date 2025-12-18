@@ -698,10 +698,12 @@ const (
 	GetDeploymentsFrameworkZola           GetDeploymentsFramework = "zola"
 	GetDeploymentsFrameworkHydrogen       GetDeploymentsFramework = "hydrogen"
 	GetDeploymentsFrameworkVite           GetDeploymentsFramework = "vite"
+	GetDeploymentsFrameworkTanstackStart  GetDeploymentsFramework = "tanstack-start"
 	GetDeploymentsFrameworkVitepress      GetDeploymentsFramework = "vitepress"
 	GetDeploymentsFrameworkVuepress       GetDeploymentsFramework = "vuepress"
 	GetDeploymentsFrameworkParcel         GetDeploymentsFramework = "parcel"
 	GetDeploymentsFrameworkFastapi        GetDeploymentsFramework = "fastapi"
+	GetDeploymentsFrameworkFlask          GetDeploymentsFramework = "flask"
 	GetDeploymentsFrameworkFasthtml       GetDeploymentsFramework = "fasthtml"
 	GetDeploymentsFrameworkSanityV3       GetDeploymentsFramework = "sanity-v3"
 	GetDeploymentsFrameworkSanity         GetDeploymentsFramework = "sanity"
@@ -710,6 +712,9 @@ const (
 	GetDeploymentsFrameworkHono           GetDeploymentsFramework = "hono"
 	GetDeploymentsFrameworkExpress        GetDeploymentsFramework = "express"
 	GetDeploymentsFrameworkH3             GetDeploymentsFramework = "h3"
+	GetDeploymentsFrameworkNestjs         GetDeploymentsFramework = "nestjs"
+	GetDeploymentsFrameworkElysia         GetDeploymentsFramework = "elysia"
+	GetDeploymentsFrameworkFastify        GetDeploymentsFramework = "fastify"
 	GetDeploymentsFrameworkXmcp           GetDeploymentsFramework = "xmcp"
 )
 
@@ -800,6 +805,8 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "vite":
 		fallthrough
+	case "tanstack-start":
+		fallthrough
 	case "vitepress":
 		fallthrough
 	case "vuepress":
@@ -807,6 +814,8 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 	case "parcel":
 		fallthrough
 	case "fastapi":
+		fallthrough
+	case "flask":
 		fallthrough
 	case "fasthtml":
 		fallthrough
@@ -824,6 +833,12 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "h3":
 		fallthrough
+	case "nestjs":
+		fallthrough
+	case "elysia":
+		fallthrough
+	case "fastify":
+		fallthrough
 	case "xmcp":
 		*e = GetDeploymentsFramework(v)
 		return nil
@@ -835,6 +850,7 @@ func (e *GetDeploymentsFramework) UnmarshalJSON(data []byte) error {
 type GetDeploymentsNodeVersion string
 
 const (
+	GetDeploymentsNodeVersionTwentyFourDotX GetDeploymentsNodeVersion = "24.x"
 	GetDeploymentsNodeVersionTwentyTwoDotX  GetDeploymentsNodeVersion = "22.x"
 	GetDeploymentsNodeVersionTwentyDotX     GetDeploymentsNodeVersion = "20.x"
 	GetDeploymentsNodeVersionEighteenDotX   GetDeploymentsNodeVersion = "18.x"
@@ -854,6 +870,8 @@ func (e *GetDeploymentsNodeVersion) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "24.x":
+		fallthrough
 	case "22.x":
 		fallthrough
 	case "20.x":
@@ -1221,6 +1239,7 @@ type GetDeploymentsDeployment struct {
 	OomReport *GetDeploymentsOomReport `json:"oomReport,omitempty"`
 	// Deployment can be used for instant rollback
 	IsRollbackCandidate *bool `json:"isRollbackCandidate,omitempty"`
+	Prebuilt            *bool `json:"prebuilt,omitempty"`
 	// The project settings which was used for this deployment
 	ProjectSettings *GetDeploymentsProjectSettings `json:"projectSettings,omitempty"`
 	// The flag saying if Secure Compute network is used for builds
@@ -1445,6 +1464,13 @@ func (o *GetDeploymentsDeployment) GetIsRollbackCandidate() *bool {
 		return nil
 	}
 	return o.IsRollbackCandidate
+}
+
+func (o *GetDeploymentsDeployment) GetPrebuilt() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prebuilt
 }
 
 func (o *GetDeploymentsDeployment) GetProjectSettings() *GetDeploymentsProjectSettings {

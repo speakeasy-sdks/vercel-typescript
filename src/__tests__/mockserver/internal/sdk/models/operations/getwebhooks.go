@@ -75,9 +75,13 @@ const (
 	GetWebhooksEvent2EdgeConfigDeleted                                  GetWebhooksEvent2 = "edge-config.deleted"
 	GetWebhooksEvent2EdgeConfigItemsUpdated                             GetWebhooksEvent2 = "edge-config.items.updated"
 	GetWebhooksEvent2FirewallAttack                                     GetWebhooksEvent2 = "firewall.attack"
+	GetWebhooksEvent2FirewallSystemRuleAnomaly                          GetWebhooksEvent2 = "firewall.system-rule-anomaly"
+	GetWebhooksEvent2FirewallCustomRuleAnomaly                          GetWebhooksEvent2 = "firewall.custom-rule-anomaly"
+	GetWebhooksEvent2AlertsTriggered                                    GetWebhooksEvent2 = "alerts.triggered"
 	GetWebhooksEvent2IntegrationConfigurationPermissionUpgraded         GetWebhooksEvent2 = "integration-configuration.permission-upgraded"
 	GetWebhooksEvent2IntegrationConfigurationRemoved                    GetWebhooksEvent2 = "integration-configuration.removed"
 	GetWebhooksEvent2IntegrationConfigurationScopeChangeConfirmed       GetWebhooksEvent2 = "integration-configuration.scope-change-confirmed"
+	GetWebhooksEvent2IntegrationConfigurationTransferred                GetWebhooksEvent2 = "integration-configuration.transferred"
 	GetWebhooksEvent2IntegrationResourceProjectConnected                GetWebhooksEvent2 = "integration-resource.project-connected"
 	GetWebhooksEvent2IntegrationResourceProjectDisconnected             GetWebhooksEvent2 = "integration-resource.project-disconnected"
 	GetWebhooksEvent2ProjectCreated                                     GetWebhooksEvent2 = "project.created"
@@ -114,7 +118,9 @@ const (
 	GetWebhooksEvent2MarketplaceInvoiceRefunded                         GetWebhooksEvent2 = "marketplace.invoice.refunded"
 	GetWebhooksEvent2ObservabilityAnomaly                               GetWebhooksEvent2 = "observability.anomaly"
 	GetWebhooksEvent2ObservabilityAnomalyError                          GetWebhooksEvent2 = "observability.anomaly-error"
-	GetWebhooksEvent2ObservabilityAnomalyBotId                          GetWebhooksEvent2 = "observability.anomaly-botId"
+	GetWebhooksEvent2ObservabilityUsageAnomaly                          GetWebhooksEvent2 = "observability.usage-anomaly"
+	GetWebhooksEvent2ObservabilityErrorAnomaly                          GetWebhooksEvent2 = "observability.error-anomaly"
+	GetWebhooksEvent2BotidAnomaly                                       GetWebhooksEvent2 = "botid.anomaly"
 	GetWebhooksEvent2TestWebhook                                        GetWebhooksEvent2 = "test-webhook"
 )
 
@@ -191,11 +197,19 @@ func (e *GetWebhooksEvent2) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "firewall.attack":
 		fallthrough
+	case "firewall.system-rule-anomaly":
+		fallthrough
+	case "firewall.custom-rule-anomaly":
+		fallthrough
+	case "alerts.triggered":
+		fallthrough
 	case "integration-configuration.permission-upgraded":
 		fallthrough
 	case "integration-configuration.removed":
 		fallthrough
 	case "integration-configuration.scope-change-confirmed":
+		fallthrough
+	case "integration-configuration.transferred":
 		fallthrough
 	case "integration-resource.project-connected":
 		fallthrough
@@ -269,7 +283,11 @@ func (e *GetWebhooksEvent2) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "observability.anomaly-error":
 		fallthrough
-	case "observability.anomaly-botId":
+	case "observability.usage-anomaly":
+		fallthrough
+	case "observability.error-anomaly":
+		fallthrough
+	case "botid.anomaly":
 		fallthrough
 	case "test-webhook":
 		*e = GetWebhooksEvent2(v)
@@ -398,10 +416,12 @@ const (
 	GetWebhooksFrameworkZola           GetWebhooksFramework = "zola"
 	GetWebhooksFrameworkHydrogen       GetWebhooksFramework = "hydrogen"
 	GetWebhooksFrameworkVite           GetWebhooksFramework = "vite"
+	GetWebhooksFrameworkTanstackStart  GetWebhooksFramework = "tanstack-start"
 	GetWebhooksFrameworkVitepress      GetWebhooksFramework = "vitepress"
 	GetWebhooksFrameworkVuepress       GetWebhooksFramework = "vuepress"
 	GetWebhooksFrameworkParcel         GetWebhooksFramework = "parcel"
 	GetWebhooksFrameworkFastapi        GetWebhooksFramework = "fastapi"
+	GetWebhooksFrameworkFlask          GetWebhooksFramework = "flask"
 	GetWebhooksFrameworkFasthtml       GetWebhooksFramework = "fasthtml"
 	GetWebhooksFrameworkSanityV3       GetWebhooksFramework = "sanity-v3"
 	GetWebhooksFrameworkSanity         GetWebhooksFramework = "sanity"
@@ -410,6 +430,9 @@ const (
 	GetWebhooksFrameworkHono           GetWebhooksFramework = "hono"
 	GetWebhooksFrameworkExpress        GetWebhooksFramework = "express"
 	GetWebhooksFrameworkH3             GetWebhooksFramework = "h3"
+	GetWebhooksFrameworkNestjs         GetWebhooksFramework = "nestjs"
+	GetWebhooksFrameworkElysia         GetWebhooksFramework = "elysia"
+	GetWebhooksFrameworkFastify        GetWebhooksFramework = "fastify"
 	GetWebhooksFrameworkXmcp           GetWebhooksFramework = "xmcp"
 )
 
@@ -500,6 +523,8 @@ func (e *GetWebhooksFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "vite":
 		fallthrough
+	case "tanstack-start":
+		fallthrough
 	case "vitepress":
 		fallthrough
 	case "vuepress":
@@ -507,6 +532,8 @@ func (e *GetWebhooksFramework) UnmarshalJSON(data []byte) error {
 	case "parcel":
 		fallthrough
 	case "fastapi":
+		fallthrough
+	case "flask":
 		fallthrough
 	case "fasthtml":
 		fallthrough
@@ -523,6 +550,12 @@ func (e *GetWebhooksFramework) UnmarshalJSON(data []byte) error {
 	case "express":
 		fallthrough
 	case "h3":
+		fallthrough
+	case "nestjs":
+		fallthrough
+	case "elysia":
+		fallthrough
+	case "fastify":
 		fallthrough
 	case "xmcp":
 		*e = GetWebhooksFramework(v)
@@ -614,9 +647,13 @@ const (
 	GetWebhooksEvent1EdgeConfigDeleted                                  GetWebhooksEvent1 = "edge-config.deleted"
 	GetWebhooksEvent1EdgeConfigItemsUpdated                             GetWebhooksEvent1 = "edge-config.items.updated"
 	GetWebhooksEvent1FirewallAttack                                     GetWebhooksEvent1 = "firewall.attack"
+	GetWebhooksEvent1FirewallSystemRuleAnomaly                          GetWebhooksEvent1 = "firewall.system-rule-anomaly"
+	GetWebhooksEvent1FirewallCustomRuleAnomaly                          GetWebhooksEvent1 = "firewall.custom-rule-anomaly"
+	GetWebhooksEvent1AlertsTriggered                                    GetWebhooksEvent1 = "alerts.triggered"
 	GetWebhooksEvent1IntegrationConfigurationPermissionUpgraded         GetWebhooksEvent1 = "integration-configuration.permission-upgraded"
 	GetWebhooksEvent1IntegrationConfigurationRemoved                    GetWebhooksEvent1 = "integration-configuration.removed"
 	GetWebhooksEvent1IntegrationConfigurationScopeChangeConfirmed       GetWebhooksEvent1 = "integration-configuration.scope-change-confirmed"
+	GetWebhooksEvent1IntegrationConfigurationTransferred                GetWebhooksEvent1 = "integration-configuration.transferred"
 	GetWebhooksEvent1IntegrationResourceProjectConnected                GetWebhooksEvent1 = "integration-resource.project-connected"
 	GetWebhooksEvent1IntegrationResourceProjectDisconnected             GetWebhooksEvent1 = "integration-resource.project-disconnected"
 	GetWebhooksEvent1ProjectCreated                                     GetWebhooksEvent1 = "project.created"
@@ -653,7 +690,9 @@ const (
 	GetWebhooksEvent1MarketplaceInvoiceRefunded                         GetWebhooksEvent1 = "marketplace.invoice.refunded"
 	GetWebhooksEvent1ObservabilityAnomaly                               GetWebhooksEvent1 = "observability.anomaly"
 	GetWebhooksEvent1ObservabilityAnomalyError                          GetWebhooksEvent1 = "observability.anomaly-error"
-	GetWebhooksEvent1ObservabilityAnomalyBotId                          GetWebhooksEvent1 = "observability.anomaly-botId"
+	GetWebhooksEvent1ObservabilityUsageAnomaly                          GetWebhooksEvent1 = "observability.usage-anomaly"
+	GetWebhooksEvent1ObservabilityErrorAnomaly                          GetWebhooksEvent1 = "observability.error-anomaly"
+	GetWebhooksEvent1BotidAnomaly                                       GetWebhooksEvent1 = "botid.anomaly"
 	GetWebhooksEvent1TestWebhook                                        GetWebhooksEvent1 = "test-webhook"
 )
 
@@ -730,11 +769,19 @@ func (e *GetWebhooksEvent1) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "firewall.attack":
 		fallthrough
+	case "firewall.system-rule-anomaly":
+		fallthrough
+	case "firewall.custom-rule-anomaly":
+		fallthrough
+	case "alerts.triggered":
+		fallthrough
 	case "integration-configuration.permission-upgraded":
 		fallthrough
 	case "integration-configuration.removed":
 		fallthrough
 	case "integration-configuration.scope-change-confirmed":
+		fallthrough
+	case "integration-configuration.transferred":
 		fallthrough
 	case "integration-resource.project-connected":
 		fallthrough
@@ -808,7 +855,11 @@ func (e *GetWebhooksEvent1) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "observability.anomaly-error":
 		fallthrough
-	case "observability.anomaly-botId":
+	case "observability.usage-anomaly":
+		fallthrough
+	case "observability.error-anomaly":
+		fallthrough
+	case "botid.anomaly":
 		fallthrough
 	case "test-webhook":
 		*e = GetWebhooksEvent1(v)

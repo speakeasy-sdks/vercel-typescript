@@ -8,14 +8,13 @@ The payload of the event, if requested.
 import { NinetyFive } from "@vercel/sdk/models/userevent.js";
 
 let value: NinetyFive = {
-  instances: 7567.04,
-  url: "https://valuable-curl.info",
+  projectId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `instances`        | *number*           | :heavy_check_mark: | N/A                |
-| `url`              | *string*           | :heavy_check_mark: | N/A                |
+| Field                                        | Type                                         | Required                                     | Description                                  |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| `projectId`                                  | *string*                                     | :heavy_check_mark:                           | N/A                                          |
+| `reasonCode`                                 | [models.ReasonCode](../models/reasoncode.md) | :heavy_minus_sign:                           | N/A                                          |

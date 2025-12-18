@@ -358,3 +358,62 @@ test("Teams Delete Team Invite Code", async () => {
     id: "<id>",
   });
 });
+
+test("Teams Invite User To Team", async () => {
+  const testHttpClient = createTestHTTPClient("inviteUserToTeam");
+
+  const vercel = new Vercel({
+    serverURL: process.env["TEST_SERVER_URL"] ?? "http://localhost:18080",
+    httpClient: testHttpClient,
+    bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
+  });
+
+  const result = await vercel.teams.inviteUserToTeam([
+    {
+      email: "john@example.com",
+      role: "DEVELOPER",
+      projects: [
+        {
+          projectId: "prj_ndlgr43fadlPyCtREAqxxdyFK",
+          role: "ADMIN",
+        },
+        {
+          projectId: "prj_ndlgr43fadlPyCtREAqxxdyFK",
+          role: "ADMIN",
+        },
+      ],
+    },
+  ]);
+  expect(result).toBeDefined();
+  expect(result).toEqual({
+    uid: "kr1PsOIzqEL5Xg6M4VZcZosf",
+    username: "john-doe",
+    email: "john@user.co",
+    role: "MEMBER",
+    teamRoles: [
+      "MEMBER",
+    ],
+    teamPermissions: [
+      "CreateProject",
+    ],
+  });
+});
+
+test("Teams Post Team Dsync Roles", async () => {
+  const testHttpClient = createTestHTTPClient("postTeamDsyncRoles");
+
+  const vercel = new Vercel({
+    serverURL: process.env["TEST_SERVER_URL"] ?? "http://localhost:18080",
+    httpClient: testHttpClient,
+    bearerToken: "<YOUR_BEARER_TOKEN_HERE>",
+  });
+
+  const result = await vercel.teams.postTeamDsyncRoles({
+    teamId: "team_1a2b3c4d5e6f7g8h9i0j1k2l",
+    slug: "my-team-url-slug",
+  });
+  expect(result).toBeDefined();
+  expect(result).toEqual({
+    ok: true,
+  });
+});

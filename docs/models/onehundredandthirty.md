@@ -14,5 +14,4 @@ let value: OneHundredAndThirty = {};
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `price`            | *number*           | :heavy_minus_sign: | N/A                |
-| `currency`         | *string*           | :heavy_minus_sign: | N/A                |
+| `slug`             | *string*           | :heavy_minus_sign: | N/A                |

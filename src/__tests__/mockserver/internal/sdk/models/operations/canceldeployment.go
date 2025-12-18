@@ -141,6 +141,53 @@ func (o *CancelDeploymentBuild2) GetConfig() map[string]any {
 	return o.Config
 }
 
+type CancelDeploymentProjectSettingsNodeVersion string
+
+const (
+	CancelDeploymentProjectSettingsNodeVersionTwentyFourDotX CancelDeploymentProjectSettingsNodeVersion = "24.x"
+	CancelDeploymentProjectSettingsNodeVersionTwentyTwoDotX  CancelDeploymentProjectSettingsNodeVersion = "22.x"
+	CancelDeploymentProjectSettingsNodeVersionTwentyDotX     CancelDeploymentProjectSettingsNodeVersion = "20.x"
+	CancelDeploymentProjectSettingsNodeVersionEighteenDotX   CancelDeploymentProjectSettingsNodeVersion = "18.x"
+	CancelDeploymentProjectSettingsNodeVersionSixteenDotX    CancelDeploymentProjectSettingsNodeVersion = "16.x"
+	CancelDeploymentProjectSettingsNodeVersionFourteenDotX   CancelDeploymentProjectSettingsNodeVersion = "14.x"
+	CancelDeploymentProjectSettingsNodeVersionTwelveDotX     CancelDeploymentProjectSettingsNodeVersion = "12.x"
+	CancelDeploymentProjectSettingsNodeVersionTenDotX        CancelDeploymentProjectSettingsNodeVersion = "10.x"
+	CancelDeploymentProjectSettingsNodeVersionEightDot10DotX CancelDeploymentProjectSettingsNodeVersion = "8.10.x"
+)
+
+func (e CancelDeploymentProjectSettingsNodeVersion) ToPointer() *CancelDeploymentProjectSettingsNodeVersion {
+	return &e
+}
+func (e *CancelDeploymentProjectSettingsNodeVersion) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "24.x":
+		fallthrough
+	case "22.x":
+		fallthrough
+	case "20.x":
+		fallthrough
+	case "18.x":
+		fallthrough
+	case "16.x":
+		fallthrough
+	case "14.x":
+		fallthrough
+	case "12.x":
+		fallthrough
+	case "10.x":
+		fallthrough
+	case "8.10.x":
+		*e = CancelDeploymentProjectSettingsNodeVersion(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CancelDeploymentProjectSettingsNodeVersion: %v", v)
+	}
+}
+
 type CancelDeploymentFramework string
 
 const (
@@ -183,10 +230,12 @@ const (
 	CancelDeploymentFrameworkZola           CancelDeploymentFramework = "zola"
 	CancelDeploymentFrameworkHydrogen       CancelDeploymentFramework = "hydrogen"
 	CancelDeploymentFrameworkVite           CancelDeploymentFramework = "vite"
+	CancelDeploymentFrameworkTanstackStart  CancelDeploymentFramework = "tanstack-start"
 	CancelDeploymentFrameworkVitepress      CancelDeploymentFramework = "vitepress"
 	CancelDeploymentFrameworkVuepress       CancelDeploymentFramework = "vuepress"
 	CancelDeploymentFrameworkParcel         CancelDeploymentFramework = "parcel"
 	CancelDeploymentFrameworkFastapi        CancelDeploymentFramework = "fastapi"
+	CancelDeploymentFrameworkFlask          CancelDeploymentFramework = "flask"
 	CancelDeploymentFrameworkFasthtml       CancelDeploymentFramework = "fasthtml"
 	CancelDeploymentFrameworkSanityV3       CancelDeploymentFramework = "sanity-v3"
 	CancelDeploymentFrameworkSanity         CancelDeploymentFramework = "sanity"
@@ -195,6 +244,9 @@ const (
 	CancelDeploymentFrameworkHono           CancelDeploymentFramework = "hono"
 	CancelDeploymentFrameworkExpress        CancelDeploymentFramework = "express"
 	CancelDeploymentFrameworkH3             CancelDeploymentFramework = "h3"
+	CancelDeploymentFrameworkNestjs         CancelDeploymentFramework = "nestjs"
+	CancelDeploymentFrameworkElysia         CancelDeploymentFramework = "elysia"
+	CancelDeploymentFrameworkFastify        CancelDeploymentFramework = "fastify"
 	CancelDeploymentFrameworkXmcp           CancelDeploymentFramework = "xmcp"
 )
 
@@ -285,6 +337,8 @@ func (e *CancelDeploymentFramework) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "vite":
 		fallthrough
+	case "tanstack-start":
+		fallthrough
 	case "vitepress":
 		fallthrough
 	case "vuepress":
@@ -292,6 +346,8 @@ func (e *CancelDeploymentFramework) UnmarshalJSON(data []byte) error {
 	case "parcel":
 		fallthrough
 	case "fastapi":
+		fallthrough
+	case "flask":
 		fallthrough
 	case "fasthtml":
 		fallthrough
@@ -308,6 +364,12 @@ func (e *CancelDeploymentFramework) UnmarshalJSON(data []byte) error {
 	case "express":
 		fallthrough
 	case "h3":
+		fallthrough
+	case "nestjs":
+		fallthrough
+	case "elysia":
+		fallthrough
+	case "fastify":
 		fallthrough
 	case "xmcp":
 		*e = CancelDeploymentFramework(v)
@@ -412,14 +474,22 @@ func (o *CancelDeploymentWebAnalytics) GetHasData() *bool {
 }
 
 type CancelDeploymentProjectSettings struct {
-	BuildCommand                *string                        `json:"buildCommand,omitempty"`
-	DevCommand                  *string                        `json:"devCommand,omitempty"`
-	Framework                   *CancelDeploymentFramework     `json:"framework,omitempty"`
-	CommandForIgnoringBuildStep *string                        `json:"commandForIgnoringBuildStep,omitempty"`
-	InstallCommand              *string                        `json:"installCommand,omitempty"`
-	OutputDirectory             *string                        `json:"outputDirectory,omitempty"`
-	SpeedInsights               *CancelDeploymentSpeedInsights `json:"speedInsights,omitempty"`
-	WebAnalytics                *CancelDeploymentWebAnalytics  `json:"webAnalytics,omitempty"`
+	NodeVersion                 *CancelDeploymentProjectSettingsNodeVersion `json:"nodeVersion,omitempty"`
+	BuildCommand                *string                                     `json:"buildCommand,omitempty"`
+	DevCommand                  *string                                     `json:"devCommand,omitempty"`
+	Framework                   *CancelDeploymentFramework                  `json:"framework,omitempty"`
+	CommandForIgnoringBuildStep *string                                     `json:"commandForIgnoringBuildStep,omitempty"`
+	InstallCommand              *string                                     `json:"installCommand,omitempty"`
+	OutputDirectory             *string                                     `json:"outputDirectory,omitempty"`
+	SpeedInsights               *CancelDeploymentSpeedInsights              `json:"speedInsights,omitempty"`
+	WebAnalytics                *CancelDeploymentWebAnalytics               `json:"webAnalytics,omitempty"`
+}
+
+func (o *CancelDeploymentProjectSettings) GetNodeVersion() *CancelDeploymentProjectSettingsNodeVersion {
+	if o == nil {
+		return nil
+	}
+	return o.NodeVersion
 }
 
 func (o *CancelDeploymentProjectSettings) GetBuildCommand() *string {
@@ -787,10 +857,14 @@ func (o *CancelDeploymentImages) GetContentDispositionType() *CancelDeploymentCo
 	return o.ContentDispositionType
 }
 
+// CancelDeploymentCreator - Information about the deployment creator
 type CancelDeploymentCreator struct {
-	UID      string  `json:"uid"`
+	// The ID of the user that created the deployment
+	UID string `json:"uid"`
+	// The username of the user that created the deployment
 	Username *string `json:"username,omitempty"`
-	Avatar   *string `json:"avatar,omitempty"`
+	// The avatar of the user that created the deployment
+	Avatar *string `json:"avatar,omitempty"`
 }
 
 func (o *CancelDeploymentCreator) GetUID() string {
@@ -955,6 +1029,7 @@ func (e *CancelDeploymentStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// CancelDeploymentTeam - The team that owns the deployment if any
 type CancelDeploymentTeam struct {
 	ID     string  `json:"id"`
 	Name   string  `json:"name"`
@@ -990,6 +1065,7 @@ func (o *CancelDeploymentTeam) GetSlug() string {
 	return o.Slug
 }
 
+// CancelDeploymentCustomEnvironment2 - If the deployment was created using a Custom Environment, then this property contains information regarding the environment used.
 type CancelDeploymentCustomEnvironment2 struct {
 	ID string `json:"id"`
 }
@@ -1257,7 +1333,7 @@ func (o *CancelDeploymentDomain) GetVerification() []CancelDeploymentVerificatio
 	return o.Verification
 }
 
-// CancelDeploymentCustomEnvironment1 - Internal representation of a custom environment with all required properties
+// CancelDeploymentCustomEnvironment1 - If the deployment was created using a Custom Environment, then this property contains information regarding the environment used.
 type CancelDeploymentCustomEnvironment1 struct {
 	// Unique identifier for the custom environment (format: env_*)
 	ID string `json:"id"`
@@ -1439,6 +1515,7 @@ func (e *CancelDeploymentOomReport) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// CancelDeploymentAliasError - An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
 type CancelDeploymentAliasError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -1552,6 +1629,69 @@ func (e *CancelDeploymentChecksConclusion) UnmarshalJSON(data []byte) error {
 	default:
 		return fmt.Errorf("invalid value for CancelDeploymentChecksConclusion: %v", v)
 	}
+}
+
+type CancelDeploymentCve struct {
+	ID          string  `json:"id"`
+	Score       float64 `json:"score"`
+	Description *string `json:"description,omitempty"`
+	Link        *string `json:"link,omitempty"`
+}
+
+func (o *CancelDeploymentCve) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *CancelDeploymentCve) GetScore() float64 {
+	if o == nil {
+		return 0.0
+	}
+	return o.Score
+}
+
+func (o *CancelDeploymentCve) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *CancelDeploymentCve) GetLink() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Link
+}
+
+// CancelDeploymentCveVulnerability - Since December 2025 - Temporary for Christmas hackathon 2025 CVE vulnerabilities found during build, only populated when CVE Shield is enabled and vulnerabilities are detected. Only accessible when CveShieldEnabled feature flag is enabled
+type CancelDeploymentCveVulnerability struct {
+	PackageName    string              `json:"packageName"`
+	PackageVersion string              `json:"packageVersion"`
+	Cve            CancelDeploymentCve `json:"cve"`
+}
+
+func (o *CancelDeploymentCveVulnerability) GetPackageName() string {
+	if o == nil {
+		return ""
+	}
+	return o.PackageName
+}
+
+func (o *CancelDeploymentCveVulnerability) GetPackageVersion() string {
+	if o == nil {
+		return ""
+	}
+	return o.PackageVersion
+}
+
+func (o *CancelDeploymentCveVulnerability) GetCve() CancelDeploymentCve {
+	if o == nil {
+		return CancelDeploymentCve{}
+	}
+	return o.Cve
 }
 
 type CancelDeploymentGitSourceTypeBitbucket3 string
@@ -3403,6 +3543,7 @@ func (u CancelDeploymentGitSourceUnion) MarshalJSON() ([]byte, error) {
 type CancelDeploymentNodeVersion string
 
 const (
+	CancelDeploymentNodeVersionTwentyFourDotX CancelDeploymentNodeVersion = "24.x"
 	CancelDeploymentNodeVersionTwentyTwoDotX  CancelDeploymentNodeVersion = "22.x"
 	CancelDeploymentNodeVersionTwentyDotX     CancelDeploymentNodeVersion = "20.x"
 	CancelDeploymentNodeVersionEighteenDotX   CancelDeploymentNodeVersion = "18.x"
@@ -3422,6 +3563,8 @@ func (e *CancelDeploymentNodeVersion) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "24.x":
+		fallthrough
 	case "22.x":
 		fallthrough
 	case "20.x":
@@ -3444,6 +3587,7 @@ func (e *CancelDeploymentNodeVersion) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// CancelDeploymentProject - The public project information associated with the deployment.
 type CancelDeploymentProject struct {
 	ID        string  `json:"id"`
 	Name      string  `json:"name"`
@@ -3471,6 +3615,7 @@ func (o *CancelDeploymentProject) GetFramework() *string {
 	return o.Framework
 }
 
+// CancelDeploymentReadyState - The state of the deployment depending on the process of deploying, or if it is ready or in an error state
 type CancelDeploymentReadyState string
 
 const (
@@ -3539,6 +3684,7 @@ func (e *CancelDeploymentReadySubstate) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// CancelDeploymentSource - Where was the deployment created from
 type CancelDeploymentSource string
 
 const (
@@ -3583,6 +3729,7 @@ func (e *CancelDeploymentSource) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// CancelDeploymentTargetEnum - If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned. `null` value indicates the "preview" deployment.
 type CancelDeploymentTargetEnum string
 
 const (
@@ -3633,15 +3780,16 @@ func (e *CancelDeploymentType) UnmarshalJSON(data []byte) error {
 }
 
 type CancelDeploymentOidcTokenClaims struct {
-	Iss         string `json:"iss"`
-	Sub         string `json:"sub"`
-	Scope       string `json:"scope"`
-	Aud         string `json:"aud"`
-	Owner       string `json:"owner"`
-	OwnerID     string `json:"owner_id"`
-	Project     string `json:"project"`
-	ProjectID   string `json:"project_id"`
-	Environment string `json:"environment"`
+	Iss         string  `json:"iss"`
+	Sub         string  `json:"sub"`
+	Scope       string  `json:"scope"`
+	Aud         string  `json:"aud"`
+	Owner       string  `json:"owner"`
+	OwnerID     string  `json:"owner_id"`
+	Project     string  `json:"project"`
+	ProjectID   string  `json:"project_id"`
+	Environment string  `json:"environment"`
+	Plan        *string `json:"plan,omitempty"`
 }
 
 func (o *CancelDeploymentOidcTokenClaims) GetIss() string {
@@ -3705,6 +3853,13 @@ func (o *CancelDeploymentOidcTokenClaims) GetEnvironment() string {
 		return ""
 	}
 	return o.Environment
+}
+
+func (o *CancelDeploymentOidcTokenClaims) GetPlan() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Plan
 }
 
 type CancelDeploymentCron struct {
@@ -4631,8 +4786,10 @@ func (o *CancelDeploymentHasHost) GetValue() CancelDeploymentHasValueUnion1 {
 type CancelDeploymentHasUnionType string
 
 const (
-	CancelDeploymentHasUnionTypeCancelDeploymentHasHost CancelDeploymentHasUnionType = "cancelDeployment_has_Host"
-	CancelDeploymentHasUnionTypeCancelDeploymentHas     CancelDeploymentHasUnionType = "cancelDeployment_has"
+	CancelDeploymentHasUnionTypeHost   CancelDeploymentHasUnionType = "host"
+	CancelDeploymentHasUnionTypeHeader CancelDeploymentHasUnionType = "header"
+	CancelDeploymentHasUnionTypeCookie CancelDeploymentHasUnionType = "cookie"
+	CancelDeploymentHasUnionTypeQuery  CancelDeploymentHasUnionType = "query"
 )
 
 type CancelDeploymentHasUnion struct {
@@ -4642,37 +4799,101 @@ type CancelDeploymentHasUnion struct {
 	Type CancelDeploymentHasUnionType
 }
 
-func CreateCancelDeploymentHasUnionCancelDeploymentHasHost(cancelDeploymentHasHost CancelDeploymentHasHost) CancelDeploymentHasUnion {
-	typ := CancelDeploymentHasUnionTypeCancelDeploymentHasHost
+func CreateCancelDeploymentHasUnionHost(host CancelDeploymentHasHost) CancelDeploymentHasUnion {
+	typ := CancelDeploymentHasUnionTypeHost
+
+	typStr := CancelDeploymentHasTypeHost(typ)
+	host.Type = typStr
 
 	return CancelDeploymentHasUnion{
-		CancelDeploymentHasHost: &cancelDeploymentHasHost,
+		CancelDeploymentHasHost: &host,
 		Type:                    typ,
 	}
 }
 
-func CreateCancelDeploymentHasUnionCancelDeploymentHas(cancelDeploymentHas CancelDeploymentHas) CancelDeploymentHasUnion {
-	typ := CancelDeploymentHasUnionTypeCancelDeploymentHas
+func CreateCancelDeploymentHasUnionHeader(header CancelDeploymentHas) CancelDeploymentHasUnion {
+	typ := CancelDeploymentHasUnionTypeHeader
+
+	typStr := CancelDeploymentHasType(typ)
+	header.Type = typStr
 
 	return CancelDeploymentHasUnion{
-		CancelDeploymentHas: &cancelDeploymentHas,
+		CancelDeploymentHas: &header,
+		Type:                typ,
+	}
+}
+
+func CreateCancelDeploymentHasUnionCookie(cookie CancelDeploymentHas) CancelDeploymentHasUnion {
+	typ := CancelDeploymentHasUnionTypeCookie
+
+	typStr := CancelDeploymentHasType(typ)
+	cookie.Type = typStr
+
+	return CancelDeploymentHasUnion{
+		CancelDeploymentHas: &cookie,
+		Type:                typ,
+	}
+}
+
+func CreateCancelDeploymentHasUnionQuery(query CancelDeploymentHas) CancelDeploymentHasUnion {
+	typ := CancelDeploymentHasUnionTypeQuery
+
+	typStr := CancelDeploymentHasType(typ)
+	query.Type = typStr
+
+	return CancelDeploymentHasUnion{
+		CancelDeploymentHas: &query,
 		Type:                typ,
 	}
 }
 
 func (u *CancelDeploymentHasUnion) UnmarshalJSON(data []byte) error {
 
-	var cancelDeploymentHasHost CancelDeploymentHasHost = CancelDeploymentHasHost{}
-	if err := utils.UnmarshalJSON(data, &cancelDeploymentHasHost, "", true, nil); err == nil {
-		u.CancelDeploymentHasHost = &cancelDeploymentHasHost
-		u.Type = CancelDeploymentHasUnionTypeCancelDeploymentHasHost
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var cancelDeploymentHas CancelDeploymentHas = CancelDeploymentHas{}
-	if err := utils.UnmarshalJSON(data, &cancelDeploymentHas, "", true, nil); err == nil {
-		u.CancelDeploymentHas = &cancelDeploymentHas
-		u.Type = CancelDeploymentHasUnionTypeCancelDeploymentHas
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Type {
+	case "host":
+		cancelDeploymentHasHost := new(CancelDeploymentHasHost)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentHasHost, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == host) type CancelDeploymentHasHost within CancelDeploymentHasUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentHasHost = cancelDeploymentHasHost
+		u.Type = CancelDeploymentHasUnionTypeHost
+		return nil
+	case "header":
+		cancelDeploymentHas := new(CancelDeploymentHas)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentHas, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == header) type CancelDeploymentHas within CancelDeploymentHasUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentHas = cancelDeploymentHas
+		u.Type = CancelDeploymentHasUnionTypeHeader
+		return nil
+	case "cookie":
+		cancelDeploymentHas := new(CancelDeploymentHas)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentHas, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == cookie) type CancelDeploymentHas within CancelDeploymentHasUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentHas = cancelDeploymentHas
+		u.Type = CancelDeploymentHasUnionTypeCookie
+		return nil
+	case "query":
+		cancelDeploymentHas := new(CancelDeploymentHas)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentHas, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == query) type CancelDeploymentHas within CancelDeploymentHasUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentHas = cancelDeploymentHas
+		u.Type = CancelDeploymentHasUnionTypeQuery
 		return nil
 	}
 
@@ -5270,8 +5491,10 @@ func (o *CancelDeploymentMissingHost) GetValue() CancelDeploymentMissingValueUni
 type CancelDeploymentMissingUnionType string
 
 const (
-	CancelDeploymentMissingUnionTypeCancelDeploymentMissingHost CancelDeploymentMissingUnionType = "cancelDeployment_missing_Host"
-	CancelDeploymentMissingUnionTypeCancelDeploymentMissing     CancelDeploymentMissingUnionType = "cancelDeployment_missing"
+	CancelDeploymentMissingUnionTypeHost   CancelDeploymentMissingUnionType = "host"
+	CancelDeploymentMissingUnionTypeHeader CancelDeploymentMissingUnionType = "header"
+	CancelDeploymentMissingUnionTypeCookie CancelDeploymentMissingUnionType = "cookie"
+	CancelDeploymentMissingUnionTypeQuery  CancelDeploymentMissingUnionType = "query"
 )
 
 type CancelDeploymentMissingUnion struct {
@@ -5281,37 +5504,101 @@ type CancelDeploymentMissingUnion struct {
 	Type CancelDeploymentMissingUnionType
 }
 
-func CreateCancelDeploymentMissingUnionCancelDeploymentMissingHost(cancelDeploymentMissingHost CancelDeploymentMissingHost) CancelDeploymentMissingUnion {
-	typ := CancelDeploymentMissingUnionTypeCancelDeploymentMissingHost
+func CreateCancelDeploymentMissingUnionHost(host CancelDeploymentMissingHost) CancelDeploymentMissingUnion {
+	typ := CancelDeploymentMissingUnionTypeHost
+
+	typStr := CancelDeploymentMissingTypeHost(typ)
+	host.Type = typStr
 
 	return CancelDeploymentMissingUnion{
-		CancelDeploymentMissingHost: &cancelDeploymentMissingHost,
+		CancelDeploymentMissingHost: &host,
 		Type:                        typ,
 	}
 }
 
-func CreateCancelDeploymentMissingUnionCancelDeploymentMissing(cancelDeploymentMissing CancelDeploymentMissing) CancelDeploymentMissingUnion {
-	typ := CancelDeploymentMissingUnionTypeCancelDeploymentMissing
+func CreateCancelDeploymentMissingUnionHeader(header CancelDeploymentMissing) CancelDeploymentMissingUnion {
+	typ := CancelDeploymentMissingUnionTypeHeader
+
+	typStr := CancelDeploymentMissingType(typ)
+	header.Type = typStr
 
 	return CancelDeploymentMissingUnion{
-		CancelDeploymentMissing: &cancelDeploymentMissing,
+		CancelDeploymentMissing: &header,
+		Type:                    typ,
+	}
+}
+
+func CreateCancelDeploymentMissingUnionCookie(cookie CancelDeploymentMissing) CancelDeploymentMissingUnion {
+	typ := CancelDeploymentMissingUnionTypeCookie
+
+	typStr := CancelDeploymentMissingType(typ)
+	cookie.Type = typStr
+
+	return CancelDeploymentMissingUnion{
+		CancelDeploymentMissing: &cookie,
+		Type:                    typ,
+	}
+}
+
+func CreateCancelDeploymentMissingUnionQuery(query CancelDeploymentMissing) CancelDeploymentMissingUnion {
+	typ := CancelDeploymentMissingUnionTypeQuery
+
+	typStr := CancelDeploymentMissingType(typ)
+	query.Type = typStr
+
+	return CancelDeploymentMissingUnion{
+		CancelDeploymentMissing: &query,
 		Type:                    typ,
 	}
 }
 
 func (u *CancelDeploymentMissingUnion) UnmarshalJSON(data []byte) error {
 
-	var cancelDeploymentMissingHost CancelDeploymentMissingHost = CancelDeploymentMissingHost{}
-	if err := utils.UnmarshalJSON(data, &cancelDeploymentMissingHost, "", true, nil); err == nil {
-		u.CancelDeploymentMissingHost = &cancelDeploymentMissingHost
-		u.Type = CancelDeploymentMissingUnionTypeCancelDeploymentMissingHost
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var cancelDeploymentMissing CancelDeploymentMissing = CancelDeploymentMissing{}
-	if err := utils.UnmarshalJSON(data, &cancelDeploymentMissing, "", true, nil); err == nil {
-		u.CancelDeploymentMissing = &cancelDeploymentMissing
-		u.Type = CancelDeploymentMissingUnionTypeCancelDeploymentMissing
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.Type {
+	case "host":
+		cancelDeploymentMissingHost := new(CancelDeploymentMissingHost)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentMissingHost, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == host) type CancelDeploymentMissingHost within CancelDeploymentMissingUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentMissingHost = cancelDeploymentMissingHost
+		u.Type = CancelDeploymentMissingUnionTypeHost
+		return nil
+	case "header":
+		cancelDeploymentMissing := new(CancelDeploymentMissing)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentMissing, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == header) type CancelDeploymentMissing within CancelDeploymentMissingUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentMissing = cancelDeploymentMissing
+		u.Type = CancelDeploymentMissingUnionTypeHeader
+		return nil
+	case "cookie":
+		cancelDeploymentMissing := new(CancelDeploymentMissing)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentMissing, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == cookie) type CancelDeploymentMissing within CancelDeploymentMissingUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentMissing = cancelDeploymentMissing
+		u.Type = CancelDeploymentMissingUnionTypeCookie
+		return nil
+	case "query":
+		cancelDeploymentMissing := new(CancelDeploymentMissing)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentMissing, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == query) type CancelDeploymentMissing within CancelDeploymentMissingUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentMissing = cancelDeploymentMissing
+		u.Type = CancelDeploymentMissingUnionTypeQuery
 		return nil
 	}
 
@@ -5746,6 +6033,7 @@ type CancelDeploymentTransform struct {
 	Op     CancelDeploymentOp            `json:"op"`
 	Target CancelDeploymentRouteTarget   `json:"target"`
 	Args   *CancelDeploymentArgs         `json:"args,omitempty"`
+	Env    []string                      `json:"env,omitempty"`
 }
 
 func (c CancelDeploymentTransform) MarshalJSON() ([]byte, error) {
@@ -5785,6 +6073,13 @@ func (o *CancelDeploymentTransform) GetArgs() *CancelDeploymentArgs {
 		return nil
 	}
 	return o.Args
+}
+
+func (o *CancelDeploymentTransform) GetEnv() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Env
 }
 
 type CancelDeploymentLocale struct {
@@ -5832,6 +6127,7 @@ type CancelDeploymentRoute1 struct {
 	Missing       []CancelDeploymentMissingUnion `json:"missing,omitempty"`
 	Mitigate      *CancelDeploymentMitigate      `json:"mitigate,omitempty"`
 	Transforms    []CancelDeploymentTransform    `json:"transforms,omitempty"`
+	Env           []string                       `json:"env,omitempty"`
 	Locale        *CancelDeploymentLocale        `json:"locale,omitempty"`
 	// A middleware key within the `output` key under the build result. Overrides a `middleware` definition.
 	MiddlewarePath *string `json:"middlewarePath,omitempty"`
@@ -5948,6 +6244,13 @@ func (o *CancelDeploymentRoute1) GetTransforms() []CancelDeploymentTransform {
 		return nil
 	}
 	return o.Transforms
+}
+
+func (o *CancelDeploymentRoute1) GetEnv() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Env
 }
 
 func (o *CancelDeploymentRoute1) GetLocale() *CancelDeploymentLocale {
@@ -6487,9 +6790,9 @@ func (o *CancelDeploymentGitRepoGitlab) GetOwnerType() CancelDeploymentOwnerType
 type CancelDeploymentGitRepoUnionType string
 
 const (
-	CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoGitlab    CancelDeploymentGitRepoUnionType = "cancelDeployment_gitRepo_Gitlab"
-	CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoGithub    CancelDeploymentGitRepoUnionType = "cancelDeployment_gitRepo_Github"
-	CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoBitbucket CancelDeploymentGitRepoUnionType = "cancelDeployment_gitRepo_Bitbucket"
+	CancelDeploymentGitRepoUnionTypeGitlab    CancelDeploymentGitRepoUnionType = "gitlab"
+	CancelDeploymentGitRepoUnionTypeGithub    CancelDeploymentGitRepoUnionType = "github"
+	CancelDeploymentGitRepoUnionTypeBitbucket CancelDeploymentGitRepoUnionType = "bitbucket"
 )
 
 type CancelDeploymentGitRepoUnion struct {
@@ -6500,53 +6803,80 @@ type CancelDeploymentGitRepoUnion struct {
 	Type CancelDeploymentGitRepoUnionType
 }
 
-func CreateCancelDeploymentGitRepoUnionCancelDeploymentGitRepoGitlab(cancelDeploymentGitRepoGitlab CancelDeploymentGitRepoGitlab) CancelDeploymentGitRepoUnion {
-	typ := CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoGitlab
+func CreateCancelDeploymentGitRepoUnionGitlab(gitlab CancelDeploymentGitRepoGitlab) CancelDeploymentGitRepoUnion {
+	typ := CancelDeploymentGitRepoUnionTypeGitlab
+
+	typStr := CancelDeploymentGitRepoTypeGitlab(typ)
+	gitlab.Type = typStr
 
 	return CancelDeploymentGitRepoUnion{
-		CancelDeploymentGitRepoGitlab: &cancelDeploymentGitRepoGitlab,
+		CancelDeploymentGitRepoGitlab: &gitlab,
 		Type:                          typ,
 	}
 }
 
-func CreateCancelDeploymentGitRepoUnionCancelDeploymentGitRepoGithub(cancelDeploymentGitRepoGithub CancelDeploymentGitRepoGithub) CancelDeploymentGitRepoUnion {
-	typ := CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoGithub
+func CreateCancelDeploymentGitRepoUnionGithub(github CancelDeploymentGitRepoGithub) CancelDeploymentGitRepoUnion {
+	typ := CancelDeploymentGitRepoUnionTypeGithub
+
+	typStr := CancelDeploymentGitRepoTypeGithub(typ)
+	github.Type = typStr
 
 	return CancelDeploymentGitRepoUnion{
-		CancelDeploymentGitRepoGithub: &cancelDeploymentGitRepoGithub,
+		CancelDeploymentGitRepoGithub: &github,
 		Type:                          typ,
 	}
 }
 
-func CreateCancelDeploymentGitRepoUnionCancelDeploymentGitRepoBitbucket(cancelDeploymentGitRepoBitbucket CancelDeploymentGitRepoBitbucket) CancelDeploymentGitRepoUnion {
-	typ := CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoBitbucket
+func CreateCancelDeploymentGitRepoUnionBitbucket(bitbucket CancelDeploymentGitRepoBitbucket) CancelDeploymentGitRepoUnion {
+	typ := CancelDeploymentGitRepoUnionTypeBitbucket
+
+	typStr := CancelDeploymentGitRepoTypeBitbucket(typ)
+	bitbucket.Type = typStr
 
 	return CancelDeploymentGitRepoUnion{
-		CancelDeploymentGitRepoBitbucket: &cancelDeploymentGitRepoBitbucket,
+		CancelDeploymentGitRepoBitbucket: &bitbucket,
 		Type:                             typ,
 	}
 }
 
 func (u *CancelDeploymentGitRepoUnion) UnmarshalJSON(data []byte) error {
 
-	var cancelDeploymentGitRepoGithub CancelDeploymentGitRepoGithub = CancelDeploymentGitRepoGithub{}
-	if err := utils.UnmarshalJSON(data, &cancelDeploymentGitRepoGithub, "", true, nil); err == nil {
-		u.CancelDeploymentGitRepoGithub = &cancelDeploymentGitRepoGithub
-		u.Type = CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoGithub
-		return nil
+	type discriminator struct {
+		Type string `json:"type"`
 	}
 
-	var cancelDeploymentGitRepoBitbucket CancelDeploymentGitRepoBitbucket = CancelDeploymentGitRepoBitbucket{}
-	if err := utils.UnmarshalJSON(data, &cancelDeploymentGitRepoBitbucket, "", true, nil); err == nil {
-		u.CancelDeploymentGitRepoBitbucket = &cancelDeploymentGitRepoBitbucket
-		u.Type = CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoBitbucket
-		return nil
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
 	}
 
-	var cancelDeploymentGitRepoGitlab CancelDeploymentGitRepoGitlab = CancelDeploymentGitRepoGitlab{}
-	if err := utils.UnmarshalJSON(data, &cancelDeploymentGitRepoGitlab, "", true, nil); err == nil {
-		u.CancelDeploymentGitRepoGitlab = &cancelDeploymentGitRepoGitlab
-		u.Type = CancelDeploymentGitRepoUnionTypeCancelDeploymentGitRepoGitlab
+	switch dis.Type {
+	case "gitlab":
+		cancelDeploymentGitRepoGitlab := new(CancelDeploymentGitRepoGitlab)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentGitRepoGitlab, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == gitlab) type CancelDeploymentGitRepoGitlab within CancelDeploymentGitRepoUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentGitRepoGitlab = cancelDeploymentGitRepoGitlab
+		u.Type = CancelDeploymentGitRepoUnionTypeGitlab
+		return nil
+	case "github":
+		cancelDeploymentGitRepoGithub := new(CancelDeploymentGitRepoGithub)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentGitRepoGithub, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == github) type CancelDeploymentGitRepoGithub within CancelDeploymentGitRepoUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentGitRepoGithub = cancelDeploymentGitRepoGithub
+		u.Type = CancelDeploymentGitRepoUnionTypeGithub
+		return nil
+	case "bitbucket":
+		cancelDeploymentGitRepoBitbucket := new(CancelDeploymentGitRepoBitbucket)
+		if err := utils.UnmarshalJSON(data, &cancelDeploymentGitRepoBitbucket, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == bitbucket) type CancelDeploymentGitRepoBitbucket within CancelDeploymentGitRepoUnion: %w", string(data), err)
+		}
+
+		u.CancelDeploymentGitRepoBitbucket = cancelDeploymentGitRepoBitbucket
+		u.Type = CancelDeploymentGitRepoUnionTypeBitbucket
 		return nil
 	}
 
@@ -6738,55 +7068,6 @@ func (u CancelDeploymentFlagsUnion) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type CancelDeploymentFlagsUnion: all fields are null")
 }
 
-// CancelDeploymentApplications - A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment. Note: this field will be removed when MFE alias routing is fully rolled out.
-type CancelDeploymentApplications struct {
-	IsDefaultApp *bool `json:"isDefaultApp,omitempty"`
-	// This is the production alias, it will always show the most up to date of each application.
-	ProductionHost string `json:"productionHost"`
-	// Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
-	DeploymentAlias *string `json:"deploymentAlias,omitempty"`
-	DeploymentHost  *string `json:"deploymentHost,omitempty"`
-}
-
-func (c CancelDeploymentApplications) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CancelDeploymentApplications) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"productionHost"}); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CancelDeploymentApplications) GetIsDefaultApp() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.IsDefaultApp
-}
-
-func (o *CancelDeploymentApplications) GetProductionHost() string {
-	if o == nil {
-		return ""
-	}
-	return o.ProductionHost
-}
-
-func (o *CancelDeploymentApplications) GetDeploymentAlias() *string {
-	if o == nil {
-		return nil
-	}
-	return o.DeploymentAlias
-}
-
-func (o *CancelDeploymentApplications) GetDeploymentHost() *string {
-	if o == nil {
-		return nil
-	}
-	return o.DeploymentHost
-}
-
 // CancelDeploymentMfeConfigUploadState - The result of the microfrontends config upload during deployment creation / build. Only set for default app deployments. The config upload is attempted during deployment create, and then again during the build. If the config is not in the root directory, or the deployment is prebuilt, the config cannot be uploaded during deployment create. The upload during deployment build finds the config even if it's not in the root directory, as it has access to all files. Uploading the config during create is ideal, as then all child deployments are guaranteed to have access to the default app deployment config even if the default app has not yet started building. If the config is not uploaded, the child app will show as building until the config has been uploaded during the default app build. - `success` - The config was uploaded successfully, either when the deployment was created or during the build. - `waiting_on_build` - The config could not be uploaded during deployment create, will be attempted again during the build. - `no_config` - No config was found. Only set once the build has not found the config in any of the deployment's files. - `undefined` - Legacy deployments, or there was an error uploading the config during deployment create.
 type CancelDeploymentMfeConfigUploadState string
 
@@ -6819,8 +7100,6 @@ func (e *CancelDeploymentMfeConfigUploadState) UnmarshalJSON(data []byte) error 
 
 type CancelDeploymentMicrofrontends2 struct {
 	IsDefaultApp bool `json:"isDefaultApp"`
-	// A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment. Note: this field will be removed when MFE alias routing is fully rolled out.
-	Applications map[string]CancelDeploymentApplications `json:"applications,omitempty"`
 	// The result of the microfrontends config upload during deployment creation / build. Only set for default app deployments. The config upload is attempted during deployment create, and then again during the build. If the config is not in the root directory, or the deployment is prebuilt, the config cannot be uploaded during deployment create. The upload during deployment build finds the config even if it's not in the root directory, as it has access to all files. Uploading the config during create is ideal, as then all child deployments are guaranteed to have access to the default app deployment config even if the default app has not yet started building. If the config is not uploaded, the child app will show as building until the config has been uploaded during the default app build. - `success` - The config was uploaded successfully, either when the deployment was created or during the build. - `waiting_on_build` - The config could not be uploaded during deployment create, will be attempted again during the build. - `no_config` - No config was found. Only set once the build has not found the config in any of the deployment's files. - `undefined` - Legacy deployments, or there was an error uploading the config during deployment create.
 	MfeConfigUploadState *CancelDeploymentMfeConfigUploadState `json:"mfeConfigUploadState,omitempty"`
 	// The project name of the default app of this deployment's microfrontends group.
@@ -6829,10 +7108,6 @@ type CancelDeploymentMicrofrontends2 struct {
 	DefaultRoute *string `json:"defaultRoute,omitempty"`
 	// The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
 	GroupIds []string `json:"groupIds"`
-	// Whether the MicrofrontendsAlias2 team flag should be considered enabled for this deployment or not.
-	MicrofrontendsAlias2Enabled *bool `json:"microfrontendsAlias2Enabled,omitempty"`
-	// Temporary flag to safely test MFE alias routing in vercel-site production for specific production hosts (not vercel.com)
-	MicrofrontendsAliasRoutingVercelSiteProdTestHost *bool `json:"microfrontendsAliasRoutingVercelSiteProdTestHost,omitempty"`
 }
 
 func (c CancelDeploymentMicrofrontends2) MarshalJSON() ([]byte, error) {
@@ -6851,13 +7126,6 @@ func (o *CancelDeploymentMicrofrontends2) GetIsDefaultApp() bool {
 		return false
 	}
 	return o.IsDefaultApp
-}
-
-func (o *CancelDeploymentMicrofrontends2) GetApplications() map[string]CancelDeploymentApplications {
-	if o == nil {
-		return nil
-	}
-	return o.Applications
 }
 
 func (o *CancelDeploymentMicrofrontends2) GetMfeConfigUploadState() *CancelDeploymentMfeConfigUploadState {
@@ -6888,20 +7156,6 @@ func (o *CancelDeploymentMicrofrontends2) GetGroupIds() []string {
 	return o.GroupIds
 }
 
-func (o *CancelDeploymentMicrofrontends2) GetMicrofrontendsAlias2Enabled() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.MicrofrontendsAlias2Enabled
-}
-
-func (o *CancelDeploymentMicrofrontends2) GetMicrofrontendsAliasRoutingVercelSiteProdTestHost() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.MicrofrontendsAliasRoutingVercelSiteProdTestHost
-}
-
 type CancelDeploymentMicrofrontends1 struct {
 	IsDefaultApp *bool `json:"isDefaultApp,omitempty"`
 	// The project name of the default app of this deployment's microfrontends group.
@@ -6910,10 +7164,6 @@ type CancelDeploymentMicrofrontends1 struct {
 	DefaultRoute *string `json:"defaultRoute,omitempty"`
 	// The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
 	GroupIds []string `json:"groupIds"`
-	// Whether the MicrofrontendsAlias2 team flag should be considered enabled for this deployment or not.
-	MicrofrontendsAlias2Enabled *bool `json:"microfrontendsAlias2Enabled,omitempty"`
-	// Temporary flag to safely test MFE alias routing in vercel-site production for specific production hosts (not vercel.com)
-	MicrofrontendsAliasRoutingVercelSiteProdTestHost *bool `json:"microfrontendsAliasRoutingVercelSiteProdTestHost,omitempty"`
 }
 
 func (c CancelDeploymentMicrofrontends1) MarshalJSON() ([]byte, error) {
@@ -6953,20 +7203,6 @@ func (o *CancelDeploymentMicrofrontends1) GetGroupIds() []string {
 		return []string{}
 	}
 	return o.GroupIds
-}
-
-func (o *CancelDeploymentMicrofrontends1) GetMicrofrontendsAlias2Enabled() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.MicrofrontendsAlias2Enabled
-}
-
-func (o *CancelDeploymentMicrofrontends1) GetMicrofrontendsAliasRoutingVercelSiteProdTestHost() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.MicrofrontendsAliasRoutingVercelSiteProdTestHost
 }
 
 type CancelDeploymentMicrofrontendsUnionType string
@@ -7231,64 +7467,88 @@ type CancelDeploymentResponseBody struct {
 	ReadyStateReason          *string                          `json:"readyStateReason,omitempty"`
 	Integrations              *CancelDeploymentIntegrations    `json:"integrations,omitempty"`
 	Images                    *CancelDeploymentImages          `json:"images,omitempty"`
-	Alias                     []string                         `json:"alias,omitempty"`
-	AliasAssigned             bool                             `json:"aliasAssigned"`
-	BootedAt                  float64                          `json:"bootedAt"`
-	BuildingAt                float64                          `json:"buildingAt"`
+	// A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
+	Alias []string `json:"alias,omitempty"`
+	// A boolean that will be true when the aliases from the alias property were assigned successfully
+	AliasAssigned bool    `json:"aliasAssigned"`
+	BootedAt      float64 `json:"bootedAt"`
+	BuildingAt    float64 `json:"buildingAt"`
 	// Since April 2025 it necessary for On-Demand Concurrency Minutes calculation
-	BuildContainerFinishedAt *float64                                `json:"buildContainerFinishedAt,omitempty"`
-	BuildSkipped             bool                                    `json:"buildSkipped"`
-	Creator                  CancelDeploymentCreator                 `json:"creator"`
-	InitReadyAt              *float64                                `json:"initReadyAt,omitempty"`
-	IsFirstBranchDeployment  *bool                                   `json:"isFirstBranchDeployment,omitempty"`
-	Lambdas                  []CancelDeploymentLambda                `json:"lambdas,omitempty"`
-	Public                   bool                                    `json:"public"`
-	Ready                    *float64                                `json:"ready,omitempty"`
-	Status                   CancelDeploymentStatus                  `json:"status"`
-	Team                     *CancelDeploymentTeam                   `json:"team,omitempty"`
-	UserAliases              []string                                `json:"userAliases,omitempty"`
-	PreviewCommentsEnabled   *bool                                   `json:"previewCommentsEnabled,omitempty"`
-	TtyBuildLogs             *bool                                   `json:"ttyBuildLogs,omitempty"`
-	CustomEnvironment        *CancelDeploymentCustomEnvironmentUnion `json:"customEnvironment,omitempty"`
-	OomReport                *CancelDeploymentOomReport              `json:"oomReport,omitempty"`
-	ID                       string                                  `json:"id"`
-	AliasError               *CancelDeploymentAliasError             `json:"aliasError,omitempty"`
-	AliasFinal               *string                                 `json:"aliasFinal,omitempty"`
-	AliasWarning             *CancelDeploymentAliasWarning           `json:"aliasWarning,omitempty"`
+	BuildContainerFinishedAt *float64 `json:"buildContainerFinishedAt,omitempty"`
+	BuildSkipped             bool     `json:"buildSkipped"`
+	// Information about the deployment creator
+	Creator                 CancelDeploymentCreator  `json:"creator"`
+	InitReadyAt             *float64                 `json:"initReadyAt,omitempty"`
+	IsFirstBranchDeployment *bool                    `json:"isFirstBranchDeployment,omitempty"`
+	Lambdas                 []CancelDeploymentLambda `json:"lambdas,omitempty"`
+	// A boolean representing if the deployment is public or not. By default this is `false`
+	Public bool                   `json:"public"`
+	Ready  *float64               `json:"ready,omitempty"`
+	Status CancelDeploymentStatus `json:"status"`
+	// The team that owns the deployment if any
+	Team *CancelDeploymentTeam `json:"team,omitempty"`
+	// An array of domains that were provided by the user when creating the Deployment.
+	UserAliases []string `json:"userAliases,omitempty"`
+	// Whether or not preview comments are enabled for the deployment
+	PreviewCommentsEnabled *bool                                   `json:"previewCommentsEnabled,omitempty"`
+	TtyBuildLogs           *bool                                   `json:"ttyBuildLogs,omitempty"`
+	CustomEnvironment      *CancelDeploymentCustomEnvironmentUnion `json:"customEnvironment,omitempty"`
+	OomReport              *CancelDeploymentOomReport              `json:"oomReport,omitempty"`
+	// A string holding the unique ID of the deployment
+	ID string `json:"id"`
+	// An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
+	AliasError   *CancelDeploymentAliasError   `json:"aliasError,omitempty"`
+	AliasFinal   *string                       `json:"aliasFinal,omitempty"`
+	AliasWarning *CancelDeploymentAliasWarning `json:"aliasWarning,omitempty"`
 	// applies to custom domains only, defaults to `true`
 	AutoAssignCustomDomains *bool                             `json:"autoAssignCustomDomains,omitempty"`
 	AutomaticAliases        []string                          `json:"automaticAliases,omitempty"`
 	BuildErrorAt            *float64                          `json:"buildErrorAt,omitempty"`
 	ChecksState             *CancelDeploymentChecksState      `json:"checksState,omitempty"`
 	ChecksConclusion        *CancelDeploymentChecksConclusion `json:"checksConclusion,omitempty"`
-	CreatedAt               float64                           `json:"createdAt"`
-	DeletedAt               *float64                          `json:"deletedAt,omitempty"`
+	// A number containing the date when the deployment was created in milliseconds
+	CreatedAt float64 `json:"createdAt"`
+	// A number containing the date when the deployment was deleted at milliseconds
+	DeletedAt *float64 `json:"deletedAt,omitempty"`
 	// Computed field that is only available for deployments with a microfrontend configuration.
 	DefaultRoute *string  `json:"defaultRoute,omitempty"`
 	CanceledAt   *float64 `json:"canceledAt,omitempty"`
-	ErrorCode    *string  `json:"errorCode,omitempty"`
-	ErrorLink    *string  `json:"errorLink,omitempty"`
-	ErrorMessage *string  `json:"errorMessage,omitempty"`
-	ErrorStep    *string  `json:"errorStep,omitempty"`
+	// Since December 2025 - Temporary for Christmas hackathon 2025 CVE vulnerabilities found during build, only populated when CVE Shield is enabled and vulnerabilities are detected. Only accessible when CveShieldEnabled feature flag is enabled
+	CveVulnerabilities []CancelDeploymentCveVulnerability `json:"cveVulnerabilities,omitempty"`
+	ErrorCode          *string                            `json:"errorCode,omitempty"`
+	ErrorLink          *string                            `json:"errorLink,omitempty"`
+	ErrorMessage       *string                            `json:"errorMessage,omitempty"`
+	ErrorStep          *string                            `json:"errorStep,omitempty"`
 	// Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
-	PassiveRegions    []string                        `json:"passiveRegions,omitempty"`
-	GitSource         *CancelDeploymentGitSourceUnion `json:"gitSource,omitempty"`
-	Name              string                          `json:"name"`
-	Meta              map[string]string               `json:"meta"`
-	OriginCacheRegion *string                         `json:"originCacheRegion,omitempty"`
+	PassiveRegions []string                        `json:"passiveRegions,omitempty"`
+	GitSource      *CancelDeploymentGitSourceUnion `json:"gitSource,omitempty"`
+	// The name of the project associated with the deployment at the time that the deployment was created
+	Name              string            `json:"name"`
+	Meta              map[string]string `json:"meta"`
+	OriginCacheRegion *string           `json:"originCacheRegion,omitempty"`
 	// If set it overrides the `projectSettings.nodeVersion` for this deployment.
 	NodeVersion *CancelDeploymentNodeVersion `json:"nodeVersion,omitempty"`
-	Project     *CancelDeploymentProject     `json:"project,omitempty"`
-	ReadyState  CancelDeploymentReadyState   `json:"readyState"`
+	// The public project information associated with the deployment.
+	Project  *CancelDeploymentProject `json:"project,omitempty"`
+	Prebuilt *bool                    `json:"prebuilt,omitempty"`
+	// The state of the deployment depending on the process of deploying, or if it is ready or in an error state
+	ReadyState CancelDeploymentReadyState `json:"readyState"`
 	// Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - ROLLING: in the process of having production traffic gradually transitioned. - PROMOTED: has seen production traffic
-	ReadySubstate          *CancelDeploymentReadySubstate       `json:"readySubstate,omitempty"`
-	Regions                []string                             `json:"regions"`
-	SoftDeletedByRetention *bool                                `json:"softDeletedByRetention,omitempty"`
-	Source                 *CancelDeploymentSource              `json:"source,omitempty"`
-	Target                 *CancelDeploymentTargetEnum          `json:"target,omitempty"`
-	Type                   CancelDeploymentType                 `json:"type"`
-	UndeletedAt            *float64                             `json:"undeletedAt,omitempty"`
-	URL                    string                               `json:"url"`
+	ReadySubstate *CancelDeploymentReadySubstate `json:"readySubstate,omitempty"`
+	// The regions the deployment exists in
+	Regions []string `json:"regions"`
+	// flag to indicate if the deployment was deleted by retention policy
+	SoftDeletedByRetention *bool `json:"softDeletedByRetention,omitempty"`
+	// Where was the deployment created from
+	Source *CancelDeploymentSource `json:"source,omitempty"`
+	// If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned. `null` value indicates the "preview" deployment.
+	Target *CancelDeploymentTargetEnum `json:"target,omitempty"`
+	Type   CancelDeploymentType        `json:"type"`
+	// A number containing the date when the deployment was undeleted at milliseconds
+	UndeletedAt *float64 `json:"undeletedAt,omitempty"`
+	// A string with the unique URL of the deployment
+	URL string `json:"url"`
+	// The platform version that was used to create the deployment.
 	Version                float64                              `json:"version"`
 	OidcTokenClaims        *CancelDeploymentOidcTokenClaims     `json:"oidcTokenClaims,omitempty"`
 	ConnectBuildsEnabled   *bool                                `json:"connectBuildsEnabled,omitempty"`
@@ -7626,6 +7886,13 @@ func (o *CancelDeploymentResponseBody) GetCanceledAt() *float64 {
 	return o.CanceledAt
 }
 
+func (o *CancelDeploymentResponseBody) GetCveVulnerabilities() []CancelDeploymentCveVulnerability {
+	if o == nil {
+		return nil
+	}
+	return o.CveVulnerabilities
+}
+
 func (o *CancelDeploymentResponseBody) GetErrorCode() *string {
 	if o == nil {
 		return nil
@@ -7701,6 +7968,13 @@ func (o *CancelDeploymentResponseBody) GetProject() *CancelDeploymentProject {
 		return nil
 	}
 	return o.Project
+}
+
+func (o *CancelDeploymentResponseBody) GetPrebuilt() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prebuilt
 }
 
 func (o *CancelDeploymentResponseBody) GetReadyState() CancelDeploymentReadyState {
@@ -7862,6 +8136,27 @@ func (o *CancelDeploymentResponseBody) GetGitRepo() *CancelDeploymentGitRepoUnio
 		return nil
 	}
 	return o.GitRepo
+}
+
+func (o *CancelDeploymentResponseBody) GetGitRepoGitlab() *CancelDeploymentGitRepoGitlab {
+	if v := o.GetGitRepo(); v != nil {
+		return v.CancelDeploymentGitRepoGitlab
+	}
+	return nil
+}
+
+func (o *CancelDeploymentResponseBody) GetGitRepoGithub() *CancelDeploymentGitRepoGithub {
+	if v := o.GetGitRepo(); v != nil {
+		return v.CancelDeploymentGitRepoGithub
+	}
+	return nil
+}
+
+func (o *CancelDeploymentResponseBody) GetGitRepoBitbucket() *CancelDeploymentGitRepoBitbucket {
+	if v := o.GetGitRepo(); v != nil {
+		return v.CancelDeploymentGitRepoBitbucket
+	}
+	return nil
 }
 
 func (o *CancelDeploymentResponseBody) GetFlags() *CancelDeploymentFlagsUnion {
